@@ -13,8 +13,8 @@ class UserLogin
 
     public function __construct()
     {
-        require_once("TransitUserLogin.php");
-        require_once("UserData.php");
+
+
         $this->_user_ul = new TransitUserLogin();
     }
 
@@ -30,7 +30,7 @@ class UserLogin
         // As long as no email input errors occur
         if($email_checked == true)
         {
-            // If email exists in db, validate password against it
+            // If email exists in db, validate password against it test
             if ($this->_user_ul->authenticate($email_clean, $this->_user_ul->cleanInput($p)))
             {
                 // A new user data object is created for use in creating a session
