@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a690ce52-896c-42aa-a240-0550241b5d76" name="Default Changelist" comment="Rubric System: Login">
-      <change afterPath="$PROJECT_DIR$/Models/RubricSet/Categories.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Models/RubricSet/Criteria.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Models/RubricSet/Rubric.php" afterDir="false" />
+    <list default="true" id="a690ce52-896c-42aa-a240-0550241b5d76" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/UserData/UserData.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/UserData/UserData.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,6 +15,43 @@
     <execution>
       <executable />
     </execution>
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="Database" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="Database" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="Database" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="sgb770_competa: schema" type="76f4a085:MysqlImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="Database" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="sgb770_competa: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="students: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+    </expand>
+    <select />
   </component>
   <component name="Git.Settings">
     <excluded-from-favorite>
@@ -53,6 +88,13 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="MERGE" />
   </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="C:\Users\anex9\PhpstormProjects\competa\.idea" />
+      </set>
+    </option>
+  </component>
   <component name="PhpTemplates">
     <option name="NEW_PHP_FILE_LAST_EXTENSION" value="phtml" />
   </component>
@@ -62,6 +104,7 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="C:/xampp/php/php.exe" />
@@ -105,7 +148,8 @@
       <workItem from="1578483747201" duration="6261000" />
       <workItem from="1578502110720" duration="3170000" />
       <workItem from="1578568964286" duration="1016000" />
-      <workItem from="1578570288879" duration="5038000" />
+      <workItem from="1578570288879" duration="7772000" />
+      <workItem from="1578586747945" duration="307000" />
     </task>
     <task id="LOCAL-00001" summary="Test">
       <created>1578484702463</created>
@@ -142,7 +186,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578489065430</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Alex V1">
+      <created>1578583640786</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1578583640786</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -167,6 +218,7 @@
     <MESSAGE value="Test" />
     <MESSAGE value="Test 1: Refactored" />
     <MESSAGE value="Rubric System: Login" />
-    <option name="LAST_COMMIT_MESSAGE" value="Rubric System: Login" />
+    <MESSAGE value="Alex V1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Alex V1" />
   </component>
 </project>
