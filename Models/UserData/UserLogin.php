@@ -13,8 +13,6 @@ class UserLogin
 
     public function __construct()
     {
-
-
         $this->_user_ul = new TransitUserLogin();
     }
 
