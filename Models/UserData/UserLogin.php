@@ -1,5 +1,7 @@
 <?php
 
+require_once('Models/UserData/TransitUserLogin.php');
+
 /*
  * Class used to handle any user functions that do not require direct db access
  *
@@ -13,8 +15,6 @@ class UserLogin
 
     public function __construct()
     {
-
-
         $this->_user_ul = new TransitUserLogin();
     }
 
