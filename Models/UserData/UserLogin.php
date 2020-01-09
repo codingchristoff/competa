@@ -1,5 +1,5 @@
 <?php
-require_once("Models/UserData/TransitUserLogin.php");
+require_once('Models/UserData/TransitUserLogin.php');
 /*
  * Class used to handle any user functions that do not require direct db access
  *
