@@ -7,9 +7,6 @@ class UserData
 
     public function __construct($user_data)
     {
-        if () {
-
-        }
 
         $this->userID = $user_data['userID'];
         $this->roleID = $user_data['roleID'];
