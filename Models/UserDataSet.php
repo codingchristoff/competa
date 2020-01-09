@@ -23,7 +23,7 @@ class UserDataSet
         if (strcmp($userType, 's'))
         {
             //SQL statement will select a specific user
-            $sqlQuery = 'SELECT * FROM student WHERE userName="' . $userName . '"';
+            $sqlQuery = 'SELECT * FROM students WHERE userName="' . $userName . '"';
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
@@ -35,7 +35,7 @@ class UserDataSet
         else if(strcmp($userType, 't'))
         {
             //SQL statement will select a specific user
-            $sqlQuery = 'SELECT * FROM teacher WHERE userName="' . $userName . '"';
+            $sqlQuery = 'SELECT * FROM teachers WHERE userName="' . $userName . '"';
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
@@ -47,7 +47,7 @@ class UserDataSet
         else if (strcmp($userType, 'a'))
         {
             //SQL statement will select a specific user
-            $sqlQuery = 'SELECT * FROM admin WHERE userName="' . $userName . '"';
+            $sqlQuery = 'SELECT * FROM admins WHERE userName="' . $userName . '"';
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
@@ -70,7 +70,7 @@ class UserDataSet
         if (strcmp($userType, 's'))
         {
             //SQL statement that will be inserted into the database
-            $sqlQuery = 'INSERT INTO student (firstName, lastName, userName, email, password, roleID) VALUES ("' . $firstName . '", "' . $lastName . '", "' . $userName . '", "' . $email . '", "' . $password. '", "' . $roleID.'");';
+            $sqlQuery = 'INSERT INTO students (firstName, lastName, userName, email, password, roleID) VALUES ("' . $firstName . '", "' . $lastName . '", "' . $userName . '", "' . $email . '", "' . $password. '", "' . $roleID.'");';
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
@@ -79,7 +79,7 @@ class UserDataSet
         else if(strcmp($userType, 't'))
         {
             //SQL statement that will be inserted into the database
-            $sqlQuery = 'INSERT INTO teacher (firstName, lastName, userName, email, password, roleID) VALUES ("' . $firstName . '", "' . $lastName . '", "' . $userName . '", "' . $email . '", "' . $password. '", "' . $roleID.'");';
+            $sqlQuery = 'INSERT INTO teachers (firstName, lastName, userName, email, password, roleID) VALUES ("' . $firstName . '", "' . $lastName . '", "' . $userName . '", "' . $email . '", "' . $password. '", "' . $roleID.'");';
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
@@ -88,7 +88,7 @@ class UserDataSet
         else if(strcmp($userType, 'a'))
         {
             //SQL statement that will be inserted into the database
-            $sqlQuery = 'INSERT INTO admin (firstName, lastName, userName, email, password, roleID) VALUES ("' . $firstName . '", "' . $lastName . '", "' . $userName . '", "' . $email . '", "' . $password. '", "' . $roleID.'");';
+            $sqlQuery = 'INSERT INTO admins (firstName, lastName, userName, email, password, roleID) VALUES ("' . $firstName . '", "' . $lastName . '", "' . $userName . '", "' . $email . '", "' . $password. '", "' . $roleID.'");';
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
