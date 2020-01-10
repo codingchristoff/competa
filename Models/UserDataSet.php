@@ -58,7 +58,7 @@ class UserDataSet
     }
 
     //Create user by adding to the database
-    public function createUser($firstName, $lastName, $userName, $email, $password, $roleID)
+    public function createUser($firstName, $lastName, $userName, $email, $password)
     {
         //Encrypts the password using the Crypt_Blowfish algorithm
         $password = password_hash($password,PASSWORD_BCRYPT);
