@@ -5,10 +5,10 @@ class Criteria
 {
     protected $_criteria_ID, $_criteria_text;
 
-    public function __construct($criteria_data)
+    public function __construct($criteria_row)
     {
-        $this->_criteria_ID = $criteria_data['criteriaID'];
-        $this->_criteria_text = $criteria_data['criteriaText'];
+        $this->_criteria_ID = $criteria_row['criteriaID'];
+        $this->_criteria_text = $criteria_row['criteriaText'];
     }
 
     /**
