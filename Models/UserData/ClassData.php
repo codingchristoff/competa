@@ -1,6 +1,6 @@
 <?php
 
-require_once("Models/UserDataSet.php");
+require_once("Models/UserData/UserDataSet.php");
 
 class ClassData extends UserData
 {
@@ -10,7 +10,7 @@ class ClassData extends UserData
     {
         parent::__construct($user_data);
         $this->_classID = $user_data['classID'];
-        $this->_user_ds = new UserDataSet();
+        //$this->_user_ds = new UserDataSet();
     }
 
     /**
@@ -18,12 +18,12 @@ class ClassData extends UserData
      * */
     public function getInfo($userName)
     {
-        $user = $this->_user_ds->fetchUser($userName);
+        //$user = $this->_user_ds->fetchUser($userName);
 
-        if($user instanceof AdminData || $user instanceof TeacherData)
-        {}
-        else {
-            return $user;
-        }
+        //if($user instanceof AdminData || $user instanceof TeacherData)
+        //{}
+        //else {
+           // return $user;
+        //}
     }
 }

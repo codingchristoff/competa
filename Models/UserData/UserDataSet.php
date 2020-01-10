@@ -21,7 +21,7 @@ class UserDataSet
         $userType = strtolower(substr($userName, 0,1));
 
         //Gets a student user
-        if (strcmp($userType, 's'))
+        if ($userType === 's')
         {
             //SQL statement will select a specific user
             $sqlQuery = 'SELECT * FROM students WHERE userName="' . $userName . '"';
@@ -30,10 +30,10 @@ class UserDataSet
             $statement->execute(); // execute the PDO statement
 
             $row = $statement->fetch();
-            return new StudentData($row);
+            return new StudentData($row);;
         }
         //Gets a teacher user
-        else if(strcmp($userType, 't'))
+        else if($userType === 't')
         {
             //SQL statement will select a specific user
             $sqlQuery = 'SELECT * FROM teachers WHERE userName="' . $userName . '"';
@@ -45,7 +45,7 @@ class UserDataSet
             return new TeacherData($row);
         }
         //Gets an admin user
-        else if (strcmp($userType, 'a'))
+        else if ($userType === 'a')
         {
             //SQL statement will select a specific user
             $sqlQuery = 'SELECT * FROM admins WHERE userName="' . $userName . '"';
@@ -72,17 +72,15 @@ class UserDataSet
         $this->loginError = True;
 
         //Checks if the userName exists
-        if ($user!=null)
+        if ($user != null)
         {
             //Checks password to see if it matches for the userName
             if (password_verify($passClean, $user->getPassword()))
             {
-                //Saves the user information as a session
-                $_SESSION['user'] = $user;
-                return true;
+                return $user;
             }
             else {
-                return false;
+                return null;
             }
 
         }
@@ -139,7 +137,7 @@ class UserDataSet
         $userType = strtolower(substr($userName, 0,1));
 
         //Checks if user should be put into the student table
-        if (strcmp($userType, 's'))
+        if ($userType === 's')
         {
             //SQL statement that will be inserted into the database
             $sqlQuery = 'INSERT INTO students (firstName, lastName, userName, email, password, roleID) VALUES ("' . $firstName . '", "' . $lastName . '", "' . $userName . '", "' . $email . '", "' . $password. '", "3");';
@@ -148,7 +146,7 @@ class UserDataSet
             $statement->execute(); // execute the PDO statement
         }
         //Checks if user should be put into the teacher table
-        else if(strcmp($userType, 't'))
+        else if($userType === 't')
         {
             //SQL statement that will be inserted into the database
             $sqlQuery = 'INSERT INTO teachers (firstName, lastName, userName, email, password, roleID) VALUES ("' . $firstName . '", "' . $lastName . '", "' . $userName . '", "' . $email . '", "' . $password. '", "2");';
@@ -157,7 +155,7 @@ class UserDataSet
             $statement->execute(); // execute the PDO statement
         }
         //Checks if user should be put into the admin table
-        else if(strcmp($userType, 'a'))
+        else if($userType === 'a')
         {
             //SQL statement that will be inserted into the database
             $sqlQuery = 'INSERT INTO admins (firstName, lastName, userName, email, password, roleID) VALUES ("' . $firstName . '", "' . $lastName . '", "' . $userName . '", "' . $email . '", "' . $password. '", "1");';
@@ -173,11 +171,36 @@ class UserDataSet
         //Cleans up input
         $userClean = $this->cleanInput($userName);
 
-        //SQL statement that will delete a user
-        $sqlQuery = 'DELETE FROM watchList WHERE watchListID="' . $userClean .'";';
+        //Gets the first letter of the userName and puts it to lowercase
+        $userType = strtolower(substr($userName, 0,1));
 
-        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
-        $statement->execute(); // execute the PDO statement
+        //Checks if user should be removed from student table
+        if ($userType === 's')
+        {
+            //SQL statement that will delete a student
+            $sqlQuery = 'DELETE FROM students WHERE userName="' . $userClean .'";';
+
+            $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+            $statement->execute(); // execute the PDO statement
+        }
+        //Checks if user should be removed from teacher table
+        else if($userType === 't')
+        {
+            //SQL statement that will delete a student
+            $sqlQuery = 'DELETE FROM teachers WHERE userName="' . $userClean .'";';
+
+            $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+            $statement->execute(); // execute the PDO statement
+        }
+        //Checks if user should be removed admin table
+        else if($userType === 'a')
+        {
+//SQL statement that will delete a student
+            $sqlQuery = 'DELETE FROM admins WHERE userName="' . $userClean .'";';
+
+            $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+            $statement->execute(); // execute the PDO statement
+        }
     }
 
     // used to clean inputs for security purposes

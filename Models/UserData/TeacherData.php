@@ -3,12 +3,20 @@
 
 class TeacherData extends ClassData
 {
+    protected $_teacherID;
+
     /**
      * TeacherData constructor.
      */
-    public function __construct()
+    public function __construct($user_data)
     {
-        parent::__construct();
+        parent::__construct($user_data);
+        $this->_teacherID = $user_data['teacherID'];
+    }
+
+    public function getUserID()
+    {
+        return $this->_teacherID;
     }
 
     /**
