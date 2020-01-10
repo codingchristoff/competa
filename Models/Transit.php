@@ -24,14 +24,4 @@ abstract class Transit
             return $statement;
         }
     }
-
-    // used to clean inputs for security purposes
-    public function cleanInput($i)
-    {
-        $i = trim($i);
-        $i = stripcslashes($i);
-        $i = htmlspecialchars($i);
-        return $i;
-    }
-
 }

@@ -11,8 +11,6 @@ class UserDataSet
     {
         $this->dbInstance = Database::getInstance();
         $this->dbHandle = $this->dbInstance->getdbConnection();
-        //Will store login error
-        $this->loginError = False;
     }
 
     //Checks the database for a specified user
@@ -62,8 +60,11 @@ class UserDataSet
     //Logs in user
     public function login($userName, $password)
     {
+        $userClean = $this->cleanInput($userName);
+        $passClean = $this->cleanInput($password);
+
         //Contains user information
-        $user = fetchUser($userName);
+        $user = fetchUser($userClean);
 
         //Temporarily sets loginError in case login fails
         $this->loginError = True;
@@ -72,13 +73,16 @@ class UserDataSet
         if ($user!=null)
         {
             //Checks password to see if it matches for the userName
-            if (password_verify($password, $user->getPassword()))
+            if (password_verify($passClean, $user->getPassword()))
             {
-                //Changes loginError as it is a success
-                $this->loginError = False;
                 //Saves the user information as a session
                 $_SESSION['user'] = $user;
+                return true;
             }
+            else {
+                return false;
+            }
+
         }
     }
 
@@ -154,6 +158,12 @@ class UserDataSet
         }
     }
 
-
-
+    // used to clean inputs for security purposes
+    private function cleanInput($i)
+    {
+        $i = trim($i);
+        $i = stripcslashes($i);
+        $i = htmlspecialchars($i);
+        return $i;
+    }
 }
