@@ -16,6 +16,7 @@ class UserDataSet
     //Checks the database for a specified user
     public function fetchUser($userName)
     {
+
         //Gets the first letter of the userName and puts it to lowercase
         $userType = strtolower(substr($userName, 0,1));
 
@@ -60,11 +61,12 @@ class UserDataSet
     //Logs in user
     public function login($userName, $password)
     {
+        //Cleans up input
         $userClean = $this->cleanInput($userName);
         $passClean = $this->cleanInput($password);
 
         //Contains user information
-        $user = fetchUser($userClean);
+        $user = $this->fetchUser($userClean);
 
         //Temporarily sets loginError in case login fails
         $this->loginError = True;
@@ -123,6 +125,13 @@ class UserDataSet
     //Create user by adding to the database
     public function createUser($firstName, $lastName, $userName, $email, $password)
     {
+        //Cleans up input
+        $firstName = $this->cleanInput($firstName);
+        $lastName = $this->cleanInput($lastName);
+        $email = $this->cleanInput($email);
+        $userName = $this->cleanInput($userName);
+        $password = $this->cleanInput($password);
+
         //Encrypts the password using the Crypt_Blowfish algorithm
         $password = password_hash($password,PASSWORD_BCRYPT);
 
