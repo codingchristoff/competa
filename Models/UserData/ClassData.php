@@ -4,9 +4,9 @@ require_once("Models/UserDataSet.php");
 
 class ClassData
 {
-    protected $_clasID
+    protected $_classID;
 
-    public function __construct()
+    public function __construct();
     {
 
     }
