@@ -6,7 +6,7 @@ class ClassData
 {
     protected $_classID;
 
-    public function __construct();
+    public function __construct()
     {
 
     }
