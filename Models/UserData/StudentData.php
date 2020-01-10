@@ -53,4 +53,13 @@ class StudentData extends ClassData
     {
         return ;
     }
+
+    /**
+     * @param $newClass ->
+     */
+    public function setClass($newClass){
+        //Inherited from ClassData
+        $this->_classID = $newClass;
+    }
+
 }
