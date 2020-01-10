@@ -55,7 +55,7 @@ class StudentData extends ClassData
     }
 
     /**
-     * @param $newClass ->
+     * @param $newClass -> new class ID
      */
     public function setClass($newClass){
         //Inherited from ClassData
