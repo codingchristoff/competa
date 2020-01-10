@@ -87,7 +87,6 @@ class UserDataSet
         }
     }
 
-
     //Checks the database for students in a specific class
     public function fetchClassStudents($classID)
     {
