@@ -17,15 +17,10 @@
                 <label for="password">Password</label>
                 <?php
 
-                if (isset($_POST['submit']) && $view->err_email == true)
-                {
-                    echo "<div class='left red-text' id='error_message'>
-                              <p><strong>Username incorrect</strong></p></div>";
-                }
-                else if (isset($_POST['submit']) && $view->err_password == true)
+                if (isset($_POST['submit']) && $view->loginError == true)
                 {
                     echo "<div class='left red-text container s12 l12' id='error_message'>
-                              <p><strong>Password incorrect</strong></p></div>";
+                              <p><strong>Username/Password incorrect</strong></p></div>";
                 }
                 else{
                     echo "<div></div>";

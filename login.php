@@ -11,6 +11,12 @@ if (isset($_SESSION['user']))
     header("Location: index.php");
 }
 require_once('Models/UserDataSet.php');
+require_once('Models/UserData/UserData.php');
+require_once('Models/UserData/AdminData.php');
+require_once('Models/UserData/ClassData.php');
+require_once('Models/UserData/StudentData.php');
+require_once('Models/UserData/TeacherData.php');
+
 $user = new UserDataSet();
 
 $view->pageTitle = "Log In";
@@ -18,7 +24,7 @@ $view->loginError = False;
 
 if(isset($_POST['submit']))
 {
-    $success = $user->login($_POST['email'],$_POST['password']);
+    $success = $user->login($_POST['username'],$_POST['password']);
 
     if ($success === True)
     {

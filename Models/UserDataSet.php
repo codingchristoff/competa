@@ -64,7 +64,7 @@ class UserDataSet
         $passClean = $this->cleanInput($password);
 
         //Contains user information
-        $user = fetchUser($userClean);
+        $user = $this->fetchUser($userClean);
 
         //Temporarily sets loginError in case login fails
         $this->loginError = True;

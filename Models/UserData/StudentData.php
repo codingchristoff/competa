@@ -3,14 +3,16 @@
 
 class StudentData extends ClassData
 {
-    protected $tableGroup, $dateJoined;
+    protected $_tableGroup, $_dateJoined;
 
     /**
      * StudentData constructor.
      */
-    public function __construct()
+    public function __construct($user_data)
     {
-        parent::__construct();
+        parent::__construct($user_data);
+        $this->_tableGroup = $user_data['tableGroup'];
+        $this->_dateJoined = $user_data['dateJoined'];
     }
 
     /**
@@ -25,9 +27,9 @@ class StudentData extends ClassData
      * @return StudentData|void
      * Gets student data
      */
-    public function getInfo()
+    public function getInfo($userName)
     {
-        parent::getInfo();
+        parent::getInfo($this->getUsername());
     }
 
     /**
