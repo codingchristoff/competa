@@ -70,7 +70,7 @@ class UserDataSet
         if (strcmp($userType, 's'))
         {
             //SQL statement that will be inserted into the database
-            $sqlQuery = 'INSERT INTO students (firstName, lastName, userName, email, password, roleID) VALUES ("' . $firstName . '", "' . $lastName . '", "' . $userName . '", "' . $email . '", "' . $password. '", "' . $roleID.'");';
+            $sqlQuery = 'INSERT INTO students (firstName, lastName, userName, email, password, roleID) VALUES ("' . $firstName . '", "' . $lastName . '", "' . $userName . '", "' . $email . '", "' . $password. '", "3");';
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
@@ -79,7 +79,7 @@ class UserDataSet
         else if(strcmp($userType, 't'))
         {
             //SQL statement that will be inserted into the database
-            $sqlQuery = 'INSERT INTO teachers (firstName, lastName, userName, email, password, roleID) VALUES ("' . $firstName . '", "' . $lastName . '", "' . $userName . '", "' . $email . '", "' . $password. '", "' . $roleID.'");';
+            $sqlQuery = 'INSERT INTO teachers (firstName, lastName, userName, email, password, roleID) VALUES ("' . $firstName . '", "' . $lastName . '", "' . $userName . '", "' . $email . '", "' . $password. '", "2");';
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
@@ -88,11 +88,13 @@ class UserDataSet
         else if(strcmp($userType, 'a'))
         {
             //SQL statement that will be inserted into the database
-            $sqlQuery = 'INSERT INTO admins (firstName, lastName, userName, email, password, roleID) VALUES ("' . $firstName . '", "' . $lastName . '", "' . $userName . '", "' . $email . '", "' . $password. '", "' . $roleID.'");';
+            $sqlQuery = 'INSERT INTO admins (firstName, lastName, userName, email, password, roleID) VALUES ("' . $firstName . '", "' . $lastName . '", "' . $userName . '", "' . $email . '", "' . $password. '", "1");';
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
         }
     }
+
+
 
 }

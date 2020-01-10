@@ -1185,7 +1185,7 @@ M.AutoInit = function (context) {
     TapTarget: root.querySelectorAll('.tap-target:not(.no-autoinit)'),
     Timepicker: root.querySelectorAll('.timepicker:not(.no-autoinit)'),
     Tooltip: root.querySelectorAll('.tooltipped:not(.no-autoinit)'),
-    FloatingActionButton: root.querySelectorAll('.fixed-action-btn:not(.no-autoinit)')
+    FloatingActionButton: root.querySelectorAll('.template-action-btn:not(.no-autoinit)')
   };
 
   for (var pluginName in registry) {
@@ -5512,10 +5512,10 @@ $jscomp.polyfill = function (e, r, p, m) {
       _this31.isOpen = false;
 
       /**
-       * Describes if Sidenav is fixed
+       * Describes if Sidenav is template
        * @type {Boolean}
        */
-      _this31.isFixed = _this31.el.classList.contains('sidenav-fixed');
+      _this31.isFixed = _this31.el.classList.contains('sidenav-template');
 
       /**
        * Describes if Sidenav is being draggeed
@@ -5590,7 +5590,7 @@ $jscomp.polyfill = function (e, r, p, m) {
         this.el.addEventListener('touchend', this._handleCloseReleaseBound);
         this.el.addEventListener('click', this._handleCloseTriggerClickBound);
 
-        // Add resize for side nav fixed
+        // Add resize for side nav template
         if (this.isFixed) {
           this._handleWindowResizeBound = this._handleWindowResize.bind(this);
           window.addEventListener('resize', this._handleWindowResizeBound);
@@ -5611,7 +5611,7 @@ $jscomp.polyfill = function (e, r, p, m) {
         this.el.removeEventListener('touchend', this._handleCloseReleaseBound);
         this.el.removeEventListener('click', this._handleCloseTriggerClickBound);
 
-        // Remove resize for side nav fixed
+        // Remove resize for side nav template
         if (this.isFixed) {
           window.removeEventListener('resize', this._handleWindowResizeBound);
         }
@@ -5909,7 +5909,7 @@ $jscomp.polyfill = function (e, r, p, m) {
           this.options.onOpenStart.call(this, this.el);
         }
 
-        // Handle fixed Sidenav
+        // Handle template Sidenav
         if (this._isCurrentlyFixed()) {
           anim.remove(this.el);
           anim({
@@ -5921,7 +5921,7 @@ $jscomp.polyfill = function (e, r, p, m) {
           this._enableBodyScrolling();
           this._overlay.style.display = 'none';
 
-          // Handle non-fixed Sidenav
+          // Handle non-template Sidenav
         } else {
           if (this.options.preventScrolling) {
             this._preventBodyScrolling();
@@ -5946,12 +5946,12 @@ $jscomp.polyfill = function (e, r, p, m) {
           this.options.onCloseStart.call(this, this.el);
         }
 
-        // Handle fixed Sidenav
+        // Handle template Sidenav
         if (this._isCurrentlyFixed()) {
           var transformX = this.options.edge === 'left' ? '-105%' : '105%';
           this.el.style.transform = "translateX(" + transformX + ")";
 
-          // Handle non-fixed Sidenav
+          // Handle non-template Sidenav
         } else {
           this._enableBodyScrolling();
 
@@ -10525,9 +10525,9 @@ $jscomp.polyfill = function (e, r, p, m) {
         _this62.options.dist = 0;
         _this62._setCarouselHeight();
 
-        // Offset fixed items when indicators.
+        // Offset template items when indicators.
         if (_this62.showIndicators) {
-          _this62.$el.find('.carousel-fixed-item').addClass('with-indicators');
+          _this62.$el.find('.carousel-template-item').addClass('with-indicators');
         }
       }
 
@@ -11437,7 +11437,7 @@ $jscomp.polyfill = function (e, r, p, m) {
     }, {
       key: "_calculatePositioning",
       value: function _calculatePositioning() {
-        // Element or parent is fixed position?
+        // Element or parent is template position?
         var isFixed = this.$origin.css('position') === 'fixed';
         if (!isFixed) {
           var parents = this.$origin.parents();
