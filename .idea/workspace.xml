@@ -29,6 +29,17 @@
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
         <item name="MySQL - jdbc:mysql://poseidon@salford.ac.uk:3306/sgb770_competa" type="feb32156:DbDataSourceImpl" />
       </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - jdbc:mysql://poseidon@salford.ac.uk:3306/sgb770_competa" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - jdbc:mysql://poseidon@salford.ac.uk:3306/sgb770_competa" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="sgb770_competa: schema" type="76f4a085:MysqlImplModel$Schema" />
+      </path>
     </expand>
     <select />
   </component>
@@ -66,7 +77,17 @@
     <option name="allServicesViewState">
       <serviceView>
         <treeState>
-          <expand />
+          <expand>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@5a973d70" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+            </path>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@5a973d70" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceNode@276a5f1" type="9fbbdea:ServiceModel$ServiceNode" />
+            </path>
+          </expand>
           <select />
         </treeState>
       </serviceView>
@@ -143,7 +164,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578673564794</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Duane updated admin usernames">
+      <created>1578676126486</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1578676126486</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -172,6 +200,7 @@
     <MESSAGE value="Ali - 10/01/20 - 3" />
     <MESSAGE value="fetchClassStudents done - ste" />
     <MESSAGE value="deleteUser fixed -Ste" />
-    <option name="LAST_COMMIT_MESSAGE" value="deleteUser fixed -Ste" />
+    <MESSAGE value="Duane updated admin usernames" />
+    <option name="LAST_COMMIT_MESSAGE" value="Duane updated admin usernames" />
   </component>
 </project>
