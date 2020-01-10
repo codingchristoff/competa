@@ -18,18 +18,18 @@ require_once('Models/UserData/ClassData.php');
 require_once('Models/UserData/StudentData.php');
 require_once('Models/UserData/TeacherData.php');
 
-$user = new UserDataSet();
+$userDataSet = new UserDataSet();
 
 $view->pageTitle = "Log In";
 $view->loginError = False;
 
 if(isset($_POST['submit']))
 {
-    $success = $user->login($_POST['username'],$_POST['password']);
+    $tempUser = $userDataSet->login($_POST['username'],$_POST['password']);
 
-    if (is_string($success))
+    if ($tempUser != null)
     {
-        header("Location: index.php");
+        $_SESSION['user'] = $tempUser;
     }
     else{
         $view->loginError = True;

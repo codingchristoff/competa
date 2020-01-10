@@ -30,7 +30,7 @@ class UserDataSet
             $statement->execute(); // execute the PDO statement
 
             $row = $statement->fetch();
-            return new StudentData($row);
+            return new StudentData($row);;
         }
         //Gets a teacher user
         else if($userType === 't')
@@ -72,18 +72,15 @@ class UserDataSet
         $this->loginError = True;
 
         //Checks if the userName exists
-        if ($user!=null)
+        if ($user != null)
         {
             //Checks password to see if it matches for the userName
             if (password_verify($passClean, $user->getPassword()))
             {
-                //Saves the user information as a session
-                $_SESSION['username'] = $user->getUsername();
-                $_SESSION['roleID'] = $user->getRoleID();
-                session_write_close();
+                return $user;
             }
             else {
-                return false;
+                return null;
             }
 
         }
