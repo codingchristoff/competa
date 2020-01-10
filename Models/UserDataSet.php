@@ -19,10 +19,10 @@ class UserDataSet
 
         //Gets the first letter of the userName and puts it to lowercase
         $userType = strtolower(substr($userName, 0,1));
+
         //Gets a student user
         if ($userType === 's')
         {
-
             //SQL statement will select a specific user
             $sqlQuery = 'SELECT * FROM students WHERE userName="' . $userName . '"';
 
@@ -78,31 +78,15 @@ class UserDataSet
             if (password_verify($passClean, $user->getPassword()))
             {
                 //Saves the user information as a session
-                return $user;
+                $_SESSION['username'] = $user->getUsername();
+                $_SESSION['roleID'] = $user->getRoleID();
+                session_write_close();
             }
             else {
                 return false;
             }
 
         }
-    }
-
-
-    //Checks the database for students in a specific class
-    public function fetchClassStudents($classID)
-    {
-        //SQL statement will select users with a specific classID
-        $sqlQuery = 'SELECT * FROM students WHERE classID="' . $classID . '"';
-
-        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
-        $statement->execute(); // execute the PDO statement
-
-        //Returns all students in an array
-        $dataSet = [];
-        while ($row = $statement->fetch()) {
-            $dataSet[] = new UserData($row);
-        }
-        return $dataSet;
     }
 
     //Gets all students
