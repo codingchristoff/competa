@@ -5,12 +5,14 @@ require_once('Models/UserData/UserData.php');
 
 class UserDataSet
 {
-    protected $dbHandle, $dbInstance;
+    protected $dbHandle, $dbInstance, $loginError;
 
     public function __construct()
     {
         $this->dbInstance = Database::getInstance();
         $this->dbHandle = $this->dbInstance->getdbConnection();
+        //Will store login error
+        $this->loginError = False;
     }
 
     //Checks the database for a specified user
@@ -54,6 +56,29 @@ class UserDataSet
 
             $row = $statement->fetch();
             return new AdminData($row);
+        }
+    }
+
+    //Logs in user
+    public function login($userName, $password)
+    {
+        //Contains user information
+        $user = fetchUser($userName);
+
+        //Temporarily sets loginError in case login fails
+        $this->loginError = True;
+
+        //Checks if the userName exists
+        if ($user!=null)
+        {
+            //Checks password to see if it matches for the userName
+            if (password_verify($password, $user->getPassword()))
+            {
+                //Changes loginError as it is a success
+                $this->loginError = False;
+                //Saves the user information as a session
+                $_SESSION['user'] = $user;
+            }
         }
     }
 
