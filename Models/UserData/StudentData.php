@@ -16,6 +16,11 @@ class StudentData extends ClassData
         $this->_dateJoined = $user_data['dateJoined'];
     }
 
+    public function getUserID()
+    {
+        return $this->_studentID;
+    }
+
     /**
      *  Requires DataSet to implement
      */

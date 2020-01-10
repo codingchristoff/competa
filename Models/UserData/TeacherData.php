@@ -14,6 +14,11 @@ class TeacherData extends ClassData
         $this->_teacherID = $user_data['teacherID'];
     }
 
+    public function getUserID()
+    {
+        return $this->_teacherID;
+    }
+
     /**
      *  Requires DataSet to implement
      */

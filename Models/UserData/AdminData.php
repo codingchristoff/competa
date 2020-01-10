@@ -1,7 +1,7 @@
 <?php
 
 
-class AdminData extends UserData
+class  AdminData extends UserData
 {
     protected $_adminID;
 
