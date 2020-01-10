@@ -12,6 +12,6 @@ if(isset($_SESSION['user']))
     $view->user = $_SESSION['user'];
 }
 
-$view->pageTitle = 'Rubric Generator';
+$view->pageTitle = 'Rubric Create';
 
-require_once('Views/rubricGenerator.phtml');
+require_once('Views/adminRubricCreate.phtml');
