@@ -7,9 +7,14 @@ $view = new stdClass();
 $view->user = null;
 
 
-if(isset($_SESSION['user']))
+if(isset($_SESSION['username']))
 {
-    $view->user = $_SESSION['user'];
+    $view->user = $_SESSION['username'];
+}
+
+if(isset($_POST))
+{
+
 }
 
 $view->pageTitle = 'Rubric Create';

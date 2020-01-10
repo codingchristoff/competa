@@ -16,7 +16,7 @@ class ClassData extends UserData
     /**
      *  Subclasses should only see student data
      * */
-    public function getInfo()
+    public function getInfo($userName)
     {
         //$user = $this->_user_ds->fetchUser($userName);
 
