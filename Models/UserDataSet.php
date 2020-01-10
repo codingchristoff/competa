@@ -167,6 +167,19 @@ class UserDataSet
         }
     }
 
+    //Remove student
+    public function deleteUser($userName)
+    {
+        //Cleans up input
+        $userClean = $this->cleanInput($userName);
+
+        //SQL statement that will delete a user
+        $sqlQuery = 'DELETE FROM watchList WHERE watchListID="' . $userClean .'";';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+    }
+
     // used to clean inputs for security purposes
     private function cleanInput($i)
     {
