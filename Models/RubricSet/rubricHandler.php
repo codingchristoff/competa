@@ -3,5 +3,7 @@
 
 class rubricHandler
 {
+    protected  $categories = [];
+
 
 }
