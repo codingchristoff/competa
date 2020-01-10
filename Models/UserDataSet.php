@@ -17,7 +17,7 @@ class UserDataSet
     public function fetchUser($userName)
     {
         //Gets the first letter of the userName and puts it to lowercase
-        $userType = strtolower(strcmp(substr($userName, 0,1)));
+        $userType = strtolower(substr($userName, 0,1));
 
         //Gets a student user
         if (strcmp($userType, 's'))
@@ -57,14 +57,48 @@ class UserDataSet
         }
     }
 
+    //Gets all students
+    public function fetchAllStudents()
+    {
+        //SQL statement will select a specific user
+        $sqlQuery = 'SELECT * FROM students';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+
+        //Returns all students in an array
+        $dataSet = [];
+        while ($row = $statement->fetch()) {
+            $dataSet[] = new UserData($row);
+        }
+        return $dataSet;
+    }
+
+    //Gets all students
+    public function fetchAllTeachers()
+    {
+        //SQL statement will select a specific user
+        $sqlQuery = 'SELECT * FROM teachers';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+
+        //Returns all teacher in an array
+        $dataSet = [];
+        while ($row = $statement->fetch()) {
+            $dataSet[] = new UserData($row);
+        }
+        return $dataSet;
+    }
+
     //Create user by adding to the database
-    public function createUser($firstName, $lastName, $userName, $email, $password, $roleID)
+    public function createUser($firstName, $lastName, $userName, $email, $password)
     {
         //Encrypts the password using the Crypt_Blowfish algorithm
         $password = password_hash($password,PASSWORD_BCRYPT);
 
         //Gets the first letter of the userName and puts it to lowercase
-        $userType = strtolower(strcmp(substr($userName, 0,1)));
+        $userType = strtolower(substr($userName, 0,1));
 
         //Checks if user should be put into the student table
         if (strcmp($userType, 's'))
