@@ -5,7 +5,7 @@ require_once('Models/UserData/UserData.php');
 
 class UserDataSet
 {
-    protected $dbHandle, $dbInstance;
+    protected $dbHandle, $dbInstance, $loginError;
 
     public function __construct()
     {
@@ -54,6 +54,35 @@ class UserDataSet
 
             $row = $statement->fetch();
             return new AdminData($row);
+        }
+    }
+
+    //Logs in user
+    public function login($userName, $password)
+    {
+        $userClean = $this->cleanInput($userName);
+        $passClean = $this->cleanInput($password);
+
+        //Contains user information
+        $user = fetchUser($userClean);
+
+        //Temporarily sets loginError in case login fails
+        $this->loginError = True;
+
+        //Checks if the userName exists
+        if ($user!=null)
+        {
+            //Checks password to see if it matches for the userName
+            if (password_verify($passClean, $user->getPassword()))
+            {
+                //Saves the user information as a session
+                $_SESSION['user'] = $user;
+                return true;
+            }
+            else {
+                return false;
+            }
+
         }
     }
 
@@ -129,6 +158,12 @@ class UserDataSet
         }
     }
 
-
-
+    // used to clean inputs for security purposes
+    private function cleanInput($i)
+    {
+        $i = trim($i);
+        $i = stripcslashes($i);
+        $i = htmlspecialchars($i);
+        return $i;
+    }
 }
