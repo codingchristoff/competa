@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a690ce52-896c-42aa-a240-0550241b5d76" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Models/UserData/UserData.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/UserData/UserData.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/UserData/AdminData.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/UserData/AdminData.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/UserData/StudentData.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/UserData/StudentData.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,30 +29,7 @@
     <option name="HIDDEN_KINDS">
       <set />
     </option>
-    <expand>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="MySQL - jdbc:mysql://poseidon@salford.ac.uk:3306/sgb770_competa" type="feb32156:DbDataSourceImpl" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="MySQL - jdbc:mysql://poseidon@salford.ac.uk:3306/sgb770_competa" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="MySQL - jdbc:mysql://poseidon@salford.ac.uk:3306/sgb770_competa" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="sgb770_competa: schema" type="76f4a085:MysqlImplModel$Schema" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="MySQL - jdbc:mysql://poseidon@salford.ac.uk:3306/sgb770_competa" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="sgb770_competa: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="students: table" type="285a2a93:MysqlImplModel$Table" />
-      </path>
-    </expand>
+    <expand />
     <select />
   </component>
   <component name="Git.Settings">
@@ -148,8 +128,7 @@
       <workItem from="1578568964286" duration="1016000" />
       <workItem from="1578570288879" duration="7772000" />
       <workItem from="1578586747945" duration="307000" />
-      <workItem from="1578651325005" duration="6492000" />
-      <workItem from="1578658141519" duration="1432000" />
+      <workItem from="1578651325005" duration="5463000" />
     </task>
     <task id="LOCAL-00001" summary="Test">
       <created>1578484702463</created>
@@ -207,21 +186,7 @@
       <option name="project" value="LOCAL" />
       <updated>1578595051109</updated>
     </task>
-    <task id="LOCAL-00009" summary="AdminData and StudentData classes updated - Alex">
-      <created>1578656959051</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1578656959051</updated>
-    </task>
-    <task id="LOCAL-00010" summary="AdminData and StudentData classes updated - Alex">
-      <created>1578658945896</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1578658945896</updated>
-    </task>
-    <option name="localTasksCounter" value="11" />
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -248,7 +213,6 @@
     <MESSAGE value="Rubric System: Login" />
     <MESSAGE value="Alex V1" />
     <MESSAGE value="Alex V2" />
-    <MESSAGE value="AdminData and StudentData classes updated - Alex" />
-    <option name="LAST_COMMIT_MESSAGE" value="AdminData and StudentData classes updated - Alex" />
+    <option name="LAST_COMMIT_MESSAGE" value="Alex V2" />
   </component>
 </project>
