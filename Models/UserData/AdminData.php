@@ -3,9 +3,12 @@
 
 class AdminData extends UserData
 {
+    protected $_adminID;
+
     public function __construct($user_data)
     {
         parent::__construct($user_data);
+        $this->_adminID = $user_data['adminID'];
     }
 
     public function getAllUsers()

@@ -3,7 +3,7 @@
 
 class StudentData extends ClassData
 {
-    protected $_tableGroup, $_dateJoined;
+    protected $_studentID, $_tableGroup, $_dateJoined;
 
     /**
      * StudentData constructor.
@@ -11,6 +11,7 @@ class StudentData extends ClassData
     public function __construct($user_data)
     {
         parent::__construct($user_data);
+        $this->_studentID = $user_data['studentID'];
         $this->_tableGroup = $user_data['tableGroup'];
         $this->_dateJoined = $user_data['dateJoined'];
     }
@@ -57,7 +58,7 @@ class StudentData extends ClassData
     }
 
     /**
-     * @param $newClass ->
+     * @param $newClass -> new class ID
      */
     public function setClass($newClass){
         //Inherited from ClassData

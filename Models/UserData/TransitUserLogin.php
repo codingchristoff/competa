@@ -1,4 +1,5 @@
 <?php
+//redundant class - needs to be deleted
 require_once('Models/UserData/TransitUserError.php');
 
 
@@ -18,22 +19,6 @@ class TransitUserLogin extends TransitUserError
             $row = $statement->fetch();
 
             return $row;
-    }
-
-    public function verifyRole($email)
-    {
-        if (substr($email, 0, 1) === "A")
-
-            // Prepare a select statement
-            $sql = "SELECT userName FROM students WHERE userName = :userName";
-
-        if ($stmt = $this->_dbHandle->prepare($sql)) {
-            // Bind variables to the prepared statement as parameters
-            $stmt->bindParam(":userName", $param_userName, PDO::PARAM_STR);
-
-            // Set parameters
-            $param_userName = trim($email);
-        }
     }
 
     // Authenticate user login

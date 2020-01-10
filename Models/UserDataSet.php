@@ -18,10 +18,11 @@ class UserDataSet
     {
         //Gets the first letter of the userName and puts it to lowercase
         $userType = strtolower(substr($userName, 0,1));
-
+        echo $userType;
         //Gets a student user
-        if (strcmp($userType, 's'))
+        if ($userType === 's')
         {
+            echo 'Hi';
             //SQL statement will select a specific user
             $sqlQuery = 'SELECT * FROM students WHERE userName="' . $userName . '"';
 
@@ -32,7 +33,7 @@ class UserDataSet
             return new StudentData($row);
         }
         //Gets a teacher user
-        else if(strcmp($userType, 't'))
+        else if($userType === 't')
         {
             //SQL statement will select a specific user
             $sqlQuery = 'SELECT * FROM teachers WHERE userName="' . $userName . '"';
@@ -44,7 +45,7 @@ class UserDataSet
             return new TeacherData($row);
         }
         //Gets an admin user
-        else if (strcmp($userType, 'a'))
+        else if ($userType === 'a')
         {
             //SQL statement will select a specific user
             $sqlQuery = 'SELECT * FROM admins WHERE userName="' . $userName . '"';
@@ -76,8 +77,7 @@ class UserDataSet
             if (password_verify($passClean, $user->getPassword()))
             {
                 //Saves the user information as a session
-                $_SESSION['user'] = $user;
-                return true;
+                return $user;
             }
             else {
                 return false;

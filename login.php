@@ -4,6 +4,7 @@ session_start();
 
 $view = new stdClass();
 $view->user = null;
+$view->success = null;
 
 // To ensure login.php is not manually accessible to logged in user
 if (isset($_SESSION['user']))
@@ -26,7 +27,7 @@ if(isset($_POST['submit']))
 {
     $success = $user->login($_POST['username'],$_POST['password']);
 
-    if ($success === True)
+    if (is_object($success))
     {
         header("Location: index.php");
     }
