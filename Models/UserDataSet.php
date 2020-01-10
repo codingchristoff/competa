@@ -19,11 +19,10 @@ class UserDataSet
 
         //Gets the first letter of the userName and puts it to lowercase
         $userType = strtolower(substr($userName, 0,1));
-        echo $userType;
+
         //Gets a student user
         if ($userType === 's')
         {
-            echo 'Hi';
             //SQL statement will select a specific user
             $sqlQuery = 'SELECT * FROM students WHERE userName="' . $userName . '"';
 
@@ -79,7 +78,9 @@ class UserDataSet
             if (password_verify($passClean, $user->getPassword()))
             {
                 //Saves the user information as a session
-                return $user;
+                $_SESSION['username'] = $user->getUsername();
+                $_SESSION['roleID'] = $user->getRoleID();
+                session_write_close();
             }
             else {
                 return false;

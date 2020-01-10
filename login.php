@@ -27,7 +27,7 @@ if(isset($_POST['submit']))
 {
     $success = $user->login($_POST['username'],$_POST['password']);
 
-    if (is_object($success))
+    if (is_string($success))
     {
         header("Location: index.php");
     }
