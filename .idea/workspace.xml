@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f5b18b0a-23c7-472e-bc2e-16ddf4f49ad5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Models/Transit.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Transit.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/UserDataSet.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/UserDataSet.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/login.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -92,7 +90,7 @@
         <entry file="file://$PROJECT_DIR$/Models/UserDataSet.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
-              <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
+              <caret line="70" selection-start-line="70" selection-end-line="70" />
             </state>
           </provider>
         </entry>
@@ -130,8 +128,8 @@
         <option value="$PROJECT_DIR$/Models/UserData/ClassData.php" />
         <option value="$PROJECT_DIR$/Models/UserData/TransitUserLogin.php" />
         <option value="$PROJECT_DIR$/Models/Transit.php" />
-        <option value="$PROJECT_DIR$/Models/UserDataSet.php" />
         <option value="$PROJECT_DIR$/login.php" />
+        <option value="$PROJECT_DIR$/Models/UserDataSet.php" />
       </list>
     </option>
   </component>
@@ -227,7 +225,7 @@
       <updated>1578591143411</updated>
       <workItem from="1578591147953" duration="878000" />
       <workItem from="1578592563478" duration="3044000" />
-      <workItem from="1578650278385" duration="7976000" />
+      <workItem from="1578650278385" duration="8398000" />
     </task>
     <task id="LOCAL-00002" summary="ali test">
       <created>1578593310180</created>
@@ -250,22 +248,28 @@
       <option name="project" value="LOCAL" />
       <updated>1578656675020</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Ali - 10/01/20 - 3">
+      <created>1578658315552</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1578658315552</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12259000" />
+    <option name="totallyTimeSpent" value="12681000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1696" height="1026" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2591687" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2591687" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32922733" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4987775" weight="0.32922733" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -273,8 +277,8 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4987775" weight="0.32922733" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49938875" weight="0.32922733" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5012225" side_tool="true" weight="0.32922733" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.4987775" visible="true" weight="0.32922733" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5012225" side_tool="true" visible="true" weight="0.32922733" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -304,7 +308,8 @@
     <MESSAGE value="ali test" />
     <MESSAGE value="Ali" />
     <MESSAGE value="Ali - 10/01/20 - 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ali - 10/01/20 - 2" />
+    <MESSAGE value="Ali - 10/01/20 - 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ali - 10/01/20 - 3" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
@@ -424,7 +429,7 @@
     <entry file="file://$PROJECT_DIR$/Models/UserDataSet.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
+          <caret line="70" selection-start-line="70" selection-end-line="70" />
         </state>
       </provider>
     </entry>
