@@ -15,8 +15,6 @@ if(isset($_SESSION['user']))
 {
     //The user that is currently logged in
     $view->user = $_SESSION['user'];
-
-    var_dump($view->user);
 }
 
 require_once('Views/myData.phtml');
