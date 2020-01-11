@@ -1,6 +1,6 @@
 <?php
 
-require_once('Models/UserData/UserData.php');
+require_once('Models/UserData/AdminData.php');
 
 session_start();
 
@@ -9,7 +9,6 @@ $view->pageTitle = 'My Data';
 
 //Sets a user
 $view->user = null;
-$view->userName = null;
 
 //Checks if a user is set
 if(isset($_SESSION['user']))
