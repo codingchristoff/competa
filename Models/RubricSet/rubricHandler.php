@@ -1,7 +1,7 @@
 <?php
 
 
-class rubricHandler
+class RubricHandler
 {
     protected $dbHandle, $dbInstance;
     public function __construct()
