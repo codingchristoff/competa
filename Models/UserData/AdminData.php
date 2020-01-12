@@ -1,5 +1,6 @@
 <?php
 
+require_once('Models/UserData/UserData.php');
 
 class  AdminData extends UserData
 {
