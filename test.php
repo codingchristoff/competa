@@ -18,4 +18,4 @@ var_dump($handler->retreiveRubric("neque"));
 
 //var_dump($handler->retreiveCriteria("Nunc purus."));
 
-var_dump($handler->test("neque"));
+var_dump($handler->work("neque"));

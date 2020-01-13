@@ -8,6 +8,7 @@ class RubricHandler
 {
     protected $dbHandle;
     protected $dbInstance;
+    
     public function __construct()
     {
         $this->dbInstance = Database::getInstance();
@@ -48,7 +49,7 @@ class RubricHandler
     }
 
     /**
-     * 
+     *
      */
     public function retreiveCategory($category)
     {
@@ -172,12 +173,10 @@ class RubricHandler
         unset($pdo);
     }
 
-public function test($test)
-{
-    $verify = retreiveCriteria($test);
+    public function work($test)
+    {
+        $verify = $this->retreiveRubric($test);
 
-    return $verify;
+        return $verify;
+    }
 }
-
-}
-
