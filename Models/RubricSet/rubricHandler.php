@@ -386,10 +386,6 @@ class RubricHandler
         }
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> b1ac8c8af4bd7189e2ad6d9051e370d80d78d9c6
     public function searchRubric($rubericName)
     {
         $rubricObj = $this->retrieveRubric($rubericName);
@@ -443,7 +439,7 @@ class RubricHandler
     }
 
 
-    public function buildRubric($date, $rubricName)
+    public function buildRubric($dateID, $rubricName)
     {
         //$dateID = $this->retrieveDate($date);
         //Returns all mergeID that match the date
@@ -456,8 +452,5 @@ class RubricHandler
         } else {
         }
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> b1ac8c8af4bd7189e2ad6d9051e370d80d78d9c6
 }
