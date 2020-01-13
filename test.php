@@ -21,8 +21,10 @@ $handler = new rubricHandler();
 //var_dump($handler->test("tree"));
 
 //this is what needs to be established and passed to our retrieveDate method
-$t=time();
-echo($t . "<br>");
-echo(date("d-m-Y H:m:s",$t));
+
+//$t=time();
+//date_default_timezone_set('UTC');
+//echo($t . "<br>");
+//echo(date("d-m-Y H:m:s",$t));
 
 var_dump($handler->retrieveDate("2020-01-10 13:04:15"));
