@@ -3,14 +3,12 @@
 
 class Rubric
 {
-
     protected $_rubric_ID, $_rubric_name, $categories=[];
 
     public function __construct($rubric_row)
     {
         $this->_rubric_ID = $rubric_row['rubricID'];
         $this->_rubric_name = $rubric_row['rubricName'];
-
     }
 
     /**

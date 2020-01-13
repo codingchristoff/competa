@@ -9,6 +9,7 @@ $view->success = null;
 // To ensure login.php is not manually accessible to logged in user
 if (isset($_SESSION['user']))
 {
+    //Change this for a more suitable page later !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     header("Location: myData.php");
 }
 require_once('Models/UserData/UserDataSet.php');

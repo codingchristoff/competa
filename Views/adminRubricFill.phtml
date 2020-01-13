@@ -1,7 +1,4 @@
 <?php require('template/header.phtml') ?>
-    <div class="container s12 l12" id="ls-header">
-        <h6 class="center helper-text"><strong>Test: rubricEditor</strong></h6>
-    </div>
     <div class="container row s12 l12 rubric-admin">
         <div class="container col s12 l12">
             <form name="table" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
@@ -9,7 +6,11 @@
                 $rubrics = $view->rubric_count;
                 while($rubrics > 0)
                 {
-                    echo "<table class=\"fixed\"><caption class=\"table-title\">Rubric 1</caption>
+                    echo "<div class=\"input-field col s6 offset-s3\">
+                          <input placeholder=\"Rubric Name\" id=\"r_name\" type=\"text\" name=\"{$rubrics}\" required>
+                          </div>";
+
+                    echo "<table class=\"fixed\">
                            <thead><tr><th>Category</th>";
 
                     $columns = $view->criteria_count;
@@ -21,7 +22,7 @@
 
                     echo "</thead></tr><tbody>";
 
-                    $rows = $view->category_count;
+                    $rows = $view->category_count-1;
                     while($rows > 0)
                     {
                         echo "<tr>";
@@ -30,7 +31,7 @@
                         {
                             echo "<td><div class=\"input-field col s12\">
                                   <textarea id=\"test\" class=\"materialize-textarea\" 
-                                  name=\"{$rubrics}{$rows}{$rowTabs}\"></textarea>
+                                  name=\"{$rubrics}{$rows}{$rowTabs}\" required></textarea>
                                   <label for=\"test\">{$rubrics}{$rows}{$rowTabs}</label>
                                   </div></td>";
                             $rowTabs--;

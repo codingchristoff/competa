@@ -21,5 +21,16 @@ if(isset($_SESSION['rubric_count']))
     $view->criteria_count = $_SESSION['criteria_count'];
 }
 
+if(isset($_SESSION['rubricsInfo']))
+{
+    unset($_SESSION['rubricsInfo']);
+}
+
+if(isset($_POST['submit']))
+{
+    $_SESSION['rubricsInfo'] = $_POST;
+    header("Location: studentRubricView.php");
+}
+
 $view->pageTitle = 'Rubrics Fill';
 require_once('Views/adminRubricFill.phtml');
