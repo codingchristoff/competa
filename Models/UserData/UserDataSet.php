@@ -136,6 +136,23 @@ class UserDataSet
         return $statement->fetch();
     }
 
+    //Gets all classNames
+    public function fetchAllClassNames()
+    {
+        //SQL statement will select a specific user
+        $sqlQuery = 'SELECT className FROM classes';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+
+        //Returns all students in an array
+        $dataSet = [];
+        while ($row = $statement->fetch()) {
+            $dataSet[] = $row;
+        }
+        return $dataSet;
+    }
+
     //Create user by adding to the database
     public function createUser($user)
     {
