@@ -6,7 +6,10 @@ $view = new stdClass();
 
 $handler = new rubricHandler();
 
-$view->test = $handler->test("neque");
+//$view->test = $handler->test("neque");
 
-echo $view->test->getRubricName();
+//echo $view->test->getRubricName();
 
+//$view->test = $handler->retreiveRubric("neque");
+
+var_dump($handler->retreiveRubric("neque"));

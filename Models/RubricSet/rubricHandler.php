@@ -1,6 +1,6 @@
 <?php
 
-require_once('');
+require_once('Models/RubricSet/Rubric.php');
 
 class RubricHandler
 {
@@ -12,7 +12,67 @@ class RubricHandler
         $this->dbHandle = $this->dbInstance->getdbConnection();
     }
 
-    public function checkRubricName($rubricName)
+    public function retreiveRubric($rubricName)
+    {
+        //checks if value exists in database
+        $sql = "SELECT * FROM rubrics WHERE rubricName = :rubricName";
+    
+        if ($stmt = $this->dbHandle->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":rubricName", $param_rubricName, PDO::PARAM_STR);
+    
+            // Set parameters
+            $param_rubricName = trim($rubricName);
+    
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+                if ($stmt->rowCount() == 1) {
+                    $row = $stmt->fetch();
+                    return new Rubric($row);
+                } else {
+                    return false;
+                }
+            } else {
+                return "An error has occurred, please try again later.";
+            }
+        }
+        //Close statement
+        unset($stmt);
+        //Close connection
+        unset($pdo);
+    }
+
+    public function retreiveCategory($category)
+    {
+        //checks if value exists in database
+        $sql = "SELECT * FROM rubrics WHERE rubricName = :rubricName";
+    
+        if ($stmt = $this->_dbHandle->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":rubricName", $param_rubricName, PDO::PARAM_STR);
+    
+            // Set parameters
+            $param_rubricName = trim($rubricName);
+    
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+                if ($stmt->rowCount() == 1) {
+                    $row = $stmt->fetch();
+                    return new Rubric($row);
+                } else {
+                    return false;
+                }
+            } else {
+                return "An error has occurred, please try again later.";
+            }
+        }
+        //Close statement
+        unset($stmt);
+        //Close connection
+        unset($pdo);
+    }
+
+    public function retreiveCriteria($rubricName)
     {
         //checks if value exists in database
         $sql = "SELECT * FROM rubrics WHERE rubricName = :rubricName";

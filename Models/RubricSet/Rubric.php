@@ -10,7 +10,6 @@ class Rubric
     {
         $this->_rubric_ID = $rubric_row['rubricID'];
         $this->_rubric_name = $rubric_row['rubricName'];
-
     }
 
     /**
