@@ -316,7 +316,7 @@ class UserDataSet
         {
             return $checkUserVariables;
         }
-        
+
         //Gets the first letter of the userName and puts it to lowercase
         $userType = strtolower(substr($userNameClean, 0,1));
 
