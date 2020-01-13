@@ -47,6 +47,9 @@ class RubricHandler
         unset($pdo);
     }
 
+    /**
+     * 
+     */
     public function retreiveCategory($category)
     {
         //checks if value exists in database
@@ -168,6 +171,13 @@ class RubricHandler
         //Close connection
         unset($pdo);
     }
+
+public function test($test)
+{
+    $verify = retreiveCriteria($test);
+
+    return $verify;
+}
 
 }
 
