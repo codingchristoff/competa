@@ -1,6 +1,53 @@
 <?php require('template/header.phtml') ?>
     <div class="container s12 l12" id="ls-header">
-        <h6 class="center helper-text"><strong>Test: rubricStudent</strong></h6>
+        <h6 class="center helper-text"><strong>Test: rubricEditor</strong></h6>
     </div>
+    <div class="container row s12 l12 rubric-admin">
+        <div class="container col s12 l12">
+            <form name="table" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+                <?php
+                $rubrics = $view->rubric_count;
+                while($rubrics > 0)
+                {
+                    echo "<table class=\"fixed\"><caption class=\"table-title\">Rubric 1</caption>
+                           <thead><tr><th>Category</th>";
+
+                    $columns = $view->criteria_count;
+                    while($columns > 0)
+                    {
+                        echo "<th>Criteria</th>";
+                        $columns--;
+                    }
+
+                    echo "</thead></tr><tbody>";
+
+                    $rows = $view->category_count;
+                    while($rows > 0)
+                    {
+                        echo "<tr>";
+                        $rowTabs = $view->criteria_count+1;
+                        while($rowTabs > 0)
+                        {
+                            echo "<td><div class=\"input-field col s12\">
+                                  <textarea id=\"test\" class=\"materialize-textarea\" 
+                                  name=\"{$rubrics}{$rows}{$rowTabs}\"></textarea>
+                                  <label for=\"test\">{$rubrics}{$rows}{$rowTabs}</label>
+                                  </div></td>";
+                            $rowTabs--;
+                        }
+                        echo "</tr>";
+
+                        $rows--;
+                    }
+                    echo"</tbody></table></br>";
+                    $rubrics--;
+                }
+                ?>
+                <div class="right btn-block col s12 l12">
+                    <input class="btn black right z-depth-2" type="submit"
+                           name="submit" value="Create">
+                </div>
+            </form>
+        </div>
     </div>
 <?php require('template/footer.phtml') ?>

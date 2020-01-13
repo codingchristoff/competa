@@ -1,0 +1,17 @@
+<?php require('template/header.phtml') ?>
+    <div class="container s12 l12" id="ls-header">
+        <h6 class="center helper-text"><strong>Username: <?php echo $view->user->getUserName()?></strong></h6>
+    </div>
+
+    <div class="container s12 l12" id="ls-header">
+        <h6 class="center helper-text"><strong>Role: <?php if ($view->user->getRoleID() == 1) echo 'Admin'; else if ($view->user->getRoleID() == 2) echo 'Teacher'; else if ($view->user->getRoleID() == 3) echo 'Student'; else echo 'Unknown';?></strong></h6>
+    </div>
+
+    <div class="container s12 l12" id="ls-header">
+        <h6 class="center helper-text"><strong>Name: <?php echo $view->user->getFirstName() . ' ' . $view->user->getLastName()?></strong></h6>
+    </div>
+
+    <div class="container s12 l12" id="ls-header">
+        <h6 class="center helper-text"><strong>Email: <?php echo $view->user->getEmail()?></strong></h6>
+    </div>
+<?php require('template/footer.phtml') ?>

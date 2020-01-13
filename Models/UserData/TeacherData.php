@@ -1,5 +1,6 @@
 <?php
 
+require_once('Models/UserData/ClassData.php');
 
 class TeacherData extends ClassData
 {
