@@ -126,13 +126,14 @@ class RubricHandler
             $param_dateID = trim($dateID);
 
             // Attempt to execute the prepared statement
-            if ($stmt->execute()) {
+            if ($stmt->execute()){
                 $mergeID = [];
-                while ($row = $stmt->fetch());
+                while($row = $stmt->fetch())
                 {
                     $mergeID[] = (int)$row['mergeID'];
                 }
                 return $mergeID;
+
             }
         } else {
             return false;
@@ -385,6 +386,10 @@ class RubricHandler
         }
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> b1ac8c8af4bd7189e2ad6d9051e370d80d78d9c6
     public function searchRubric($rubericName)
     {
         $rubricObj = $this->retrieveRubric($rubericName);
@@ -451,4 +456,8 @@ class RubricHandler
         } else {
         }
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b1ac8c8af4bd7189e2ad6d9051e370d80d78d9c6
 }
