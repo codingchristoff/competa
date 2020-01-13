@@ -110,6 +110,105 @@ class RubricHandler
         unset($pdo);
     }
 
+    /**
+     * 
+     */
+    public function retrieveRubricGroup()
+    {
+                //checks if value exists in database
+                $sql = "SELECT * FROM rubricGroup WHERE criteriaText = :criteriaText";
+    
+                if ($stmt = $this->dbHandle->prepare($sql)) {
+                    // Bind variables to the prepared statement as parameters
+                    $stmt->bindParam(":criteriaText", $param_criteriaText, PDO::PARAM_STR);
+            
+                    // Set parameters
+                    $param_criteriaText = trim($criteriaText);
+            
+                    // Attempt to execute the prepared statement
+                    if ($stmt->execute()) {
+                        if ($stmt->rowCount() == 1) {
+                            $row = $stmt->fetch();
+                            return new Criteria($row);
+                        } else {
+                            return false;
+                        }
+                    } else {
+                        return "An error has occurred, please try again later.";
+                    }
+                }
+                //Close statement
+                unset($stmt);
+                //Close connection
+                unset($pdo);                
+    }
+
+        /**
+     * 
+     */
+    public function retrieveDate($date)
+    {
+                //checks if value exists in database
+                $sql = "SELECT dateID FROM dates WHERE date = :date";
+    
+                if ($stmt = $this->dbHandle->prepare($sql)) {
+                    // Bind variables to the prepared statement as parameters
+                    $stmt->bindParam(":date", $param_date, PDO::PARAM_STR);
+            
+                    // Set parameters
+                    $param_date = trim($date);
+            
+                    // Attempt to execute the prepared statement
+                    if ($stmt->execute()) {
+                        if ($stmt->rowCount() == 1) {
+                            $row = $stmt->fetch();
+                            return $row;
+                        } else {
+                            return false;
+                        }
+                    } else {
+                        return "An error has occurred, please try again later.";
+                    }
+                }
+                //Close statement
+                unset($stmt);
+                //Close connection
+                unset($pdo);                
+    }
+
+        /**
+     * 
+     */
+    public function retrieveMerge()
+    {
+                //checks if value exists in database
+                $sql = "SELECT * FROM rubricGroup WHERE criteriaText = :criteriaText";
+    
+                if ($stmt = $this->dbHandle->prepare($sql)) {
+                    // Bind variables to the prepared statement as parameters
+                    $stmt->bindParam(":criteriaText", $param_criteriaText, PDO::PARAM_STR);
+            
+                    // Set parameters
+                    $param_criteriaText = trim($criteriaText);
+            
+                    // Attempt to execute the prepared statement
+                    if ($stmt->execute()) {
+                        if ($stmt->rowCount() == 1) {
+                            $row = $stmt->fetch();
+                            return new Criteria($row);
+                        } else {
+                            return false;
+                        }
+                    } else {
+                        return "An error has occurred, please try again later.";
+                    }
+                }
+                //Close statement
+                unset($stmt);
+                //Close connection
+                unset($pdo);                
+    }
+
     public function createRubric($rubricName)
     {
             // Prepare an insert statement
@@ -136,8 +235,6 @@ class RubricHandler
             // Close connection
             unset($pdo);
         }
-
-
 
     private function createCriteria($criteriaText)
     {  // Prepare an insert statement
@@ -199,4 +296,7 @@ class RubricHandler
             return false;
         }
     }
+
+
+
 }
