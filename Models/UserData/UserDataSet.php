@@ -61,6 +61,52 @@ class UserDataSet
         }
     }
 
+    //Used to check if unique variable exists, outputs userData object
+    public function fetchUniqueVariable($variable, $type)
+    {
+        $variableClean = $this->cleanInput($variable);
+        $typeClean = $this->cleanInput($type);
+
+        //SQL statement will get a user with a specific variable in admins table
+        $sqlQuery = 'SELECT * FROM admins WHERE ' . $typeClean . '="' . $variableClean . '";';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+        $row = $statement->fetch();
+
+        //Check if anything was found in the database for admins
+        if ($row != null)
+        {
+            return new AdminData($row);
+        }
+
+        //SQL statement will get a user with a specific variable in teachers
+        $sqlQuery = 'SELECT * FROM teachers WHERE ' . $typeClean . '="' . $variableClean . '";';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+        $row = $statement->fetch();
+
+        //Check if anything was found in the database for teachers
+        if ($row != null)
+        {
+            return new TeacherData($row);
+        }
+
+        //SQL statement will get a user with a specific variable in students
+        $sqlQuery = 'SELECT * FROM students WHERE ' . $typeClean . '="' . $variableClean . '";';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+        $row = $statement->fetch();
+
+        //Check if anything was found in the database for teachers
+        if ($row != null)
+        {
+            return new StudentData($row);
+        }
+    }
+
 
 
     //Logs in user
@@ -166,7 +212,7 @@ class UserDataSet
         $passwordClean = $this->cleanInput($user->getPassword());
 
         //Encrypts the password using the Crypt_Blowfish algorithm
-        $password = password_hash($passwordClean,PASSWORD_BCRYPT);
+        $passwordClean = password_hash($passwordClean,PASSWORD_BCRYPT);
 
         //Gets the first letter of the userName and puts it to lowercase
         $userType = strtolower(substr($userNameClean, 0,1));
@@ -252,7 +298,7 @@ class UserDataSet
         $passwordClean = $this->cleanInput($user->getPassword());
 
         //Encrypts the password using the Crypt_Blowfish algorithm
-        $password = password_hash($passwordClean,PASSWORD_BCRYPT);
+        $passwordClean = password_hash($passwordClean,PASSWORD_BCRYPT);
 
         //Gets the first letter of the userName and puts it to lowercase
         $userType = strtolower(substr($userNameClean, 0,1));
