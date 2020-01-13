@@ -24,6 +24,15 @@ $handler = new rubricHandler();
 
 //var_dump($handler->createCategory("Active lesson start"));
 
+//var_dump($handler->test("tree"));
+
+//this is what needs to be established and passed to our retrieveDate method
+$t=time();
+echo($t . "<br>");
+echo(date("d-m-Y H:m:s",$t));
+
+var_dump($handler->retrieveDate("2020-01-10 13:04:15"));
+
 //var_dump($handler->criteriaCategory("I do not follow the five basic rules that apply in every classroom."));
 
 //var_dump($handler->createDate(""))

@@ -110,6 +110,111 @@ class RubricHandler
         unset($pdo);
     }
 
+    /**
+     * Returns all mergeIDs with the corresponding date
+     */
+    public function retrieveRubricGroup($date)
+    {
+        //checks if value exists in database
+        $sql = "SELECT mergeID FROM rubricGroup WHERE date = :date";
+
+        if ($stmt = $this->dbHandle->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":date", $param_date, PDO::PARAM_STR);
+
+            // Set parameters
+            $param_date = trim($date);
+
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+                $mergeID = [];
+                while ($row = $stmt->fetch());
+                {
+                                $mergeID[] = $row;
+                            }
+                return $mergeID;
+            }
+        } else {
+            return "An error has occurred, please try again later.";
+        }
+        //Close statement
+        unset($stmt);
+        //Close connection
+        unset($pdo);
+    }
+
+    /**
+     *
+     */
+    public function retrieveDate($date)
+    {
+        //checks if value exists in database
+        $sql = "SELECT dateID FROM dates WHERE date = :date";
+
+        if ($stmt = $this->dbHandle->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":date", $param_date, PDO::PARAM_STR);
+
+            // Set parameters
+            $param_date = trim($date);
+
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+                if ($stmt->rowCount() == 1) {
+                    $row = $stmt->fetch();
+                    return $row;
+                } else {
+                    return false;
+                }
+            } else {
+                return "An error has occurred, please try again later.";
+            }
+        }
+        //Close statement
+        unset($stmt);
+        //Close connection
+        unset($pdo);
+    }
+
+    /**
+     * Returns rubricID, categoryID, criteriaID based on mergeID.
+     */
+    public function retrieveMerge($mergeID)
+    {
+        //checks if value exists in database
+        $sql = "SELECT * FROM rubricMerge WHERE mergeID = :mergeID";
+
+        if ($stmt = $this->dbHandle->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":mergeID", $param_mergeID, PDO::PARAM_STR);
+
+            // Set parameters
+            $param_mergeID = trim($mergeID);
+
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+                if ($stmt->rowCount() == 1) {
+                    $row = $stmt->fetch();
+                    return $row;
+                } else {
+                    return false;
+                }
+            } else {
+                return "An error has occurred, please try again later.";
+            }
+        }
+        //Close statement
+        unset($stmt);
+        //Close connection
+        unset($pdo);
+    }
+
+    public function masterMethod()
+    {
+        //check date if not then create
+        //
+    }
+
     public function createRubric($rubricName)
     {
             // Prepare an insert statement
@@ -122,21 +227,20 @@ class RubricHandler
                 // Set parameters
                 $param_rubricName = trim($rubricName);
 
-                                // Attempt to execute the prepared statement
-                if ($stmt->execute()) {
-                    return "Rubric name added to DB.";
-                } else {
-                    return "Something went wrong. Please try again later.";
-                }
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+                return "Name added to DB.";
             } else {
                 return "Something went wrong. Please try again later.";
-
             }
-            // Close statement
-            unset($stmt);
-            // Close connection
-            unset($pdo);
+        } else {
+            return "Something went wrong. Please try again later.";
         }
+        // Close statement
+        unset($stmt);
+        // Close connection
+        unset($pdo);
+    }
 
 
 
@@ -157,13 +261,13 @@ class RubricHandler
             } else {
                 return "Something went wrong. Please try again later.";
             }
+        } else {
+            return "Something went wrong. Please try again later.";
         }
-        else {return "Something went wrong. Please try again later.";}
         // Close statement
         unset($stmt);
         // Close connection
         unset($pdo);
-
     }
     public function createCategory($categoryName)
     {   // Prepare an insert statement
@@ -237,15 +341,14 @@ class RubricHandler
             } else {
                 return "Something went wrong. Please try again later.";
             }
+        } else {
+            return "Something went wrong. Please try again later.";
         }
-        else {return "Something went wrong. Please try again later.";}
         // Close statement
         unset($stmt);
         // Close connection
         unset($pdo);
     }
-
-
 
     public function test($test)
     {

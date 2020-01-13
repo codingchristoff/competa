@@ -61,6 +61,54 @@ class UserDataSet
         }
     }
 
+    //Used to check if unique variable exists, outputs userData object
+    public function fetchUniqueVariable($variable, $type)
+    {
+        $variableClean = $this->cleanInput($variable);
+        $typeClean = $this->cleanInput($type);
+
+        //SQL statement will get a user with a specific variable in admins table
+        $sqlQuery = 'SELECT * FROM admins WHERE ' . $typeClean . '="' . $variableClean . '";';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+        $row = $statement->fetch();
+
+        //Check if anything was found in the database for admins
+        if ($row != null)
+        {
+            return new AdminData($row);
+        }
+
+        //SQL statement will get a user with a specific variable in teachers
+        $sqlQuery = 'SELECT * FROM teachers WHERE ' . $typeClean . '="' . $variableClean . '";';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+        $row = $statement->fetch();
+
+        //Check if anything was found in the database for teachers
+        if ($row != null)
+        {
+            return new TeacherData($row);
+        }
+
+        //SQL statement will get a user with a specific variable in students
+        $sqlQuery = 'SELECT * FROM students WHERE ' . $typeClean . '="' . $variableClean . '";';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+        $row = $statement->fetch();
+
+        //Check if anything was found in the database for teachers
+        if ($row != null)
+        {
+            return new StudentData($row);
+        }
+    }
+
+
+
     //Logs in user
     public function login($userName, $password)
     {
@@ -164,7 +212,7 @@ class UserDataSet
         $passwordClean = $this->cleanInput($user->getPassword());
 
         //Encrypts the password using the Crypt_Blowfish algorithm
-        $password = password_hash($passwordClean,PASSWORD_BCRYPT);
+        $passwordClean = password_hash($passwordClean,PASSWORD_BCRYPT);
 
         //Gets the first letter of the userName and puts it to lowercase
         $userType = strtolower(substr($userNameClean, 0,1));
@@ -250,7 +298,7 @@ class UserDataSet
         $passwordClean = $this->cleanInput($user->getPassword());
 
         //Encrypts the password using the Crypt_Blowfish algorithm
-        $password = password_hash($passwordClean,PASSWORD_BCRYPT);
+        $passwordClean = password_hash($passwordClean,PASSWORD_BCRYPT);
 
         //Gets the first letter of the userName and puts it to lowercase
         $userType = strtolower(substr($userNameClean, 0,1));
@@ -278,13 +326,26 @@ class UserDataSet
         //Checks if user should be removed from admins table
         else if ($userType === 'a')
         {
-            $classIDClean = $this->cleanInput($user->getClassID());
             //SQL statement that will edit a user
             $sqlQuery = 'UPDATE admins SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'", password="' . $passwordClean.'" WHERE userName="' . $userNameClean.'"';
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
         }
+    }
+
+    //Sets a students tableGroup
+    public function setTableGroup($user)
+    {
+        //Cleans up input
+        $userNameClean = $this->cleanInput($user->getUserName());
+        $tableGroupClean = $this->cleanInput($user->getTableGroup());
+
+        //SQL statement that will edit a students tableGroup
+        $sqlQuery= 'UPDATE students SET tableGroup="' . $tableGroupClean.'" WHERE userName="' . $userNameClean.'"';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
     }
 
     // used to clean inputs for security purposes
