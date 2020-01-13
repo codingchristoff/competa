@@ -33,7 +33,7 @@ class UserDataSet
             $statement->execute(); // execute the PDO statement
 
             $row = $statement->fetch();
-            return new StudentData($row);;
+            return new StudentData($row);
         }
         //Gets a teacher user
         else if($userType === 't')
@@ -58,6 +58,9 @@ class UserDataSet
 
             $row = $statement->fetch();
             return new AdminData($row);
+        }
+        else{
+            return null;
         }
     }
 
@@ -178,7 +181,11 @@ class UserDataSet
         $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
         $statement->execute(); // execute the PDO statement
 
-        return $statement->fetch();
+        //Getting the row (array)
+        $row = $statement->fetch();
+
+        //returning the first value (the classID)
+        return $row[0];
     }
 
     //Gets all classNames
@@ -193,7 +200,7 @@ class UserDataSet
         //Returns all students in an array
         $dataSet = [];
         while ($row = $statement->fetch()) {
-            $dataSet[] = $row;
+            $dataSet[] = $row[0];
         }
         return $dataSet;
     }
@@ -202,7 +209,7 @@ class UserDataSet
     public function createUser($user, $classID)
     {
         //Cleans up input
-        $userNameClean = $this->cleanInput($user->getUserName());
+        $userNameClean = $this->cleanInput($user->getUsername());
         $firstNameClean = $this->cleanInput($user->getFirstName());
         $lastNameClean = $this->cleanInput($user->getLastName());
         $emailClean = $this->cleanInput($user->getEmail());
@@ -212,9 +219,9 @@ class UserDataSet
         $passwordClean = password_hash($passwordClean,PASSWORD_BCRYPT);
 
         //Checks if the user already exists
-        if (fetchUser($userNameClean)==null)
+        if ($this->fetchUser($userNameClean)->getUsername()!==null)
         {
-            return 'Username Error';
+            return 'Username already exists';
         }
 
         //Checks the rest of the variables to see if they are in the correct format
@@ -230,7 +237,7 @@ class UserDataSet
         //Checks if user should be put into the student table
         if ($userType === 's')
         {
-            $classIDClean = $this->cleanInput($classID);
+            $classIDClean = intval($this->cleanInput($classID));
             //SQL statement that will be inserted into the database
             $sqlQuery = 'INSERT INTO students (firstName, lastName, userName, email, password, roleID, classID) VALUES ("' . $firstNameClean . '", "' . $lastNameClean . '", "' . $userNameClean . '", "' . $emailClean . '", "' . $passwordClean . '", "3", "' . $classIDClean .'");';
 
@@ -240,7 +247,8 @@ class UserDataSet
         //Checks if user should be put into the teacher table
         else if($userType === 't')
         {
-            $classIDClean = $this->cleanInput($classID);
+
+            $classIDClean = intval($this->cleanInput($classID));
             //SQL statement that will be inserted into the database
             $sqlQuery = 'INSERT INTO teachers (firstName, lastName, userName, email, password, roleID, classID) VALUES ("' . $firstNameClean . '", "' . $lastNameClean . '", "' . $userNameClean . '", "' . $emailClean . '", "' . $passwordClean . '", "2", "' . $classIDClean .'");';
 
@@ -355,7 +363,7 @@ class UserDataSet
     public function setTableGroup($user)
     {
         //Cleans up input
-        $userNameClean = $this->cleanInput($user->getUserName());
+        $userNameClean = $this->cleanInput($user->getUsername());
         $tableGroupClean = $this->cleanInput($user->getTableGroup());
 
         //SQL statement that will edit a students tableGroup

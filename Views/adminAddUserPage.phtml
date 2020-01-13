@@ -54,6 +54,10 @@
                        name="submit" value="Create User">
             </div>
         </form>
+        <div>
+            <p><?php if(isset($view->errorMessage)){ echo $view->errorMessage; } ?></p>
+            <p><?php if(isset($view->createUserSuccess)){ echo $view->createUserSuccess; } ?></p>
+        </div>
     </div>
 </div>
 <?php require('template/footer.phtml') ?>
