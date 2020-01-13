@@ -34,9 +34,9 @@ class StudentData extends ClassData
      * @return StudentData|void
      * Gets student data
      */
-    public function getInfo($userName)
+    public function getInfo()
     {
-        parent::getInfo($this->getUsername());
+        parent::getInfo();
     }
 
     /**
@@ -61,14 +61,6 @@ class StudentData extends ClassData
     public function setDateJoined()
     {
         return ;
-    }
-
-    /**
-     * @param $newClass -> new class ID
-     */
-    public function setClass($newClass){
-        //Inherited from ClassData
-        $this->_classID = $newClass;
     }
 
 }
