@@ -1,15 +1,59 @@
 <?php require('template/header.phtml') ?>
-<div class="container s12 l12" id="ls-header">
-    <h6 class="center helper-text"><strong>Test: rubricEditor</strong></h6>
-</div>
 <div class="container row s12 l12 rubric-admin">
     <div class="container col s12 l12">
         <form name="studentFill" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
             <?php
-            var_dump($view->rubricsInfo);
-            var_dump($view->newRubricsInfo);
+
+            $rubricCount = 0;
+
+            foreach($view->twoRubricsInfo as $array)
+            {
+
+                $arrayTemp = $array;
+                $rubricName = array_shift($arrayTemp);
+
+                echo "<div class=\"container s12 l12\" id=\"ls-header\">
+              <h6 class=\"center helper-text\"><strong>{$rubricName}</strong></h6></div>";
+                echo "<table class=\"fixed\"><tbody>";
+
+                $arrayTempChunked = array_chunk($arrayTemp, $_SESSION['criteria_count']+1);
+
+                foreach($arrayTempChunked as $arrayCC)
+                {
+                    echo "<tr>";
+                    $arrayTempCC = $arrayCC;
+                    $categoryName = array_shift($arrayTempCC);
+
+
+                    // echo $categoryName;
+
+                    echo "<td>{$categoryName}</td>";
+
+
+                    foreach ($arrayTempCC as $key => $value)
+                    {
+                        // echo $value;
+                        echo "<td>{$value}</td>";
+                        echo "<td><select name=\"rubric_count\" class=\"browser-default\" id=\"rubrics\">
+                        <option value=\"1\">1</option>
+                        <option value=\"2\">2</option>
+                        <option value=\"3\">3</option>
+                        <option value=\"4\">4</option>
+                    </select></td>";
+                    }
+                    echo "</tr>";
+                }
+
+                echo"</tbody></table></br>";
+                $rubricCount++;
+            }
             ?>
+            <div class="btn-block col s12 l12">
+                <input class="btn black right z-depth-2" type="submit"
+                       name="submit" value="Submit">
+            </div>
         </form>
     </div>
+
 </div>
 <?php require('template/footer.phtml') ?>

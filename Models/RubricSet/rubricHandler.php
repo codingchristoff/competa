@@ -442,7 +442,7 @@ class RubricHandler
     }
 
 
-    public function buildRubric($date, $rubricName)
+    public function buildRubric($dateID, $rubricName)
     {
         //$dateID = $this->retrieveDate($date);
         //Returns all mergeID that match the date
@@ -455,4 +455,8 @@ class RubricHandler
         } else {
         }
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7da1e40097604a5b76242370e5c5a247b24403e5
 }
