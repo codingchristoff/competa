@@ -7,6 +7,13 @@ session_start();
 $view = new stdClass();
 $view->pageTitle = 'Add User';
 
+//Initiating a connection to database and giving it to the view
+$dataSet = new UserDataSet();
+$view->dataSet = $dataSet;
+
+//Fetching all of the classes for the drop down menu
+$view->allClasses = $dataSet->fetchAllClassNames;
+
 //Checks if a USER has logged in
 if(isset($_SESSION['user']))
 {
@@ -16,21 +23,24 @@ if(isset($_SESSION['user']))
         //Checks if admin clicked 'Create User button'
         if(isset($_POST['submit'])){
 
-            //Initiating a connection to database
-            $dataSet = new UserDataSet();
+            //Setting the role ID temporarily -> in the UserDataSet this changes
+            $_POST['roleID'] = 0;
+            //Creating a tempUser to send to the class
+            $tempUser = new UserData($_POST);
 
-            //Checks if admin entered a username that DOES NOT already exists
-            if ($dataSet->fetchUser($_POST['userName']) != null){
+            //Storing the user into the database -> if email is invalid returns false
+             if ($dataSet->createUser($tempUser, $_POST['classID']) == false){
 
-            }
-
-
-
+                 //Email is invalid error
+                 $view->errorMessage = 'Email invalid';
+             }
+             //When creating a user has no problems
+             else{
+                 //Success message
+                 $view->createUserSuccess = 'User successfully created';
+             }
         }
     }
-
-
-
 }
 
 
