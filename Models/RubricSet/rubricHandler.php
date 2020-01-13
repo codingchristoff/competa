@@ -173,10 +173,14 @@ class RubricHandler
         unset($pdo);
     }
 
-    public function work($test)
+    public function test($test)
     {
         $verify = $this->retreiveRubric($test);
 
-        return $verify;
+        if (is_a($verify, 'Rubric')) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
