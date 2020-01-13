@@ -39,4 +39,4 @@ $handler = new rubricHandler();
 
 //var_dump($handler->createDate(""))
 
-
+var_dump($handler->retrieveRubricGroup(""));
