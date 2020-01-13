@@ -1,6 +1,7 @@
 <?php
 
 require_once('Models/RubricSet/Rubric.php');
+require_once('Models/RubricSet/Categories.php');
 
 class RubricHandler
 {
@@ -12,6 +13,9 @@ class RubricHandler
         $this->dbHandle = $this->dbInstance->getdbConnection();
     }
 
+    /**
+     * @param rubricName information
+     */
     public function retreiveRubric($rubricName)
     {
         //checks if value exists in database
@@ -45,20 +49,20 @@ class RubricHandler
     public function retreiveCategory($category)
     {
         //checks if value exists in database
-        $sql = "SELECT * FROM rubrics WHERE rubricName = :rubricName";
+        $sql = "SELECT * FROM categories WHERE categoryName = :categoryName";
     
         if ($stmt = $this->_dbHandle->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
-            $stmt->bindParam(":rubricName", $param_rubricName, PDO::PARAM_STR);
+            $stmt->bindParam(":categoryName", $param_categoryName, PDO::PARAM_STR);
     
             // Set parameters
-            $param_rubricName = trim($rubricName);
+            $param_categoryName = trim($category);
     
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
                 if ($stmt->rowCount() == 1) {
                     $row = $stmt->fetch();
-                    return new Rubric($row);
+                    return new Categories($row);
                 } else {
                     return false;
                 }

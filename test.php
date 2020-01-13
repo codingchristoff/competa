@@ -12,4 +12,6 @@ $handler = new rubricHandler();
 
 //$view->test = $handler->retreiveRubric("neque");
 
-var_dump($handler->retreiveRubric("neque"));
+//var_dump($handler->retreiveRubric("neque"));
+
+var_dump($handler->retreiveCategory("congue"));
