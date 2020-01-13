@@ -455,8 +455,4 @@ class RubricHandler
         } else {
         }
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 7da1e40097604a5b76242370e5c5a247b24403e5
 }
