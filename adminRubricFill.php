@@ -17,8 +17,19 @@ if(isset($_SESSION['user']))
 if(isset($_SESSION['rubric_count']))
 {
     $view->rubric_count = $_SESSION['rubric_count'];
-    $view->criteria_count_cols = $_SESSION['category_count'];
+    $view->criteria_count_cols = $_SESSION['category_count']-1;
     $view->criteria_count = $_SESSION['criteria_count'];
+}
+
+if(isset($_SESSION['rubricsInfo']))
+{
+    unset($_SESSION['rubricsInfo']);
+}
+
+if(isset($_POST['submit']))
+{
+    $_SESSION['rubricsInfo'] = $_POST;
+    header("Location: studentRubricView.php");
 }
 
 $view->pageTitle = 'Rubrics Fill';

@@ -2,10 +2,13 @@
 
 require_once('Models/Database.php');
 require_once('Models/UserData/UserData.php');
+require_once('Models/UserData/AdminData.php');
+require_once('Models/UserData/TeacherData.php');
+require_once('Models/UserData/StudentData.php');
 
 class UserDataSet
 {
-    protected $dbHandle, $dbInstance, $loginError;
+    protected $dbHandle, $dbInstance;
 
     public function __construct()
     {
@@ -30,7 +33,7 @@ class UserDataSet
             $statement->execute(); // execute the PDO statement
 
             $row = $statement->fetch();
-            return new StudentData($row);;
+            return new StudentData($row);
         }
         //Gets a teacher user
         else if($userType === 't')
@@ -56,7 +59,58 @@ class UserDataSet
             $row = $statement->fetch();
             return new AdminData($row);
         }
+        else{
+            return null;
+        }
     }
+
+    //Used to check if unique variable exists, outputs userData object
+    public function fetchUniqueVariable($variable, $type)
+    {
+        $variableClean = $this->cleanInput($variable);
+        $typeClean = $this->cleanInput($type);
+
+        //SQL statement will get a user with a specific variable in admins table
+        $sqlQuery = 'SELECT * FROM admins WHERE ' . $typeClean . '="' . $variableClean . '";';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+        $row = $statement->fetch();
+
+        //Check if anything was found in the database for admins
+        if ($row != null)
+        {
+            return new AdminData($row);
+        }
+
+        //SQL statement will get a user with a specific variable in teachers
+        $sqlQuery = 'SELECT * FROM teachers WHERE ' . $typeClean . '="' . $variableClean . '";';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+        $row = $statement->fetch();
+
+        //Check if anything was found in the database for teachers
+        if ($row != null)
+        {
+            return new TeacherData($row);
+        }
+
+        //SQL statement will get a user with a specific variable in students
+        $sqlQuery = 'SELECT * FROM students WHERE ' . $typeClean . '="' . $variableClean . '";';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+        $row = $statement->fetch();
+
+        //Check if anything was found in the database for teachers
+        if ($row != null)
+        {
+            return new StudentData($row);
+        }
+    }
+
+
 
     //Logs in user
     public function login($userName, $password)
@@ -67,9 +121,6 @@ class UserDataSet
 
         //Contains user information
         $user = $this->fetchUser($userClean);
-
-        //Temporarily sets loginError in case login fails
-        $this->loginError = True;
 
         //Checks if the userName exists
         if ($user != null)
@@ -122,27 +173,79 @@ class UserDataSet
         return $dataSet;
     }
 
+    //Gets classID
+    public function fetchClassID($className)
+    {
+        $sqlQuery = 'SELECT classID FROM classes WHERE className="' . $className .'"';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+
+        //Getting the row (array)
+        $row = $statement->fetch();
+
+        //returning the first value (the classID)
+        return $row[0];
+    }
+
+    //Gets all classNames
+    public function fetchAllClassNames()
+    {
+        //SQL statement will select a specific user
+        $sqlQuery = 'SELECT className FROM classes';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+
+        //Returns all students in an array
+        $dataSet = [];
+        while ($row = $statement->fetch()) {
+            $dataSet[] = $row[0];
+        }
+        return $dataSet;
+    }
+
     //Create user by adding to the database
-    public function createUser($firstName, $lastName, $userName, $email, $password)
+    public function createUser($user, $classID)
     {
         //Cleans up input
-        $firstName = $this->cleanInput($firstName);
-        $lastName = $this->cleanInput($lastName);
-        $email = $this->cleanInput($email);
-        $userName = $this->cleanInput($userName);
-        $password = $this->cleanInput($password);
+        $userNameClean = $this->cleanInput($user->getUsername());
+        $firstNameClean = $this->cleanInput($user->getFirstName());
+        $lastNameClean = $this->cleanInput($user->getLastName());
+        $emailClean = $this->cleanInput($user->getEmail());
+        $passwordClean = $this->cleanInput($user->getPassword());
 
         //Encrypts the password using the Crypt_Blowfish algorithm
-        $password = password_hash($password,PASSWORD_BCRYPT);
+        $passwordClean = password_hash($passwordClean,PASSWORD_BCRYPT);
 
         //Gets the first letter of the userName and puts it to lowercase
-        $userType = strtolower(substr($userName, 0,1));
+        $userType = strtolower(substr($userNameClean, 0,1));
+
+        //Check to see if the userName is using the correct naming scheme
+        if (!($userType=='s' || $userType=='t' || $userType=='a'))
+        {
+            return 'Username not using correct naming scheme, should start with S, T or A';
+        }
+
+        //Checks if the user already exists
+        if ($this->fetchUser($userNameClean)->getUsername()!==null)
+        {
+            return 'Username already exists';
+        }
+
+        //Checks the rest of the variables to see if they are in the correct format
+        $checkUserVariables = $this->checkUserVariables($userNameClean, $firstNameClean, $lastNameClean, $emailClean, $passwordClean);
+        if ($checkUserVariables!==null)
+        {
+            return $checkUserVariables;
+        }
 
         //Checks if user should be put into the student table
         if ($userType === 's')
         {
+            $classIDClean = intval($this->cleanInput($classID));
             //SQL statement that will be inserted into the database
-            $sqlQuery = 'INSERT INTO students (firstName, lastName, userName, email, password, roleID) VALUES ("' . $firstName . '", "' . $lastName . '", "' . $userName . '", "' . $email . '", "' . $password. '", "3");';
+            $sqlQuery = 'INSERT INTO students (firstName, lastName, userName, email, password, roleID, classID) VALUES ("' . $firstNameClean . '", "' . $lastNameClean . '", "' . $userNameClean . '", "' . $emailClean . '", "' . $passwordClean . '", "3", "' . $classIDClean .'");';
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
@@ -150,8 +253,10 @@ class UserDataSet
         //Checks if user should be put into the teacher table
         else if($userType === 't')
         {
+
+            $classIDClean = intval($this->cleanInput($classID));
             //SQL statement that will be inserted into the database
-            $sqlQuery = 'INSERT INTO teachers (firstName, lastName, userName, email, password, roleID) VALUES ("' . $firstName . '", "' . $lastName . '", "' . $userName . '", "' . $email . '", "' . $password. '", "2");';
+            $sqlQuery = 'INSERT INTO teachers (firstName, lastName, userName, email, password, roleID, classID) VALUES ("' . $firstNameClean . '", "' . $lastNameClean . '", "' . $userNameClean . '", "' . $emailClean . '", "' . $passwordClean . '", "2", "' . $classIDClean .'");';
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
@@ -160,7 +265,7 @@ class UserDataSet
         else if($userType === 'a')
         {
             //SQL statement that will be inserted into the database
-            $sqlQuery = 'INSERT INTO admins (firstName, lastName, userName, email, password, roleID) VALUES ("' . $firstName . '", "' . $lastName . '", "' . $userName . '", "' . $email . '", "' . $password. '", "1");';
+            $sqlQuery = 'INSERT INTO admins (firstName, lastName, userName, email, password, roleID) VALUES ("' . $firstNameClean . '", "' . $lastNameClean . '", "' . $userNameClean . '", "' . $emailClean . '", "' . $passwordClean . '", "1");';
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
@@ -197,12 +302,81 @@ class UserDataSet
         //Checks if user should be removed admin table
         else if($userType === 'a')
         {
-//SQL statement that will delete a student
+            //SQL statement that will delete a student
             $sqlQuery = 'DELETE FROM admins WHERE userName="' . $userClean .'";';
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
         }
+    }
+
+    //Edits a student
+    public function editUser($user)
+    {
+
+        //Cleans up input
+        $userNameClean = $this->cleanInput($user->getUserName());
+        $firstNameClean = $this->cleanInput($user->getFirstName());
+        $lastNameClean = $this->cleanInput($user->getLastName());
+        $emailClean = $this->cleanInput($user->getEmail());
+        $passwordClean = $this->cleanInput($user->getPassword());
+
+        //Encrypts the password using the Crypt_Blowfish algorithm
+        $passwordClean = password_hash($passwordClean,PASSWORD_BCRYPT);
+
+        //Checks the rest of the variables to see if they are in the correct format
+        $checkUserVariables = $this->checkUserVariables($userNameClean, $firstNameClean, $lastNameClean, $emailClean, $passwordClean);
+        if ($checkUserVariables!=True)
+        {
+            return $checkUserVariables;
+        }
+
+        //Gets the first letter of the userName and puts it to lowercase
+        $userType = strtolower(substr($userNameClean, 0,1));
+
+        //Checks if user should be removed from students table
+        if ($userType === 's')
+        {
+            $classIDClean = $this->cleanInput($user->getClassID());
+            //SQL statement that will edit a user
+            $sqlQuery = 'UPDATE students SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'", password="' . $passwordClean.'", classID="' . $classIDClean.'" WHERE userName="' . $userNameClean.'"';
+
+            $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+            $statement->execute(); // execute the PDO statement
+        }
+        //Checks if user should be removed from teachers table
+        else if ($userType === 't')
+        {
+            $classIDClean = $this->cleanInput($user->getClassID());
+            //SQL statement that will edit a user
+            $sqlQuery = 'UPDATE teachers SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'", password="' . $passwordClean.'", classID="' . $classIDClean.'" WHERE userName="' . $userNameClean.'"';
+
+            $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+            $statement->execute(); // execute the PDO statement
+        }
+        //Checks if user should be removed from admins table
+        else if ($userType === 'a')
+        {
+            //SQL statement that will edit a user
+            $sqlQuery = 'UPDATE admins SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'", password="' . $passwordClean.'" WHERE userName="' . $userNameClean.'"';
+
+            $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+            $statement->execute(); // execute the PDO statement
+        }
+    }
+
+    //Sets a students tableGroup
+    public function setTableGroup($user)
+    {
+        //Cleans up input
+        $userNameClean = $this->cleanInput($user->getUsername());
+        $tableGroupClean = $this->cleanInput($user->getTableGroup());
+
+        //SQL statement that will edit a students tableGroup
+        $sqlQuery= 'UPDATE students SET tableGroup="' . $tableGroupClean.'" WHERE userName="' . $userNameClean.'"';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
     }
 
     // used to clean inputs for security purposes
@@ -212,5 +386,30 @@ class UserDataSet
         $i = stripcslashes($i);
         $i = htmlspecialchars($i);
         return $i;
+    }
+
+    //Used to check if an email is valid
+    private function checkUserVariables($userName, $firstName, $lastName, $email, $password)
+    {
+        //Check if the length is too big
+        if (strlen($userName) > 45)
+        {
+            return 'Username error';
+        }
+        //Check if the name uses letters and if it is the correct length
+        if (!(preg_match("/^[a-zA-Z]*$/", $firstName)) || !(preg_match("/^[a-zA-Z]*$/", $lastName)) || strlen($firstName) > 45 || strlen($lastName) > 45)
+        {
+            return 'Name error';
+        }
+
+        if (filter_var($email, FILTER_VALIDATE_EMAIL) ===False || strlen($email) > 45)
+        {
+            return 'Email error';
+        }
+
+        if (strlen($password) > 255)
+        {
+            return 'Password error';
+        }
     }
 }

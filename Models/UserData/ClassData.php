@@ -1,6 +1,7 @@
 <?php
 
 require_once("Models/UserData/UserDataSet.php");
+require_once("Models/UserData/UserData.php");
 
 class ClassData extends UserData
 {
@@ -16,7 +17,7 @@ class ClassData extends UserData
     /**
      *  Subclasses should only see student data
      * */
-    public function getInfo($userName)
+    public function getInfo()
     {
         //$user = $this->_user_ds->fetchUser($userName);
 
@@ -26,4 +27,20 @@ class ClassData extends UserData
            // return $user;
         //}
     }
+
+    /**
+     * @param $newClass -> new class ID
+     */
+    public function setClass($newClass){
+
+        //Creating a database connection to save user's details
+        $userSaveConnection = new UserDataSet();
+
+        //Sets the user objects _classID (works for student and teacher)
+        $this->_classID = $newClass;
+
+        //Calling the editUser method (This method saves users into the database) -> passes the UserData object itself to the method
+        $userSaveConnection->editUser($this);
+    }
+
 }
