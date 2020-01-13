@@ -162,7 +162,7 @@ class RubricHandler
             if ($stmt->execute()) {
                 if ($stmt->rowCount() == 1) {
                     $row = $stmt->fetch();
-                    return $row;
+                    return (int)$row['dateID'];
                 } else {
                     return false;
                 }
@@ -308,7 +308,7 @@ class RubricHandler
 
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
-                return "Name added to DB.";
+                return $this->retrieveDate($date);
             } else {
                 return "Something went wrong. Please try again later.";
             }
@@ -387,5 +387,63 @@ class RubricHandler
         } else {
             return false;
         }
+    }
+
+    public function searchRubric($rubericName)
+    {
+        //checks if value exists in database
+        $sql = "SELECT * FROM rubrics WHERE rubricName = :rubricName";
+    
+        if ($stmt = $this->dbHandle->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":rubricName", $param_rubricName, PDO::PARAM_STR);
+    
+            // Set parameters
+            $param_rubricName = trim($rubricName);
+    
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+                if ($stmt->rowCount() == 1) {
+                    $rubricObj = [];
+                    while ($row = $stmt->fetch());
+                    {
+                                    $rubricObj[] = $row;
+                                }
+                    return $rubricObj;
+                } else {
+                    return false;
+                }
+            } else {
+                return "An error has occurred, please try again later.";
+            }
+        }
+        //Close statement
+        unset($stmt);
+        //Close connection
+        unset($pdo);
+    }
+    }
+
+    public Function buildRubric($date, $rubricName)
+    {
+        //$dateID = $this->retrieveDate($date);
+        //Returns all mergeID that match the date    
+        $rubricGroup[] = $this->retrieveRubricGroup($dateID);
+        //Returns the rubric name
+        $rubricObject = $this->retrieveRubric($rubricName);
+
+        if($rubricName == false)
+        {
+            return "Rubric not found";
+        }      
+        else
+        {
+            RubricObject
+        }
+        else
+        {
+            return "Rubric does not exist. Please select another search term.";
+        }
+
     }
 }
