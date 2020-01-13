@@ -162,11 +162,7 @@ class RubricHandler
             if ($stmt->execute()) {
                 if ($stmt->rowCount() == 1) {
                     $row = $stmt->fetch();
-<<<<<<< HEAD
                     return (int)$row['dateID'];
-=======
-                    return $row['dateID'];
->>>>>>> 2b7402f036c1bdc922c8be76c4bb0570d95e36b4
                 } else {
                     return false;
                 }
@@ -312,11 +308,7 @@ class RubricHandler
 
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
-<<<<<<< HEAD
-                return $this->retrieveDate($date);
-=======
                 return ($this->retrieveDate($date));
->>>>>>> 2b7402f036c1bdc922c8be76c4bb0570d95e36b4
             } else {
                 return false;
             }
