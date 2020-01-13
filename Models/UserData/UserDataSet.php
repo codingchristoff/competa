@@ -212,7 +212,7 @@ class UserDataSet
         $passwordClean = $this->cleanInput($user->getPassword());
 
         //Encrypts the password using the Crypt_Blowfish algorithm
-        $password = password_hash($passwordClean,PASSWORD_BCRYPT);
+        $passwordClean = password_hash($passwordClean,PASSWORD_BCRYPT);
 
         //Gets the first letter of the userName and puts it to lowercase
         $userType = strtolower(substr($userNameClean, 0,1));
@@ -298,7 +298,7 @@ class UserDataSet
         $passwordClean = $this->cleanInput($user->getPassword());
 
         //Encrypts the password using the Crypt_Blowfish algorithm
-        $password = password_hash($passwordClean,PASSWORD_BCRYPT);
+        $passwordClean = password_hash($passwordClean,PASSWORD_BCRYPT);
 
         //Gets the first letter of the userName and puts it to lowercase
         $userType = strtolower(substr($userNameClean, 0,1));
