@@ -59,10 +59,10 @@ class  AdminData extends UserData
      * @param $userObjct -> the userData object
      * @param $newClass -> the new class the user is being assigned to
      */
-    public function setUserClass($userObjct, $newClass)
+    public function setUserClass($userObject, $newClass)
     {
         //Calls the function in student to change
-        $userObjct->setClass($newClass);
+        $userObject->setClass($newClass);
     }
 
     //Needs rubric class to be complete and function in UserDataSet

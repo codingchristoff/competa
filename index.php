@@ -7,7 +7,7 @@ $view->user = null;
 $view->success = null;
 
 // To ensure login.php is not manually accessible to logged in user
-if (isset($_SESSION['username']))
+if (isset($_SESSION['user']))
 {
     header("Location: myData.php");
 }
