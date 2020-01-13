@@ -385,7 +385,6 @@ class RubricHandler
         }
     }
 
-<<<<<<< HEAD
     public function searchRubric($rubericName)
     {
         $rubricObj = $this->retrieveRubric($rubericName);
@@ -452,65 +451,4 @@ class RubricHandler
         } else {
         }
     }
-=======
-//    public function searchRubric($rubericName)
-//    {
-//        //checks if value exists in database
-//        $sql = "SELECT * FROM rubrics WHERE rubricName = :rubricName";
-//
-//        if ($stmt = $this->dbHandle->prepare($sql)) {
-//            // Bind variables to the prepared statement as parameters
-//            $stmt->bindParam(":rubricName", $param_rubricName, PDO::PARAM_STR);
-//
-//            // Set parameters
-//            $param_rubricName = trim($rubricName);
-//
-//            // Attempt to execute the prepared statement
-//            if ($stmt->execute()) {
-//                if ($stmt->rowCount() == 1) {
-//                    $rubricObj = [];
-//                    while ($row = $stmt->fetch());
-//                    {
-//                                    $rubricObj[] = $row;
-//                                }
-//                    return $rubricObj;
-//                } else {
-//                    return false;
-//                }
-//            } else {
-//                return false;
-//            }
-//        }
-//        else
-//        {return false}
-//            //Close statement
-//        unset($stmt);
-//        //Close connection
-//        unset($pdo);
-//    }
-
-
-//    public Function buildRubric($date, $rubricName)
-//    {
-//        //$dateID = $this->retrieveDate($date);
-//        //Returns all mergeID that match the date
-//        $rubricGroup[] = $this->retrieveRubricGroup($dateID);
-//        //Returns the rubric name
-//        $rubricObject = $this->retrieveRubric($rubricName);
-//
-//        if($rubricName == false)
-//        {
-//            return "Rubric not found";
-//        }
-//        else
-//        {
-//            RubricObject
-//        }
-//        else
-//        {
-//            return "Rubric does not exist. Please select another search term.";
-//        }
-//
-//    }
->>>>>>> 7b628b0ca047901f7042675dee57988b9a5bc906
 }
