@@ -3,7 +3,6 @@
 
 class Rubric
 {
-
     protected $_rubric_ID, $_rubric_name, $categories=[];
 
     public function __construct($rubric_row)

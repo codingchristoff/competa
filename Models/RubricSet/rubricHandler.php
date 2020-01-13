@@ -77,7 +77,7 @@ class RubricHandler
         //checks if value exists in database
         $sql = "SELECT * FROM rubrics WHERE rubricName = :rubricName";
     
-        if ($stmt = $this->_dbHandle->prepare($sql)) {
+        if ($stmt = $this->dbHandle->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
             $stmt->bindParam(":rubricName", $param_rubricName, PDO::PARAM_STR);
     
@@ -111,7 +111,7 @@ class RubricHandler
             // Prepare an insert statement
             $sql = "INSERT INTO rubric (rubricName) VALUES (:rubricName)";
 
-            if ($stmt = $this->_dbHandle->prepare($sql)) {
+            if ($stmt = $this->dbHandle->prepare($sql)) {
                 // Bind variables to the prepared statement as parameters
                 $stmt->bindParam(":rubricName", $param_rubricName, PDO::PARAM_STR);
 
@@ -133,4 +133,36 @@ class RubricHandler
         // Close connection
         unset($pdo);
     }
+
+    public function createCriteria($criteriaID)
+    {
+        //checks if value exists in database
+        $sql = "SELECT * FROM criteria WHERE criteriaName = :criteriaID";
+
+        if ($stmt = $this->dbHandle->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":criteriaID", $param_criteriaID, PDO::PARAM_STR);
+
+            // Set parameters
+            $param_criteriaID = trim($criteriaID);
+
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+                if ($stmt->rowCount() == 1) {
+                    $row = $stmt->fetch();
+                    return new Criteria($row);
+                } else {
+                    return false;
+                }
+            } else {
+                return "An error has occurred, please try again later.";
+            }
+        }
+        //Close statement
+        unset($stmt);
+        //Close connection
+        unset($pdo);
+    }
+
 }
+
