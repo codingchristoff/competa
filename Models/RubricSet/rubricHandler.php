@@ -191,10 +191,12 @@ class RubricHandler
 
     public function test($test)
     {
-        $verify = retreiveCriteria($test);
+        $verify = $this->retrieveRubric($test);
 
-        return $verify;
+        if (is_a($verify, 'Rubric')) {
+            return true;
+        } else {
+            return false;
+        }
     }
-
 }
-
