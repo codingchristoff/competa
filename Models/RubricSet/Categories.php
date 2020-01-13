@@ -3,7 +3,6 @@
 
 class Categories
 {
-
     protected $_category_ID, $_category_text, $criteria=[];
 
     public function __construct($category_row)
