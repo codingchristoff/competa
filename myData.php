@@ -1,6 +1,8 @@
 <?php
 
 require_once('Models/UserData/AdminData.php');
+require_once('Models/UserData/TeacherData.php');
+require_once('Models/UserData/StudentData.php');
 
 session_start();
 

@@ -1,6 +1,6 @@
 <?php
 
-require_once('Models/UserData/UserData.php');
+require_once('Models/UserData/ClassData.php');
 
 class StudentData extends ClassData
 {

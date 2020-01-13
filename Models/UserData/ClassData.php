@@ -1,6 +1,7 @@
 <?php
 
 require_once("Models/UserData/UserDataSet.php");
+require_once("Models/UserData/UserData.php");
 
 class ClassData extends UserData
 {
