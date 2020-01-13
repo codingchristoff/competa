@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a690ce52-896c-42aa-a240-0550241b5d76" name="Default Changelist" comment="">
+    <list default="true" id="5422204b-7a47-404a-9169-5740eb53c3dd" name="Default Changelist" comment="Added SQL statement to rubric handler">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/UserData/StudentData.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/UserData/StudentData.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/UserData/TeacherData.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/UserData/TeacherData.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myData.php" beforeDir="false" afterPath="$PROJECT_DIR$/myData.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/RubricSet/rubricHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/RubricSet/rubricHandler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.php" beforeDir="false" afterPath="$PROJECT_DIR$/test.php" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,30 +33,183 @@
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
         <item name="MySQL - jdbc:mysql://poseidon@salford.ac.uk:3306/sgb770_competa" type="feb32156:DbDataSourceImpl" />
       </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - jdbc:mysql://poseidon@salford.ac.uk:3306/sgb770_competa" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - jdbc:mysql://poseidon@salford.ac.uk:3306/sgb770_competa" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="sgb770_competa: schema" type="76f4a085:MysqlImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - jdbc:mysql://poseidon@salford.ac.uk:3306/sgb770_competa" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="sgb770_competa: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="dates: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - jdbc:mysql://poseidon@salford.ac.uk:3306/sgb770_competa" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="sgb770_competa: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="rubricGroup: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - jdbc:mysql://poseidon@salford.ac.uk:3306/sgb770_competa" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="sgb770_competa: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="rubricMerge: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - jdbc:mysql://poseidon@salford.ac.uk:3306/sgb770_competa" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="sgb770_competa: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="students: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
     </expand>
     <select />
   </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Models/RubricSet/rubricHandler.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="132" column="33" lean-forward="true" selection-start-line="132" selection-start-column="33" selection-end-line="132" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="495">
+              <caret line="44" selection-start-line="44" selection-end-line="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/7706a75a-5ffa-46c3-b228-1f6f6d916eb3/console.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Models/RubricSet/Rubric.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Models/RubricSet/Criteria.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Models/RubricSet/Categories.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
   <component name="Git.Settings">
     <option name="PUSH_AUTO_UPDATE" value="true" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Models/RubricSet/Categories.php" />
+        <option value="$PROJECT_DIR$/Models/RubricSet/Rubric.php" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/7706a75a-5ffa-46c3-b228-1f6f6d916eb3/console.sql" />
+        <option value="$PROJECT_DIR$/test.php" />
+        <option value="$PROJECT_DIR$/Models/RubricSet/rubricHandler.php" />
+      </list>
+    </option>
   </component>
   <component name="PhpTemplates">
     <option name="NEW_PHP_FILE_LAST_EXTENSION" value="phtml" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1892" />
-    <option name="y" value="-25" />
+    <option name="x" value="1072" />
+    <option name="y" value="859" />
     <option name="width" value="1696" />
     <option name="height" value="1026" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="competa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="competa" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="competa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="competa" type="462c0819:PsiDirectoryNode" />
+              <item name="Models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="competa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="competa" type="462c0819:PsiDirectoryNode" />
+              <item name="Models" type="462c0819:PsiDirectoryNode" />
+              <item name="RubricSet" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="competa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+            </path>
+            <path>
+              <item name="competa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+              <item name="Extensions" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
+            </path>
+            <path>
+              <item name="competa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+              <item name="Extensions" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
+              <item name="com.intellij.database" type="1e004dc1:ScratchProjectViewPane$MyRootNode$1$1" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -66,7 +219,21 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="database.console.LAST_STATE" value="true" />
     <property name="last_opened_file_path" value="C:/xampp/php/php.exe" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="TestServer" type="PhpBuiltInWebServerConfigurationType" factoryName="PHP Built-in Web Server" document_root="$PROJECT_DIR$" port="8000">
@@ -97,7 +264,7 @@
       <updated>1578590778348</updated>
     </task>
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f5b18b0a-23c7-472e-bc2e-16ddf4f49ad5" name="Default Changelist" comment="" />
+      <changelist id="5422204b-7a47-404a-9169-5740eb53c3dd" name="Default Changelist" comment="Added SQL statement to rubric handler" />
       <created>1578591143411</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -105,6 +272,8 @@
       <workItem from="1578591147953" duration="878000" />
       <workItem from="1578592563478" duration="3044000" />
       <workItem from="1578650278385" duration="8398000" />
+      <workItem from="1578919577666" duration="3012000" />
+      <workItem from="1578926710243" duration="12484000" />
     </task>
     <task id="LOCAL-00002" summary="ali test">
       <created>1578593310180</created>
@@ -169,8 +338,101 @@
       <option name="project" value="LOCAL" />
       <updated>1578781256385</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Added SQL statement to rubric handler">
+      <created>1578916095148</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1578916095148</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Added SQL statement to rubric handler">
+      <created>1578919377409</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1578919377409</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Added SQL statement to rubric handler">
+      <created>1578920291529</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1578920291529</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Added SQL statement to rubric handler">
+      <created>1578930066154</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1578930066154</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Added SQL statement to rubric handler">
+      <created>1578930303323</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1578930303323</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Added SQL statement to rubric handler">
+      <created>1578932133860</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1578932133860</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Added SQL statement to rubric handler">
+      <created>1578935370652</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1578935370652</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Added SQL statement to rubric handler">
+      <created>1578935566829</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1578935566829</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Changes to rubric handler">
+      <created>1578940225111</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1578940225111</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="21339000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1072" y="859" width="1696" height="1026" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Favorites" order="0" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.11430318" />
+      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
+      <window_info active="true" anchor="bottom" id="Database Console" visible="true" weight="0.31578946" />
+      <window_info anchor="bottom" id="Terminal" order="0" weight="0.32982457" />
+      <window_info anchor="bottom" id="Database Changes" order="1" />
+      <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" weight="0.32982457" />
+      <window_info anchor="bottom" id="Version Control" order="3" weight="0.32982457" />
+      <window_info anchor="bottom" id="Docker" order="4" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Message" order="5" />
+      <window_info anchor="bottom" id="Find" order="6" />
+      <window_info anchor="bottom" id="Run" order="7" weight="0.25979844" />
+      <window_info anchor="bottom" id="Debug" order="8" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="11" />
+      <window_info active="true" anchor="bottom" id="Messages" order="12" visible="true" weight="0.32982457" />
+      <window_info anchor="right" id="Database" order="0" visible="true" weight="0.11430318" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
+    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -181,7 +443,20 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="COLUMN_ORDER" />
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
             </State>
           </value>
         </entry>
@@ -212,48 +487,88 @@
     <MESSAGE value="moved &lt;/div&gt; tag into footer -Ste" />
     <MESSAGE value="myData update -Ste" />
     <MESSAGE value="fixed problem with adminData.php -Ste" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed problem with adminData.php -Ste" />
+    <MESSAGE value="Added SQL statement to rubric handler" />
+    <MESSAGE value="Changes to rubric handler" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes to rubric handler" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1578776038994">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1578776038994" />
-    <state x="787" y="8" key="CommitChangelistDialog2" timestamp="1578781255494">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="787" y="8" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1578781255494" />
-    <state width="1478" height="208" key="GridCell.Tab.0.bottom" timestamp="1578776581884">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1478" height="208" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1578776581884" />
-    <state width="1478" height="208" key="GridCell.Tab.0.center" timestamp="1578776581884">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1478" height="208" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1578776581884" />
-    <state width="1478" height="208" key="GridCell.Tab.0.left" timestamp="1578776581884">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1478" height="208" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1578776581884" />
-    <state width="1478" height="208" key="GridCell.Tab.0.right" timestamp="1578776581884">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1478" height="208" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1578776581884" />
-    <state x="582" y="226" key="NewPhpClassDialog" timestamp="1578776238785">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="582" y="226" key="NewPhpClassDialog/0.0.1536.824@0.0.1536.824" timestamp="1578776238785" />
-    <state x="604" y="335" key="NewPhpFileDialog" timestamp="1578776262661">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="604" y="335" key="NewPhpFileDialog/0.0.1536.824@0.0.1536.824" timestamp="1578776262661" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1578781266785">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1578781266785" />
-    <state x="465" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1578775289174">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="465" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1578775289174" />
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" />
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" />
+    <state x="787" y="8" key="CommitChangelistDialog2" />
+    <state x="787" y="8" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" />
+    <state width="1478" height="208" key="GridCell.Tab.0.bottom" />
+    <state width="1478" height="208" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" />
+    <state width="1478" height="208" key="GridCell.Tab.0.center" />
+    <state width="1478" height="208" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" />
+    <state width="1478" height="208" key="GridCell.Tab.0.left" />
+    <state width="1478" height="208" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" />
+    <state width="1478" height="208" key="GridCell.Tab.0.right" />
+    <state width="1478" height="208" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" />
+    <state x="582" y="226" key="NewPhpClassDialog" />
+    <state x="582" y="226" key="NewPhpClassDialog/0.0.1536.824@0.0.1536.824" />
+    <state x="604" y="335" key="NewPhpFileDialog" />
+    <state x="604" y="335" key="NewPhpFileDialog/0.0.1536.824@0.0.1536.824" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" />
+    <state x="465" y="236" key="com.intellij.ide.util.TipDialog" />
+    <state x="465" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Models/UserData/UserData.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-247">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Models/UserData/UserDataSet.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="29" column="63" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Models/RubricSet/Criteria.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Models/RubricSet/Categories.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Models/RubricSet/Rubric.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/7706a75a-5ffa-46c3-b228-1f6f6d916eb3/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="44" selection-start-line="44" selection-end-line="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Models/RubricSet/rubricHandler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="132" column="33" lean-forward="true" selection-start-line="132" selection-start-column="33" selection-end-line="132" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

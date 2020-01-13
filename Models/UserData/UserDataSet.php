@@ -8,7 +8,7 @@ require_once('Models/UserData/StudentData.php');
 
 class UserDataSet
 {
-    protected $dbHandle, $dbInstance, $loginError;
+    protected $dbHandle, $dbInstance;
 
     public function __construct()
     {
@@ -119,9 +119,6 @@ class UserDataSet
         //Contains user information
         $user = $this->fetchUser($userClean);
 
-        //Temporarily sets loginError in case login fails
-        $this->loginError = True;
-
         //Checks if the userName exists
         if ($user != null)
         {
@@ -202,7 +199,7 @@ class UserDataSet
     }
 
     //Create user by adding to the database
-    public function createUser($user)
+    public function createUser($user, $classID)
     {
         //Cleans up input
         $userNameClean = $this->cleanInput($user->getUserName());
@@ -214,13 +211,26 @@ class UserDataSet
         //Encrypts the password using the Crypt_Blowfish algorithm
         $passwordClean = password_hash($passwordClean,PASSWORD_BCRYPT);
 
+        //Checks if the user already exists
+        if (fetchUser($userNameClean)==null)
+        {
+            return 'Username Error';
+        }
+
+        //Checks the rest of the variables to see if they are in the correct format
+        $checkUserVariables = $this->checkUserVariables($userNameClean, $firstNameClean, $lastNameClean, $emailClean, $passwordClean);
+        if ($checkUserVariables!=True)
+        {
+            return $checkUserVariables;
+        }
+
         //Gets the first letter of the userName and puts it to lowercase
         $userType = strtolower(substr($userNameClean, 0,1));
 
         //Checks if user should be put into the student table
         if ($userType === 's')
         {
-            $classIDClean = $this->cleanInput($user->getClassID());
+            $classIDClean = $this->cleanInput($classID);
             //SQL statement that will be inserted into the database
             $sqlQuery = 'INSERT INTO students (firstName, lastName, userName, email, password, roleID, classID) VALUES ("' . $firstNameClean . '", "' . $lastNameClean . '", "' . $userNameClean . '", "' . $emailClean . '", "' . $passwordClean . '", "3", "' . $classIDClean .'");';
 
@@ -230,7 +240,7 @@ class UserDataSet
         //Checks if user should be put into the teacher table
         else if($userType === 't')
         {
-            $classIDClean = $this->cleanInput($user->getClassID());
+            $classIDClean = $this->cleanInput($classID);
             //SQL statement that will be inserted into the database
             $sqlQuery = 'INSERT INTO teachers (firstName, lastName, userName, email, password, roleID, classID) VALUES ("' . $firstNameClean . '", "' . $lastNameClean . '", "' . $userNameClean . '", "' . $emailClean . '", "' . $passwordClean . '", "2", "' . $classIDClean .'");';
 
@@ -300,6 +310,13 @@ class UserDataSet
         //Encrypts the password using the Crypt_Blowfish algorithm
         $passwordClean = password_hash($passwordClean,PASSWORD_BCRYPT);
 
+        //Checks the rest of the variables to see if they are in the correct format
+        $checkUserVariables = $this->checkUserVariables($userNameClean, $firstNameClean, $lastNameClean, $emailClean, $passwordClean);
+        if ($checkUserVariables!=True)
+        {
+            return $checkUserVariables;
+        }
+
         //Gets the first letter of the userName and puts it to lowercase
         $userType = strtolower(substr($userNameClean, 0,1));
 
@@ -355,5 +372,34 @@ class UserDataSet
         $i = stripcslashes($i);
         $i = htmlspecialchars($i);
         return $i;
+    }
+
+    //Used to check if an email is valid
+    private function checkUserVariables($userName, $firstName, $lastName, $email, $password)
+    {
+        //Check if the length is too big
+        if (strlen($userName) > 45)
+        {
+            return 'Username error';
+        }
+        //Check if the name uses letters and if it is the correct length
+        else if (!(preg_match("/^[a-zA-Z]*$/", $firstName)) || !(preg_match("/^[a-zA-Z]*$/", $lastName)) || strlen($firstName) > 45 || strlen($lastName) > 45)
+        {
+            return 'Name error';
+        }
+
+        else if (filter_var($email, FILTER_VALIDATE_EMAIL) ===False || strlen($email) > 45)
+        {
+            return 'Email error';
+        }
+
+        else if (strlen($password) > 255)
+        {
+            return 'Password error';
+        }
+        else
+        {
+            return True;
+        }
     }
 }
