@@ -61,6 +61,8 @@ class UserDataSet
         }
     }
 
+
+
     //Logs in user
     public function login($userName, $password)
     {
@@ -278,13 +280,26 @@ class UserDataSet
         //Checks if user should be removed from admins table
         else if ($userType === 'a')
         {
-            $classIDClean = $this->cleanInput($user->getClassID());
             //SQL statement that will edit a user
             $sqlQuery = 'UPDATE admins SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'", password="' . $passwordClean.'" WHERE userName="' . $userNameClean.'"';
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
         }
+    }
+
+    //Sets a students tableGroup
+    public function setTableGroup($user)
+    {
+        //Cleans up input
+        $userNameClean = $this->cleanInput($user->getUserName());
+        $tableGroupClean = $this->cleanInput($user->getTableGroup());
+
+        //SQL statement that will edit a students tableGroup
+        $sqlQuery= 'UPDATE students SET tableGroup="' . $tableGroupClean.'" WHERE userName="' . $userNameClean.'"';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
     }
 
     // used to clean inputs for security purposes
