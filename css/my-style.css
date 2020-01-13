@@ -27,7 +27,13 @@ main {
 .collection-format{
     background-color: black;
 }
-
+.rubric-admin{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.table-title table,caption{
+    font-weight: bold;
+}
 
 /* ID-based CSS*/
 #sp_container{

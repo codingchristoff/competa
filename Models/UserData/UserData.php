@@ -1,34 +1,21 @@
 <?php
 
+require_once ('Models/UserData/UserDataSet.php');
+
 
 class UserData
 {
-    protected $userID, $roleID, $firstName, $lastName, $username, $email, $password;
+    protected $roleID, $firstName, $lastName, $username, $email, $password;
 
     public function __construct($user_data)
     {
-
-        $this->userID = $user_data['userID'];
-        $this->roleID = $user_data['roleID'];
-        $this->firstName = $user_data['firstName'];
-        $this->lastName = $user_data['lastName'];
-        $this->username = $user_data['userName'];
-        $this->email = $user_data['email'];
-        $this->password = $user_data['password'];
-
-    }
-
-    /**
-     * Logs the user in
-     *
-     */
-    public function login(){
-
-    }
-
-    public function getUserID()
-    {
-        return $this->userID;
+        //Setting class variables
+            $this->roleID = $user_data['roleID'];
+            $this->firstName = $user_data['firstName'];
+            $this->lastName = $user_data['lastName'];
+            $this->username = $user_data['userName'];
+            $this->email = $user_data['email'];
+            $this->password = $user_data['password'];
     }
 
     /**
@@ -72,5 +59,4 @@ class UserData
     {
         return $this->password;
     }
-
 }

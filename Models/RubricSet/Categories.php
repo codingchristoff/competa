@@ -4,12 +4,12 @@
 class Categories
 {
 
-    protected $_category_ID, $_category_text;
+    protected $_category_ID, $_category_text, $criteria=[];
 
-    public function __construct($criteria_data)
+    public function __construct($category_row)
     {
-        $this->_category_ID = $criteria_data['criteriaID'];
-        $this->_category_text = $criteria_data['criteriaText'];
+        $this->_category_ID = $category_row['criteriaID'];
+        $this->_category_text = $category_row['criteriaText'];
     }
 
     /**
