@@ -218,6 +218,15 @@ class UserDataSet
         //Encrypts the password using the Crypt_Blowfish algorithm
         $passwordClean = password_hash($passwordClean,PASSWORD_BCRYPT);
 
+        //Gets the first letter of the userName and puts it to lowercase
+        $userType = strtolower(substr($userNameClean, 0,1));
+
+        //Check to see if the userName is using the correct naming scheme
+        if (!($userType=='s' || $userType=='t' || $userType=='a'))
+        {
+            return 'Username not using correct naming scheme, should start with S, T or A';
+        }
+
         //Checks if the user already exists
         if ($this->fetchUser($userNameClean)->getUsername()!==null)
         {
@@ -226,13 +235,10 @@ class UserDataSet
 
         //Checks the rest of the variables to see if they are in the correct format
         $checkUserVariables = $this->checkUserVariables($userNameClean, $firstNameClean, $lastNameClean, $emailClean, $passwordClean);
-        if ($checkUserVariables!=True)
+        if ($checkUserVariables!==null)
         {
             return $checkUserVariables;
         }
-
-        //Gets the first letter of the userName and puts it to lowercase
-        $userType = strtolower(substr($userNameClean, 0,1));
 
         //Checks if user should be put into the student table
         if ($userType === 's')
@@ -391,23 +397,19 @@ class UserDataSet
             return 'Username error';
         }
         //Check if the name uses letters and if it is the correct length
-        else if (!(preg_match("/^[a-zA-Z]*$/", $firstName)) || !(preg_match("/^[a-zA-Z]*$/", $lastName)) || strlen($firstName) > 45 || strlen($lastName) > 45)
+        if (!(preg_match("/^[a-zA-Z]*$/", $firstName)) || !(preg_match("/^[a-zA-Z]*$/", $lastName)) || strlen($firstName) > 45 || strlen($lastName) > 45)
         {
             return 'Name error';
         }
 
-        else if (filter_var($email, FILTER_VALIDATE_EMAIL) ===False || strlen($email) > 45)
+        if (filter_var($email, FILTER_VALIDATE_EMAIL) ===False || strlen($email) > 45)
         {
             return 'Email error';
         }
 
-        else if (strlen($password) > 255)
+        if (strlen($password) > 255)
         {
             return 'Password error';
-        }
-        else
-        {
-            return True;
         }
     }
 }
