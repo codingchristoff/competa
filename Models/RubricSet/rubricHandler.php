@@ -38,7 +38,7 @@ class RubricHandler
                     return false;
                 }
             } else {
-                return "An error has occurred, please try again later.";
+                return false;
             }
         }
         //Close statement
@@ -50,7 +50,7 @@ class RubricHandler
     /**
      *
      */
-    public function retreiveCategory($category)
+    public function retrieveCategory($category)
     {
         //checks if value exists in database
         $sql = "SELECT * FROM categories WHERE categoryText = :categoryText";
@@ -71,7 +71,7 @@ class RubricHandler
                     return false;
                 }
             } else {
-                return "An error has occurred, please try again later.";
+                return false;
             }
         }
         //Close statement
@@ -101,7 +101,7 @@ class RubricHandler
                     return false;
                 }
             } else {
-                return "An error has occurred, please try again later.";
+                return false;
             }
         }
         //Close statement
@@ -113,29 +113,28 @@ class RubricHandler
     /**
      * Returns all mergeIDs with the corresponding date
      */
-    public function retrieveRubricGroup($date)
+    public function retrieveRubricGroup($dateID)
     {
         //checks if value exists in database
-        $sql = "SELECT mergeID FROM rubricGroup WHERE date = :date";
+        $sql = "SELECT mergeID FROM rubricGroup WHERE dateID = :dateID";
 
         if ($stmt = $this->dbHandle->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
-            $stmt->bindParam(":date", $param_date, PDO::PARAM_STR);
+            $stmt->bindParam(":dateID", $param_dateID, PDO::PARAM_STR);
 
             // Set parameters
-            $param_date = trim($date);
+            $param_dateID = trim($dateID);
 
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
                 $mergeID = [];
-                while ($row = $stmt->fetch());
-                {
-                                $mergeID[] = $row;
-                            }
+                while ($row = $stmt->fetch()) {
+                    $mergeID[] = (int)$row['mergeID'];
+                }
                 return $mergeID;
             }
         } else {
-            return "An error has occurred, please try again later.";
+            return false;
         }
         //Close statement
         unset($stmt);
@@ -162,12 +161,12 @@ class RubricHandler
             if ($stmt->execute()) {
                 if ($stmt->rowCount() == 1) {
                     $row = $stmt->fetch();
-                    return $row;
+                    return (int)$row['dateID'];
                 } else {
                     return false;
                 }
             } else {
-                return "An error has occurred, please try again later.";
+                return false;
             }
         }
         //Close statement
@@ -200,7 +199,7 @@ class RubricHandler
                     return false;
                 }
             } else {
-                return "An error has occurred, please try again later.";
+                return false;
             }
         }
         //Close statement
@@ -209,32 +208,26 @@ class RubricHandler
         unset($pdo);
     }
 
-    public function masterMethod()
-    {
-        //check date if not then create
-        //
-    }
-
     public function createRubric($rubricName)
     {
-            // Prepare an insert statement
-            $sql = "INSERT INTO rubrics (rubricName) VALUES (:rubricName)";
+        // Prepare an insert statement
+        $sql = "INSERT INTO rubrics (rubricName) VALUES (:rubricName)";
 
-            if ($stmt = $this->dbHandle->prepare($sql)) {
-                // Bind variables to the prepared statement as parameters
-                $stmt->bindParam(":rubricName", $param_rubricName, PDO::PARAM_STR);
+        if ($stmt = $this->dbHandle->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":rubricName", $param_rubricName, PDO::PARAM_STR);
 
-                // Set parameters
-                $param_rubricName = trim($rubricName);
+            // Set parameters
+            $param_rubricName = trim($rubricName);
 
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
                 return "Name added to DB.";
             } else {
-                return "Something went wrong. Please try again later.";
+                return false;
             }
         } else {
-            return "Something went wrong. Please try again later.";
+            return false;
         }
         // Close statement
         unset($stmt);
@@ -259,10 +252,10 @@ class RubricHandler
             if ($stmt->execute()) {
                 return "Criteria added to DB.";
             } else {
-                return "Something went wrong. Please try again later.";
+                return false;
             }
         } else {
-            return "Something went wrong. Please try again later.";
+            return false;
         }
         // Close statement
         unset($stmt);
@@ -284,10 +277,11 @@ class RubricHandler
             if ($stmt->execute()) {
                 return "Category added to DB.";
             } else {
-                return "Something went wrong. Please try again later.";
+                return false;
             }
+        } else {
+            return false;
         }
-        else {return "Something went wrong. Please try again later.";}
         // Close statement
         unset($stmt);
         // Close connection
@@ -308,19 +302,20 @@ class RubricHandler
 
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
-                return "Name added to DB.";
+                return ($this->retrieveDate($date));
             } else {
-                return "Something went wrong. Please try again later.";
+                return false;
             }
+        } else {
+            return false;
         }
-        else {return "Something went wrong. Please try again later.";}
         // Close statement
         unset($stmt);
         // Close connection
         unset($pdo);
     }
 
-    public function createMerge($rubricID,$categoryID,$criteriaID)
+    public function createMerge($rubricID, $categoryID, $criteriaID)
     {
         $sqlQuery = "INSERT INTO rubricMerge (rubricID,categoryID,criteriaID) values (:rubricID,:categoryID,:criteriaID)";
 
@@ -339,10 +334,10 @@ class RubricHandler
             if ($stmt->execute()) {
                 return "Name added to DB.";
             } else {
-                return "Something went wrong. Please try again later.";
+                return false;
             }
         } else {
-            return "Something went wrong. Please try again later.";
+            return false;
         }
         // Close statement
         unset($stmt);
@@ -350,7 +345,7 @@ class RubricHandler
         unset($pdo);
     }
 
-    public function createGroup($mergeID,$dateID)
+    public function createGroup($mergeID, $dateID)
     {
         $sqlQuery = "INSERT INTO rubricGroup (mergeID, dateID) values (:mergeID,:dateID)";
 
@@ -367,10 +362,10 @@ class RubricHandler
             if ($stmt->execute()) {
                 return "Group added to DB.";
             } else {
-                return "Something went wrong. Please try again later.";
+                return false;
             }
         } else {
-            return "Something went wrong. Please try again later.";
+            return false;
         }
         // Close statement
         unset($stmt);
@@ -388,4 +383,80 @@ class RubricHandler
             return false;
         }
     }
+
+    public function searchRubric($rubericName)
+    {
+        $rubricObj = $this->retrieveRubric($rubericName);
+
+        $rubricID = $rubricObj->getRubricID();
+        
+        if ($rubricID == false) {
+            return "No rubric found, please alter search term";
+        } else {
+            //checks if value exists in database
+            $sql = "SELECT mergeID FROM rubricMerge WHERE rubricID = :rubricID";
+    
+            if ($stmt = $this->dbHandle->prepare($sql)) {
+                // Bind variables to the prepared statement as parameters
+                $stmt->bindParam(":rubricID", $param_rubricID, PDO::PARAM_STR);
+    
+                // Set parameters
+                $param_rubricID = trim($rubricID);
+     
+                // Attempt to execute the prepared statement
+                if ($stmt->execute()) {
+                    $mergeID = [];
+                    while ($row = $stmt->fetch()) {
+                        $mergeID[] = $row;
+                    }
+                    if ($mergeID == null) {
+                        return "No merge results found";
+                    } else {
+                        //loop through mergeID And return the dateID into the array
+                        
+                        $date = [];
+                        foreach ($mergeID as $id) {
+                                                  
+                           var_dump($dump);
+
+                            $sql = "SELECT d.date FROM rubricGroup rg INNER JOIN dates d WHERE rg.mergeID = $dump AND rg.dateID = d.dateID";
+
+                            if ($stmt = $this->dbHandle->prepare($sql)) {
+                                // Attempt to execute the prepared statement
+                                if ($stmt->execute()) {
+                                    $row = $stmt->fetch();
+                                    $date[] = $row;
+                                }
+                            }
+                        }
+                        //NEED TO ADD 
+                        return $date;
+                    }
+                }
+                //Close statement
+                unset($stmt);
+                //Close connection
+                unset($pdo);
+            }
+        }
+    }
+
+
+    public function buildRubric($dateID, $rubricName)
+    {
+        //$dateID = $this->retrieveDate($date);
+        //Returns all mergeID that match the date
+        $rubricGroup[] = $this->retrieveRubricGroup($dateID);
+        //Returns the rubric name
+        $rubricObject = $this->retrieveRubric($rubricName);
+
+        if ($rubricName == false) {
+            return "Rubric not found";
+        } else {
+        }
+    }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7da1e40097604a5b76242370e5c5a247b24403e5
 }

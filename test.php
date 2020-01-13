@@ -33,10 +33,15 @@ $handler = new rubricHandler();
 //echo($t . "<br>");
 //echo(date("d-m-Y H:m:s",$t));
 
-var_dump($handler->retrieveDate("2020-01-10 13:04:15"));
+//var_dump($handler->retrieveDate("2020-01-10 13:04:15"));
 
 //var_dump($handler->criteriaCategory("I do not follow the five basic rules that apply in every classroom."));
 
 //var_dump($handler->createDate(""))
 
+//var_dump($handler->buildRubric("2020-01-10 13:04:15"));
+
+var_dump($handler->searchRubric("neque"));
+
+//var_dump($handler->retrieveRubricGroup("1"));
 

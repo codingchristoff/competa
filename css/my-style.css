@@ -34,6 +34,9 @@ main {
 .table-title table,caption{
     font-weight: bold;
 }
+.table-cat div{
+    font-weight: bold;
+}
 
 /* ID-based CSS*/
 #sp_container{
