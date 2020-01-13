@@ -17,7 +17,7 @@ class RubricHandler
     /**
      * @param rubricName information
      */
-    public function retreiveRubric($rubricName)
+    public function retrieveRubric($rubricName)
     {
         //checks if value exists in database
         $sql = "SELECT * FROM rubrics WHERE rubricName = :rubricName";
@@ -47,6 +47,9 @@ class RubricHandler
         unset($pdo);
     }
 
+    /**
+     *
+     */
     public function retreiveCategory($category)
     {
         //checks if value exists in database
@@ -77,7 +80,7 @@ class RubricHandler
         unset($pdo);
     }
 
-    public function retreiveCriteria($criteriaText)
+    public function retrieveCriteria($criteriaText)
     {
         //checks if value exists in database
         $sql = "SELECT * FROM criteria WHERE criteriaText = :criteriaText";
@@ -109,10 +112,6 @@ class RubricHandler
 
     public function createRubric($rubricName)
     {
-        $verify = checkRubricName($rubricName);
-
-        //checks if the value returned is a Rubric object.
-        if (is_a($verify, 'Rubric')) {
             // Prepare an insert statement
             $sql = "INSERT INTO rubric (rubricName) VALUES (:rubricName)";
 
@@ -129,45 +128,75 @@ class RubricHandler
                 } else {
                     return "Something went wrong. Please try again later.";
                 }
+            } else {
+                return "Something went wrong. Please try again later.";
             }
-        } else {
+            // Close statement
+            unset($stmt);
+            // Close connection
+            unset($pdo);
         }
-        
+
+
+
+    private function createCriteria($criteriaText)
+    {  // Prepare an insert statement
+        $sqlQuery = "INSERT INTO criteria (criteriaText) values (:criteriaText)";
+
+        if ($stmt = $this->dbHandle->prepare($sqlQuery)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":criteriaText", $param_criteriaText, PDO::PARAM_STR);
+
+            // Set parameters
+            $param_criteriaText = trim($criteriaText);
+
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+                return "Name added to DB.";
+            } else {
+                return "Something went wrong. Please try again later.";
+            }
+        }
+        else {return "Something went wrong. Please try again later.";}
+        // Close statement
+        unset($stmt);
+        // Close connection
+        unset($pdo);
+
+    }
+    private function createCategory($categoryName)
+    {   // Prepare an insert statement
+        $sqlQuery = "INSERT INTO categories (criteriaText) values (:categoryName)";
+
+        if ($stmt = $this->dbHandle->prepare($sqlQuery)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":cateGory", $param_categoryName, PDO::PARAM_STR);
+
+            // Set parameters
+            $param_categoryName = trim($categoryName);
+
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+                return "Name added to DB.";
+            } else {
+                return "Something went wrong. Please try again later.";
+            }
+        }
+        else {return "Something went wrong. Please try again later.";}
         // Close statement
         unset($stmt);
         // Close connection
         unset($pdo);
     }
 
-    public function createCriteria($criteriaID)
+    public function test($test)
     {
-        //checks if value exists in database
-        $sql = "SELECT * FROM criteria WHERE criteriaName = :criteriaID";
+        $verify = $this->retrieveRubric($test);
 
-        if ($stmt = $this->dbHandle->prepare($sql)) {
-            // Bind variables to the prepared statement as parameters
-            $stmt->bindParam(":criteriaID", $param_criteriaID, PDO::PARAM_STR);
-
-            // Set parameters
-            $param_criteriaID = trim($criteriaID);
-
-            // Attempt to execute the prepared statement
-            if ($stmt->execute()) {
-                if ($stmt->rowCount() == 1) {
-                    $row = $stmt->fetch();
-                    return new Criteria($row);
-                } else {
-                    return false;
-                }
-            } else {
-                return "An error has occurred, please try again later.";
-            }
+        if (is_a($verify, 'Rubric')) {
+            return true;
+        } else {
+            return false;
         }
-        //Close statement
-        unset($stmt);
-        //Close connection
-        unset($pdo);
     }
-
 }
-

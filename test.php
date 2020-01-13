@@ -16,4 +16,6 @@ $handler = new rubricHandler();
 
 //var_dump($handler->retreiveCategory("vel"));
 
-var_dump($handler->retreiveCriteria("Nunc purus."));
+//var_dump($handler->retreiveCriteria("Nunc purus."));
+
+var_dump($handler->test("tree"));
