@@ -199,7 +199,7 @@ class UserDataSet
     }
 
     //Create user by adding to the database
-    public function createUser($user)
+    public function createUser($user, $classID)
     {
         //Cleans up input
         $userNameClean = $this->cleanInput($user->getUserName());
@@ -230,7 +230,7 @@ class UserDataSet
         //Checks if user should be put into the student table
         if ($userType === 's')
         {
-            $classIDClean = $this->cleanInput($user->getClassID());
+            $classIDClean = $this->cleanInput($classID);
             //SQL statement that will be inserted into the database
             $sqlQuery = 'INSERT INTO students (firstName, lastName, userName, email, password, roleID, classID) VALUES ("' . $firstNameClean . '", "' . $lastNameClean . '", "' . $userNameClean . '", "' . $emailClean . '", "' . $passwordClean . '", "3", "' . $classIDClean .'");';
 
@@ -240,7 +240,7 @@ class UserDataSet
         //Checks if user should be put into the teacher table
         else if($userType === 't')
         {
-            $classIDClean = $this->cleanInput($user->getClassID());
+            $classIDClean = $this->cleanInput($classID);
             //SQL statement that will be inserted into the database
             $sqlQuery = 'INSERT INTO teachers (firstName, lastName, userName, email, password, roleID, classID) VALUES ("' . $firstNameClean . '", "' . $lastNameClean . '", "' . $userNameClean . '", "' . $emailClean . '", "' . $passwordClean . '", "2", "' . $classIDClean .'");';
 

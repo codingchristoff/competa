@@ -38,7 +38,7 @@ class RubricHandler
                     return false;
                 }
             } else {
-                return "An error has occurred, please try again later.";
+                return false;
             }
         }
         //Close statement
@@ -50,7 +50,7 @@ class RubricHandler
     /**
      *
      */
-    public function retreiveCategory($category)
+    public function retrieveCategory($category)
     {
         //checks if value exists in database
         $sql = "SELECT * FROM categories WHERE categoryText = :categoryText";
@@ -71,7 +71,7 @@ class RubricHandler
                     return false;
                 }
             } else {
-                return "An error has occurred, please try again later.";
+                return false;
             }
         }
         //Close statement
@@ -101,7 +101,7 @@ class RubricHandler
                     return false;
                 }
             } else {
-                return "An error has occurred, please try again later.";
+                return false;
             }
         }
         //Close statement
@@ -130,12 +130,12 @@ class RubricHandler
                 $mergeID = [];
                 while ($row = $stmt->fetch());
                 {
-                                $mergeID[] = $row;
+                                $mergeID[] = (int)$row['mergeID'];
                             }
                 return $mergeID;
             }
         } else {
-            return "An error has occurred, please try again later.";
+            return false;
         }
         //Close statement
         unset($stmt);
@@ -162,12 +162,16 @@ class RubricHandler
             if ($stmt->execute()) {
                 if ($stmt->rowCount() == 1) {
                     $row = $stmt->fetch();
+<<<<<<< HEAD
                     return (int)$row['dateID'];
+=======
+                    return $row['dateID'];
+>>>>>>> 2b7402f036c1bdc922c8be76c4bb0570d95e36b4
                 } else {
                     return false;
                 }
             } else {
-                return "An error has occurred, please try again later.";
+                return false;
             }
         }
         //Close statement
@@ -200,7 +204,7 @@ class RubricHandler
                     return false;
                 }
             } else {
-                return "An error has occurred, please try again later.";
+                return false;
             }
         }
         //Close statement
@@ -231,10 +235,10 @@ class RubricHandler
             if ($stmt->execute()) {
                 return "Name added to DB.";
             } else {
-                return "Something went wrong. Please try again later.";
+                return false;
             }
         } else {
-            return "Something went wrong. Please try again later.";
+            return false;
         }
         // Close statement
         unset($stmt);
@@ -259,10 +263,10 @@ class RubricHandler
             if ($stmt->execute()) {
                 return "Criteria added to DB.";
             } else {
-                return "Something went wrong. Please try again later.";
+                return false;
             }
         } else {
-            return "Something went wrong. Please try again later.";
+            return false;
         }
         // Close statement
         unset($stmt);
@@ -284,10 +288,10 @@ class RubricHandler
             if ($stmt->execute()) {
                 return "Category added to DB.";
             } else {
-                return "Something went wrong. Please try again later.";
+                return false;
             }
         }
-        else {return "Something went wrong. Please try again later.";}
+        else {return false;}
         // Close statement
         unset($stmt);
         // Close connection
@@ -308,12 +312,16 @@ class RubricHandler
 
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
+<<<<<<< HEAD
                 return $this->retrieveDate($date);
+=======
+                return ($this->retrieveDate($date));
+>>>>>>> 2b7402f036c1bdc922c8be76c4bb0570d95e36b4
             } else {
-                return "Something went wrong. Please try again later.";
+                return false;
             }
         }
-        else {return "Something went wrong. Please try again later.";}
+        else {return false;}
         // Close statement
         unset($stmt);
         // Close connection
@@ -339,10 +347,10 @@ class RubricHandler
             if ($stmt->execute()) {
                 return "Name added to DB.";
             } else {
-                return "Something went wrong. Please try again later.";
+                return false;
             }
         } else {
-            return "Something went wrong. Please try again later.";
+            return false;
         }
         // Close statement
         unset($stmt);
@@ -367,10 +375,10 @@ class RubricHandler
             if ($stmt->execute()) {
                 return "Group added to DB.";
             } else {
-                return "Something went wrong. Please try again later.";
+                return false;
             }
         } else {
-            return "Something went wrong. Please try again later.";
+            return false;
         }
         // Close statement
         unset($stmt);
