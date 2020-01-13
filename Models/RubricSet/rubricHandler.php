@@ -209,23 +209,17 @@ class RubricHandler
         unset($pdo);
     }
 
-    public function masterMethod()
-    {
-        //check date if not then create
-        //
-    }
-
     public function createRubric($rubricName)
     {
-            // Prepare an insert statement
-            $sql = "INSERT INTO rubrics (rubricName) VALUES (:rubricName)";
+        // Prepare an insert statement
+        $sql = "INSERT INTO rubrics (rubricName) VALUES (:rubricName)";
 
-            if ($stmt = $this->dbHandle->prepare($sql)) {
-                // Bind variables to the prepared statement as parameters
-                $stmt->bindParam(":rubricName", $param_rubricName, PDO::PARAM_STR);
+        if ($stmt = $this->dbHandle->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":rubricName", $param_rubricName, PDO::PARAM_STR);
 
-                // Set parameters
-                $param_rubricName = trim($rubricName);
+            // Set parameters
+            $param_rubricName = trim($rubricName);
 
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
@@ -286,8 +280,9 @@ class RubricHandler
             } else {
                 return false;
             }
+        } else {
+            return false;
         }
-        else {return false;}
         // Close statement
         unset($stmt);
         // Close connection
@@ -312,15 +307,16 @@ class RubricHandler
             } else {
                 return false;
             }
+        } else {
+            return false;
         }
-        else {return false;}
         // Close statement
         unset($stmt);
         // Close connection
         unset($pdo);
     }
 
-    public function createMerge($rubricID,$categoryID,$criteriaID)
+    public function createMerge($rubricID, $categoryID, $criteriaID)
     {
         $sqlQuery = "INSERT INTO rubricMerge (rubricID,categoryID,criteriaID) values (:rubricID,:categoryID,:criteriaID)";
 
@@ -350,7 +346,7 @@ class RubricHandler
         unset($pdo);
     }
 
-    public function createGroup($mergeID,$dateID)
+    public function createGroup($mergeID, $dateID)
     {
         $sqlQuery = "INSERT INTO rubricGroup (mergeID, dateID) values (:mergeID,:dateID)";
 
@@ -391,59 +387,68 @@ class RubricHandler
 
     public function searchRubric($rubericName)
     {
-        //checks if value exists in database
-        $sql = "SELECT * FROM rubrics WHERE rubricName = :rubricName";
+        $rubricObj = $this->retrieveRubric($rubericName);
+
+        $rubricID = $rubricObj->getRubricID();
+
+        if ($rubricID == false) {
+            return "No rubric found, please alter search term";
+        } else {
+            //checks if value exists in database
+            $sql = "SELECT mergeID FROM rubricMerge WHERE rubricID = :rubricID";
     
-        if ($stmt = $this->dbHandle->prepare($sql)) {
-            // Bind variables to the prepared statement as parameters
-            $stmt->bindParam(":rubricName", $param_rubricName, PDO::PARAM_STR);
+            if ($stmt = $this->dbHandle->prepare($sql)) {
+                // Bind variables to the prepared statement as parameters
+                $stmt->bindParam(":rubricID", $param_rubricID, PDO::PARAM_STR);
     
-            // Set parameters
-            $param_rubricName = trim($rubricName);
+                // Set parameters
+                $param_rubricID = trim($rubricID);
     
-            // Attempt to execute the prepared statement
-            if ($stmt->execute()) {
-                if ($stmt->rowCount() == 1) {
-                    $rubricObj = [];
+                // Attempt to execute the prepared statement
+                if ($stmt->execute()) {
+                    $mergeID = [];
                     while ($row = $stmt->fetch());
                     {
-                                    $rubricObj[] = $row;
+                     $mergeID[] = $row['mergeID'];
                                 }
-                    return $rubricObj;
-                } else {
-                    return false;
+                    if ($mergeID == null) {
+                        return "No merge results found";
+                    } else {
+                        //loop through mergeID And return the dateID into the array
+                        $sql = "SELECT d.date FROM rubricGroup rg INNER JOIN dates d WHERE rg.mergeID = $mergeID AND rg.dateID = d.dateID";
+    
+                        if ($stmt = $this->dbHandle->prepare($sql)) {
+                            $date = [];
+                            foreach ($mergeID as $id) {
+                                // Attempt to execute the prepared statement
+                                if ($stmt->execute()) {
+                                    $row = $stmt->fetch();
+                                    $date[] = $row['dateID'];
+                                }
+                            }
+                        }
+                    }
                 }
-            } else {
-                return "An error has occurred, please try again later.";
+                //Close statement
+                unset($stmt);
+                //Close connection
+                unset($pdo);
             }
         }
-        //Close statement
-        unset($stmt);
-        //Close connection
-        unset($pdo);
-    }
     }
 
-    public Function buildRubric($date, $rubricName)
+
+    public function buildRubric($date, $rubricName)
     {
         //$dateID = $this->retrieveDate($date);
-        //Returns all mergeID that match the date    
+        //Returns all mergeID that match the date
         $rubricGroup[] = $this->retrieveRubricGroup($dateID);
         //Returns the rubric name
         $rubricObject = $this->retrieveRubric($rubricName);
 
-        if($rubricName == false)
-        {
+        if ($rubricName == false) {
             return "Rubric not found";
-        }      
-        else
-        {
-            RubricObject
+        } else {
         }
-        else
-        {
-            return "Rubric does not exist. Please select another search term.";
-        }
-
     }
 }

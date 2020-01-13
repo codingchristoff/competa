@@ -39,6 +39,8 @@ $handler = new rubricHandler();
 
 //var_dump($handler->createDate(""))
 
-var_dump($handler->buildRubric("2020-01-10 13:04:15"));
+//var_dump($handler->buildRubric("2020-01-10 13:04:15"));
+
+var_dump($handler->searchRubric("neque"));
 
 
