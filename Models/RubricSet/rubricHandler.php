@@ -2,6 +2,7 @@
 
 require_once('Models/RubricSet/Rubric.php');
 require_once('Models/RubricSet/Categories.php');
+require_once('Models/RubricSet/Criteria.php');
 
 class RubricHandler
 {
@@ -49,14 +50,14 @@ class RubricHandler
     public function retreiveCategory($category)
     {
         //checks if value exists in database
-        $sql = "SELECT * FROM categories WHERE categoryName = :categoryName";
+        $sql = "SELECT * FROM categories WHERE categoryText = :categoryText";
     
-        if ($stmt = $this->_dbHandle->prepare($sql)) {
+        if ($stmt = $this->dbHandle->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
-            $stmt->bindParam(":categoryName", $param_categoryName, PDO::PARAM_STR);
+            $stmt->bindParam(":categoryText", $param_categoryText, PDO::PARAM_STR);
     
             // Set parameters
-            $param_categoryName = trim($category);
+            $param_categoryText = trim($category);
     
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
@@ -76,23 +77,23 @@ class RubricHandler
         unset($pdo);
     }
 
-    public function retreiveCriteria($rubricName)
+    public function retreiveCriteria($criteriaText)
     {
         //checks if value exists in database
-        $sql = "SELECT * FROM rubrics WHERE rubricName = :rubricName";
+        $sql = "SELECT * FROM criteria WHERE criteriaText = :criteriaText";
     
         if ($stmt = $this->dbHandle->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
-            $stmt->bindParam(":rubricName", $param_rubricName, PDO::PARAM_STR);
+            $stmt->bindParam(":criteriaText", $param_criteriaText, PDO::PARAM_STR);
     
             // Set parameters
-            $param_rubricName = trim($rubricName);
+            $param_criteriaText = trim($criteriaText);
     
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
                 if ($stmt->rowCount() == 1) {
                     $row = $stmt->fetch();
-                    return new Rubric($row);
+                    return new Criteria($row);
                 } else {
                     return false;
                 }

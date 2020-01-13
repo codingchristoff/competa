@@ -14,4 +14,6 @@ $handler = new rubricHandler();
 
 //var_dump($handler->retreiveRubric("neque"));
 
-var_dump($handler->retreiveCategory("congue"));
+//var_dump($handler->retreiveCategory("vel"));
+
+var_dump($handler->retreiveCriteria("Nunc purus."));
