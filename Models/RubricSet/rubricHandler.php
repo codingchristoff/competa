@@ -113,7 +113,7 @@ class RubricHandler
     public function createRubric($rubricName)
     {
             // Prepare an insert statement
-            $sql = "INSERT INTO rubric (rubricName) VALUES (:rubricName)";
+            $sql = "INSERT INTO rubrics (rubricName) VALUES (:rubricName)";
 
             if ($stmt = $this->dbHandle->prepare($sql)) {
                 // Bind variables to the prepared statement as parameters
@@ -122,14 +122,15 @@ class RubricHandler
                 // Set parameters
                 $param_rubricName = trim($rubricName);
 
-                // Attempt to execute the prepared statement
+                                // Attempt to execute the prepared statement
                 if ($stmt->execute()) {
-                    return "Name added to DB.";
+                    return "Rubric name added to DB.";
                 } else {
                     return "Something went wrong. Please try again later.";
                 }
             } else {
                 return "Something went wrong. Please try again later.";
+
             }
             // Close statement
             unset($stmt);
@@ -139,7 +140,7 @@ class RubricHandler
 
 
 
-    private function createCriteria($criteriaText)
+    public function createCriteria($criteriaText)
     {  // Prepare an insert statement
         $sqlQuery = "INSERT INTO criteria (criteriaText) values (:criteriaText)";
 
@@ -152,7 +153,7 @@ class RubricHandler
 
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
-                return "Name added to DB.";
+                return "Criteria added to DB.";
             } else {
                 return "Something went wrong. Please try again later.";
             }
@@ -164,16 +165,42 @@ class RubricHandler
         unset($pdo);
 
     }
-    private function createCategory($categoryName)
+    public function createCategory($categoryName)
     {   // Prepare an insert statement
         $sqlQuery = "INSERT INTO categories (criteriaText) values (:categoryName)";
 
         if ($stmt = $this->dbHandle->prepare($sqlQuery)) {
             // Bind variables to the prepared statement as parameters
-            $stmt->bindParam(":cateGory", $param_categoryName, PDO::PARAM_STR);
+            $stmt->bindParam(":categoryName", $param_categoryName, PDO::PARAM_STR);
 
             // Set parameters
             $param_categoryName = trim($categoryName);
+
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+                return "Category added to DB.";
+            } else {
+                return "Something went wrong. Please try again later.";
+            }
+        }
+        else {return "Something went wrong. Please try again later.";}
+        // Close statement
+        unset($stmt);
+        // Close connection
+        unset($pdo);
+    }
+
+
+    public function createDate($date)
+    {
+        $sqlQuery = "INSERT INTO dates (date) values (:date)";
+
+        if ($stmt = $this->dbHandle->prepare($sqlQuery)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":date", $param_date, PDO::PARAM_STR);
+
+            // Set parameters
+            $param_date = trim($date);
 
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
@@ -188,6 +215,37 @@ class RubricHandler
         // Close connection
         unset($pdo);
     }
+
+    public function createMerge($rubricID,$categoryID,$criteriaID)
+    {
+        $sqlQuery = "INSERT INTO rubricMerge (rubricID,categoryID,criteriaID) values (:rubricID,:categoryID,:criteriaID)";
+
+        if ($stmt = $this->dbHandle->prepare($sqlQuery)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":rubricID", $param_rubricID, PDO::PARAM_STR);
+            $stmt->bindParam(":categoryID", $param_categoryID, PDO::PARAM_STR);
+            $stmt->bindParam(":criteriaID", $param_criteriaID, PDO::PARAM_STR);
+
+            // Set parameters
+            $param_rubricID = trim($rubricID);
+            $param_categoryID = trim($categoryID);
+            $param_criteriaID = trim($criteriaID);
+            // Attempt to execute the prepared statement
+
+            if ($stmt->execute()) {
+                return "Name added to DB.";
+            } else {
+                return "Something went wrong. Please try again later.";
+            }
+        }
+        else {return "Something went wrong. Please try again later.";}
+        // Close statement
+        unset($stmt);
+        // Close connection
+        unset($pdo);
+    }
+
+
 
     public function test($test)
     {
