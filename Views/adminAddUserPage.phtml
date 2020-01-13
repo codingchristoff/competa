@@ -6,10 +6,49 @@
 
     <!--Container for all the content for the page-->
     <div class="container">
-        <form name="firstName" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
-            <input type="text" name="firstName" id="firstName" required>
-            <label for="firstName">Firstname</label>
+        <form name="addUser" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+            <div class="input-field col s12 l12">
+                <input type="text" name="userName" id="userName" required>
+                <label for="userName">Username</label>
+            </div></br>
+
+            <div class="input-field col s12 l12">
+                <input type="text" name="firstName" id="firstName" required>
+                <label for="firstName">Firstname</label>
+            </div></br>
+
+            <div class="input-field col s12 l12">
+                <input type="text" name="lastName" id="lastName" required>
+                <label for="lastName">Lastname</label>
+            </div></br>
+
+            <div class="input-field col s12 l12">
+                <input type="text" name="email" id="email" required>
+                <label for="email">Email</label>
+            </div></br>
+
+            <div class="input-field col s12 l12">
+                <div class="col s9 l9">
+                    <p>Class</p>
+                </div>
+                <div class="input-field col s3 l3">
+                    <select name="className" class="browser-default" id="className">
+                        <option value="None">None(Admin)</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+            </div></br>
+
+            <div class="input-field col s12 l12">
+                <input type="password" name="password" id="password" required>
+                <label for="password">Password</label>
+            </div></br>
+
+            <div class="right btn-block col s12 l12">
+                <input class="btn black right z-depth-2" type="submit"
+                       name="submit" value="Create User">
+            </div>
         </form>
-    </div></br>
+    </div>
 </div>
 <?php require('template/footer.phtml') ?>
