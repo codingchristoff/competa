@@ -47,7 +47,10 @@ class RubricHandler
         unset($pdo);
     }
 
-    public function retrieveCategory($category)
+    /**
+     *
+     */
+    public function retreiveCategory($category)
     {
         //checks if value exists in database
         $sql = "SELECT * FROM categories WHERE categoryText = :categoryText";
@@ -125,13 +128,16 @@ class RubricHandler
                 } else {
                     return "Something went wrong. Please try again later.";
                 }
+            } else {
+                return "Something went wrong. Please try again later.";
             }
-            else {return "Something went wrong. Please try again later.";}
-        // Close statement
-        unset($stmt);
-        // Close connection
-        unset($pdo);
-    }
+            // Close statement
+            unset($stmt);
+            // Close connection
+            unset($pdo);
+        }
+
+
 
     private function createCriteria($criteriaText)
     {  // Prepare an insert statement
@@ -181,15 +187,14 @@ class RubricHandler
         unset($stmt);
         // Close connection
         unset($pdo);
-
-        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
-        $statement->execute(); // execute the PDO statement
-
     }
 
+    public function test($test)
+    {
+        $verify = retreiveCriteria($test);
 
-
-
+        return $verify;
+    }
 
 }
 
