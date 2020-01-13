@@ -350,6 +350,34 @@ class RubricHandler
         unset($pdo);
     }
 
+    public function createGroup($mergeID,$dateID)
+    {
+        $sqlQuery = "INSERT INTO rubricGroup (mergeID, dateID) values (:mergeID,:dateID)";
+
+        if ($stmt = $this->dbHandle->prepare($sqlQuery)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":mergeID", $param_mergeID, PDO::PARAM_STR);
+            $stmt->bindParam(":dateID", $param_dateID, PDO::PARAM_STR);
+
+            // Set parameters
+            $param_mergeID = trim($mergeID);
+            $param_dateID = trim($dateID);
+            // Attempt to execute the prepared statement
+
+            if ($stmt->execute()) {
+                return "Group added to DB.";
+            } else {
+                return "Something went wrong. Please try again later.";
+            }
+        } else {
+            return "Something went wrong. Please try again later.";
+        }
+        // Close statement
+        unset($stmt);
+        // Close connection
+        unset($pdo);
+    }
+
     public function test($test)
     {
         $verify = $this->retrieveRubric($test);
