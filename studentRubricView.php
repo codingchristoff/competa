@@ -6,7 +6,8 @@ session_start();
 $view = new stdClass();
 $view->user = null;
 $view->rubricsInfo = null;
-$view->newRubricsInfo = array();
+$view->twoRubricsInfo = array();
+$view->threeRubricsInfo = array();
 
 
 if(isset($_SESSION['username']))
@@ -28,20 +29,20 @@ if(isset($_SESSION['rubricsInfo']))
     $offsetCount = $rubric-1;
 
 
-    while($lengthCount < 3)
+    while($lengthCount < $rubric)
     {
         $offset = $indexDivide * $offsetCount;
-        $length = $indexDivide * $lengthCount;
 
-        $view->newRubricsInfo[$dimension][$offsetCount] = array_slice($view->rubricsInfo, $offset, -$length);
+        $view->twoRubricsInfo[$offsetCount] = array_slice($view->rubricsInfo, $offset, $indexDivide);
 
-        var_dump($offset);
-        var_dump($length);
+        $arr_count = count($view->twoRubricsInfo[$offsetCount]);
+
+
         $offsetCount--;
         $lengthCount++;
     }
 
-
+    $view->threeRubricsInfo = array();
 }
 
 $view->pageTitle = 'Rubric View';
