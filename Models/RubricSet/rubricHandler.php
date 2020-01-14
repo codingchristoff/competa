@@ -182,7 +182,7 @@ class RubricHandler
         unset($pdo);
     }
 
-        /**
+    /**
      * Returns all mergeIDs with the corresponding rubric id.
      */
     public function retrieveRubricGroupOnID($rubricID)
@@ -515,7 +515,6 @@ class RubricHandler
                         
                         $date = [];
                         foreach ($mergeID as $id) {
-
                             $sql = "SELECT d.date FROM rubricGroup rg INNER JOIN dates d WHERE rg.mergeID = $id AND rg.dateID = d.dateID";
 
                             if ($stmt = $this->dbHandle->prepare($sql)) {
@@ -538,11 +537,11 @@ class RubricHandler
     }
 
     /**
-     * Method will take search input and return a rubric object which 
-     * 
+     * Method will take search input and return a rubric object which
+     *
      * @param date specific timestamp
      * @param rubricName specific name of the Rubric
-     * 
+     *
      * @return Rubric object which contains the information needed to produce a blank rubric
      */
     public function buildRubric($date, $rubricName)
@@ -553,16 +552,16 @@ class RubricHandler
         
         $rubricID = $this->retrieveRubricID($rubricName);
 
-        //Returns a list of merge id's which contain the matching rubric ID        
+        //Returns a list of merge id's which contain the matching rubric ID
         $mergeID[] = $this->retrieveRubricGroupOnID($rubricID);
         
         //Loops through each merge id and returns the ones which match the date
         foreach ($mergeID as $group) {
             $rubricGroup = $this->retrieveRubricGroupOnDateID($dateID);
         }
-        var_dump($rubricGroup);
-
-            $mergeList = [];
+        
+        //Loops through each 
+        $mergeList = [];
         foreach ($rubricGroup as $mergeID) {
             $mergeList[] = $this->retrieveMerge($mergeID);
         }
@@ -571,12 +570,5 @@ class RubricHandler
         //$rubricObj = new Rubric($rubricID, $rubricName);
 
         //set method in Rubric to set category
-
-        
-        
-
-
-
-
     }
 }
