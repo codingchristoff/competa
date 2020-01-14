@@ -26,4 +26,12 @@ class Rubric
     {
         return $this->_rubric_name;
     }
+
+    /**
+     * @return array
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
 }
