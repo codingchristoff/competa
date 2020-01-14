@@ -44,6 +44,10 @@ if(isset($_SESSION['user']))
         header('Location: myData.php');
     }
 }
+else
+{
+    header('Location: index.php');
+}
 
 
 require_once('Views/adminAddUserPage.phtml');
