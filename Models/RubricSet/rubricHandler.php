@@ -183,7 +183,7 @@ class RubricHandler
     }
 
         /**
-     * Returns all mergeIDs with the corresponding date
+     * Returns all mergeIDs with the corresponding rubric id.
      */
     public function retrieveRubricGroupOnID($rubricID)
     {
@@ -485,12 +485,10 @@ class RubricHandler
         }
     }
 
-    public function searchRubric($rubericName)
+    public function searchRubric($rubricName)
     {
-        $rubricObj = $this->retrieveRubric($rubericName);
-
-        $rubricID = $rubricObj->getRubricID();
-        
+        $rubricID = $this->retrieveRubricID($rubricName);
+       
         if ($rubricID == false) {
             return "No rubric found, please alter search term";
         } else {
@@ -539,32 +537,46 @@ class RubricHandler
         }
     }
 
-
+    /**
+     * Method will take search input and return a rubric object which 
+     * 
+     * @param date specific timestamp
+     * @param rubricName specific name of the Rubric
+     * 
+     * @return Rubric object which contains the information needed to produce a blank rubric
+     */
     public function buildRubric($date, $rubricName)
     {
-<<<<<<< HEAD
+        $mergeID = [];
         
-        $dateID = $this->retrieveDate($date);
-
-        $rubricID = $this->retrieveRubric($rubricName);
-
+        $dateID = $this->retrieveDateID($date);
         
+        $rubricID = $this->retrieveRubricID($rubricName);
 
-
-
-
-
-=======
-        //$dateID = $this->retrieveDateID($date);
->>>>>>> 4958cf21648436a579cafe06ebe3a3c1d1f27d09
-        //Returns all mergeID that match the date
-        $rubricGroup[] = $this->retrieveRubricGroup($dateID);
-        //Returns the rubric name
-        $rubricObject = $this->retrieveRubric($rubricName);
-
-        if ($rubricName == false) {
-            return "Rubric not found";
-        } else {
+        //Returns a list of merge id's which contain the matching rubric ID        
+        $mergeID[] = $this->retrieveRubricGroupOnID($rubricID);
+        
+        //Loops through each merge id and returns the ones which match the date
+        foreach ($mergeID as $group) {
+            $rubricGroup = $this->retrieveRubricGroupOnDateID($dateID);
         }
+        var_dump($rubricGroup);
+
+            $mergeList = [];
+        foreach ($rubricGroup as $mergeID) {
+            $mergeList[] = $this->retrieveMerge($mergeID);
+        }
+        var_dump($mergeList);
+
+        //$rubricObj = new Rubric($rubricID, $rubricName);
+
+        //set method in Rubric to set category
+
+        
+        
+
+
+
+
     }
 }
