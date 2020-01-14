@@ -25,7 +25,11 @@
                           </div>
                           </li>";
                 }
-            }?>
+            }elseif(is_string($view->err))
+            {
+                echo "<li class=\"collection-header center\"><h6><strong>{$view->err}</strong></h6></li>";
+            }
+            ?>
         </ul>
     </div>
 </div>
