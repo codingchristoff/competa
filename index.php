@@ -6,12 +6,6 @@ $view = new stdClass();
 $view->user = null;
 $view->success = null;
 
-if (isset($_SESSION['user']))
-{
-    //Change this for a more suitable page later !!!!!!!!!!!!!!!!!!!!!
-    header("Location: myData.php");
-}
-
 // To ensure login.php is not manually accessible to logged in user
 
 require_once('Models/UserData/UserDataSet.php');
@@ -37,5 +31,11 @@ if(isset($_POST['submit']))
     else{
         $view->loginError = True;
     }
+}
+
+if (isset($_SESSION['user']))
+{
+    //Change this for a more suitable page later !!!!!!!!!!!!!!!!!!!!!
+    header("Location: myData.php");
 }
 require_once('Views/index.phtml');
