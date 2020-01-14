@@ -363,6 +363,7 @@ class RubricHandler
         // Close connection
         unset($pdo);
     }
+
     public function createCategory($categoryName)
     {   // Prepare an insert statement
         $sqlQuery = "INSERT INTO categories (criteriaText) values (:categoryName)";
