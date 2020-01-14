@@ -8,22 +8,22 @@
     <div class="container">
         <form name="addUser" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
             <div class="input-field col s12 l12">
-                <input type="text" name="userName" id="userName" required>
+                <input type="text" name="userName" id="userName" value="<?php if (isset($view->errorMessage)){echo $_POST['userName'];}?>" required>
                 <label for="userName">Username</label>
             </div><br/>
 
             <div class="input-field col s12 l12">
-                <input type="text" name="firstName" id="firstName" required>
+                <input type="text" name="firstName" id="firstName" value="<?php if (isset($view->errorMessage)){echo $_POST['firstName'];}?>" required>
                 <label for="firstName">Firstname</label>
             </div><br/>
 
             <div class="input-field col s12 l12">
-                <input type="text" name="lastName" id="lastName" required>
+                <input type="text" name="lastName" id="lastName" value="<?php if (isset($view->errorMessage)){echo $_POST['lastName'];}?>" required>
                 <label for="lastName">Lastname</label>
             </div><br/>
 
             <div class="input-field col s12 l12">
-                <input type="text" name="email" id="email" required>
+                <input type="text" name="email" id="email" value="<?php if (isset($view->errorMessage)){echo $_POST['email'];}?>" required>
                 <label for="email">Email</label>
             </div><br/>
 
