@@ -21,6 +21,11 @@ if(isset($_SESSION['user']))
         $view->allStudents = $dataSet->fetchAllStudents();
         $view->allTeachers = $dataSet->fetchAllTeachers();
         $view->allAdmins = $dataSet->fetchAllAdmins();
+
+        if (isset($_POST['searchUser']))
+        {
+            $view->allUsers = $dataSet->searchUser($_POST['userName']);
+        }
     }
     else
         {

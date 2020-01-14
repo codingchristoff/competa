@@ -19,7 +19,36 @@
                         <input type="text" name="userName" id="userName" value="<?php if (isset($view->errorMessage)){echo $_POST['userName'];}?>" required>
                         <label for="userName">Username</label>
                     </div><br/>
+
+                    <div class="right btn-block col s12 l12">
+                        <input class="btn black right z-depth-2" type="submit"
+                               name="searchUser" value="Search User">
+                    </div>
                 </form>
+            </div>
+
+            <div class="container">
+
+            <?php
+            if (isset($view->allUsers))
+            {
+                echo '<h6 class="center helper-text"><strong>Search Results</strong></h6>';
+                if (empty($view->allUsers))
+                {
+                    echo '<h6 class="center helper-text">No users found</h6>';
+                }
+                else
+                {
+
+                    //For every user searched in the database
+                    foreach($view->allUsers as $user)
+                    {
+                        //One user
+                        echo '<h6 class="helper-text">Username: ' . $user->getUserName() .' Name: ' . $user->getFirstName() . ' ' . $user->getLastName() . ' Email: ' . $user->getEmail() .'</h6>';
+                    }
+                }
+            }
+            ?>
             </div>
         </div>
 

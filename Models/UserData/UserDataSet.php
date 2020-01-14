@@ -74,7 +74,7 @@ class UserDataSet
         if ($userType === 's')
         {
             //SQL statement will select a specific user
-            $sqlQuery = 'SELECT * FROM students WHERE userName LIKE"' . $userName . '"%';
+            $sqlQuery = 'SELECT * FROM students WHERE userName LIKE"' . $userName . '%"';
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
@@ -91,7 +91,7 @@ class UserDataSet
         else if($userType === 't')
         {
             //SQL statement will select a specific user
-            $sqlQuery = 'SELECT * FROM teachers WHERE userName LIKE"' . $userName . '"%';
+            $sqlQuery = 'SELECT * FROM teachers WHERE userName LIKE"' . $userName . '%"';
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
@@ -107,7 +107,7 @@ class UserDataSet
         else if ($userType === 'a')
         {
             //SQL statement will select a specific user
-            $sqlQuery = 'SELECT * FROM admins WHERE userName LIKE"' . $userName . '"%';
+            $sqlQuery = 'SELECT * FROM admins WHERE userName LIKE"' . $userName . '%"';
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
