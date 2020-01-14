@@ -1,7 +1,7 @@
 <?php
 
 
-class Categories
+class Category
 {
     protected $_category_ID, $_category_text, $criteria=[];
 
