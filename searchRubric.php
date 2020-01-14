@@ -25,4 +25,12 @@ if(isset($_POST['search']))
     }
 }
 
+if(isset($_POST['submit']))
+{
+    $_SESSION['rubric_name'] = $_POST['rubric_name'];
+    $_SESSION['timestamp'] = $_POST['timestamp'];
+
+//    header("Location: displayRubric.php");
+}
+
 require_once('Views/searchRubric.phtml');
