@@ -3,7 +3,7 @@
 
 class Category
 {
-    protected $_category_ID, $_category_text, $criteria=[];
+    protected $_category_ID, $_category_text, $criteria = [];
 
     public function __construct($category_row)
     {
@@ -35,4 +35,19 @@ class Category
         return $this->criteria;
     }
 
+    /**
+     * @param array $criteria
+     */
+    public function setCriteria($criteria)
+    {
+        $this->criteria = $criteria;
+    }
+
+    /**
+     * @param array $criteria
+     */
+    public function addCriteria($criteria)
+    {
+        $this->criteria[] = $criteria;
+    }
 }
