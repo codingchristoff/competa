@@ -64,6 +64,67 @@ class UserDataSet
         }
     }
 
+    //Search the database for a specific user
+    public function searchUser($userName)
+    {
+        //Gets the first letter of the userName and puts it to lowercase
+        $userType = strtolower(substr($userName, 0,1));
+
+        //Gets a student user
+        if ($userType === 's')
+        {
+            //SQL statement will select a specific user
+            $sqlQuery = 'SELECT * FROM students WHERE userName LIKE"' . $userName . '"%';
+
+            $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+            $statement->execute(); // execute the PDO statement
+
+            //Returns all students in an array
+            $dataSet = [];
+            while ($row = $statement->fetch()) {
+                $dataSet[] = new StudentData($row);
+            }
+            return $dataSet;
+
+        }
+        //Gets a teacher user
+        else if($userType === 't')
+        {
+            //SQL statement will select a specific user
+            $sqlQuery = 'SELECT * FROM teachers WHERE userName LIKE"' . $userName . '"%';
+
+            $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+            $statement->execute(); // execute the PDO statement
+
+            //Returns all students in an array
+            $dataSet = [];
+            while ($row = $statement->fetch()) {
+                $dataSet[] = new TeacherData($row);
+            }
+            return $dataSet;
+        }
+        //Gets an admin user
+        else if ($userType === 'a')
+        {
+            //SQL statement will select a specific user
+            $sqlQuery = 'SELECT * FROM admins WHERE userName LIKE"' . $userName . '"%';
+
+            $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+            $statement->execute(); // execute the PDO statement
+
+            //Returns all students in an array
+            $dataSet = [];
+            while ($row = $statement->fetch()) {
+                $dataSet[] = new AdminData($row);
+            }
+            return $dataSet;
+        }
+        else{
+            return null;
+        }
+    }
+
+
     //Used to check if unique variable exists, outputs userData object
     public function fetchUniqueVariable($variable, $type)
     {
@@ -142,7 +203,7 @@ class UserDataSet
     //Gets all students
     public function fetchAllStudents()
     {
-        //SQL statement will select a specific user
+        //SQL statement will select all students
         $sqlQuery = 'SELECT * FROM students';
 
         $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
@@ -151,15 +212,20 @@ class UserDataSet
         //Returns all students in an array
         $dataSet = [];
         while ($row = $statement->fetch()) {
-            $dataSet[] = new UserData($row);
+            $dataSet[] = new StudentData($row);
+        }
+        return $dataSet;//Returns all students in an array
+        $dataSet = [];
+        while ($row = $statement->fetch()) {
+            $dataSet[] = new StudentData($row);
         }
         return $dataSet;
     }
 
-    //Gets all students
+    //Gets all teachers
     public function fetchAllTeachers()
     {
-        //SQL statement will select a specific user
+        //SQL statement will select all teachers
         $sqlQuery = 'SELECT * FROM teachers';
 
         $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
@@ -168,7 +234,24 @@ class UserDataSet
         //Returns all teacher in an array
         $dataSet = [];
         while ($row = $statement->fetch()) {
-            $dataSet[] = new UserData($row);
+            $dataSet[] = new TeacherData($row);
+        }
+        return $dataSet;
+    }
+
+    //Gets all admins
+    public function fetchAllAdmins()
+    {
+        //SQL statement will select all admins
+        $sqlQuery = 'SELECT * FROM admins';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+
+        //Returns all teacher in an array
+        $dataSet = [];
+        while ($row = $statement->fetch()) {
+            $dataSet[] = new AdminData($row);
         }
         return $dataSet;
     }
@@ -226,7 +309,7 @@ class UserDataSet
         {
             return 'Username not using correct naming scheme, should start with S, T or A';
         }
-        else if ($userType=='a' && $classID!=null)
+        else if ($userType=='a' && $classID!='None')
         {
             return 'Admins must have no class name';
         }

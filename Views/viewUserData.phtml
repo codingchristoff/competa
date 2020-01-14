@@ -1,0 +1,80 @@
+<?php require('template/header.phtml') ?>
+<div class="container row" id="admin-container">
+    <div class="container s12 l12" id="ls-header">
+
+    </div>
+
+    <div class="row">
+        <div class="col s12">
+            <ul class="tabs">
+                <li class="tab col s6 black-text"><a class="active" href="#test1">Search User</a></li>
+                <li class="tab col s6"><a href="#test2">View All Users</a></li>
+            </ul>
+        </div>
+
+        <div id="test1" class="col s12">
+            <div class="container">
+                <form name="addUser" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+                    <div class="input-field col s12 l12">
+                        <input type="text" name="userName" id="userName" value="<?php if (isset($view->errorMessage)){echo $_POST['userName'];}?>" required>
+                        <label for="userName">Username</label>
+                    </div><br/>
+                </form>
+            </div>
+        </div>
+
+        <div id="test2" class="col s12">
+            <h6 class="center helper-text"><strong>Admins</strong></h6>
+            <?php if (empty($view->allAdmins))
+            {
+                echo '<h6 class="center helper-text">There are no admins</h6>';
+            }
+            else
+            {
+                //For every admin in the database
+                foreach($view->allAdmins as $admin)
+                {
+                    //One admins
+                    echo '<h6 class="helper-text">Username: ' . $admin->getUserName() .' Name: ' . $admin->getFirstName() . ' ' . $admin->getLastName() . ' Email: ' . $admin->getEmail() .'</h6>';
+                }
+            }
+
+            ?>
+            <h6 class="center helper-text"><strong>Teachers</strong></h6>
+            <?php if (empty($view->allTeachers))
+            {
+                echo '<h6 class="center helper-text">There are no teachers</h6>';
+            }
+            else
+            {
+                //For every teacher in the database
+                foreach($view->allTeachers as $teacher)
+                {
+                    //One teacher
+                    echo '<h6 class="helper-text">Username: ' . $teacher->getUserName() .' Name: ' . $teacher->getFirstName() . ' ' . $teacher->getLastName() . ' Email: ' . $teacher->getEmail() .'</h6>';
+                }
+            }
+
+            ?>
+            <h6 class="center helper-text"><strong>Students</strong></h6>
+            <?php if (empty($view->allStudents))
+            {
+                echo '<h6 class="center helper-text">There are no students</h6>';
+            }
+            else
+            {
+                //For every student in the database
+                foreach($view->allStudents as $student)
+                {
+                    //One student
+                    echo '<h6 class="helper-text">Username: ' . $student->getUserName() .' Name: ' . $student->getFirstName() . ' ' . $student->getLastName() . ' Email: ' . $student->getEmail() .'</h6>';
+                }
+            }
+
+                ?>
+        </div>
+    </div>
+
+
+</div>
+<?php require('template/footer.phtml') ?>

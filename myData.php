@@ -10,7 +10,7 @@ $view = new stdClass();
 $view->pageTitle = 'My Data';
 
 // To ensure login.php is not manually accessible to logged in user
-if(!(isset($_SESSION['user'])))
+if(!isset($_SESSION['user']))
 {
     header("Location: index.php");
 }
