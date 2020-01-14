@@ -534,7 +534,6 @@ class RubricHandler
                             }
                         }
 
-<<<<<<< HEAD
                         $date = array_unique($date);  
                         if(sizeof($date) == 1)
                         {
@@ -544,9 +543,6 @@ class RubricHandler
                             return array_unique($date);
                         }                      
                         
-=======
-                        return array_unique($date);
->>>>>>> f59e046d110df3f40d59423ddeab095a5baa7e0a
                     }
                 }
                 //Close statement
