@@ -126,14 +126,12 @@ class RubricHandler
             $param_dateID = trim($dateID);
 
             // Attempt to execute the prepared statement
-            if ($stmt->execute()){
+            if ($stmt->execute()) {
                 $mergeID = [];
-                while($row = $stmt->fetch())
-                {
+                while ($row = $stmt->fetch()) {
                     $mergeID[] = (int)$row['mergeID'];
                 }
                 return $mergeID;
-
             }
         } else {
             return false;
@@ -391,7 +389,7 @@ class RubricHandler
         $rubricObj = $this->retrieveRubric($rubericName);
 
         $rubricID = $rubricObj->getRubricID();
-
+        
         if ($rubricID == false) {
             return "No rubric found, please alter search term";
         } else {
@@ -404,30 +402,35 @@ class RubricHandler
     
                 // Set parameters
                 $param_rubricID = trim($rubricID);
-    
+     
                 // Attempt to execute the prepared statement
                 if ($stmt->execute()) {
                     $mergeID = [];
-                    while ($row = $stmt->fetch());
-                    {
-                     $mergeID[] = $row['mergeID'];
-                                }
+                    while ($row = $stmt->fetch()) {
+                        $mergeID[] = $row;
+                    }
                     if ($mergeID == null) {
                         return "No merge results found";
                     } else {
                         //loop through mergeID And return the dateID into the array
-                        $sql = "SELECT d.date FROM rubricGroup rg INNER JOIN dates d WHERE rg.mergeID = $mergeID AND rg.dateID = d.dateID";
-    
-                        if ($stmt = $this->dbHandle->prepare($sql)) {
-                            $date = [];
-                            foreach ($mergeID as $id) {
+                        
+                        $date = [];
+                        foreach ($mergeID as $id) {
+                                                  
+                           var_dump($dump);
+
+                            $sql = "SELECT d.date FROM rubricGroup rg INNER JOIN dates d WHERE rg.mergeID = $dump AND rg.dateID = d.dateID";
+
+                            if ($stmt = $this->dbHandle->prepare($sql)) {
                                 // Attempt to execute the prepared statement
                                 if ($stmt->execute()) {
                                     $row = $stmt->fetch();
-                                    $date[] = $row['dateID'];
+                                    $date[] = $row;
                                 }
                             }
                         }
+                        //NEED TO ADD 
+                        return $date;
                     }
                 }
                 //Close statement
@@ -452,5 +455,8 @@ class RubricHandler
         } else {
         }
     }
+<<<<<<< HEAD
+=======
 
+>>>>>>> 7da1e40097604a5b76242370e5c5a247b24403e5
 }
