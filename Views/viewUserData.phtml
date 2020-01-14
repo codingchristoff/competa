@@ -24,7 +24,22 @@
         </div>
 
         <div id="test2" class="col s12">
-            
+            <h6 class="center helper-text"><strong>Students</strong></h6>
+            <?php if (empty($view->allStudents))
+            {
+                echo '<h6 class="center helper-text">There are no students</h6>';
+            }
+            else
+            {
+                //For every student in the database
+                foreach($view->allStudents as $student)
+                {
+                    //One student
+                    echo '<h6 class="helper-text">Username: ' . $student->getUserName() .' Name: ' . $student->getFirstName() . ' ' . $student->getLastName() . ' Email: ' . $student->getEmail() .'</h6>';
+                }
+            }
+
+                ?>
         </div>
     </div>
 
