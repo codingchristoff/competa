@@ -528,18 +528,20 @@ class RubricHandler
                                 // Attempt to execute the prepared statement
                                 if ($stmt->execute()) {
                                     $row = $stmt->fetch();
-                                    if($row == null)
-                                    {
-                                        return "No dates found";
-                                    }
-                                    else{
-                                        $date[] = $row['date'];
-                                    }
+                                    $date[] = $row['date'];
                                 }
                             }
                         }
+
+                        $date = array_unique($date);  
+                        if(sizeof($date) == 1)
+                        {
+                            return "No results found.";
+                        }
+                        else{
+                            return array_unique($date);
+                        }                      
                         
-                        return array_unique($date);
                     }
                 }
                 //Close statement
