@@ -30,8 +30,12 @@
                     <ul class="left hide-on-med-and-down">
                         <?php if(isset($_SESSION['user']))
                          {
-                             echo "<li><a class='btn-block' href='index.php'>View X</a></li>";
                              echo "<li><a class='btn-block' href='myData.php'>My Data</a></li>";
+                             if($_SESSION['user']->getRoleID() === '1')
+                             {
+                                 echo "<li><a class='btn-block' href='adminAddUserPage.php'>Add User</a></li>";
+                                 echo "<li><a class='btn-block' href='adminEditUserPage.php'>Edit User</a></li>";
+                             }
                          }
                          else{
                              echo "<li><a class='btn-block' href='adminRubricCreate.php'>Rubric Generator</a></li>";
@@ -55,7 +59,6 @@
 
                     <!-- Sidenav when view is v>992px  -->
                      <ul id="slide-out" class="sidenav black">
-                        <li><a href="index.php">Home</a></li>
                          <?php if(isset($_SESSION['user']))
                          {
                              echo "<li><a class='btn-block' href='../../logout.php'> Log Out</a></li>";

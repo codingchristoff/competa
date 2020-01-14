@@ -6,10 +6,58 @@
 
     <!--Container for all the content for the page-->
     <div class="container">
-        <form name="firstName" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
-            <input type="text" name="firstName" id="firstName" required>
-            <label for="firstName">Firstname</label>
+        <form name="addUser" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+            <div class="input-field col s12 l12">
+                <input type="text" name="userName" id="userName" required>
+                <label for="userName">Username</label>
+            </div><br/>
+
+            <div class="input-field col s12 l12">
+                <input type="text" name="firstName" id="firstName" required>
+                <label for="firstName">Firstname</label>
+            </div><br/>
+
+            <div class="input-field col s12 l12">
+                <input type="text" name="lastName" id="lastName" required>
+                <label for="lastName">Lastname</label>
+            </div><br/>
+
+            <div class="input-field col s12 l12">
+                <input type="text" name="email" id="email" required>
+                <label for="email">Email</label>
+            </div><br/>
+
+            <div class="input-field col s12 l12">
+                <div class="col s9 l9">
+                    <p>Class</p>
+                </div>
+                <div class="input-field col s3 l3">
+                    <select name="classID" class="browser-default" id="classID">
+                        <option value="None">None (Admin)</option>
+                        <?php
+                        foreach ($view->allClasses as $class){
+                            //Creating an option and showing the class names and sending the class ID to the controller
+                            echo '<option value="'.$view->dataSet->fetchClassID($class).'">'.$class.'</option>';
+                        }
+                        ?>
+                    </select>
+                </div>
+            </div><br/>
+
+            <div class="input-field col s12 l12">
+                <input type="password" name="password" id="password" required>
+                <label for="password">Password</label>
+            </div><br/>
+
+            <div class="right btn-block col s12 l12">
+                <input class="btn black right z-depth-2" type="submit"
+                       name="submit" value="Create User">
+            </div>
         </form>
-    </div></br>
+        <div>
+            <p class="red-text"><?php if(isset($view->errorMessage)){ echo $view->errorMessage; } ?></p>
+            <p><?php if(isset($view->createUserSuccess)){ echo $view->createUserSuccess; } ?></p>
+        </div>
+    </div>
 </div>
 <?php require('template/footer.phtml') ?>

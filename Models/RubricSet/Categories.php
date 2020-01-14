@@ -27,4 +27,12 @@ class Categories
         return $this->_category_text;
     }
 
+    /**
+     * @return array
+     */
+    public function getCriteria()
+    {
+        return $this->criteria;
+    }
+
 }
