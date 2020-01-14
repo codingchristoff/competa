@@ -519,7 +519,7 @@ class RubricHandler
                     if ($mergeID == null) {
                         return "No merge results found";
                     } else {
-                        //loop through mergeID And return the dateID into the array
+                        //loop through mergeID and return the dateID into the array
                         
                         $date = [];
                         foreach ($mergeID as $id) {
@@ -529,24 +529,19 @@ class RubricHandler
                                 // Attempt to execute the prepared statement
                                 if ($stmt->execute()) {
                                     $row = $stmt->fetch();
-                                    if(!$row == null)
-                                    {
+                                    if (!$row == null) {
                                         $date[] = $row['date'];
                                     }
-                                    
                                 }
                             }
                         }
-                        var_dump($date);
-                        $date = array_unique($date);  
-                        if(sizeof($date) == 0)
-                        {
-                            return "No results found.";
-                        }
-                        else{
-                            return array_unique($date);
-                        }                      
                         
+                        $date = array_unique($date);
+                        if (sizeof($date) == 0) {
+                            return "No results found.";
+                        } else {
+                            return $date;
+                        }
                     }
                 }
                 //Close statement
@@ -589,7 +584,7 @@ class RubricHandler
         var_dump($mergeList);
 
         //Creates new rubric object.
-        $rubric=new Rubric($rubricID,$rubricName);
+        $rubric=new Rubric($rubricID, $rubricName);
 
         //holds the value of the first categoryID in the array
         $holder=$mergeList[0]['categoryID'];
@@ -601,22 +596,17 @@ class RubricHandler
         $category = ($this->retrieveCategory($holder));
 
         //Loops through the merge array
-        foreach ($mergeList as $mergeItem)
-        {
+        foreach ($mergeList as $mergeItem) {
             //Checks current objects categoryID with previous to see if its a new category
-            if (!($mergeItem['categoryID'] == $holder))
-            {
+            if (!($mergeItem['categoryID'] == $holder)) {
                 //if it is different, sends off the last category to the rubric
-               $rubric->addCategory($category);
+                $rubric->addCategory($category);
                 $category=($this->retrieveCategory($mergeItem['categoryID']));
-
             }
             //gets criteria object from current criteria ID
             $category->addCriteria($this->retrieveCriteria($mergeItem['criteriaID']));
             //Changes holder, to hold previous categoryID
             $holder =   $mergeItem['categoryID'];
-
-
         }
         //adds final category to the rubric
         $rubric->addCategory($category);
@@ -674,5 +664,4 @@ class RubricHandler
         // Close connection
         unset($pdo);
     }
-
 }
