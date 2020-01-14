@@ -528,13 +528,17 @@ class RubricHandler
                                 // Attempt to execute the prepared statement
                                 if ($stmt->execute()) {
                                     $row = $stmt->fetch();
-                                    $date[] = $row['date'];
+                                    if(!$row == null)
+                                    {
+                                        $date[] = $row['date'];
+                                    }
+                                    
                                 }
                             }
                         }
-
+                        var_dump($date);
                         $date = array_unique($date);  
-                        if(sizeof($date) == 1)
+                        if(sizeof($date) == 0)
                         {
                             return "No results found.";
                         }
