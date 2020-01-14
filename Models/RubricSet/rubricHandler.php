@@ -84,18 +84,18 @@ class RubricHandler
      *
      * Returns the category row from the category text
      */
-    public function retrieveCategory($category)
+    public function retrieveCategory($categoryID)
     {
         //checks if value exists in database
-        $sql = "SELECT * FROM categories WHERE categoryText = :categoryText";
-    
+        $sql = "SELECT * FROM categories WHERE categoryID = :categoryID";
+
         if ($stmt = $this->dbHandle->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
-            $stmt->bindParam(":categoryText", $param_categoryText, PDO::PARAM_STR);
+            $stmt->bindParam(":categoryID", $param_categoryID, PDO::PARAM_STR);
     
             // Set parameters
-            $param_categoryText = trim($category);
-    
+            $param_categoryID = trim($categoryID);
+
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
                 if ($stmt->rowCount() == 1) {
@@ -119,17 +119,17 @@ class RubricHandler
      * Returns a criteria row from the criteria text
      */
 
-    public function retrieveCriteria($criteriaText)
+    public function retrieveCriteria($criteriaID)
     {
         //checks if value exists in database
-        $sql = "SELECT * FROM criteria WHERE criteriaText = :criteriaText";
+        $sql = "SELECT * FROM criteria WHERE criteriaID = :criteriaID";
     
         if ($stmt = $this->dbHandle->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
-            $stmt->bindParam(":criteriaText", $param_criteriaText, PDO::PARAM_STR);
+            $stmt->bindParam(":criteriaID", $param_criteriaID, PDO::PARAM_STR);
     
             // Set parameters
-            $param_criteriaText = trim($criteriaText);
+            $param_criteriaID = trim($criteriaID);
     
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
@@ -189,14 +189,14 @@ class RubricHandler
     {
         //checks if value exists in database
         $sql = "SELECT mergeID FROM rubricMerge WHERE rubricID = :rubricID";
-    
+
         if ($stmt = $this->dbHandle->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
             $stmt->bindParam(":rubricID", $param_rubricID, PDO::PARAM_STR);
 
             // Set parameters
             $param_rubricID = trim($rubricID);
- 
+
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
                 $mergeID = [];
@@ -392,9 +392,9 @@ class RubricHandler
 
     /**
      * Takes a timestamp and inserts into DB then returns the ID
-     * 
+     *
      * @param timestamp ('Y-m-d H:i:s')
-     * 
+     *
      * @return dateID int
      */
     public function createDate($date)
@@ -495,7 +495,7 @@ class RubricHandler
     public function searchRubric($rubricName)
     {
         $rubricID = $this->retrieveRubricID($rubricName);
-       
+
         if ($rubricID == false) {
             return "No rubric found, please alter search term";
         } else {
@@ -505,10 +505,10 @@ class RubricHandler
             if ($stmt = $this->dbHandle->prepare($sql)) {
                 // Bind variables to the prepared statement as parameters
                 $stmt->bindParam(":rubricID", $param_rubricID, PDO::PARAM_STR);
-    
+
                 // Set parameters
                 $param_rubricID = trim($rubricID);
-     
+
                 // Attempt to execute the prepared statement
                 if ($stmt->execute()) {
                     $mergeID = [];
@@ -533,6 +533,7 @@ class RubricHandler
                             }
                         }
 
+<<<<<<< HEAD
                         $date = array_unique($date);  
                         if(sizeof($date) == 1)
                         {
@@ -542,6 +543,9 @@ class RubricHandler
                             return array_unique($date);
                         }                      
                         
+=======
+                        return array_unique($date);
+>>>>>>> f59e046d110df3f40d59423ddeab095a5baa7e0a
                     }
                 }
                 //Close statement
@@ -563,27 +567,60 @@ class RubricHandler
     public function buildRubric($date, $rubricName)
     {
         $mergeID = [];
-        
+
         $dateID = $this->retrieveDateID($date);
-        
+
         $rubricID = $this->retrieveRubricID($rubricName);
 
         //Returns a list of merge id's which contain the matching rubric ID
         $mergeID[] = $this->retrieveRubricGroupOnID($rubricID);
-        
+
         //Loops through each merge id and returns the ones which match the date
         foreach ($mergeID as $group) {
             $rubricGroup = $this->retrieveRubricGroupOnDateID($dateID);
         }
 
-        var_dump($mergeID);
-        
-        //Loops through each merge id and expands the results into an array containing rubric id, category id and criteria id.
+        //Loops through each
         $mergeList = [];
         foreach ($rubricGroup as $mergeID) {
             $mergeList[] = $this->retrieveMerge($mergeID);
         }
         var_dump($mergeList);
+
+        //Creates new rubric object.
+        $rubric=new Rubric($rubricID,$rubricName);
+
+        //holds the value of the first categoryID in the array
+        $holder=$mergeList[0]['categoryID'];
+
+        //In the created rubric, creates and adds a category object using the int in $holder
+//        $rubric->addCategory($this->retrieveCategory($holder));
+
+        //Creates a new Category Object, so that it can be sent to the rubric later.
+        $category = ($this->retrieveCategory($holder));
+
+        //Loops through the merge array
+        foreach ($mergeList as $mergeItem)
+        {
+            //Checks current objects categoryID with previous to see if its a new category
+            if (!($mergeItem['categoryID'] == $holder))
+            {
+                //if it is different, sends off the last category to the rubric
+               $rubric->addCategory($category);
+                $category=($this->retrieveCategory($mergeItem['categoryID']));
+
+            }
+            //gets criteria object from current criteria ID
+            $category->addCriteria($this->retrieveCriteria($mergeItem['criteriaID']));
+            //Changes holder, to hold previous categoryID
+            $holder =   $mergeItem['categoryID'];
+
+
+        }
+        //adds final category to the rubric
+        $rubric->addCategory($category);
+        var_dump($rubric);
+
 
         //$rubricObj = new Rubric($rubricID, $rubricName);
 
@@ -616,7 +653,7 @@ class RubricHandler
             $stmt->bindParam(":dateID", $param_dateID, PDO::PARAM_STR);
 
             // Set parameters
-            $param_mergeID = trim($mergeID); 
+            $param_mergeID = trim($mergeID);
             $param_studentID = trim($studentID);
             $param_result = trim($result);
             $param_dateID = trim($dateID);
@@ -630,7 +667,7 @@ class RubricHandler
         } else {
             return false;
         }
-        
+
         // Close statement
         unset($stmt);
         // Close connection
