@@ -153,7 +153,7 @@ class RubricHandler
      *
      * Returns all mergeIDs with the corresponding date as an array
      */
-    public function retrieveRubricGroup($dateID)
+    public function retrieveRubricGroupOnDateID($dateID)
     {
         //checks if value exists in database
         $sql = "SELECT mergeID FROM rubricGroup WHERE dateID = :dateID";
@@ -180,6 +180,32 @@ class RubricHandler
         unset($stmt);
         //Close connection
         unset($pdo);
+    }
+
+        /**
+     * Returns all mergeIDs with the corresponding date
+     */
+    public function retrieveRubricGroupOnID($rubricID)
+    {
+        //checks if value exists in database
+        $sql = "SELECT mergeID FROM rubricMerge WHERE rubricID = :rubricID";
+    
+        if ($stmt = $this->dbHandle->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":rubricID", $param_rubricID, PDO::PARAM_STR);
+
+            // Set parameters
+            $param_rubricID = trim($rubricID);
+ 
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+                $mergeID = [];
+                while ($row = $stmt->fetch()) {
+                    $mergeID[] = $row['mergeID'];
+                }
+                return $mergeID;
+            }
+        }
     }
 
     /**
@@ -514,9 +540,23 @@ class RubricHandler
     }
 
 
-    public function buildRubric($dateID, $rubricName)
+    public function buildRubric($date, $rubricName)
     {
+<<<<<<< HEAD
+        
+        $dateID = $this->retrieveDate($date);
+
+        $rubricID = $this->retrieveRubric($rubricName);
+
+        
+
+
+
+
+
+=======
         //$dateID = $this->retrieveDateID($date);
+>>>>>>> 4958cf21648436a579cafe06ebe3a3c1d1f27d09
         //Returns all mergeID that match the date
         $rubricGroup[] = $this->retrieveRubricGroup($dateID);
         //Returns the rubric name
