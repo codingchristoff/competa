@@ -215,11 +215,7 @@ class UserDataSet
             $dataSet[] = new StudentData($row);
         }
         return $dataSet;//Returns all students in an array
-        $dataSet = [];
-        while ($row = $statement->fetch()) {
-            $dataSet[] = new StudentData($row);
-        }
-        return $dataSet;
+
     }
 
     //Gets all teachers
@@ -286,6 +282,23 @@ class UserDataSet
             $dataSet[] = $row[0];
         }
         return $dataSet;
+    }
+
+    //Gets all students that match a specific classID
+    public function fetchStudentsInClass($classID)
+    {
+        //SQL statement will select a specific user
+        $sqlQuery = 'SELECT * FROM students WHERE classID="' . $classID .'"';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+
+        //Returns all students in an array
+        $dataSet = [];
+        while ($row = $statement->fetch()) {
+            $dataSet[] = new StudentData($row);
+        }
+        return $dataSet;//Returns all students in an array
     }
 
     //Create user by adding to the database

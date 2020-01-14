@@ -27,8 +27,11 @@ if(isset($_SESSION['user']))
             $view->allUsers = $dataSet->searchUser($_POST['userName']);
         }
     }
-    else
-        {
+    else if ($_SESSION['user']->getRoleID() === '2')
+    {
+        $view->classStudents = $dataSet->fetchStudentsInClass($_SESSION['user']->getClassID());
+    }
+    else {
         header('Location: myData.php');
     }
 }
