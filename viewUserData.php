@@ -18,7 +18,9 @@ if(isset($_SESSION['user']))
     //Checks if an ADMIN is logged in
     if ($_SESSION['user']->getRoleID() === '1')
     {
-
+        $view->allStudents = $dataSet->fetchAllStudents();
+        $view->allTeachers = $dataSet->fetchAllTeachers();
+        $view->allAdmins = $dataSet->fetchAllAdmins();
     }
     else
         {
