@@ -38,4 +38,5 @@ if (isset($_SESSION['user']))
     //Change this for a more suitable page later !!!!!!!!!!!!!!!!!!!!!
     header("Location: myData.php");
 }
+
 require_once('Views/index.phtml');
