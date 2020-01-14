@@ -41,7 +41,11 @@ $handler = new rubricHandler();
 
 //var_dump($handler->buildRubric("2020-01-10 13:04:15"));
 
-var_dump($handler->searchRubric("neque"));
+//var_dump($handler->searchRubric("neque"));
 
-//var_dump($handler->retrieveRubricGroup("1"));
+//var_dump($handler->retrieveRubricGroupOnID("1"));
+
+//var_dump($handler->retrieveRubricGroupOnID("1"));
+
+var_dump($handler->buildRubric("2019-12-05 00:00:00", "neque"));
 
