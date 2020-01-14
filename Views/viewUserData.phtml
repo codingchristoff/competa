@@ -24,6 +24,38 @@
         </div>
 
         <div id="test2" class="col s12">
+            <h6 class="center helper-text"><strong>Admins</strong></h6>
+            <?php if (empty($view->allAdmins))
+            {
+                echo '<h6 class="center helper-text">There are no admins</h6>';
+            }
+            else
+            {
+                //For every admin in the database
+                foreach($view->allAdmins as $admin)
+                {
+                    //One admins
+                    echo '<h6 class="helper-text">Username: ' . $admin->getUserName() .' Name: ' . $admin->getFirstName() . ' ' . $admin->getLastName() . ' Email: ' . $admin->getEmail() .'</h6>';
+                }
+            }
+
+            ?>
+            <h6 class="center helper-text"><strong>Teachers</strong></h6>
+            <?php if (empty($view->allTeachers))
+            {
+                echo '<h6 class="center helper-text">There are no teachers</h6>';
+            }
+            else
+            {
+                //For every teacher in the database
+                foreach($view->allTeachers as $teacher)
+                {
+                    //One teacher
+                    echo '<h6 class="helper-text">Username: ' . $teacher->getUserName() .' Name: ' . $teacher->getFirstName() . ' ' . $teacher->getLastName() . ' Email: ' . $teacher->getEmail() .'</h6>';
+                }
+            }
+
+            ?>
             <h6 class="center helper-text"><strong>Students</strong></h6>
             <?php if (empty($view->allStudents))
             {
