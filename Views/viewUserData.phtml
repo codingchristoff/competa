@@ -7,41 +7,84 @@
     <div class="row">
         <div class="col s12">
             <ul class="tabs">
-                <li class="tab col s6 black-text"><a class="active" href="#test1">Search User</a></li>
-                <li class="tab col s6"><a href="#test2">View All Users</a></li>
+                <?php  if ($_SESSION['user']->getRoleID() === '1')
+                {
+                    echo '
+                    <li class="tab col s6 black-text"><a class="active" href="#test1">Search User</a></li>
+                    <li class="tab col s6"><a href="#test2">View All Users</a></li>
+                    ';
+                }
+                else if ($_SESSION['user']->getRoleID() === '2')
+                {
+                    echo '
+                    <li class="tab col s12"><a href="#test3">View All Students In Class</a></li>
+                    ';
+                }
+                ?>
             </ul>
         </div>
 
-        <div id="test1" class="col s12">
-            <div class="container">
-                <form name="addUser" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
-                    <div class="input-field col s12 l12">
-                        <input type="text" name="userName" id="userName" value="<?php if (isset($view->errorMessage)){echo $_POST['userName'];}?>" required>
-                        <label for="userName">Username</label>
-                    </div><br/>
-                </form>
-            </div>
-        </div>
+        <?php  if ($_SESSION['user']->getRoleID() === '1')
+            {
+                echo '
+                    <div id="test1" class="col s12">
+                        <div class="container">
+                            <form name="addUser" method="post" action="<?php echo $_SERVER[\'PHP_SELF\'];?>">
+                                <div class="input-field col s12 l12">
+                                <input type="text" name="userName" id="userName" value="<?php if (isset($view->errorMessage)){echo $_POST[\'userName\'];}?>" required>
+                                <label for="userName">Username</label>
+                                </div><br/>
 
-        <div id="test2" class="col s12">
-            <h6 class="center helper-text"><strong>Admins</strong></h6>
-            <?php if (empty($view->allAdmins))
-            {
-                echo '<h6 class="center helper-text">There are no admins</h6>';
-            }
-            else
-            {
-                //For every admin in the database
-                foreach($view->allAdmins as $admin)
+                                <div class="right btn-block col s12 l12">
+                                <input class="btn black right z-depth-2" type="submit"
+                               name="searchUser" value="Search User">
+                                </div>
+                            </form>
+                        </div>
+
+                    <div class="container">';
+
+                if (isset($view->allUsers))
                 {
-                    //One admins
-                    echo '<h6 class="helper-text">Username: ' . $admin->getUserName() .' Name: ' . $admin->getFirstName() . ' ' . $admin->getLastName() . ' Email: ' . $admin->getEmail() .'</h6>';
-                }
-            }
+                    echo '<h6 class="center helper-text"><strong>Search Results</strong></h6>';
+                    if (empty($view->allUsers))
+                    {
+                        echo '<h6 class="center helper-text">No users found</h6>';
+                    }
+                    else
+                    {
 
-            ?>
-            <h6 class="center helper-text"><strong>Teachers</strong></h6>
-            <?php if (empty($view->allTeachers))
+                        //For every user searched in the database
+                        foreach($view->allUsers as $user)
+                        {
+                            //One user
+                            echo '<h6 class="helper-text">Username: ' . $user->getUserName() .' Name: ' . $user->getFirstName() . ' ' . $user->getLastName() . ' Email: ' . $user->getEmail();'</h6>';
+                        }
+                    }
+                }
+                echo '
+                 </div>
+                </div>
+
+                <div id="test2" class="col s12">
+                    <h6 class="center helper-text"><strong>Admins</strong></h6>
+                ';
+                if (empty($view->allAdmins))
+                {
+                    echo '<h6 class="center helper-text">There are no admins</h6>';
+                }
+                else
+                {
+                    //For every admin in the database
+                    foreach($view->allAdmins as $admin)
+                    {
+                        //One admins
+                        echo '<h6 class="helper-text">Username: ' . $admin->getUserName() .' Name: ' . $admin->getFirstName() . ' ' . $admin->getLastName() . ' Email: ' . $admin->getEmail() .'</h6>';
+                    }
+                }
+                echo '
+                <h6 class="center helper-text"><strong>Teachers</strong></h6>
+                '; if (empty($view->allTeachers))
             {
                 echo '<h6 class="center helper-text">There are no teachers</h6>';
             }
@@ -54,27 +97,46 @@
                     echo '<h6 class="helper-text">Username: ' . $teacher->getUserName() .' Name: ' . $teacher->getFirstName() . ' ' . $teacher->getLastName() . ' Email: ' . $teacher->getEmail() .'</h6>';
                 }
             }
-
-            ?>
+            echo '
             <h6 class="center helper-text"><strong>Students</strong></h6>
-            <?php if (empty($view->allStudents))
-            {
-                echo '<h6 class="center helper-text">There are no students</h6>';
-            }
-            else
-            {
-                //For every student in the database
-                foreach($view->allStudents as $student)
+            ';
+                if (empty($view->allStudents))
                 {
-                    //One student
-                    echo '<h6 class="helper-text">Username: ' . $student->getUserName() .' Name: ' . $student->getFirstName() . ' ' . $student->getLastName() . ' Email: ' . $student->getEmail() .'</h6>';
+                    echo '<h6 class="center helper-text">There are no students</h6>';
                 }
+                else
+                {
+                    //For every student in the database
+                    foreach($view->allStudents as $student)
+                    {
+                        //One student
+                        echo '<h6 class="helper-text">Username: ' . $student->getUserName() .' Name: ' . $student->getFirstName() . ' ' . $student->getLastName() . ' Email: ' . $student->getEmail() .'</h6>';
+                    }
+                }
+                echo '</div>';
             }
-
-                ?>
-        </div>
+            else if ($_SESSION['user']->getRoleID() === '2')
+            {
+             echo '<div id="test1" class="col s12">
+                        <div class="container">
+                        ';
+                        if (empty($view->classStudents))
+                        {
+                            echo '<h6 class="center helper-text">There are no students</h6>';
+                        }
+                        else{
+                            //For every student in class
+                            foreach($view->classStudents as $student)
+                            {
+                                //One student
+                                echo '<h6 class="helper-text">Username: ' . $student->getUserName() .' Name: ' . $student->getFirstName() . ' ' . $student->getLastName() . ' Email: ' . $student->getEmail() .'</h6>';
+                            }
+                        }
+                        echo '
+                        </div>
+                   </div>';
+            }
+            ?>
     </div>
-
-
 </div>
 <?php require('template/footer.phtml') ?>
