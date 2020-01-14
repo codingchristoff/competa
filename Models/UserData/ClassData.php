@@ -28,6 +28,13 @@ class ClassData extends UserData
         //}
     }
 
+    public function getClassID()
+    {
+        return $this->_classID;
+    }
+
+
+
     /**
      * @param $newClass -> new class ID
      */

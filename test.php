@@ -33,19 +33,24 @@ $handler = new rubricHandler();
 //echo($t . "<br>");
 //echo(date("d-m-Y H:m:s",$t));
 
-//var_dump($handler->retrieveDate("2020-01-10 13:04:15"));
+//var_dump($handler->retrieveDateID("2020-01-14 17:24:05"));
 
 //var_dump($handler->criteriaCategory("I do not follow the five basic rules that apply in every classroom."));
 
-//var_dump($handler->createDate(""))
+/*
+$timestamp = date('Y-m-d H:i:s');
+var_dump($handler->createDate($timestamp));
+*/
 
 //var_dump($handler->buildRubric("2020-01-10 13:04:15"));
 
-//var_dump($handler->searchRubric("neque"));
+var_dump($handler->searchRubric("neque"));
 
 //var_dump($handler->retrieveRubricGroupOnID("1"));
 
 //var_dump($handler->retrieveRubricGroupOnID("1"));
 
-var_dump($handler->buildRubric("2019-12-05 00:00:00", "neque"));
+//var_dump($handler->buildRubric("2019-12-05 00:00:00", "neque"));
 
+//var_dump($timestamp = $handler->getTimestamp());
+//var_dump($handler->insertAssessmentValues("4","70","4", $timestamp));

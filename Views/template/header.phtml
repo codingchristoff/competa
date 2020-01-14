@@ -23,24 +23,38 @@
         <!-- Title of the open tab in a browser -->
         <header class="nav-content">
             <?php if (isset($_SESSION['user'])) {
-                if ($_SESSION['user']->getRoleID() === '1') {
+                if ($_SESSION['user']->getRoleID() === '1' || $_SESSION['user']->getRoleID() === '2' ) {
                     echo '
                 <!-- Dropdown Structure -->
                 <ul id="dropdown1" class="dropdown-content black">
                     <li><a class=\'btn-block\' href=\'viewUserData.php\'>View User</a></li>
-                    <li class="divider"></li>
-                    <li><a class=\'btn-block\' href=\'adminAddUserPage.php\'>Add User</a></li>
-                    <li class="divider"></li>
+                    <li class="divider"></li>';
+                    if ($_SESSION['user']->getRoleID() === '1')
+                    {
+                        echo '   
+                        <li><a class=\'btn-block\' href=\'adminAddUser.php\'>Add User</a></li>
+                        <li class="divider"></li>  
+                        ';
+                    }
+                    echo '
+                    
                     <li><a class=\'btn-block\' href=\'adminEditUserPage.php\'>Edit User</a></li>
                 </ul>
                 
-                <!-- Dropdown Structure 2-->
-                <ul id="dropdown1" class="dropdown-content black">
-                    <li><a class=\'btn-block\' href=\'viewUserData.php\'>View User</a></li>
-                    <li class="divider"></li>
-                    <li><a class=\'btn-block\' href=\'adminAddUserPage.php\'>Add User</a></li>
-                    <li class="divider"></li>
-                    <li><a class=\'btn-block\' href=\'adminEditUserPage.php\'>Edit User</a></li>
+                <!-- Dropdown Structure 2 -->
+                <ul id="dropdown2" class="dropdown-content black">
+                    <li><a class=\'btn - block\' href=\'viewUserData.php\'>View User</a></li>
+                    <li class="divider"></li>';
+                    if ($_SESSION['user']->getRoleID() === '1')
+                    {
+                        echo '   
+                        <li><a class=\'btn - block\' href=\'adminAddUserPage.php\'>Add User</a></li>
+                        <li class="divider"></li>  
+                        ';
+                    }
+                    echo '
+                    
+                    <li><a class=\'btn - block\' href=\'adminEditUserPage.php\'>Edit User</a></li>
                 </ul>
                 ';
                 }
@@ -58,7 +72,7 @@
                         <?php if(isset($_SESSION['user']))
                          {
                              echo "<li><a class='btn-block' href='myData.php'>My Data</a></li>";
-                             if($_SESSION['user']->getRoleID() === '1')
+                             if($_SESSION['user']->getRoleID() === '1' || $_SESSION['user']->getRoleID() === '2')
                              {
                                  echo "<li><a class=\"dropdown-trigger\" href=\"#!\" data-target=\"dropdown1\">Manage User<i class=\"material-icons right\">arrow_drop_down</i></a></li>";
                              }
@@ -93,7 +107,7 @@
                          <?php if(isset($_SESSION['user']))
                          {
                              echo "<li><a class='btn-block' href='myData.php'>My Data</a></li>";
-                             if($_SESSION['user']->getRoleID() === '1')
+                             if($_SESSION['user']->getRoleID() === '1' || $_SESSION['user']->getRoleID() === '2')
                              {
                                  echo "<li><a class=\"dropdown-trigger\" href=\"#!\" data-target=\"dropdown2\">Manage User<i class=\"material-icons right white-text\">arrow_drop_down</i></a></li>";
                              }

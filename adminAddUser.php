@@ -50,4 +50,4 @@ else
 }
 
 
-require_once('Views/adminAddUserPage.phtml');
+require_once('Views/adminAddUser.phtml');
