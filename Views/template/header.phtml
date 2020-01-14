@@ -38,7 +38,7 @@
                     }
                     echo '
                     
-                    <li><a class=\'btn-block\' href=\'adminEditUserPage.php\'>Edit User</a></li>
+                    <li><a class=\'btn-block\' href=\'editUser.php\'>Edit User</a></li>
                 </ul>
                 
                 <!-- Dropdown Structure 2 -->
@@ -48,13 +48,13 @@
                     if ($_SESSION['user']->getRoleID() === '1')
                     {
                         echo '   
-                        <li><a class=\'btn - block\' href=\'adminAddUserPage.php\'>Add User</a></li>
+                        <li><a class=\'btn - block\' href=\'adminAddUser.php\'>Add User</a></li>
                         <li class="divider"></li>  
                         ';
                     }
                     echo '
                     
-                    <li><a class=\'btn - block\' href=\'adminEditUserPage.php\'>Edit User</a></li>
+                    <li><a class=\'btn - block\' href=\'editUser.php\'>Edit User</a></li>
                 </ul>
                 ';
                 }
