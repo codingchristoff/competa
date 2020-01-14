@@ -390,11 +390,18 @@ class RubricHandler
     }
 
 
+    /**
+     * Takes a timestamp and inserts into DB then returns the ID
+     * 
+     * @param timestamp ('Y-m-d H:i:s')
+     * 
+     * @return dateID int
+     */
     public function createDate($date)
     {
-        $sqlQuery = "INSERT INTO dates (date) values (:date)";
+        $sql = "INSERT INTO dates (date) values (:date)";
 
-        if ($stmt = $this->dbHandle->prepare($sqlQuery)) {
+        if ($stmt = $this->dbHandle->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
             $stmt->bindParam(":date", $param_date, PDO::PARAM_STR);
 
@@ -403,7 +410,7 @@ class RubricHandler
 
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
-                return ($this->retrieveDate($date));
+                return $this->retrieveDateID($date);
             } else {
                 return false;
             }
@@ -521,10 +528,17 @@ class RubricHandler
                                 // Attempt to execute the prepared statement
                                 if ($stmt->execute()) {
                                     $row = $stmt->fetch();
-                                    $date[] = $row['date'];
+                                    if($row == null)
+                                    {
+                                        return "No dates found";
+                                    }
+                                    else{
+                                        $date[] = $row['date'];
+                                    }
                                 }
                             }
                         }
+                        
                         return array_unique($date);
                     }
                 }
@@ -559,8 +573,10 @@ class RubricHandler
         foreach ($mergeID as $group) {
             $rubricGroup = $this->retrieveRubricGroupOnDateID($dateID);
         }
+
+        var_dump($mergeID);
         
-        //Loops through each 
+        //Loops through each merge id and expands the results into an array containing rubric id, category id and criteria id.
         $mergeList = [];
         foreach ($rubricGroup as $mergeID) {
             $mergeList[] = $this->retrieveMerge($mergeID);
@@ -571,4 +587,52 @@ class RubricHandler
 
         //set method in Rubric to set category
     }
+
+    /**
+     * @return date string returns date in format required by sql
+     */
+    public function getTimestamp()
+    {
+        return date('Y-m-d H:i:s');
+    }
+
+    public function insertAssessmentValues($mergeID, $studentID, $result, $timestamp)
+    {
+        $dateID = $this->retrieveDateID($timestamp);
+
+        if ($dateID == false) {
+            $dateID = $this->createDate($timestamp);
+        }
+
+        $sql = "INSERT INTO assessments (mergeID, studentID, result, dateID) values (:mergeID, :studentID, :result, :dateID)";
+
+        if ($stmt = $this->dbHandle->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":mergeID", $param_mergeID, PDO::PARAM_STR);
+            $stmt->bindParam(":studentID", $param_studentID, PDO::PARAM_STR);
+            $stmt->bindParam(":result", $param_result, PDO::PARAM_STR);
+            $stmt->bindParam(":dateID", $param_dateID, PDO::PARAM_STR);
+
+            // Set parameters
+            $param_mergeID = trim($mergeID); 
+            $param_studentID = trim($studentID);
+            $param_result = trim($result);
+            $param_dateID = trim($dateID);
+
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+                return "Values inserted successfully";
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+        
+        // Close statement
+        unset($stmt);
+        // Close connection
+        unset($pdo);
+    }
+
 }
