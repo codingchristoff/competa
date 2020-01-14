@@ -142,7 +142,7 @@ class UserDataSet
     //Gets all students
     public function fetchAllStudents()
     {
-        //SQL statement will select a specific user
+        //SQL statement will select all students
         $sqlQuery = 'SELECT * FROM students';
 
         $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
@@ -151,15 +151,15 @@ class UserDataSet
         //Returns all students in an array
         $dataSet = [];
         while ($row = $statement->fetch()) {
-            $dataSet[] = new UserData($row);
+            $dataSet[] = new StudentData($row);
         }
         return $dataSet;
     }
 
-    //Gets all students
+    //Gets all teachers
     public function fetchAllTeachers()
     {
-        //SQL statement will select a specific user
+        //SQL statement will select all teachers
         $sqlQuery = 'SELECT * FROM teachers';
 
         $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
@@ -168,7 +168,24 @@ class UserDataSet
         //Returns all teacher in an array
         $dataSet = [];
         while ($row = $statement->fetch()) {
-            $dataSet[] = new UserData($row);
+            $dataSet[] = new TeacherData($row);
+        }
+        return $dataSet;
+    }
+
+    //Gets all admins
+    public function fetchAllAdmins()
+    {
+        //SQL statement will select all admins
+        $sqlQuery = 'SELECT * FROM admins';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+
+        //Returns all teacher in an array
+        $dataSet = [];
+        while ($row = $statement->fetch()) {
+            $dataSet[] = new AdminData($row);
         }
         return $dataSet;
     }
