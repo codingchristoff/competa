@@ -363,6 +363,7 @@ class RubricHandler
         // Close connection
         unset($pdo);
     }
+
     public function createCategory($categoryName)
     {   // Prepare an insert statement
         $sqlQuery = "INSERT INTO categories (criteriaText) values (:categoryName)";
@@ -528,18 +529,24 @@ class RubricHandler
                                 // Attempt to execute the prepared statement
                                 if ($stmt->execute()) {
                                     $row = $stmt->fetch();
-                                    if($row == null)
+                                    if(!$row == null)
                                     {
-                                        return "No dates found";
-                                    }
-                                    else{
                                         $date[] = $row['date'];
                                     }
+                                    
                                 }
                             }
                         }
-
-                        return array_unique($date);
+                        var_dump($date);
+                        $date = array_unique($date);  
+                        if(sizeof($date) == 0)
+                        {
+                            return "No results found.";
+                        }
+                        else{
+                            return array_unique($date);
+                        }                      
+                        
                     }
                 }
                 //Close statement

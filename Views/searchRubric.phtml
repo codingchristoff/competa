@@ -1,0 +1,36 @@
+<?php require('template/header.phtml') ?>
+<nav>
+    <div class="nav-wrapper blue">
+        <form name="name" method="post" action="<?php echo ($_SERVER['PHP_SELF']); ?>">
+            <div class="input-field">
+                <input id="search"  type="search" class="purple darken-3 white-text" name="search" placeholder="Search Rubric Name" required>
+                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons">close</i>
+            </div>
+        </form>
+    </div>
+</nav>
+<div class="container row">
+    <div class="container col s12 l12 black-text">
+        <ul class="collection with-header">
+            <?php if(is_array($view->searchResult))
+            {
+                echo "<li class=\"collection-header center\"><h6><strong>Search Results</strong></h6></li>";
+
+                foreach ($view->searchResult as $key => $value)
+                {
+                    echo "<li class=\"collection-item\">
+                          <div>Rubric: {$view->searchValue} Date: {$value}<a href=\"#!\" class=\"secondary-content\">
+                          <i class=\"material-icons\">send</i></a>
+                          </div>
+                          </li>";
+                }
+            }elseif(is_string($view->err))
+            {
+                echo "<li class=\"collection-header center\"><h6><strong>{$view->err}</strong></h6></li>";
+            }
+            ?>
+        </ul>
+    </div>
+</div>
+<?php require('template/footer.phtml') ?>
