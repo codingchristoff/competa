@@ -34,7 +34,7 @@
                     {
                         // echo $value;
                         echo "<td>{$value}</td>";
-                        echo "<td><select name=\"rubric_count\" class=\"browser-default\" id=\"rubrics\">
+                        echo "<td><select name=\"rubric_count\" class=\"browser-default\">
                         <option value=\"1\">1</option>
                         <option value=\"2\">2</option>
                         <option value=\"3\">3</option>
@@ -44,7 +44,7 @@
                     echo "</tr>";
                 }
 
-                echo"</tbody></table></br>";
+                echo"</tbody></table><br/>";
                 $rubricCount++;
             }
             ?>
@@ -54,6 +54,5 @@
             </div>
         </form>
     </div>
-
 </div>
 <?php require('template/footer.phtml') ?>

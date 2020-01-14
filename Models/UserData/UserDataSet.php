@@ -226,6 +226,10 @@ class UserDataSet
         {
             return 'Username not using correct naming scheme, should start with S, T or A';
         }
+        else if ($userType=='a' && $classID!=null)
+        {
+            return 'Admins must have no class name';
+        }
 
         //Checks if the user already exists
         if ($this->fetchUser($userNameClean)->getUsername()!==null)

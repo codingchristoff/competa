@@ -249,9 +249,8 @@ class RubricHandler
         unset($pdo);
     }
 
-
-
     /**
+     *
      * Returns rubricID, categoryID, criteriaID based on mergeID.
      */
     public function retrieveMerge($mergeID)
@@ -483,7 +482,7 @@ class RubricHandler
                 if ($stmt->execute()) {
                     $mergeID = [];
                     while ($row = $stmt->fetch()) {
-                        $mergeID[] = $row;
+                        $mergeID[] = $row['mergeID'];
                     }
                     if ($mergeID == null) {
                         return "No merge results found";
@@ -492,21 +491,18 @@ class RubricHandler
                         
                         $date = [];
                         foreach ($mergeID as $id) {
-                                                  
-                           var_dump($dump);
 
-                            $sql = "SELECT d.date FROM rubricGroup rg INNER JOIN dates d WHERE rg.mergeID = $dump AND rg.dateID = d.dateID";
+                            $sql = "SELECT d.date FROM rubricGroup rg INNER JOIN dates d WHERE rg.mergeID = $id AND rg.dateID = d.dateID";
 
                             if ($stmt = $this->dbHandle->prepare($sql)) {
                                 // Attempt to execute the prepared statement
                                 if ($stmt->execute()) {
                                     $row = $stmt->fetch();
-                                    $date[] = $row;
+                                    $date[] = $row['date'];
                                 }
                             }
                         }
-                        //NEED TO ADD 
-                        return $date;
+                        return array_unique($date);
                     }
                 }
                 //Close statement
@@ -531,5 +527,4 @@ class RubricHandler
         } else {
         }
     }
-
 }
