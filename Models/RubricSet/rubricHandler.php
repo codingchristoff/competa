@@ -581,7 +581,7 @@ class RubricHandler
         foreach ($rubricGroup as $mergeID) {
             $mergeList[] = $this->retrieveMerge($mergeID);
         }
-        var_dump($mergeList);
+        //var_dump($mergeList);
 
         //Creates new rubric object.
         $rubric=new Rubric($rubricID, $rubricName);
@@ -610,7 +610,9 @@ class RubricHandler
         }
         //adds final category to the rubric
         $rubric->addCategory($category);
-        var_dump($rubric);
+
+        // Return final rubric obj
+        return $rubric;
 
 
         //$rubricObj = new Rubric($rubricID, $rubricName);

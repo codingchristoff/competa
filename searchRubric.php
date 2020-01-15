@@ -4,6 +4,11 @@ require_once('Models/RubricSet/rubricHandler.php');
 
 session_start();
 
+if(isset($_SESSION['rubric']))
+{
+    unset($_SESSION['rubric']);
+}
+
 $view = new stdClass();
 $view->pageTitle = 'Search Rubric';
 $view->searchValue = null;
@@ -30,7 +35,7 @@ if(isset($_POST['submit']))
     $_SESSION['rubric_name'] = $_POST['rubric_name'];
     $_SESSION['timestamp'] = $_POST['timestamp'];
 
-//    header("Location: displayRubric.php");
+    header("Location: displayRubric.php");
 }
 
 require_once('Views/searchRubric.phtml');
