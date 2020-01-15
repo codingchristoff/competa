@@ -38,8 +38,6 @@ if(isset($_POST['submit']))
     foreach ($arrayVals as $value)
     {
         $success = $handler->insertAssessmentValues($value, $dateID);
-
-        var_dump($success);
     }
 }
 
