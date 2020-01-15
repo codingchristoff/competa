@@ -27,4 +27,9 @@ if(isset($_SESSION['rubric']))
     $view->cats = $view->rubric->getCategories();
 }
 
+if(isset($_POST['submit']))
+{
+
+}
+
 require_once('Views/displayRubric.phtml');
