@@ -267,6 +267,21 @@ class UserDataSet
         return $row[0];
     }
 
+    //Gets className
+    public function fetchClassName($classID)
+    {
+        $sqlQuery = 'SELECT className FROM classes WHERE classID="' . $classID .'"';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+
+        //Getting the row (array)
+        $row = $statement->fetch();
+
+        //returning the first value (the classID)
+        return $row[0];
+    }
+
     //Gets all classNames
     public function fetchAllClassNames()
     {
@@ -280,6 +295,23 @@ class UserDataSet
         $dataSet = [];
         while ($row = $statement->fetch()) {
             $dataSet[] = $row[0];
+        }
+        return $dataSet;
+    }
+
+    //Gets all classNames
+    public function fetchAllClasses()
+    {
+        //SQL statement will select a specific user
+        $sqlQuery = 'SELECT * FROM classes';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+
+        //Returns all students in an array
+        $dataSet = [];
+        while ($row = $statement->fetch()) {
+            $dataSet[] = new ClassInfoData($row);
         }
         return $dataSet;
     }
@@ -325,6 +357,10 @@ class UserDataSet
         else if ($userType=='a' && $classID!='None')
         {
             return 'Admins must have no class name';
+        }
+        else if ($userType!='a' && $classID=='None')
+        {
+            return 'Only Admins can have no class';
         }
 
         //Checks if the user already exists
@@ -410,12 +446,11 @@ class UserDataSet
         }
     }
 
-    //Edits a student
-    public function editUser($user)
+    //Edits a user
+    public function editUser($user, $classID)
     {
-
         //Cleans up input
-        $userNameClean = $this->cleanInput($user->getUserName());
+        $userNameClean = $this->cleanInput($user->getUsername());
         $firstNameClean = $this->cleanInput($user->getFirstName());
         $lastNameClean = $this->cleanInput($user->getLastName());
         $emailClean = $this->cleanInput($user->getEmail());
@@ -423,6 +458,19 @@ class UserDataSet
 
         //Encrypts the password using the Crypt_Blowfish algorithm
         $passwordClean = password_hash($passwordClean,PASSWORD_BCRYPT);
+
+        //Gets the first letter of the userName and puts it to lowercase
+        $userType = strtolower(substr($userNameClean, 0,1));
+
+        //Tests on class name
+        if ($userType=='a' && $classID!='None')
+        {
+            return 'Admins must have no class name';
+        }
+        else if ($userType!='a' && $classID=='None')
+        {
+            return 'Only Admins can have no class';
+        }
 
         //Checks the rest of the variables to see if they are in the correct format
         $checkUserVariables = $this->checkUserVariables($userNameClean, $firstNameClean, $lastNameClean, $emailClean, $passwordClean);
