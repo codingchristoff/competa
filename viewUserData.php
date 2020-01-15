@@ -30,6 +30,7 @@ if(isset($_SESSION['user']))
         {
             $view->allUsers = $dataSet->searchUser($_POST['userName']);
         }
+
     }
     //Checks if TEACHER is logged in
     else if ($_SESSION['user']->getRoleID() ===  '2')
