@@ -59,7 +59,7 @@ var_dump($handler->createDate($timestamp));
 
 //################ INSERTION TEST ################
 
-var_dump($handler->checkMergeID("1","3","1"));
+//var_dump($handler->checkMergeID("1","3","1"));
 
 //var_dump($handler->createCriteria("I do use the right manners."));
 //var_dump($handler->checkCriteria("Good"));
@@ -73,3 +73,7 @@ var_dump($handler->checkMergeID("1","3","1"));
 //var_dump($handler->checkDate("2022-01-10 13:04:15"));
 //var_dump($handler->retrieveMergeID("1", "1", "1"));
 
+
+//var_dump($handler->retrieveMergeID("1","1","1"));
+
+var_dump($handler->getDatesFromStudentID(1));
