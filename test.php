@@ -73,3 +73,7 @@ var_dump($handler->createDate($timestamp));
 //var_dump($handler->checkDate("2022-01-10 13:04:15"));
 //var_dump($handler->retrieveMergeID("1", "1", "1"));
 
+
+//var_dump($handler->retrieveMergeID("1","1","1"));
+
+var_dump($handler->getDatesFromStudentID(1));
