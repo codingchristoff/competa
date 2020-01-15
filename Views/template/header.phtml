@@ -39,22 +39,38 @@
                     echo '
                     
                     <li><a class=\'btn-block\' href=\'editUser.php\'>Edit User</a></li>
-                </ul>
-                
-                <!-- Dropdown Structure 2 -->
-                <ul id="dropdown2" class="dropdown-content black">
-                    <li><a class=\'btn - block\' href=\'viewUserData.php\'>View User</a></li>
                     <li class="divider"></li>';
                     if ($_SESSION['user']->getRoleID() === '1')
                     {
                         echo '   
-                        <li><a class=\'btn - block\' href=\'adminAddUser.php\'>Add User</a></li>
+                        <li><a class=\'btn-block\' href=\'adminDeleteUser.php\'>Delete User</a></li>  
+                        ';
+                    }
+                    echo '
+                </ul>
+                
+                <!-- Dropdown Structure 2 -->
+                <ul id="dropdown2" class="dropdown-content black">
+                    <li><a class=\'btn-block\' href=\'viewUserData.php\'>View User</a></li>
+                    <li class="divider"></li>';
+                    if ($_SESSION['user']->getRoleID() === '1')
+                    {
+                        echo '   
+                        <li><a class=\'btn-block\' href=\'adminAddUser.php\'>Add User</a></li>
                         <li class="divider"></li>  
                         ';
                     }
                     echo '
                     
-                    <li><a class=\'btn - block\' href=\'editUser.php\'>Edit User</a></li>
+                    <li><a class=\'btn-block\' href=\'editUser.php\'>Edit User</a></li>
+                    <li class="divider"></li>';
+                    if ($_SESSION['user']->getRoleID() === '1')
+                    {
+                        echo '   
+                        <li><a class=\'btn-block\' href=\'adminDeleteUser.php\'>Delete User</a></li>  
+                        ';
+                    }
+                    echo '
                 </ul>
                 ';
                 }
