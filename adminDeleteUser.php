@@ -12,3 +12,4 @@ $view->pageTitle = 'Delete User';
 $dataSet = new UserDataSet();
 $view->dataSet = $dataSet;
 
+require_once('Views/adminDeleteUser.phtml');
