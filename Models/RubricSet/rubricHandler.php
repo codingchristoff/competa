@@ -579,7 +579,8 @@ class RubricHandler
             // Attempt to execute the prepared statement
 
             if ($stmt->execute()) {
-                return "Name added to DB.";
+                $result = $this->retrieveMergeID($rubricID, $categoryID, $criteriaID);
+                return $result;
             } else {
                 return false;
             }
