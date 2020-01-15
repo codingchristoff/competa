@@ -482,17 +482,6 @@ class RubricHandler
         unset($pdo);
     }
 
-    public function test($test)
-    {
-        $verify = $this->retrieveRubric($test);
-
-        if (is_a($verify, 'Rubric')) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public function searchRubric($rubricName)
     {
         $rubricID = $this->retrieveRubricID($rubricName);
@@ -611,11 +600,6 @@ class RubricHandler
         //adds final category to the rubric
         $rubric->addCategory($category);
         var_dump($rubric);
-
-
-        //$rubricObj = new Rubric($rubricID, $rubricName);
-
-        //set method in Rubric to set category
     }
 
     /**
