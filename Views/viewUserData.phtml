@@ -110,7 +110,13 @@
                     foreach($view->allStudents as $student)
                     {
                         //One student
-                        echo '<h6 class="helper-text">Username: ' . $student->getUserName() .' Name: ' . $student->getFirstName() . ' ' . $student->getLastName() . ' Email: ' . $student->getEmail() .' Class: ' . $view->dataSet->fetchClassName($student->getClassID()) . '</h6>';
+                        $className = 'Error';
+                        foreach ($view->allClasses as $class){
+                            if ($class->getClassID() == $student->getClassID()){
+                                $className = $class->getClassName();
+                            }
+                        }
+                        echo '<h6 class="helper-text">Username: ' . $student->getUserName() .' Name: ' . $student->getFirstName() . ' ' . $student->getLastName() . ' Email: ' . $student->getEmail() .' Class: ' . $className . '</h6>';
                     }
                 }
                 echo '</div>';
@@ -128,8 +134,14 @@
                             //For every student in class
                             foreach($view->classStudents as $student)
                             {
+                                $className = 'Error';
+                                foreach ($view->allClasses as $class){
+                                    if ($class->getClassID() == $student->getClassID()){
+                                        $className = $class->getClassName();
+                                    }
+                                }
                                 //One student
-                                echo '<h6 class="helper-text">Username: ' . $student->getUserName() .' Name: ' . $student->getFirstName() . ' ' . $student->getLastName() . ' Email: ' . $student->getEmail() .'</h6>';
+                                echo '<h6 class="helper-text">Username: ' . $student->getUserName() .' Name: ' . $student->getFirstName() . ' ' . $student->getLastName() . ' Email: ' . $student->getEmail() .' Class: ' . $className . '</h6>';
                             }
                         }
                         echo '
