@@ -369,8 +369,6 @@ class RubricHandler
         unset($pdo);
     }
 
-
-
     public function createCriteria($criteriaText)
     {  // Prepare an insert statement
         $sqlQuery = "INSERT INTO criteria (criteriaText) values (:criteriaText)";
@@ -422,7 +420,6 @@ class RubricHandler
         // Close connection
         unset($pdo);
     }
-
 
     /**
      * Takes a timestamp and inserts into DB then returns the ID
@@ -681,4 +678,48 @@ class RubricHandler
         // Close connection
         unset($pdo);
     }
+
+    public function getDatesFromStudentID($studentID)
+    {
+        //checks if value exists in database
+        $sql = "SELECT dateID FROM assessments where studentID = :studentID";
+
+        if ($stmt = $this->dbHandle->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":studentID", $param_studentID, PDO::PARAM_STR);
+
+            // Set parameters
+            $param_studentID = trim($studentID);
+            $dateIDs = [];
+
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+
+
+                    while ($row = $stmt->fetch()) {
+                        echo "test";
+                        $dateIDs[] = $row;
+                    }
+                    $dates = [];
+                    var_dump($dateIDs);
+                    foreach ($dateIDs as $ID)
+                    {
+
+                        $dates[]=($this->retrieveDate($ID['dateID']));
+                    }
+                    var_dump($dates);
+                }
+            } else {
+
+                return false;
+            }
+
+        //Close statement
+        unset($stmt);
+        //Close connection
+        unset($pdo);
+    }
+
+
+
 }
