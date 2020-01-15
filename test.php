@@ -76,4 +76,16 @@ var_dump($handler->createDate($timestamp));
 
 //var_dump($handler->retrieveMergeID("1","1","1"));
 
-var_dump($handler->getDatesFromStudentID(1));
+//var_dump($handler->getDatesFromStudentID(1));
+
+$str = "h,e,l,l,o";
+/*
+var_dump(substr($str, 0,1));
+var_dump(substr($str, 0,2));
+var_dump(substr($str, 2,1));
+var_dump(explode(",",$str));
+*/
+
+$explosion = explode(",",$str);
+
+echo $explosion[2];
