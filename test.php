@@ -44,7 +44,7 @@ var_dump($handler->createDate($timestamp));
 
 //var_dump($handler->buildRubric("2020-01-10 13:04:15"));
 
-var_dump($handler->searchRubric("magna ac"));
+var_dump($handler->searchRubric("neque"));
 
 //var_dump($handler->retrieveRubricGroupOnID("1"));
 
