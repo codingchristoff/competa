@@ -11,6 +11,7 @@ $view->rubric = null;
 $view->rubric_id = null;
 $view->rubric_name = null;
 $view->cats = array();
+$view->runTimestamp = null;
 
 
 $handler = new rubricHandler();
@@ -18,6 +19,7 @@ $handler = new rubricHandler();
 if(isset($_SESSION['rubric_name']))
 {
     $_SESSION['rubric'] = $handler->buildRubric($_SESSION['timestamp'], $_SESSION['rubric_name']);
+    $view->runTimestamp = $_SESSION['timestamp'];
 }
 if(isset($_SESSION['rubric']))
 {
@@ -30,11 +32,14 @@ if(isset($_SESSION['rubric']))
 if(isset($_POST['submit']))
 {
     $arrayVals = array_slice($_POST, 0, -1);
-    $timestamp = $handler->getTimestamp();
+
+    $dateID = $handler->checkDate($handler->getTimestamp());
 
     foreach ($arrayVals as $value)
     {
-        $handler->insertAssessmentValues();
+        $success = $handler->insertAssessmentValues($value, $dateID);
+
+        var_dump($success);
     }
 }
 

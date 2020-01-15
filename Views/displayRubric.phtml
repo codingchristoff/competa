@@ -11,6 +11,7 @@
                     <?php
                     $critCount = 1;
                     $result = 1;
+                    $testStudID = 192;
                         foreach ($view->cats as $cat)
                         {
                             $catID = $cat->getCategoryID();
@@ -28,13 +29,13 @@
                                 echo "<td>{$crit->getCriteriaText()}</td>";
                                 echo "<td>
                                 <label>
-                              <input class=\"with-gap\" type=\"radio\" value=\"{$view->rubric_id},{$catID},{$critID},{$result},{$_SESSION['user']->getUserID()}\" name=\"{$critCount}\" required/> 
+                              <input class=\"with-gap\" type=\"radio\" value=\"{$view->rubric_id},{$catID},{$critID},{$result},{$testStudID},{$view->runTimestamp}\" name=\"{$critCount}\" required/> 
                               <span></span>
                               </label>
                               </td>";
                                 $result++;
                             }
-                            $value = 1;
+                            $result = 1;
                             echo "</tr>";
                             $critCount++;
                         }
