@@ -812,17 +812,37 @@ class RubricHandler
 
 
     /**
-     * NEED TO WRITE COMMENT DO NOT DELETE
+     * Sorts the data that is passed back from the form
+     * 
+     * @param postedResult string
+     * @param dateID int
+     * 
+     * @return boolean 
      */
-    public function insertAssessmentValues($mergeID, $studentID, $result, $timestamp)
+    public function insertAssessmentValues($postedResult, $dateID)
     {
-        $dateID = $this->retrieveDateID($timestamp);
- 
-        if ($dateID == false) {
-            $dateID = $this->createDate($timestamp);
-        }
- 
-        $sql = "INSERT INTO assessments (mergeID, studentID, result, dateID) values (:mergeID, :studentID, :result, :dateID)";
+        //$dateID = $this->checkDate($this->getTimestamp());
+
+        $explosion = explode(",",$postedResult);
+
+        $rubricID = $explosion[0];
+        $categoryID = $explosion[1];
+        $criteriaID = $explosion[2];
+        $result = $explosion[3];
+        $studentID = $explosion[4];
+        $rubricDate = $this->retrieveDateID($explosion[5]);
+        
+        $mergeID = $this->retrieveMergeID($rubricID, $categoryID, $criteriaID);
+
+        return $this->createAssessmentValue($mergeID, $studentID, $result,$dateID, $rubricDate);      
+    }
+
+    /**
+     * 
+     */
+    public function createAssessmentValue($mergeID, $studentID, $result,$dateID, $rubricDate)
+    {
+        $sql = "INSERT INTO assessments (mergeID, studentID, result, dateID, rubricDate) values (:mergeID, :studentID, :result, :dateID, :rubricDate)";
  
         if ($stmt = $this->dbHandle->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
@@ -830,23 +850,21 @@ class RubricHandler
             $stmt->bindParam(":studentID", $param_studentID, PDO::PARAM_STR);
             $stmt->bindParam(":result", $param_result, PDO::PARAM_STR);
             $stmt->bindParam(":dateID", $param_dateID, PDO::PARAM_STR);
+            $stmt->bindParam(":rubricDate", $param_dateID, PDO::PARAM_STR);
  
             // Set parameters
             $param_mergeID = trim($mergeID);
             $param_studentID = trim($studentID);
             $param_result = trim($result);
             $param_dateID = trim($dateID);
+            $param_rubricDate = trim($rubricDate);
  
             // Attempt to execute the prepared statement
-            if ($stmt->execute()) {
-                return "Values inserted successfully";
-            } else {
-                return false;
-            }
+            $stmt->execute();
+                return true;            
         } else {
             return false;
-        }
- 
+        } 
         // Close statement
         unset($stmt);
         // Close connection
@@ -855,7 +873,10 @@ class RubricHandler
 
     /**
      * Enters the rubric data into the database
+     * 
+     * not finished
      *
+     * GET STRING FROM ALI
      * @param mergeID
      * @param dateID
      *
