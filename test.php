@@ -59,7 +59,7 @@ var_dump($handler->createDate($timestamp));
 
 //################ INSERTION TEST ################
 
-var_dump($handler->checkMergeID("1","3","1"));
+//var_dump($handler->checkMergeID("1","3","1"));
 
 //var_dump($handler->createCriteria("I do use the right manners."));
 //var_dump($handler->checkCriteria("Good"));

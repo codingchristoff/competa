@@ -819,6 +819,8 @@ class RubricHandler
         $categoryID = $this->checkCategory($categoryText);
         $criteriaID = $this->checkCriteria($criteriaText);
 
+        $mergeID = $this->checkMergeID($rubricID, $categoryID, $criteriaID);
+
         $sql = "INSERT INTO rubricMerge (rubricID, categoryID, criteriaID, dateID) values (:mergeID, :studentID, :result, :dateID)";
 
         if ($stmt = $this->dbHandle->prepare($sql)) {
