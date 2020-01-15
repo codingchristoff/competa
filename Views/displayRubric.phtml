@@ -10,7 +10,7 @@
                     <tbody>
                     <?php
                     $critCount = 1;
-
+                    $value = 1;
                         foreach ($view->cats as $cat)
                         {
                             $catID = $cat->getCategoryID();
@@ -23,7 +23,7 @@
                             foreach ($crits as $crit)
                             {
                                 $critID = $crit->getCriteriaID();
-                                $value = $critID;
+
 
                                 echo "<td>{$crit->getCriteriaText()}</td>";
                                 echo "<td>
@@ -32,7 +32,9 @@
                               <span></span>
                               </label>
                               </td>";
+                                $value++;
                             }
+                            $value = 1;
                             echo "</tr>";
                             $critCount++;
                         }
