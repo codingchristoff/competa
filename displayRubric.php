@@ -2,6 +2,16 @@
 require_once('Models/UserData/UserData.php');
 require_once('Models/RubricSet/rubricHandler.php');
 
+//if(isset($_SESSION['user']) && $_SESSION['user']->getRoleID() == 1 ||  $_SESSION['user']->getRoleID() == 2) {}
+//elseif(isset($_SESSION['user']) && $_SESSION['user']->getRoleID() == 3)
+//{
+//    header("Location: myData.php");
+//}
+//else{
+//    header("Location: index.php");
+//}
+
+
 session_start();
 
 $view = new stdClass();
@@ -25,7 +35,5 @@ if(isset($_SESSION['rubric']))
     $view->rubric_name = $view->rubric->getRubricName();
     $view->cats = $view->rubric->getCategories();
 }
-
-
 
 require_once('Views/displayRubric.phtml');

@@ -9,7 +9,7 @@ class Criteria
     {
         $this->_criteria_ID = $criteria_row['criteriaID'];
         $this->_criteria_text = $criteria_row['criteriaText'];
-        $this->_criteria_Value=$criteria_row['criteriaValue'];
+       // $this->_criteria_Value=$criteria_row['criteriaValue'];
     }
 
     /**
