@@ -299,6 +299,23 @@ class UserDataSet
         return $dataSet;
     }
 
+    //Gets all classNames
+    public function fetchAllClasses()
+    {
+        //SQL statement will select a specific user
+        $sqlQuery = 'SELECT * FROM classes';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+
+        //Returns all students in an array
+        $dataSet = [];
+        while ($row = $statement->fetch()) {
+            $dataSet[] = new ClassInfoData($row);
+        }
+        return $dataSet;
+    }
+
     //Gets all students that match a specific classID
     public function fetchStudentsInClass($classID)
     {
