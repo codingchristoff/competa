@@ -18,7 +18,18 @@ if(isset($_SESSION['user']))
     //Checks if an ADMIN is logged in
     if ($_SESSION['user']->getRoleID() === '1')
     {
-        
+        //For when a user is searched
+        if (isset($_POST['searchUser']))
+        {
+            $view->user = $dataSet->fetchUser($_POST['userName']);
+        }
+        else{
+            echo'hi';
+        }
+    }
+    else
+    {
+        header('Location: myData.php');
     }
 }
 else
