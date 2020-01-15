@@ -9,6 +9,10 @@ session_start();
 $view = new stdClass();
 $view->pageTitle = 'My Data';
 
+//Initiating a connection to database and giving it to the view
+$dataSet = new UserDataSet();
+$view->dataSet = $dataSet;
+
 // To ensure login.php is not manually accessible to logged in user
 if(!isset($_SESSION['user']))
 {
