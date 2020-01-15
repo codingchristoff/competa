@@ -81,6 +81,35 @@ class RubricHandler
     }
 
     /**
+     * Returns the category id based on the name of the category
+     */
+    public function retrieveCategoryID($categoryText)
+    {
+        $sql = "SELECT categoryID FROM categories WHERE categoryText = :categoryText";
+
+        if ($stmt = $this->dbHandle->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":categoryText", $param_categoryText, PDO::PARAM_STR);
+    
+            // Set parameters
+            $param_categoryText = trim($categoryText);
+
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+                $row = $stmt->fetch();
+
+                return $row['categoryID'];
+            } else {
+                return false;
+            }
+        }
+        //Close statement
+        unset($stmt);
+        //Close connection
+        unset($pdo);
+    }
+
+    /**
      *
      * Returns the category row from the category text
      */
@@ -118,7 +147,6 @@ class RubricHandler
      *
      * Returns a criteria row from the criteria text
      */
-
     public function retrieveCriteria($criteriaID)
     {
         //checks if value exists in database
@@ -143,6 +171,36 @@ class RubricHandler
                 return false;
             }
         }
+        //Close statement
+        unset($stmt);
+        //Close connection
+        unset($pdo);
+    }
+
+    /**
+     *
+     * Returns a criteria row from the criteria text
+     */
+    public function retrieveCriteriaID($criteriaText)
+    {
+        //checks if value exists in database
+        $sql = "SELECT criteriaID FROM criteria WHERE criteriaText = :criteriaText";
+    
+        if ($stmt = $this->dbHandle->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":criteriaText", $param_criteriaText, PDO::PARAM_STR);
+    
+            // Set parameters
+            $param_criteriaText = trim($criteriaText);
+    
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+                $row = $stmt->fetch();
+                return $row['criteriaID'];
+            }
+        } else {
+            return false;
+        }        
         //Close statement
         unset($stmt);
         //Close connection
@@ -455,9 +513,9 @@ class RubricHandler
 
     /**
      * Checks if date exists, if it does then returns ID otherwise creates and returns the ID.
-     * 
+     *
      * @param timestamp
-     * 
+     *
      * @return dateID
      */
     public function checkDate($timestamp)
@@ -533,9 +591,9 @@ class RubricHandler
 
     /**
      * Searches for all rubrics based on the name given in the search term and returns the date/time stamp
-     * 
+     *
      * @param rubricName string
-     * 
+     *
      * @return date array
      */
     public function searchRubric($rubricName)
@@ -703,15 +761,46 @@ class RubricHandler
 
     /**
      * Enters the rubric data into the database
-     * 
+     *
      * @param mergeID
      * @param dateID
-     * 
+     *
      * @return
      */
-    public function insertRubricData($mergeID, $dateID)
+    public function insertRubricData($rubricText, $categoryText, $criteriaText, $dateID)
     {
-        
-        
+        $rubricID = $this->retrieveRubricID($rubricText);
+        $categoryID = $this->retrieveCategoryID($categoryText);
+        $criteriaID = $this->retrieveCriteriaID($criteriaText);
+
+        $sql = "INSERT INTO rubricGroup (mergeID, studentID, result, dateID) values (:mergeID, :studentID, :result, :dateID)";
+
+        if ($stmt = $this->dbHandle->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":mergeID", $param_mergeID, PDO::PARAM_STR);
+            $stmt->bindParam(":studentID", $param_studentID, PDO::PARAM_STR);
+            $stmt->bindParam(":result", $param_result, PDO::PARAM_STR);
+            $stmt->bindParam(":dateID", $param_dateID, PDO::PARAM_STR);
+
+            // Set parameters
+            $param_mergeID = trim($mergeID);
+            $param_studentID = trim($studentID);
+            $param_result = trim($result);
+            $param_dateID = trim($dateID);
+
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+                return "Values inserted successfully";
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+
+        // Close statement
+        unset($stmt);
+        // Close connection
+        unset($pdo);
     }
 }
