@@ -97,7 +97,6 @@ class RubricHandler
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
                 $row = $stmt->fetch();
-
                 return $row['categoryID'];
             } else {
                 return false;
@@ -200,7 +199,7 @@ class RubricHandler
             }
         } else {
             return false;
-        }        
+        }
         //Close statement
         unset($stmt);
         //Close connection
@@ -426,20 +425,23 @@ class RubricHandler
         unset($pdo);
     }
 
-    public function createCriteria($criteriaText)
-    {  // Prepare an insert statement
-        $sqlQuery = "INSERT INTO criteria (criteriaText) values (:criteriaText)";
+    /**
+     *
+     */
+    public function createCategory($categoryText)
+    {   // Prepare an insert statement
+        $sqlQuery = "INSERT INTO categories (categoryText) values (:categoryText)";
 
         if ($stmt = $this->dbHandle->prepare($sqlQuery)) {
             // Bind variables to the prepared statement as parameters
-            $stmt->bindParam(":criteriaText", $param_criteriaText, PDO::PARAM_STR);
+            $stmt->bindParam(":categoryText", $param_categoryText, PDO::PARAM_STR);
 
             // Set parameters
-            $param_criteriaText = trim($criteriaText);
+            $param_categoryText = trim($categoryText);
 
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
-                return "Criteria added to DB.";
+                return $this->retrieveCategoryID($categoryText);
             } else {
                 return false;
             }
@@ -452,23 +454,20 @@ class RubricHandler
         unset($pdo);
     }
 
-    public function createCategory($categoryName)
-    {   // Prepare an insert statement
-        $sqlQuery = "INSERT INTO categories (criteriaText) values (:categoryName)";
+    public function createCriteria($criteriaText)
+    {
+        $sqlQuery = "INSERT INTO criteria (criteriaText) values (:criteriaText)";
 
         if ($stmt = $this->dbHandle->prepare($sqlQuery)) {
             // Bind variables to the prepared statement as parameters
-            $stmt->bindParam(":categoryName", $param_categoryName, PDO::PARAM_STR);
+            $stmt->bindParam(":criteriaText", $param_criteriaText, PDO::PARAM_STR);
 
             // Set parameters
-            $param_categoryName = trim($categoryName);
+            $param_criteriaText = trim($criteriaText);
 
             // Attempt to execute the prepared statement
-            if ($stmt->execute()) {
-                return "Category added to DB.";
-            } else {
-                return false;
-            }
+            $stmt->execute();
+            return $this->retrieveCriteriaID($criteriaText);
         } else {
             return false;
         }
@@ -511,6 +510,59 @@ class RubricHandler
         unset($pdo);
     }
 
+    //################ Verification Methods ################
+
+    /**
+     * Checks if rubric exists, if it does then returns ID otherwise creates and returns the ID.
+     *
+     * @param rubricName
+     *
+     * @return rubricID
+     */
+    public function checkRubric($rubricName)
+    {
+        $rubricID = $this->retrieveRubricID($rubricName);
+
+        if ($rubricID == false) {
+            $rubricID = $this->createRubric($rubricName);
+        }
+        return $rubricID;
+    }
+
+    /**
+     * Checks if category exists, if it does then returns ID otherwise creates and returns the ID.
+     *
+     * @param categoryName
+     *
+     * @return categoryID
+     */
+    public function checkCategory($categoryText)
+    {
+        $categoryID = $this->retrieveCategoryID($categoryText);
+        
+        if ($categoryID == false) {
+            $categoryID = $this->createCategory($categoryText);
+        }
+        return $categoryID;
+    }
+
+    /**
+     * Checks if criteria exists, if it does then returns ID otherwise creates and returns the ID.
+     *
+     * @param criteriaName
+     *
+     * @return criteriaID
+     */
+    public function checkCriteria($criteriaName)
+    {
+        $criteriaID = $this->retrieveCriteriaID($criteriaName);
+
+        if ($criteriaID == false) {
+            $criteriaID = $this->createCriteria($criteriaName);
+        }
+        return $criteriaID;
+    }
+
     /**
      * Checks if date exists, if it does then returns ID otherwise creates and returns the ID.
      *
@@ -526,6 +578,17 @@ class RubricHandler
             $dateID = $this->createDate($timestamp);
         }
 
+        return $dateID;
+    }
+
+    public function checkMergeID()
+    {
+        $dateID = $this->retrieveDateID($timestamp);
+    
+        if ($dateID == false) {
+            $dateID = $this->createDate($timestamp);
+        }
+    
         return $dateID;
     }
 
@@ -692,7 +755,7 @@ class RubricHandler
         $holder=$mergeList[0]['categoryID'];
 
         //In the created rubric, creates and adds a category object using the int in $holder
-//        $rubric->addCategory($this->retrieveCategory($holder));
+        //$rubric->addCategory($this->retrieveCategory($holder));
 
         //Creates a new Category Object, so that it can be sent to the rubric later.
         $category = ($this->retrieveCategory($holder));
@@ -769,11 +832,11 @@ class RubricHandler
      */
     public function insertRubricData($rubricText, $categoryText, $criteriaText, $dateID)
     {
-        $rubricID = $this->retrieveRubricID($rubricText);
-        $categoryID = $this->retrieveCategoryID($categoryText);
-        $criteriaID = $this->retrieveCriteriaID($criteriaText);
+        $rubricID = $this->checkRubric($rubricText);
+        $categoryID = $this->checkCategory($categoryText);
+        $criteriaID = $this->checkCriteria($criteriaText);
 
-        $sql = "INSERT INTO rubricGroup (mergeID, studentID, result, dateID) values (:mergeID, :studentID, :result, :dateID)";
+        $sql = "INSERT INTO rubricMerge (rubricID, categoryID, criteriaID, dateID) values (:mergeID, :studentID, :result, :dateID)";
 
         if ($stmt = $this->dbHandle->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
