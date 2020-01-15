@@ -2,15 +2,6 @@
 require_once('Models/UserData/UserData.php');
 require_once('Models/RubricSet/rubricHandler.php');
 
-//if(isset($_SESSION['user']) && $_SESSION['user']->getRoleID() == 1 ||  $_SESSION['user']->getRoleID() == 2) {}
-//elseif(isset($_SESSION['user']) && $_SESSION['user']->getRoleID() == 3)
-//{
-//    header("Location: myData.php");
-//}
-//else{
-//    header("Location: index.php");
-//}
-
 
 session_start();
 
@@ -34,6 +25,17 @@ if(isset($_SESSION['rubric']))
     $view->rubric_id = $view->rubric->getRubricID();
     $view->rubric_name = $view->rubric->getRubricName();
     $view->cats = $view->rubric->getCategories();
+}
+
+if(isset($_POST['submit']))
+{
+    $arrayVals = array_slice($_POST, 0, -1);
+    $timestamp = $handler->getTimestamp();
+
+    foreach ($arrayVals as $value)
+    {
+        $handler->insertAssessmentValues();
+    }
 }
 
 require_once('Views/displayRubric.phtml');

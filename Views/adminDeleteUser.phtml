@@ -19,7 +19,43 @@
                     </form>
                 </div
 
+                <div class="container">
+                    <?php
+                    if (isset($_POST['searchUser']))
+                    {
+                        if ($view->user!=null) {
+                            if ($view->user->getUsername() != null) {
+                                echo '<div class="container s12 l12" id="ls-header">
+                                    <h6 class="center helper-text"><strong>Username: ' . $view->user->getUserName() . '</strong></h6>
+                                  </div>
 
+                                   <div class="container s12 l12" id="ls-header">
+                                    <h6 class="center helper-text"><strong>Role: ';
+                                if ($view->user->getRoleID() == 1) echo 'Admin'; else if ($view->user->getRoleID() == 2) echo 'Teacher'; else if ($view->user->getRoleID() == 3) echo 'Student'; else echo 'Unknown';
+                                echo '</strong></h6>
+                                   </div>
+
+                                <div class="container s12 l12" id="ls-header">
+                                    <h6 class="center helper-text"><strong>Name: ' . $view->user->getFirstName() . ' ' . $view->user->getLastName() . '</strong></h6>
+                                </div>
+
+                                <div class="container s12 l12" id="ls-header">
+                                    <h6 class="center helper-text"><strong>Email: ' . $view->user->getEmail() . '</strong></h6>
+                                </div>
+                                
+                                
+                                ';
+                            } else {
+                                echo '<div class="container s12 l12" id="ls-header"><h6 class="center helper-text">User not found</h6></div>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<div class="container s12 l12" id="ls-header"><h6 class="center helper-text">User not found</h6></div>';
+                        }
+                    }
+                    ?>
+                </div>
             </div>
         </div>
 </div>
