@@ -9,45 +9,41 @@
                 <div class="container">
                     <form name="addUser" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                         <div class="input-field col s12 l12">
-                            <input type="text" name="userName" id="userName" value="<?php if (isset($view->errorMessage)){echo $_POST['userName'];} ?>" required>
+                            <input type="text" name="userName" id="userName" value="<?php if (isset($_POST['userName'])){echo $_POST['userName'];} ?>" required>
                             <label for="userName">Username</label>
                         </div><br/>
 
                         <div class="right btn-block col s12 l12">
-                            <input class="btn black right z-depth-2" type="submit" name="searchUser" value="Edit User">
+                            <input class="btn black right z-depth-2" type="submit" name="searchUser" value="Find User">
                         </div>
                     </form>
                 </div>
 
                 <div class="container">
                     <?php
-                    if (isset($view->allUsers))
+                    if (isset($view->user))
                     {
                         echo'
                         <form name="addUser" method="post" action="' . $_SERVER['PHP_SELF'] . '">
+                            <input type="hidden" name="userName" id="userName" value="' . $view->user->getUserName() .'" required>
                             <div class="input-field col s12 l12">
-                                <input type="text" name="userName" id="userName" value="<?php if (isset($view->errorMessage)){echo $_POST[\'userName\'];}?>" required>
-                                <label for="userName">Username</label>
+                                <input type="text" name="firstName" id="firstName" value="' . $view->user->getFirstName() .'" required>
+                                <label for="firstName">First name</label>
                             </div><br/>
 
                             <div class="input-field col s12 l12">
-                                <input type="text" name="firstName" id="firstName" value="<?php if (isset($view->errorMessage)){echo $_POST[\'firstName\'];}?>" required>
-                                <label for="firstName">Firstname</label>
+                                <input type="text" name="lastName" id="lastName" value="' . $view->user->getLastName() .'" required>
+                                <label for="lastName">Last name</label>
                             </div><br/>
 
                             <div class="input-field col s12 l12">
-                                <input type="text" name="lastName" id="lastName" value="<?php if (isset($view->errorMessage)){echo $_POST[\'lastName\'];}?>" required>
-                                <label for="lastName">Lastname</label>
-                            </div><br/>
-
-                            <div class="input-field col s12 l12">
-                                <input type="text" name="email" id="email" value="<?php if (isset($view->errorMessage)){echo $_POST[\'email\'];}?>" required>
+                                <input type="text" name="email" id="email" value="' . $view->user->getEmail() .'" required>
                                 <label for="email">Email</label>
                             </div><br/>
 
                             <div class="input-field col s12 l12">
                              <div class="col s9 l9">
-                                <p>Class</p>
+                                <p>New Class</p>
                             </div>
                             <div class="input-field col s3 l3">
                             <select name="classID" class="browser-default" id="classID">
@@ -64,17 +60,21 @@
 
             <div class="input-field col s12 l12">
                 <input type="password" name="password" id="password" required>
-                <label for="password">Password</label>
+                <label for="password">New Password</label>
             </div><br/>
 
             <div class="right btn-block col s12 l12">
                 <input class="btn black right z-depth-2" type="submit"
-                       name="submit" value="Create User">
+                       name="submit" value="Edit User">
             </div>
         </form>
                         ';
                     }
                     ?>
+                    <div>
+                        <p class="red-text"><?php if(isset($view->errorMessage)){ echo $view->errorMessage; } ?></p>
+                        <p><?php if(isset($view->editUserSuccess)){ echo $view->editUserSuccess; } ?></p>
+                    </div>
                 </div>
         </div>
     </div>
