@@ -81,6 +81,7 @@ class RubricHandler
     }
 
     /**
+<<<<<<< HEAD
      * Returns the category id based on the name of the category
      */
     public function retrieveCategoryID($categoryText)
@@ -109,6 +110,8 @@ class RubricHandler
     }
 
     /**
+=======
+>>>>>>> 10788c1a240bd0ed812039854a82a11689ef8f39
      *
      * Returns the category row from the category text
      */
@@ -146,6 +149,7 @@ class RubricHandler
      *
      * Returns a criteria row from the criteria text
      */
+
     public function retrieveCriteria($criteriaID)
     {
         //checks if value exists in database
@@ -178,6 +182,7 @@ class RubricHandler
 
     /**
      *
+<<<<<<< HEAD
      * Returns a criteria row from the criteria text
      */
     public function retrieveCriteriaID($criteriaText)
@@ -208,6 +213,8 @@ class RubricHandler
 
     /**
      *
+=======
+>>>>>>> 10788c1a240bd0ed812039854a82a11689ef8f39
      * Returns all mergeIDs with the corresponding date as an array
      */
     public function retrieveRubricGroupOnDateID($dateID)
@@ -266,39 +273,7 @@ class RubricHandler
     }
 
     /**
-     * Returns mergeID with the corresponding rubric id.
      *
-     * @param rubricID int
-     * @param categoryID int
-     * @param criteriaID int
-     *
-     * @return mergeID int
-     */
-    public function retrieveMergeID($rubricID, $categoryID, $criteriaID)
-    {
-        //checks if value exists in database
-        $sql = "SELECT mergeID FROM rubricMerge WHERE rubricID = :rubricID AND categoryID = :categoryID AND criteriaID = :criteriaID";
-
-        if ($stmt = $this->dbHandle->prepare($sql)) {
-            // Bind variables to the prepared statement as parameters
-            $stmt->bindParam(":rubricID", $param_rubricID, PDO::PARAM_STR);
-            $stmt->bindParam(":categoryID", $param_categoryID, PDO::PARAM_STR);
-            $stmt->bindParam(":criteriaID", $param_criteriaID, PDO::PARAM_STR);
-
-            // Set parameters
-            $param_rubricID = trim($rubricID);
-            $param_categoryID = trim($categoryID);
-            $param_criteriaID = trim($criteriaID);
-
-            // Attempt to execute the prepared statement
-            if ($stmt->execute()) {
-                $row = $stmt->fetch();
-                return $row['mergeID'];
-            }
-        }
-    }
-
-    /**
      * Returns the date from the dateID as a string
      */
     public function retrieveDate($dateID)
@@ -425,12 +400,20 @@ class RubricHandler
         unset($pdo);
     }
 
+<<<<<<< HEAD
     /**
      *
      */
     public function createCategory($categoryText)
     {   // Prepare an insert statement
         $sqlQuery = "INSERT INTO categories (categoryText) values (:categoryText)";
+=======
+
+
+    public function createCriteria($criteriaText)
+    {  // Prepare an insert statement
+        $sqlQuery = "INSERT INTO criteria (criteriaText) values (:criteriaText)";
+>>>>>>> 10788c1a240bd0ed812039854a82a11689ef8f39
 
         if ($stmt = $this->dbHandle->prepare($sqlQuery)) {
             // Bind variables to the prepared statement as parameters
@@ -477,6 +460,7 @@ class RubricHandler
         unset($pdo);
     }
 
+
     /**
      * Takes a timestamp and inserts into DB then returns the ID
      *
@@ -510,6 +494,7 @@ class RubricHandler
         unset($pdo);
     }
 
+<<<<<<< HEAD
     //################ Verification Methods ################
 
     /**
@@ -592,6 +577,8 @@ class RubricHandler
         return $dateID;
     }
 
+=======
+>>>>>>> 10788c1a240bd0ed812039854a82a11689ef8f39
     public function createMerge($rubricID, $categoryID, $criteriaID)
     {
         $sqlQuery = "INSERT INTO rubricMerge (rubricID,categoryID,criteriaID) values (:rubricID,:categoryID,:criteriaID)";
@@ -650,15 +637,17 @@ class RubricHandler
         unset($pdo);
     }
 
-    //################ MAIN RUBRIC METHODS ################
+    public function test($test)
+    {
+        $verify = $this->retrieveRubric($test);
 
-    /**
-     * Searches for all rubrics based on the name given in the search term and returns the date/time stamp
-     *
-     * @param rubricName string
-     *
-     * @return date array
-     */
+        if (is_a($verify, 'Rubric')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function searchRubric($rubricName)
     {
         $rubricID = $this->retrieveRubricID($rubricName);
@@ -685,13 +674,14 @@ class RubricHandler
                     if ($mergeID == null) {
                         return "No merge results found";
                     } else {
-                        //loop through mergeID and returns the dateID into the array
+                        //loop through mergeID and return the dateID into the array
+                        
                         $date = [];
                         foreach ($mergeID as $id) {
                             $sql = "SELECT d.date FROM rubricGroup rg INNER JOIN dates d WHERE rg.mergeID = $id AND rg.dateID = d.dateID";
 
                             if ($stmt = $this->dbHandle->prepare($sql)) {
-                                //Returns the date/time stamp of each of the rubrics that match the search term
+                                // Attempt to execute the prepared statement
                                 if ($stmt->execute()) {
                                     $row = $stmt->fetch();
                                     if (!$row == null) {
@@ -741,12 +731,12 @@ class RubricHandler
             $rubricGroup = $this->retrieveRubricGroupOnDateID($dateID);
         }
 
-        //Loops through each mergeID and returns the independent ID for rubric/category/criteria
+        //Loops through each
         $mergeList = [];
         foreach ($rubricGroup as $mergeID) {
             $mergeList[] = $this->retrieveMerge($mergeID);
         }
-        var_dump($mergeList);
+        //var_dump($mergeList);
 
         //Creates new rubric object.
         $rubric=new Rubric($rubricID, $rubricName);
@@ -775,7 +765,14 @@ class RubricHandler
         }
         //adds final category to the rubric
         $rubric->addCategory($category);
-        var_dump($rubric);
+
+        // Return final rubric obj
+        return $rubric;
+
+
+        //$rubricObj = new Rubric($rubricID, $rubricName);
+
+        //set method in Rubric to set category
     }
 
     /**
@@ -788,34 +785,13 @@ class RubricHandler
 
     public function insertAssessmentValues($mergeID, $studentID, $result, $timestamp)
     {
-        //Verifies if date exists and returns an ID
-        $dateID = $this->checkdate($timestamp);
+        $dateID = $this->retrieveDateID($timestamp);
 
-        $sql = "INSERT INTO assessments (mergeID, studentID, result, dateID) values (:mergeID, :studentID, :result, :dateID)";
-
-        if ($stmt = $this->dbHandle->prepare($sql)) {
-            // Bind variables to the prepared statement as parameters
-            $stmt->bindParam(":mergeID", $param_mergeID, PDO::PARAM_STR);
-            $stmt->bindParam(":studentID", $param_studentID, PDO::PARAM_STR);
-            $stmt->bindParam(":result", $param_result, PDO::PARAM_STR);
-            $stmt->bindParam(":dateID", $param_dateID, PDO::PARAM_STR);
-
-            // Set parameters
-            $param_mergeID = trim($mergeID);
-            $param_studentID = trim($studentID);
-            $param_result = trim($result);
-            $param_dateID = trim($dateID);
-
-            // Attempt to execute the prepared statement
-            if ($stmt->execute()) {
-                return "Values inserted successfully";
-            } else {
-                return false;
-            }
-        } else {
-            return false;
+        if ($dateID == false) {
+            $dateID = $this->createDate($timestamp);
         }
 
+<<<<<<< HEAD
         // Close statement
         unset($stmt);
         // Close connection
@@ -837,6 +813,9 @@ class RubricHandler
         $criteriaID = $this->checkCriteria($criteriaText);
 
         $sql = "INSERT INTO rubricMerge (rubricID, categoryID, criteriaID, dateID) values (:mergeID, :studentID, :result, :dateID)";
+=======
+        $sql = "INSERT INTO assessments (mergeID, studentID, result, dateID) values (:mergeID, :studentID, :result, :dateID)";
+>>>>>>> 10788c1a240bd0ed812039854a82a11689ef8f39
 
         if ($stmt = $this->dbHandle->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
