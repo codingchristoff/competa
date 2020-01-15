@@ -209,6 +209,39 @@ class RubricHandler
     }
 
     /**
+     * Returns mergeID with the corresponding rubric id.
+     * 
+     * @param rubricID int
+     * @param categoryID int
+     * @param criteriaID int
+     * 
+     * @return mergeID int
+     */
+    public function retrieveMergeID($rubricID,$categoryID, $criteriaID)
+    {
+        //checks if value exists in database
+        $sql = "SELECT mergeID FROM rubricMerge WHERE rubricID = :rubricID AND categoryID = :categoryID AND criteriaID = :criteriaID";
+
+        if ($stmt = $this->dbHandle->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":rubricID", $param_rubricID, PDO::PARAM_STR);
+            $stmt->bindParam(":categoryID", $param_categoryID, PDO::PARAM_STR);
+            $stmt->bindParam(":criteriaID", $param_criteriaID, PDO::PARAM_STR);
+
+            // Set parameters
+            $param_rubricID = trim($rubricID);
+            $param_categoryID = trim($categoryID);
+            $param_criteriaID = trim($criteriaID);
+
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+                $row = $stmt->fetch();
+                return $row['mergeID'];
+            }
+        }
+    }
+
+    /**
      *
      * Returns the date from the dateID as a string
      */

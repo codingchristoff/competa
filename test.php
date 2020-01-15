@@ -54,3 +54,5 @@ var_dump($handler->createDate($timestamp));
 
 //var_dump($timestamp = $handler->getTimestamp());
 //var_dump($handler->insertAssessmentValues("4","70","4", $timestamp));
+
+var_dump($handler->retrieveMergeID("1","1","1"));
