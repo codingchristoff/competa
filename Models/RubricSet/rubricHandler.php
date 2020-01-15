@@ -54,7 +54,7 @@ class RubricHandler
     public function retrieveRubricName($rubricID)
     {
         //checks if value exists in database
-        $sql = "SELECT rubricID FROM rubrics WHERE rubricID = :rubricID";
+        $sql = "SELECT rubricName FROM rubrics WHERE rubricID = :rubricID";
 
         if ($stmt = $this->dbHandle->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
@@ -813,11 +813,11 @@ class RubricHandler
 
     /**
      * Sorts the data that is passed back from the form
-     * 
+     *
      * @param postedResult string
      * @param dateID int
-     * 
-     * @return boolean 
+     *
+     * @return boolean
      */
     public function insertAssessmentValues($postedResult, $dateID)
     {
@@ -831,14 +831,14 @@ class RubricHandler
         $result = $explosion[3];
         $studentID = $explosion[4];
         $rubricDate = $this->retrieveDateID($explosion[5]);
-        
+
         $mergeID = $this->retrieveMergeID($rubricID, $categoryID, $criteriaID);
 
-        return $this->createAssessmentValue($mergeID, $studentID, $result,$dateID, $rubricDate);      
+        return $this->createAssessmentValue($mergeID, $studentID, $result,$dateID, $rubricDate);
     }
 
     /**
-     * 
+     *
      */
     public function createAssessmentValue($mergeID, $studentID, $result,$dateID, $rubricDate)
     {
@@ -851,20 +851,20 @@ class RubricHandler
             $stmt->bindParam(":result", $param_result, PDO::PARAM_STR);
             $stmt->bindParam(":dateID", $param_dateID, PDO::PARAM_STR);
             $stmt->bindParam(":rubricDate", $param_rubricDate, PDO::PARAM_STR);
- 
+
             // Set parameters
             $param_mergeID = trim($mergeID);
             $param_studentID = trim($studentID);
             $param_result = trim($result);
             $param_dateID = trim($dateID);
             $param_rubricDate = trim($rubricDate);
- 
+
             // Attempt to execute the prepared statement
             $stmt->execute();
-                return true;            
+                return true;
         } else {
             return false;
-        } 
+        }
         // Close statement
         unset($stmt);
         // Close connection
@@ -873,7 +873,7 @@ class RubricHandler
 
     /**
      * Enters the rubric data into the database
-     * 
+     *
      * not finished
      *
      * GET STRING FROM ALI
@@ -935,16 +935,48 @@ class RubricHandler
 
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
-                while ($row = $stmt->fetch()) {
-                    echo "test";
-                    $dateIDs[] = $row;
+                    while ($row = $stmt->fetch()) {
+                        $dateIDs[] = $row;
+                    }
+                    $dates = [];
+                    foreach ($dateIDs as $ID)
+                    {
+                        $dates[]=($this->retrieveDate($ID['dateID']));
+                    }
+                    return $dates;
                 }
-                $dates = [];
-                var_dump($dateIDs);
-                foreach ($dateIDs as $ID) {
-                    $dates[]=($this->retrieveDate($ID['dateID']));
+            } else {
+                return false;
+            }
+        //Close statement
+        unset($stmt);
+        //Close connection
+        unset($pdo);
+    }
+
+    public function getMergeIDsFromStudentID($studentID,$dateID)
+    {
+        //checks if value exists in database
+        $sql = "SELECT mergeID,rubricDate FROM assessments where studentID = :studentID and dateID = :dateID";
+
+        if ($stmt = $this->dbHandle->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":studentID", $param_studentID, PDO::PARAM_STR);
+            $stmt->bindParam(":dateID", $param_dateID, PDO::PARAM_STR);
+
+            // Set parameters
+            $param_studentID = trim($studentID);
+            $param_dateID = trim($dateID);
+
+            $mergeIDs = [];
+
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+                while ($row = $stmt->fetch())
+                {
+                 $mergeIDs[] = $row;
                 }
-                var_dump($dates);
+            return $mergeIDs;
             }
         } else {
             return false;
@@ -955,4 +987,26 @@ class RubricHandler
         //Close connection
         unset($pdo);
     }
+
+
+    public function createMarkedRubric($studentID,$assessmentDate)//,$rubricDate)
+    {
+        $mergeIDs = $this->getMergeIDsFromStudentID($studentID,$assessmentDate);
+        $rubricDate = $mergeIDs[0]['rubricDate'];
+        $rubricDate = $this->retrieveDate($rubricDate);
+        foreach ($mergeIDs as $ID)
+        {
+            $merges[] = $this->retrieveMerge($ID['mergeID']);
+        }
+        $rubricID = $merges[0]['rubricID'];
+        $this->retrieveRubricName($rubricID);
+        $rubric = ($this->buildRubric($rubricDate,($this->retrieveRubricName($rubricID))));
+        $rubricArray[]=$rubric;
+        $mergedArrays[0] = $rubricArray;
+        $mergedArrays[1] = $merges;
+
+        return $mergedArrays;
+    }
+
+
 }
