@@ -23,21 +23,22 @@
                     <?php
                     if (isset($view->user))
                     {
-                        echo'
+                        if ($view->user->getUserName()!=null) {
+                            echo '
                         <form name="addUser" method="post" action="' . $_SERVER['PHP_SELF'] . '">
-                            <input type="hidden" name="userName" id="userName" value="' . $view->user->getUserName() .'" required>
+                            <input type="hidden" name="userName" id="userName" value="' . $view->user->getUserName() . '" required>
                             <div class="input-field col s12 l12">
-                                <input type="text" name="firstName" id="firstName" value="' . $view->user->getFirstName() .'" required>
+                                <input type="text" name="firstName" id="firstName" value="' . $view->user->getFirstName() . '" required>
                                 <label for="firstName">First name</label>
                             </div><br/>
 
                             <div class="input-field col s12 l12">
-                                <input type="text" name="lastName" id="lastName" value="' . $view->user->getLastName() .'" required>
+                                <input type="text" name="lastName" id="lastName" value="' . $view->user->getLastName() . '" required>
                                 <label for="lastName">Last name</label>
                             </div><br/>
 
                             <div class="input-field col s12 l12">
-                                <input type="text" name="email" id="email" value="' . $view->user->getEmail() .'" required>
+                                <input type="text" name="email" id="email" value="' . $view->user->getEmail() . '" required>
                                 <label for="email">Email</label>
                             </div><br/>
 
@@ -49,11 +50,11 @@
                             <select name="classID" class="browser-default" id="classID">
                             <option value="None">None (Admin)</option>
                         ';
-                        foreach ($view->allClasses as $class) {
-                            //Creating an option and showing the class names and sending the class ID to the controller
-                            echo '<option value="' . $view->dataSet->fetchClassID($class) . '">' . $class . '</option>';
-                        }
-                        echo '
+                            foreach ($view->allClasses as $class) {
+                                //Creating an option and showing the class names and sending the class ID to the controller
+                                echo '<option value="' . $view->dataSet->fetchClassID($class) . '">' . $class . '</option>';
+                            }
+                            echo '
                     </select>
                 </div>
             </div><br/>
@@ -69,7 +70,13 @@
             </div>
         </form>
                         ';
+                        }
+                        else
+                        {
+                            echo '<h6 class="center helper-text">No users found</h6>';
+                        }
                     }
+
                     ?>
                     <div>
                         <p class="red-text"><?php if(isset($view->errorMessage)){ echo $view->errorMessage; } ?></p>
