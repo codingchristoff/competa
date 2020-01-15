@@ -299,6 +299,23 @@ class UserDataSet
         return $dataSet;
     }
 
+    //Gets all classNames
+    public function fetchAllClasses()
+    {
+        //SQL statement will select a specific user
+        $sqlQuery = 'SELECT * FROM classes';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+
+        //Returns all students in an array
+        $dataSet = [];
+        while ($row = $statement->fetch()) {
+            $dataSet[] = new ClassInfoData($row);
+        }
+        return $dataSet;
+    }
+
     //Gets all students that match a specific classID
     public function fetchStudentsInClass($classID)
     {
@@ -455,20 +472,18 @@ class UserDataSet
             return 'Only Admins can have no class';
         }
 
+
         //Checks the rest of the variables to see if they are in the correct format
         $checkUserVariables = $this->checkUserVariables($userNameClean, $firstNameClean, $lastNameClean, $emailClean, $passwordClean);
-        if ($checkUserVariables!=True)
+        if ($checkUserVariables!==null)
         {
             return $checkUserVariables;
         }
 
-        //Gets the first letter of the userName and puts it to lowercase
-        $userType = strtolower(substr($userNameClean, 0,1));
-
         //Checks if user should be removed from students table
         if ($userType === 's')
         {
-            $classIDClean = $this->cleanInput($user->getClassID());
+            $classIDClean = intval($this->cleanInput($classID));
             //SQL statement that will edit a user
             $sqlQuery = 'UPDATE students SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'", password="' . $passwordClean.'", classID="' . $classIDClean.'" WHERE userName="' . $userNameClean.'"';
 
@@ -478,7 +493,7 @@ class UserDataSet
         //Checks if user should be removed from teachers table
         else if ($userType === 't')
         {
-            $classIDClean = $this->cleanInput($user->getClassID());
+            $classIDClean = intval($this->cleanInput($classID));
             //SQL statement that will edit a user
             $sqlQuery = 'UPDATE teachers SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'", password="' . $passwordClean.'", classID="' . $classIDClean.'" WHERE userName="' . $userNameClean.'"';
 

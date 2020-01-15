@@ -14,7 +14,7 @@ $handler = new rubricHandler();
 
 //var_dump($handler->retrieveRubricID("magna ac"));
 
-//var_dump($handler->retrieveCategory("vel"));
+//var_dump($handler->retrieveCategoryID("I always listen."));
 
 //var_dump($handler->retrieveCriteria("Nunc purus."));
 
@@ -54,6 +54,25 @@ var_dump($handler->createDate($timestamp));
 
 //var_dump($timestamp = $handler->getTimestamp());
 //var_dump($handler->insertAssessmentValues("4","70","4", $timestamp));
+
+//var_dump($handler->retrieveMergeID("1","1","1"));
+
+//################ INSERTION TEST ################
+
+var_dump($handler->checkMergeID("1","3","1"));
+
+//var_dump($handler->createCriteria("I do use the right manners."));
+//var_dump($handler->checkCriteria("Good"));
+//var_dump($handler->retrieveCriteriaID("Nulla nisl."));
+
+//var_dump($handler->createCategory("I always listen."));
+//var_dump($handler->checkCategory("I always listen."));
+//var_dump($handler->checkRubric("Shared Learning"));
+//var_dump($handler->retrieveCriteriaID("Nunc nisl."));
+//var_dump($handler->retrieveCategoryID("vel"));
+//var_dump($handler->checkDate("2022-01-10 13:04:15"));
+//var_dump($handler->retrieveMergeID("1", "1", "1"));
+
 
 //var_dump($handler->retrieveMergeID("1","1","1"));
 
