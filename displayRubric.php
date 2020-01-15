@@ -29,7 +29,13 @@ if(isset($_SESSION['rubric']))
 
 if(isset($_POST['submit']))
 {
+    $arrayVals = array_slice($_POST, 0, -1);
+    $timestamp = $handler->getTimestamp();
 
+    foreach ($arrayVals as $value)
+    {
+        $handler->insertAssessmentValues();
+    }
 }
 
 require_once('Views/displayRubric.phtml');

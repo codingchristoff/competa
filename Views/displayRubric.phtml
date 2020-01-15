@@ -10,7 +10,7 @@
                     <tbody>
                     <?php
                     $critCount = 1;
-                    $value = 1;
+                    $result = 1;
                         foreach ($view->cats as $cat)
                         {
                             $catID = $cat->getCategoryID();
@@ -28,11 +28,11 @@
                                 echo "<td>{$crit->getCriteriaText()}</td>";
                                 echo "<td>
                                 <label>
-                              <input class=\"with-gap\" type=\"radio\" value=\"{$view->rubric_id},{$catID},{$critID},{$value},{$_SESSION['user']->getUserID()}\" name=\"{$critCount}\" required/> 
+                              <input class=\"with-gap\" type=\"radio\" value=\"{$view->rubric_id},{$catID},{$critID},{$result},{$_SESSION['user']->getUserID()}\" name=\"{$critCount}\" required/> 
                               <span></span>
                               </label>
                               </td>";
-                                $value++;
+                                $result++;
                             }
                             $value = 1;
                             echo "</tr>";
