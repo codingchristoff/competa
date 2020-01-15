@@ -12,4 +12,18 @@ $view->pageTitle = 'Delete User';
 $dataSet = new UserDataSet();
 $view->dataSet = $dataSet;
 
+//Checks if a USER has logged in
+if(isset($_SESSION['user']))
+{
+    //Checks if an ADMIN is logged in
+    if ($_SESSION['user']->getRoleID() === '1')
+    {
+        
+    }
+}
+else
+{
+    header('Location: index.php');
+}
+
 require_once('Views/adminDeleteUser.phtml');
