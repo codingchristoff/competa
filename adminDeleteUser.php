@@ -23,6 +23,13 @@ if(isset($_SESSION['user']))
         {
             $view->user = $dataSet->fetchUser($_POST['userName']);
         }
+
+        //Check if user should be deleted
+        if (isset($_POST['deleteUser']))
+        {
+            //Deletes the user
+            $dataSet->deleteUser($_POST['userName']);
+        }
     }
     else
     {

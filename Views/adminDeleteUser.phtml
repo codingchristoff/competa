@@ -43,6 +43,14 @@
                                     <h6 class="center helper-text"><strong>Email: ' . $view->user->getEmail() . '</strong></h6>
                                 </div>
                                 
+                                <form name="addUser" method="post" action="' . $_SERVER['PHP_SELF'] . '">
+                                    <div class="container s12 l12" id="ls-header">
+                                    <input type="hidden" name="userName" id="userName" value="' . $view->user->getUserName() . '" required>
+                                    </div>
+                                    <div class="container s12 l12" id="ls-header">
+                                    <input class="btn black right z-depth-2" type="submit" name="deleteUser" value="Delete User">
+                                    </div>
+                                </form>
                                 
                                 ';
                             } else {

@@ -36,19 +36,34 @@ if(isset($_SESSION['user']))
             //Creating a tempUser to send to the class
             $tempUser = new UserData($_POST);
 
-            $edit = $dataSet->editUser($tempUser, $_POST['classID']);
-
-            //Storing the user into the database -> if email is invalid returns false
-            if ( $edit!== null){
-
-                //Email is invalid error
-                $view->errorMessage = $edit;
+            if ($_SESSION['user']->getRoleID()=='2')
+            {
+                if($_SESSION['user']->getClassID() == $_POST['classID'] )
+                {
+                    $edit = $dataSet->editUser($tempUser, $_POST['classID']);
+                }
+                else
+                {
+                    $view->errorMessage = 'Can only edit students in class';
+                }
             }
-            //When creating a user has no problems
             else{
-                //Success message
-                $view->editUserSuccess = 'User successfully edited';
+                $edit = $dataSet->editUser($tempUser, $_POST['classID']);
+
+                //Storing the user into the database -> if email is invalid returns false
+                if ( $edit!== null){
+                    //Email is invalid error
+                    $view->errorMessage = $edit;
+                }
+                //When creating a user has no problems
+                else{
+                    //Success message
+                    $view->editUserSuccess = 'User successfully edited';
+                }
             }
+
+
+
 
             //Fetches the same user
             $view->user = $dataSet->fetchUser($_POST['userName']);
