@@ -28,7 +28,7 @@
                                 echo "<td>{$crit->getCriteriaText()}</td>";
                                 echo "<td>
                                 <label>
-                              <input class=\"with-gap\" type=\"radio\" value=\"{$view->rubric_id},{$catID},{$critID},{$value}\" name=\"{$critCount}\" required/> 
+                              <input class=\"with-gap\" type=\"radio\" value=\"{$view->rubric_id},{$catID},{$critID},{$value},{$_SESSION['user']->getUserID()}\" name=\"{$critCount}\" required/> 
                               <span></span>
                               </label>
                               </td>";

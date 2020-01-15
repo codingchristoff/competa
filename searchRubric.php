@@ -4,17 +4,17 @@ require_once('Models/RubricSet/rubricHandler.php');
 
 session_start();
 
-if(isset($_SESSION['user']))
-{
-    if($_SESSION['user']->getRoleID() == 1 ||  $_SESSION['user']->getRoleID() == 2){}
-    elseif($_SESSION['user']->getRoleID() == 3)
-    {
-        header("Location: myData.php");
-    }
-}
-else{
-    header("Location: index.php");
-}
+//if(isset($_SESSION['user']))
+//{
+//    if($_SESSION['user']->getRoleID() == 1 ||  $_SESSION['user']->getRoleID() == 2){}
+//    elseif($_SESSION['user']->getRoleID() == 3)
+//    {
+//        header("Location: myData.php");
+//    }
+//}
+//else{
+//    header("Location: index.php");
+//}
 
 
 if(isset($_SESSION['rubric']))
