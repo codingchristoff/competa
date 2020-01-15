@@ -5,13 +5,12 @@ require_once("Models/UserData/UserData.php");
 
 class ClassData extends UserData
 {
-    protected $_classID, $_user_ds;
+    protected $_classID;
 
     public function __construct($user_data)
     {
         parent::__construct($user_data);
         $this->_classID = $user_data['classID'];
-        //$this->_user_ds = new UserDataSet();
     }
 
     /**
@@ -32,8 +31,6 @@ class ClassData extends UserData
     {
         return $this->_classID;
     }
-
-
 
     /**
      * @param $newClass -> new class ID
