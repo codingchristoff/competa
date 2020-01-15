@@ -94,7 +94,7 @@
                 foreach($view->allTeachers as $teacher)
                 {
                     //One teacher
-                    echo '<h6 class="helper-text">Username: ' . $teacher->getUserName() .' Name: ' . $teacher->getFirstName() . ' ' . $teacher->getLastName() . ' Email: ' . $teacher->getEmail() .'</h6>';
+                    echo '<h6 class="helper-text">Username: ' . $teacher->getUserName() .' Name: ' . $teacher->getFirstName() . ' ' . $teacher->getLastName() . ' Email: ' . $teacher->getEmail() .' Class: ' . $view->dataSet->fetchClassName($teacher->getClassID()) . '</h6>';
                 }
             }
             echo '
@@ -110,7 +110,7 @@
                     foreach($view->allStudents as $student)
                     {
                         //One student
-                        echo '<h6 class="helper-text">Username: ' . $student->getUserName() .' Name: ' . $student->getFirstName() . ' ' . $student->getLastName() . ' Email: ' . $student->getEmail() .'</h6>';
+                        echo '<h6 class="helper-text">Username: ' . $student->getUserName() .' Name: ' . $student->getFirstName() . ' ' . $student->getLastName() . ' Email: ' . $student->getEmail() .' Class: ' . $view->dataSet->fetchClassName($student->getClassID()) . '</h6>';
                     }
                 }
                 echo '</div>';

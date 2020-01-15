@@ -267,6 +267,21 @@ class UserDataSet
         return $row[0];
     }
 
+    //Gets className
+    public function fetchClassName($classID)
+    {
+        $sqlQuery = 'SELECT className FROM classes WHERE classID="' . $classID .'"';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+
+        //Getting the row (array)
+        $row = $statement->fetch();
+
+        //returning the first value (the classID)
+        return $row[0];
+    }
+
     //Gets all classNames
     public function fetchAllClassNames()
     {
@@ -325,6 +340,10 @@ class UserDataSet
         else if ($userType=='a' && $classID!='None')
         {
             return 'Admins must have no class name';
+        }
+        else if ($userType!='a' && $classID=='None')
+        {
+            return 'Only Admins can have no class';
         }
 
         //Checks if the user already exists
