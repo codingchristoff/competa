@@ -850,7 +850,7 @@ class RubricHandler
             $stmt->bindParam(":studentID", $param_studentID, PDO::PARAM_STR);
             $stmt->bindParam(":result", $param_result, PDO::PARAM_STR);
             $stmt->bindParam(":dateID", $param_dateID, PDO::PARAM_STR);
-            $stmt->bindParam(":rubricDate", $param_dateID, PDO::PARAM_STR);
+            $stmt->bindParam(":rubricDate", $param_rubricID, PDO::PARAM_STR);
  
             // Set parameters
             $param_mergeID = trim($mergeID);
