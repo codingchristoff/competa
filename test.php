@@ -59,6 +59,8 @@ var_dump($handler->createDate($timestamp));
 
 //################ INSERTION TEST ################
 
+var_dump($handler->retrieveCriteriaID("Nunc nisl."));
+var_dump($handler->retrieveCategoryID("vel"));
 //var_dump($handler->checkDate("2022-01-10 13:04:15"));
 //var_dump($handler->retrieveMergeID("1", "1", "1"));
 
