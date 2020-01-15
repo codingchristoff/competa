@@ -1,0 +1,70 @@
+<?php require('template/header.phtml') ?>
+<div class="container row" id="admin-container">
+    <div class="container s12 l12" id="ls-header">
+    </div>
+
+    <div class="row">
+        <div class="col s12">
+            <div id="test1" class="col s12">
+                <div class="container">
+                    <form name="addUser" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                        <div class="input-field col s12 l12">
+                            <input type="text" name="userName" id="userName" value="<?php if (isset($_POST['userName'])){echo $_POST['userName'];} ?>" required>
+                            <label for="userName">Username</label>
+                        </div><br/>
+
+                        <div class="right btn-block col s12 l12">
+                            <input class="btn black right z-depth-2" type="submit" name="searchUser" value="Find User">
+                        </div>
+                    </form>
+                </div
+
+                <div class="container">
+                    <?php
+                    if (isset($_POST['searchUser']))
+                    {
+                        if ($view->user!=null) {
+                            if ($view->user->getUsername() != null) {
+                                echo '<div class="container s12 l12" id="ls-header">
+                                    <h6 class="center helper-text"><strong>Username: ' . $view->user->getUserName() . '</strong></h6>
+                                  </div>
+
+                                   <div class="container s12 l12" id="ls-header">
+                                    <h6 class="center helper-text"><strong>Role: ';
+                                if ($view->user->getRoleID() == 1) echo 'Admin'; else if ($view->user->getRoleID() == 2) echo 'Teacher'; else if ($view->user->getRoleID() == 3) echo 'Student'; else echo 'Unknown';
+                                echo '</strong></h6>
+                                   </div>
+
+                                <div class="container s12 l12" id="ls-header">
+                                    <h6 class="center helper-text"><strong>Name: ' . $view->user->getFirstName() . ' ' . $view->user->getLastName() . '</strong></h6>
+                                </div>
+
+                                <div class="container s12 l12" id="ls-header">
+                                    <h6 class="center helper-text"><strong>Email: ' . $view->user->getEmail() . '</strong></h6>
+                                </div>
+                                
+                                <form name="addUser" method="post" action="' . $_SERVER['PHP_SELF'] . '">
+                                    <div class="container s12 l12" id="ls-header">
+                                    <input type="hidden" name="userName" id="userName" value="' . $view->user->getUserName() . '" required>
+                                    </div>
+                                    <div class="container s12 l12" id="ls-header">
+                                    <input class="btn black right z-depth-2" type="submit" name="deleteUser" value="Delete User">
+                                    </div>
+                                </form>
+                                
+                                ';
+                            } else {
+                                echo '<div class="container s12 l12" id="ls-header"><h6 class="center helper-text">User not found</h6></div>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<div class="container s12 l12" id="ls-header"><h6 class="center helper-text">User not found</h6></div>';
+                        }
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+</div>
+<?php require('template/footer.phtml') ?>

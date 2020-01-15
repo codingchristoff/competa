@@ -27,11 +27,12 @@ if(isset($_SESSION['user']))
             //Creating a tempUser to send to the class
             $tempUser = new UserData($_POST);
 
+            $add = $dataSet->createUser($tempUser, $_POST['classID']);
             //Storing the user into the database -> if email is invalid returns false
-             if ($dataSet->createUser($tempUser, $_POST['classID']) !== null){
+             if ( $add!== null){
 
                  //Email is invalid error
-                 $view->errorMessage = $dataSet->createUser($tempUser, $_POST['classID']);
+                 $view->errorMessage = $add;
              }
              //When creating a user has no problems
              else{
@@ -44,6 +45,10 @@ if(isset($_SESSION['user']))
         header('Location: myData.php');
     }
 }
+else
+{
+    header('Location: index.php');
+}
 
 
-require_once('Views/adminAddUserPage.phtml');
+require_once('Views/adminAddUser.phtml');

@@ -8,22 +8,22 @@
     <div class="container">
         <form name="addUser" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
             <div class="input-field col s12 l12">
-                <input type="text" name="userName" id="userName" required>
+                <input type="text" name="userName" id="userName" value="<?php if (isset($view->errorMessage)){echo $_POST['userName'];}?>" required>
                 <label for="userName">Username</label>
             </div><br/>
 
             <div class="input-field col s12 l12">
-                <input type="text" name="firstName" id="firstName" required>
-                <label for="firstName">Firstname</label>
+                <input type="text" name="firstName" id="firstName" value="<?php if (isset($view->errorMessage)){echo $_POST['firstName'];}?>" required>
+                <label for="firstName">First name</label>
             </div><br/>
 
             <div class="input-field col s12 l12">
-                <input type="text" name="lastName" id="lastName" required>
-                <label for="lastName">Lastname</label>
+                <input type="text" name="lastName" id="lastName" value="<?php if (isset($view->errorMessage)){echo $_POST['lastName'];}?>" required>
+                <label for="lastName">Last name</label>
             </div><br/>
 
             <div class="input-field col s12 l12">
-                <input type="text" name="email" id="email" required>
+                <input type="text" name="email" id="email" value="<?php if (isset($view->errorMessage)){echo $_POST['email'];}?>" required>
                 <label for="email">Email</label>
             </div><br/>
 
@@ -33,7 +33,7 @@
                 </div>
                 <div class="input-field col s3 l3">
                     <select name="classID" class="browser-default" id="classID">
-                        <option value="None">None(Admin)</option>
+                        <option value="None">None (Admin)</option>
                         <?php
                         foreach ($view->allClasses as $class){
                             //Creating an option and showing the class names and sending the class ID to the controller
@@ -55,7 +55,7 @@
             </div>
         </form>
         <div>
-            <p><?php if(isset($view->errorMessage)){ echo $view->errorMessage; } ?></p>
+            <p class="red-text"><?php if(isset($view->errorMessage)){ echo $view->errorMessage; } ?></p>
             <p><?php if(isset($view->createUserSuccess)){ echo $view->createUserSuccess; } ?></p>
         </div>
     </div>

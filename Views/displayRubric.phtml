@@ -1,0 +1,53 @@
+<?php require('template/header.phtml') ?>
+<div class="container row s12 l12 rubric-admin">
+    <div class="container col s12 l12">
+        <form name="studentFill" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+            <div class="container" id="ls-header">
+                <h6 class="center helper-text"><strong><?php echo $view->rubric_name ?></strong></h6>
+            </div>
+            <div>
+                <table class="fixed">
+                    <tbody>
+                    <?php
+                    $critCount = 1;
+                    $result = 1;
+                    $testStudID = 192;
+                        foreach ($view->cats as $cat)
+                        {
+                            $catID = $cat->getCategoryID();
+
+                            echo "<tr>";
+                            echo "<td><strong>{$cat->getCategoryText()}</strong></td>";
+
+                            $crits = $cat->getCriteria(); // Criteria Array
+
+                            foreach ($crits as $crit)
+                            {
+                                $critID = $crit->getCriteriaID();
+
+
+                                echo "<td>{$crit->getCriteriaText()}</td>";
+                                echo "<td>
+                                <label>
+                              <input class=\"with-gap\" type=\"radio\" value=\"{$view->rubric_id},{$catID},{$critID},{$result},{$testStudID},{$view->runTimestamp}\" name=\"{$critCount}\" required/> 
+                              <span></span>
+                              </label>
+                              </td>";
+                                $result++;
+                            }
+                            $result = 1;
+                            echo "</tr>";
+                            $critCount++;
+                        }
+                    ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="btn-block col s12 l12" id="btn-under-alert">
+                <input class="btn black right z-depth-2" type="submit"
+                       name="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+</div>
+<?php require('template/footer.phtml') ?>

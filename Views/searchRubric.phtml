@@ -1,0 +1,51 @@
+<?php require('template/header.phtml') ?>
+<nav>
+    <div class="nav-wrapper blue">
+        <form name="name" method="post" action="<?php echo ($_SERVER['PHP_SELF']); ?>">
+            <div class="input-field">
+                <input id="search"  type="search" class="purple darken-3 white-text" name="search" placeholder="Search Rubric Name" required>
+                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons">close</i>
+            </div>
+        </form>
+    </div>
+</nav>
+<div class="container row">
+    <div class="container col s12 l12 black-text">
+        <ul class="collection with-header">
+            <?php if(is_array($view->searchResult))
+            {
+                echo "<li class=\"collection-header center\"><h6><strong>Search Results</strong></h6></li>";
+
+                foreach ($view->searchResult as $key => $value)
+                {
+                    echo "<div class=\"col s12 m4\">
+                            <div class=\"card small purple lighten-5\">
+                                <div class=\"card-content black-text row\">
+                                    <div class='card-meta'>
+                                    <span class=\"left-align small col s12 l12 grey-text text-darken-2\">
+                                    Rubric: <strong>{$view->searchValue}</strong></span>
+                                    <span class=\"left-align small col s12 l12 grey-text text-darken-2\"> 
+                                    Date: <strong>{$value}</strong></span>
+                                    </div>
+                                    <div class=\"card-action col s12 l12\">
+                                        <form class =\"center card-button\" method=\"post\" action=\"{$_SERVER['PHP_SELF']}\">
+                                            <input type=\"hidden\" name=\"rubric_name\" value=\"{$view->searchValue}\">
+                                            <input type=\"hidden\" name=\"timestamp\" value=\"{$value}\">
+                                            <button class=\"btn black\" type=\"submit\" name=\"submit\">View
+                                                <i class=\"material-icons right\">visibility</i></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>";
+                }
+            }elseif(is_string($view->err))
+            {
+                echo "<li class=\"collection-header center\"><h6><strong>{$view->err}</strong></h6></li>";
+            }
+            ?>
+        </ul>
+    </div>
+</div>
+<?php require('template/footer.phtml') ?>

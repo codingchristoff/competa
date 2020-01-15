@@ -7,11 +7,7 @@ $view->user = null;
 $view->success = null;
 
 // To ensure login.php is not manually accessible to logged in user
-if (isset($_SESSION['user']))
-{
-    //Change this for a more suitable page later !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    header("Location: myData.php");
-}
+
 require_once('Models/UserData/UserDataSet.php');
 require_once('Models/UserData/UserData.php');
 require_once('Models/UserData/AdminData.php');
@@ -36,4 +32,10 @@ if(isset($_POST['submit']))
         $view->loginError = True;
     }
 }
+
+if (isset($_SESSION['user']))
+{
+    header("Location: myData.php");
+}
+
 require_once('Views/index.phtml');

@@ -12,9 +12,9 @@ $handler = new rubricHandler();
 
 //$view->test = $handler->retrieveRubric("neque");
 
-//var_dump($handler->retrieveRubric("Independent Learning"));
+//var_dump($handler->retrieveRubricID("magna ac"));
 
-//var_dump($handler->retrieveCategory("vel"));
+//var_dump($handler->retrieveCategoryID("I always listen."));
 
 //var_dump($handler->retrieveCriteria("Nunc purus."));
 
@@ -33,15 +33,69 @@ $handler = new rubricHandler();
 //echo($t . "<br>");
 //echo(date("d-m-Y H:m:s",$t));
 
-//var_dump($handler->retrieveDate("2020-01-10 13:04:15"));
+//var_dump($handler->retrieveDateID("2020-01-14 17:24:05"));
 
 //var_dump($handler->criteriaCategory("I do not follow the five basic rules that apply in every classroom."));
 
-//var_dump($handler->createDate(""))
+/*
+$timestamp = date('Y-m-d H:i:s');
+var_dump($handler->createDate($timestamp));
+*/
 
 //var_dump($handler->buildRubric("2020-01-10 13:04:15"));
 
-var_dump($handler->searchRubric("neque"));
+//var_dump($handler->searchRubric("neque"));
 
-//var_dump($handler->retrieveRubricGroup("1"));
+//var_dump($handler->retrieveRubricGroupOnID("1"));
 
+//var_dump($handler->retrieveRubricGroupOnID("1"));
+
+//var_dump($handler->buildRubric("2019-12-05 00:00:00", "neque"));
+
+//var_dump($timestamp = $handler->getTimestamp());
+//var_dump($handler->insertAssessmentValues("4","70","4", $timestamp));
+
+//var_dump($handler->retrieveMergeID("1","1","1"));
+
+//################ INSERTION TEST ################
+
+//var_dump($handler->checkMergeID("1","3","1"));
+
+//var_dump($handler->createCriteria("I do use the right manners."));
+//var_dump($handler->checkCriteria("Good"));
+//var_dump($handler->retrieveCriteriaID("Nulla nisl."));
+
+//var_dump($handler->createCategory("I always listen."));
+//var_dump($handler->checkCategory("I always listen."));
+//var_dump($handler->checkRubric("Shared Learning"));
+//var_dump($handler->retrieveCriteriaID("Nunc nisl."));
+//var_dump($handler->retrieveCategoryID("vel"));
+//var_dump($handler->checkDate("2022-01-10 13:04:15"));
+//var_dump($handler->retrieveMergeID("1", "1", "1"));
+
+
+//var_dump($handler->retrieveMergeID("1","1","1"));
+
+//var_dump($handler->getDatesFromStudentID(1));
+
+//$str = "h,e,l,l,o";
+/*
+var_dump(substr($str, 0,1));
+var_dump(substr($str, 0,2));
+var_dump(substr($str, 2,1));
+var_dump(explode(",",$str));
+*/
+
+//$explosion = explode(",",$str);
+
+//echo $explosion[2];
+
+//var_dump($handler->retrieveDateID("1,2,3,4,5,2019-12-05 00:00:00"));
+//
+//$str = ("1,2,3,4,5,2019-12-05 00:00:00");
+//$explosion = explode(",", $str);
+//
+//echo $explosion[5];
+//echo $rubricDate = $handler->retrieveDateID($explosion[5]);
+//var_dump($handler->getDatesFromStudentID(1));
+//var_dump($handler->createMarkedRubric(1,1));

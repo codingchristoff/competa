@@ -5,10 +5,10 @@ class Rubric
 {
     protected $_rubric_ID, $_rubric_name, $categories=[];
 
-    public function __construct($rubric_row)
+    public function __construct($rubricID,$rubricName)
     {
-        $this->_rubric_ID = $rubric_row['rubricID'];
-        $this->_rubric_name = $rubric_row['rubricName'];
+        $this->_rubric_ID = $rubricID;
+        $this->_rubric_name = $rubricName;
     }
 
     /**
@@ -26,4 +26,30 @@ class Rubric
     {
         return $this->_rubric_name;
     }
+
+    /**
+     * @return array
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * @param array $categories
+     */
+    public function setCategories($categories)
+    {
+        $this->categories = $categories;
+    }
+
+    /**
+     * @param array $categories
+     */
+    public function addCategory($categories)
+    {
+        $this->categories[] = $categories;
+    }
+
+
 }
