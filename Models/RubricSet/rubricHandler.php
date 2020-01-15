@@ -367,6 +367,41 @@ class RubricHandler
         unset($pdo);
     }
 
+    /**
+     *
+     * Returns rubricID, categoryID, criteriaID based on mergeID.
+     */
+    public function retrieveMergeID($rubricID, $categoryID, $criteriaID)
+    {
+        //checks if value exists in database
+        $sql = "SELECT mergeID FROM rubricMerge WHERE rubricID = :rubricID AND categoryID = :categoryID AND criteriaID = :criteriaID";
+
+        if ($stmt = $this->dbHandle->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":rubricID", $param_rubricID, PDO::PARAM_STR);
+            $stmt->bindParam(":categoryID", $param_categoryID, PDO::PARAM_STR);
+            $stmt->bindParam(":criteriaID", $param_criteriaID, PDO::PARAM_STR);
+
+            // Set parameters
+            $param_rubricID = trim($rubricID);
+            $param_categoryID = trim($categoryID);
+            $param_criteriaID = trim($criteriaID);
+
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+                $row = $stmt->fetch();
+                return $row['mergeID'];
+            }
+        } else {
+            return false;
+        }
+        
+        //Close statement
+        unset($stmt);
+        //Close connection
+        unset($pdo);
+    }
+
     public function createRubric($rubricName)
     {
         // Prepare an insert statement
@@ -553,13 +588,13 @@ class RubricHandler
 
     public function checkMergeID($rubricID, $categoryID, $criteriaID)
     {
-        $dateID = $this->retrieveMergeID($rubricID, $categoryID, $criteriaID);
+        $mergeID = $this->retrieveMergeID($rubricID, $categoryID, $criteriaID);
     
-        if ($dateID == false) {
-            $dateID = $this->createMerge($rubricID, $categoryID, $criteriaID);
+        if ($mergeID == false) {
+            $mergeID = $this->createMerge($rubricID, $categoryID, $criteriaID);
         }
     
-        return $dateID;
+        return $mergeID;
     }
 
     public function createMerge($rubricID, $categoryID, $criteriaID)
@@ -619,17 +654,6 @@ class RubricHandler
         unset($stmt);
         // Close connection
         unset($pdo);
-    }
-
-    public function test($test)
-    {
-        $verify = $this->retrieveRubric($test);
-
-        if (is_a($verify, 'Rubric')) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     public function searchRubric($rubricName)
