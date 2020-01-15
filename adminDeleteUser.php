@@ -23,9 +23,6 @@ if(isset($_SESSION['user']))
         {
             $view->user = $dataSet->fetchUser($_POST['userName']);
         }
-        else{
-            echo'hi';
-        }
     }
     else
     {
