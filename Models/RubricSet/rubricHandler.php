@@ -503,7 +503,7 @@ class RubricHandler
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
                 $result = $this->retrieveRubricID($rubricName);
-                return $result['rubricName'];
+                return $result;
             } else {
                 return false;
             }
@@ -623,7 +623,7 @@ class RubricHandler
 
             $stmt->execute();
                 $result = $this->retrieveMergeID($rubricID, $categoryID, $criteriaID);
-                return $result['mergeID'];
+                return $result;
         } else {
             return false;
         }

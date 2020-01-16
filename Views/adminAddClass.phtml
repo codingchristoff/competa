@@ -1,0 +1,21 @@
+<?php require('template/header.phtml') ?>
+<div class="container row" id="admin-container">
+    <div class="container s12 l12" id="ls-header">
+
+    </div>
+
+    <!--Container for all the content for the page-->
+    <div class="container">
+        <form name="addClassNameForm" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+            <div class="input-field col s12 l12">
+                <input type="text" name="className" id="className" value="<?php if (isset($view->errorMessage)){echo $_POST['userName'];}?>" required>
+                <label for="className">Class Name</label>
+            </div><br/>
+
+            <div class="right btn-block col s12 l12">
+                <input class="btn black right z-depth-2" type="submit" name="addClass" value="Add Class">
+            </div>
+        </form>
+    </div>
+</div>
+<?php require('template/footer.phtml') ?>
