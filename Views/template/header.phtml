@@ -48,8 +48,7 @@
             if ($_SESSION['user']->getRoleID() === '1')
             {
                 echo '   
-                        <li><a class=\'btn-block\' href=\'adminDeleteUser.php\'>Delete User</a></li>
-                        <li class="divider"></li>  
+                        <li><a class=\'btn-block\' href=\'adminDeleteUser.php\'>Delete User</a></li> 
                         ';
             }
             echo '
@@ -58,17 +57,17 @@
                 
                 <!-- Dropdown Structure 2 -->
                 <ul id="dropdown2" class="dropdown-content black">
-                    <li><a class=\'btn - block\' href=\'viewUserData.php\'>View User</a></li>
+                    <li><a class=\'btn-block\' href=\'viewUserData.php\'>View User</a></li>
                     <li class="divider"></li>';
 
             if ($_SESSION['user']->getRoleID() === '1')
             {
                 echo '   
-                        <li><a class=\'btn - block\' href=\'adminAddUser.php\'>Add User</a></li>
+                        <li><a class=\'btn-block\' href=\'adminAddUser.php\'>Add User</a></li>
                         <li class="divider"></li>  
                         ';
             }
-            echo '<li><a class=\'btn - block\' href=\'editUser.php\'>Edit User</a></li>
+            echo '<li><a class=\'btn-block\' href=\'editUser.php\'>Edit User</a></li>
                      <li class="divider"></li>';
             if ($_SESSION['user']->getRoleID() === '1')
             {
@@ -97,6 +96,19 @@
                      </ul><li class="divider"></li>';
     }
 
+    if(isset($_SESSION['user']))
+    {
+        echo '<!-- Dropdown Structure 4-->
+                     <ul id="dropdown4" class="dropdown-content black">';
+
+        if($_SESSION['user']->getRoleID() === '1')
+        {
+            echo '<li><a class=\'btn-block\' href=\'adminRubricCreate.php\'>Rubric Generator</a></li>';
+        }
+        echo '<li class="divider"></li>
+                     <li><a class=\'btn-block\' href=\'searchRubric.php\'>Rubric Search</a></li>
+                     </ul><li class="divider"></li>';
+    }
 
     ?>
 
@@ -120,7 +132,7 @@
             <ul class="right hide-on-med-and-down">
                 <?php if(isset($_SESSION['user']))
                 {
-                    if($_SESSION['user']->getRoleID() == 1 || $_SESSION['user']->getRoleID() == 2 || $_SESSION['user']->getRoleID() === '3')
+                    if($_SESSION['user']->getRoleID() == '1' || $_SESSION['user']->getRoleID() == '2' || $_SESSION['user']->getRoleID() === '3')
                     {
                         echo "<li><a class=\"dropdown-trigger\" href=\"#!\" data-target=\"dropdown3\">Manage Rubrics<i class=\"material-icons right\">arrow_drop_down</i></a></li>";
                     }
@@ -138,11 +150,12 @@
                 <?php if(isset($_SESSION['user']))
                 {
                     echo "<li><a class='btn-block' href='myData.php'>My Data</a></li>";
-                    if($_SESSION['user']->getRoleID() === 1 || $_SESSION['user']->getRoleID() === 2 || $_SESSION['user']->getRoleID() === '3')
+                    if($_SESSION['user']->getRoleID() === '1' || $_SESSION['user']->getRoleID() === '2')
                     {
                         echo "<li><a class=\"dropdown-trigger\" href=\"#!\" data-target=\"dropdown2\">Manage User<i class=\"material-icons right white-text\">arrow_drop_down</i></a></li>";
-                        echo "<li><a class=\"dropdown-trigger\" href=\"#!\" data-target=\"dropdown3\">Manage Rubrics<i class=\"material-icons right\">arrow_drop_down</i></a></li>";
+
                     }
+                    echo "<li><a class=\"dropdown-trigger\" href=\"#!\" data-target=\"dropdown4\">Manage Rubrics<i class=\"material-icons right white-text\">arrow_drop_down</i></a></li>";
                     echo "<li><a class='btn-block' href='../../logout.php'> Log Out</a></li>";
                 }
                 else{
