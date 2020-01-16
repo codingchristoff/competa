@@ -40,7 +40,7 @@
                                         <form name="addUser" method="post" action="' . $_SERVER['PHP_SELF'] . '">
                                             <input type="hidden" name="userName" id="userName" value="' . $view->user->getUserName() . '" required>
                                             <div class="input-field col s12 l12">
-                                            <input type="text" name="firstName" id="firstName" value="' . $view->user->getTableGroup() . '" required>
+                                            <input type="text" name="tableGroup" id="tableGroup" value="' . $view->user->getTableGroup() . '" required>
                                             <label for="firstName">Table Group</label>
                                             </div><br/>
                                             
@@ -59,7 +59,19 @@
                                 //For the admin do the following
                                 else
                                 {
-
+                                    echo '
+                                        <form name="addUser" method="post" action="' . $_SERVER['PHP_SELF'] . '">
+                                            <input type="hidden" name="userName" id="userName" value="' . $view->user->getUserName() . '" required>
+                                            <div class="input-field col s12 l12">
+                                            <input type="text" name="tableGroup" id="tableGroup" value="' . $view->user->getTableGroup() . '" required>
+                                            <label for="firstName">Table Group</label>
+                                            </div><br/>
+                                            
+                                            <div class="right btn-block col s12 l12">
+                                            <input class="btn black right z-depth-2" type="submit" name="setTableGroup" value="Assign Table Group">
+                                            </div>
+                                        </form>
+                                        ';
                                 }
                             }
                             else
@@ -73,14 +85,11 @@
                         }
                     }
                     ?>
+                    <div>
+                        <p class="red-text"><?php if(isset($view->errorMessage)){ echo $view->errorMessage; } ?></p>
+                        <p><?php if(isset($view->setTableGroupSuccess)){ echo $view->setTableGroupSuccess; } ?></p>
+                    </div>
                 </div>
-
-                <div>
-                    <p class="red-text"><?php if(isset($view->errorMessage)){ echo $view->errorMessage; } ?></p>
-                    <p><?php if(isset($view->setTableGroupSuccess)){ echo $view->setTableGroupSuccess; } ?></p>
-                </div>
-
-
             </div>
         </div>
     </div>

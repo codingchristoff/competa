@@ -518,11 +518,16 @@ class UserDataSet
     }
 
     //Sets a students tableGroup
-    public function setTableGroup($user)
+    public function setTableGroup($userName, $tableGroup)
     {
         //Cleans up input
-        $userNameClean = $this->cleanInput($user->getUsername());
-        $tableGroupClean = $this->cleanInput($user->getTableGroup());
+        $userNameClean = $this->cleanInput($userName);
+        $tableGroupClean = $this->cleanInput($tableGroup);
+
+        if (!(preg_match("/^[0-9]+$/", $tableGroupClean)))
+        {
+            return 'Group must be a number';
+        }
 
         //SQL statement that will edit a students tableGroup
         $sqlQuery= 'UPDATE students SET tableGroup="' . $tableGroupClean.'" WHERE userName="' . $userNameClean.'"';

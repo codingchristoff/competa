@@ -32,6 +32,23 @@ if(isset($_SESSION['user']))
                 $view->user = null;
             }
         }
+
+        //For when a user is assigned a different table group
+        if (isset($_POST['setTableGroup']))
+        {
+           $tableGroup = $dataSet->setTableGroup($_POST['userName'], $_POST['tableGroup']);
+
+           //Check if there was any errors
+            if ($tableGroup!==null)
+            {
+                $view->errorMessage = $tableGroup;
+            }
+            else
+            {
+                //Success message
+                $view->setTableGroupSuccess = 'Students group updated';
+            }
+        }
     }
     else
     {
