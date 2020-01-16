@@ -461,14 +461,15 @@ class RubricHandler
 
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
-                while ($row = $stmt->fetch()) {
-                    $dateIDs[] = $row;
-                }
+
                 $dates = [];
-                foreach ($dateIDs as $ID) {
+                while ($row = $stmt->fetch()) {
+                 
+                
+                foreach ($row as $ID) {
                     $dates[]=($this->retrieveDate($ID['dateID']));
                 }
-                return $dates;
+                return $dates;               
             }
         } else {
             return false;
@@ -503,7 +504,7 @@ class RubricHandler
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
                 $result = $this->retrieveRubricID($rubricName);
-                return $result;
+                return $result['rubricName'];
             } else {
                 return false;
             }
@@ -663,7 +664,6 @@ class RubricHandler
     
     public function createMarkedRubric($studentID, $assessmentDate)//,$rubricDate)
     {
-        $assessmentDate = $this->retrieveDateID($assessmentDate);
         $mergeIDs = $this->getMergeIDsFromStudentID($studentID, $assessmentDate);
         $rubricDate = $mergeIDs[0]['rubricDate'];
         $rubricDate = $this->retrieveDate($rubricDate);
