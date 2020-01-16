@@ -328,7 +328,7 @@ class UserDataSet
             return 'Class name error';
         }
 
-        //Checks if the user already exists
+        //Checks if the class already exists
         if ($this->fetchClassID($classNameClean)!==null)
         {
             return 'Class already exists';
@@ -341,11 +341,48 @@ class UserDataSet
         $statement->execute(); // execute the PDO statement
     }
 
+    //Deletes a class from the database
+    public function deleteClass($className)
+    {
+        //Cleans up input
+        $classNameClean = $this->cleanInput($className);
+
+        if ($classNameClean=='Temporary')
+        {
+            return 'Cannot delete Temporary';
+        }
+
+        $classID = $this->fetchClassID($classNameClean);
+        //Checks if the class exists
+        if ($classID==null)
+        {
+            return 'Class does not exist';
+        }
+
+        //Changes all students who are in the deleted class into 'Temporary'
+        $sqlQuery = 'UPDATE students SET classID="27" WHERE classID="' . $classID .'";';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+
+        //Changes all teachers who are in the deleted class into 'Temporary'
+        $sqlQuery = 'UPDATE teachers SET classID="27" WHERE classID="' . $classID .'";';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+
+        //Deletes the class
+        $sqlQuery = 'DELETE FROM classes WHERE classID="' . $classID .'"';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+    }
+
     //Gets all students that match a specific classID
     public function fetchStudentsInClass($classID)
     {
         //SQL statement will select a specific user
-        $sqlQuery = 'SELECT * FROM students WHERE classID="' . $classID .'"';
+        $sqlQuery = 'SELECT * FROM students WHERE classID="' . $classID .'";';
 
         $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
         $statement->execute(); // execute the PDO statement
