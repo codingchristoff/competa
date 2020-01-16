@@ -14,4 +14,10 @@
     <div class="container s12 l12" id="ls-header">
         <h6 class="center helper-text"><strong>Email: <?php echo $view->user->getEmail()?></strong></h6>
     </div>
+
+    <?php if($_SESSION['user']->getRoleID()=='3' || $_SESSION['user']->getRoleID()=='2')
+        echo '<div class="container s12 l12" id="ls-header">
+                <h6 class="center helper-text"><strong>Class: ' . $view->dataSet->fetchClassName($view->user->getClassID()) . '</strong></h6>
+        </div>'
+    ?>
 <?php require('template/footer.phtml') ?>

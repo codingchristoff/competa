@@ -425,6 +425,8 @@ class UserDataSet
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
+
+            return True;
         }
         //Checks if user should be removed from teacher table
         else if($userType === 't')
@@ -434,6 +436,8 @@ class UserDataSet
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
+
+            return True;
         }
         //Checks if user should be removed admin table
         else if($userType === 'a')
@@ -443,6 +447,8 @@ class UserDataSet
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
+
+            return True;
         }
     }
 
