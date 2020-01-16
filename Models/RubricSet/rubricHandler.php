@@ -503,7 +503,7 @@ class RubricHandler
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
                 $result = $this->retrieveRubricID($rubricName);
-                return $result['rubricName'];
+                return $result;
             } else {
                 return false;
             }
