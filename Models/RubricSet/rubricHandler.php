@@ -468,7 +468,8 @@ class RubricHandler
                 foreach ($dateIDs as $ID) {
                     $dates[]=($this->retrieveDate($ID['dateID']));
                 }
-               return $dates = array_unique($dates);
+                $dates = array_values(array_unique($dates));
+               return $dates;
             }
         } else {
             return false;

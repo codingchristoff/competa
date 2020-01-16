@@ -21,7 +21,7 @@ if (isset($_SESSION['user'])){
 
         //Stores all of the current users fully assessed rubric's DATES into an array
         $view->dates = $handler->getDatesFromStudentID($_SESSION['user']->getUserID());
-        $view->dates = array_unique($view->dates);
+        //$view->dates = array_unique($view->dates);
 
         $counter = 0;
 
