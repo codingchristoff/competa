@@ -23,6 +23,14 @@ class StudentData extends ClassData
     }
 
     /**
+     * @return mixed
+     */
+    public function getTableGroup()
+    {
+        return $this->_tableGroup;
+    }
+
+    /**
      *  Requires DataSet to implement
      */
     public function setTable()
