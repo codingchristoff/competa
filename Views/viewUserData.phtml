@@ -28,7 +28,7 @@
                 echo '
                     <div id="test1" class="col s12">
                         <div class="container">
-                            <form name="addUser" method="post" action="'; echo $_SERVER['PHP_SELF']; echo '">
+                            <form name="viewUserForm" method="post" action="'; echo $_SERVER['PHP_SELF']; echo '">
                                 <div class="input-field col s12 l12">
                                 <input type="text" name="userName" id="userName" value="'; if (isset($view->errorMessage)){echo $_POST['userName'];} echo '" required>
                                 <label for="userName">Username</label>
