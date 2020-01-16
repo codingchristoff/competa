@@ -12,4 +12,25 @@ $view->pageTitle = 'Assign Table Group';
 $dataSet = new UserDataSet();
 $view->dataSet = $dataSet;
 
+//Checks if a USER has logged in
+if(isset($_SESSION['user']))
+{
+    //Checks if an admin/teacher is logged in
+    if ($_SESSION['user']->getRoleID() === '1' || $_SESSION['user']->getRoleID() === '2')
+    {
+
+    }
+    else
+    {
+        //If the user is a student they cannot access the page therefore redirect them to myData page
+        header('Location: myData.php');
+    }
+
+}
+else
+{
+    //If the user is not logged in bring them to the index page
+    header('Location: index.php');
+}
+
 require_once('Views/assignTableGroup.phtml');

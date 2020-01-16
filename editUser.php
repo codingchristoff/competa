@@ -18,7 +18,7 @@ $view->allClasses = $dataSet->fetchAllClassNames();
 //Checks if a USER has logged in
 if(isset($_SESSION['user']))
 {
-    //Checks if an ADMIN is logged in
+    //Checks if an admin/teacher is logged in
     if ($_SESSION['user']->getRoleID() === '1' || $_SESSION['user']->getRoleID() === '2')
     {
         //For when a user is searched
@@ -70,6 +70,9 @@ if(isset($_SESSION['user']))
         }
 
 
+    }
+    else{
+        header('Location: myData.php');
     }
 }
 else
