@@ -75,8 +75,8 @@ if(isset($_POST['submit']))
 
     $dateID = $handler->checkDate($handler->getTimestamp());
 
-    var_dump($arrayFinal);
-    var_dump($dateID);
+    $handler->insertRubricData($arrayFinal, $dateID);
+
 }
 
 $view->pageTitle = 'Rubrics Fill';
