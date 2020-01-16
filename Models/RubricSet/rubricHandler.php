@@ -461,23 +461,22 @@ class RubricHandler
 
             // Attempt to execute the prepared statement
             if ($stmt->execute()) {
-
                 $dates = [];
                 while ($row = $stmt->fetch()) {
-                 
-                
-                foreach ($row as $ID) {
-                    $dates[]=($this->retrieveDate($ID['dateID']));
+                    
+                        $dates[]=($this->retrieveDate($ID['dateID']));
+                    
+                    
                 }
-                return $dates;               
+                return $dates;
+            } else {
+                return false;
             }
-        } else {
-            return false;
+            //Close statement
+            unset($stmt);
+            //Close connection
+            unset($pdo);
         }
-        //Close statement
-        unset($stmt);
-        //Close connection
-        unset($pdo);
     }
 
     //################ Set Methods ################
