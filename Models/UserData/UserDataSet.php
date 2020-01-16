@@ -316,6 +316,31 @@ class UserDataSet
         return $dataSet;
     }
 
+    //Adds a class to the database
+    public function addClass($className)
+    {
+        //Cleans up input
+        $classNameClean = $this->cleanInput($className);
+
+        //Check if the name uses letters and spaces
+        if (!(preg_match("/^[a-zA-Z ]*$/", $classNameClean)) || strlen($classNameClean) > 45)
+        {
+            return 'Class name error';
+        }
+
+        //Checks if the user already exists
+        if ($this->fetchClassID($classNameClean)!==null)
+        {
+            return 'Class already exists';
+        }
+
+        //SQL statement will create a new class
+        $sqlQuery = 'INSERT INTO classes (className) VALUES("' . $classNameClean.'")';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+    }
+
     //Gets all students that match a specific classID
     public function fetchStudentsInClass($classID)
     {
@@ -332,6 +357,37 @@ class UserDataSet
         }
         return $dataSet;//Returns all students in an array
     }
+
+    // This function returns all studetns who are in a teachers class
+    public function getStudentsInClass()
+    {
+
+    }
+
+    public function getTeachersClassID($teacherID)
+    {
+        $sql = "SELECT classID FROM teachers WHERE teacherID = :teacherID";
+
+        if ($stmt = $this->dbHandle->prepare($sql)) {
+            $stmt->bindParam(":teacherID", $param_teacherID, PDO::PARAM_STR);
+
+            // Set parameters
+            $param_teacherID = trim($teacherID);
+
+            $stmt->execute(); // execute the PDO statement
+
+            //Getting the row (array)
+            $row = $stmt->fetch();
+            if ($row != false) {//returning the first value (the classID)
+                return $row;
+            } else {
+                return "Teacher not found";
+            }
+        }
+    else{
+    return false;}
+        }
+
 
     //Create user by adding to the database
     public function createUser($user, $classID)
