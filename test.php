@@ -1,10 +1,12 @@
 <?php
 require_once('Models/UserData/UserData.php');
+require_once('Models/UserData/UserDataSet.php');
 require_once('Models/RubricSet/rubricHandler.php');
 
 $view = new stdClass();
 
 $handler = new rubricHandler();
+$userHandler = new UserDataSet();
 
 //$view->test = $handler->test("neque");
 
@@ -98,5 +100,7 @@ var_dump(explode(",",$str));
 //echo $explosion[5];
 //echo $rubricDate = $handler->retrieveDateID($explosion[5]);
 
-var_dump($handler->getDatesFromStudentID(1));
-var_dump($handler->createMarkedRubric(1,"2020-01-16 12:24:12"));
+//var_dump($handler->getDatesFromStudentID(1));
+//var_dump($handler->createMarkedRubric(1,"2020-01-16 12:24:12"));
+
+var_dump($userHandler->getTeachersClassID("2"));
