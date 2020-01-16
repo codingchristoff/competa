@@ -1033,9 +1033,9 @@ class RubricHandler
     {
         $explosion = explode(",", $string);
 
-        $rubricID = $explosion[0];
-        $categoryID = $explosion[1];
-        $criteriaID = $explosion[2];
+        $rubricText = $explosion[0];
+        $categoryText = $explosion[1];
+        $criteriaText = $explosion[2];
 
         $rubricID = $this->checkRubric($rubricText);
         $categoryID = $this->checkCategory($categoryText);
