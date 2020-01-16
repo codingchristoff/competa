@@ -7,7 +7,7 @@
                 while($rubrics > 0)
                 {
                     echo "<div class=\"input-field col s6 offset-s3\">
-                          <input value=\"Rubric Name\" id=\"r_name\" type=\"text\" name=\"{$rubrics}\" required>
+                          <input id=\"r_name\" type=\"text\" name=\"{$rubrics}\" required>
                           </div>";
 
                     echo "<table class=\"fixed\">
@@ -35,17 +35,17 @@
                                   <textarea id=\"test\" class=\"materialize-textarea\" 
                                   name=\"{$rubrics}{$rows}{$rowTabs}\" required>";
 
-                            //Test Delete
-                            if($testCat == 1)
-                            {
-                                echo "Cat{$testCat}";
-                            }
-                            else{
-                                echo "Crit{$testCrit}";
-                            }
-                            $testCat++;
-                            $testCrit = $testCat-1;
-                            //Test Delete
+//                            //Test Delete
+//                            if($testCat == 1)
+//                            {
+//                                echo "Cat{$testCat}";
+//                            }
+//                            else{
+//                                echo "Crit{$testCrit}";
+//                            }
+//                            $testCat++;
+//                            $testCrit = $testCat-1;
+//                            //Test Delete
 
                             echo "</textarea>
                                   <label for=\"test\">{$rubrics}{$rows}{$rowTabs}</label>
