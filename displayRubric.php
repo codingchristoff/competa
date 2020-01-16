@@ -50,4 +50,11 @@ if(isset($_POST['submit']))
 
 }
 
+//Click to assign a rubric to a class
+if(isset($_POST['assign']))
+{
+    $teacherID = $_SESSION['user']->getRoleID();
+    $teacherClassID = $_SESSION['user']->getTeachersClassID($teacherID);
+}
+
 require_once('Views/displayRubric.phtml');

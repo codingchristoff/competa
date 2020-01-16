@@ -82,4 +82,10 @@ class  AdminData extends UserData
     {
         return ;
     }
+
+    //Needs rubric class to be complete and function in UserDataSet
+    public function getUserID()
+    {
+        return $this->_adminID;
+    }
 }

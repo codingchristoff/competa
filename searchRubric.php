@@ -39,7 +39,7 @@ if(isset($_POST['search']))
     {
         $view->searchResult = $searchResult;
     }else{
-        echo $view->err = $searchResult;
+        $view->err = $searchResult;
     }
 }
 

@@ -1,10 +1,12 @@
 <?php
 require_once('Models/UserData/UserData.php');
+require_once('Models/UserData/UserDataSet.php');
 require_once('Models/RubricSet/rubricHandler.php');
 
 $view = new stdClass();
 
 $handler = new rubricHandler();
+$userHandler = new UserDataSet();
 
 //$view->test = $handler->test("neque");
 
@@ -59,7 +61,11 @@ var_dump($handler->createDate($timestamp));
 
 //################ INSERTION TEST ################
 
-//var_dump($handler->checkMergeID("1","3","1"));
+
+//var_dump($rubricID = $handler->checkRubric("hubba bubba bubba"));
+//var_dump($categoryID = $handler->checkCategory("Test Test"));
+//var_dump($criteriaID = $handler->checkCriteria("Test Test"));
+//var_dump($handler->checkMergeID($rubricID, $categoryID, $criteriaID));
 
 //var_dump($handler->createCriteria("I do use the right manners."));
 //var_dump($handler->checkCriteria("Good"));
@@ -97,5 +103,8 @@ var_dump(explode(",",$str));
 //
 //echo $explosion[5];
 //echo $rubricDate = $handler->retrieveDateID($explosion[5]);
+
 //var_dump($handler->getDatesFromStudentID(1));
-//var_dump($handler->createMarkedRubric(1,1));
+//var_dump($handler->createMarkedRubric(1,"2020-01-16 12:24:12"));
+
+var_dump($userHandler->getTeachersClassID("2"));
