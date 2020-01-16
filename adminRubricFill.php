@@ -29,7 +29,8 @@ if(isset($_SESSION['rubricsInfo']))
 if(isset($_POST['submit']))
 {
     $_SESSION['rubricsInfo'] = $_POST;
-    header("Location: studentRubricView.php");
+
+
 }
 
 $view->pageTitle = 'Rubrics Fill';
