@@ -1,0 +1,27 @@
+<?php require('template/header.phtml') ?>
+<div class="container row" id="admin-container">
+    <div class="container s12 l12" id="ls-header">
+
+    </div>
+
+    <!--Container for all the content for the page-->
+    <div class="container">
+        <form name="deleteClassNameForm" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+            <div class="input-field col s12 l12">
+                <input type="text" name="className" id="className" value="<?php if (isset($view->errorMessage)){echo $_POST['className'];}?>" required>
+                <label for="className">Class Name</label>
+            </div><br/>
+
+            <div class="right btn-block col s12 l12">
+                <input class="btn black right z-depth-2" type="submit" name="deleteClass" value="Delete Class">
+            </div>
+        </form>
+
+        <div>
+            <p class="red-text"><?php if(isset($view->errorMessage)){ echo $view->errorMessage; } ?></p>
+            <p><?php if(isset($view->createUserSuccess)){ echo $view->createUserSuccess; } ?></p>
+        </div>
+
+    </div>
+</div>
+<?php require('template/footer.phtml') ?>

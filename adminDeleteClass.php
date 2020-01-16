@@ -6,7 +6,7 @@ require_once('Models/UserData/UserDataSet.php');
 session_start();
 
 $view = new stdClass();
-$view->pageTitle = 'Add Class';
+$view->pageTitle = 'Delete Class';
 
 //Initiating a connection to database and giving it to the view
 $dataSet = new UserDataSet();
@@ -19,19 +19,19 @@ if(isset($_SESSION['user']))
     if ($_SESSION['user']->getRoleID() === '1')
     {
         //Checks if admin clicked 'Add Class' button
-        if(isset($_POST['addClass']))
+        if(isset($_POST['deleteClass']))
         {
-            $add = $dataSet->addClass($_POST['className']);
+            $delete = $dataSet->deleteClass($_POST['className']);
 
-            if ( $add!== null){
+            if ( $delete!== null){
 
                 //There was a problem creating an error
-                $view->errorMessage = $add;
+                $view->errorMessage = $delete;
             }
             //When creating a class has no problems
             else{
                 //Success message
-                $view->createUserSuccess = 'Class successfully created';
+                $view->createUserSuccess = 'Class successfully deleted';
             }
         }
     }
@@ -47,4 +47,4 @@ else
     header('Location: index.php');
 }
 
-require_once('Views/adminAddClass.phtml');
+require_once('Views/adminDeleteClass.phtml');
