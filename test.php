@@ -82,7 +82,7 @@ var_dump($handler->createDate($timestamp));
 
 //var_dump($handler->retrieveMergeID("1","1","1"));
 
-var_dump($handler->getDatesFromStudentID(52));
+//var_dump($handler->getDatesFromStudentID(52));
 
 //$str = "h,e,l,l,o";
 /*
@@ -108,3 +108,5 @@ var_dump(explode(",",$str));
 //var_dump($handler->createMarkedRubric(1,"2020-01-16 12:24:12"));
 
 //var_dump($userHandler->getTeachersClassID("2"));
+
+var_dump($userHandler->getStudentsInClass(11));
