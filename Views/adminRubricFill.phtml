@@ -7,7 +7,7 @@
                 while($rubrics > 0)
                 {
                     echo "<div class=\"input-field col s6 offset-s3\">
-                          <input placeholder=\"Rubric Name\" id=\"r_name\" type=\"text\" name=\"{$rubrics}\" required>
+                          <input value=\"Rubric Name\" id=\"r_name\" type=\"text\" name=\"{$rubrics}\" required>
                           </div>";
 
                     echo "<table class=\"fixed\">
@@ -27,11 +27,27 @@
                     {
                         echo "<tr>";
                         $rowTabs = $view->criteria_count+1;
+                        $testCat = 1;
+                        $testCrit = null;
                         while($rowTabs > 0)
                         {
                             echo "<td><div class=\"input-field col s12\">
                                   <textarea id=\"test\" class=\"materialize-textarea\" 
-                                  name=\"{$rubrics}{$rows}{$rowTabs}\" required></textarea>
+                                  name=\"{$rubrics}{$rows}{$rowTabs}\" required>";
+
+                            //Test Delete
+                            if($testCat == 1)
+                            {
+                                echo "Cat{$testCat}";
+                            }
+                            else{
+                                echo "Crit{$testCrit}";
+                            }
+                            $testCat++;
+                            $testCrit = $testCat-1;
+                            //Test Delete
+
+                            echo "</textarea>
                                   <label for=\"test\">{$rubrics}{$rows}{$rowTabs}</label>
                                   </div></td>";
                             $rowTabs--;
