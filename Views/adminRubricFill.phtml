@@ -1,13 +1,16 @@
 <?php require('template/header.phtml') ?>
     <div class="container row s12 l12 rubric-admin">
-        <div class="container col s12 l12">
+        <div class="container z-depth-2 col s12 l12">
+            <div class="col s12 l12" id="ls-header">
+                <h6 class="center helper-text"><strong>Rubric Name</strong></h6>
+            </div>
             <form name="table" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
                 <?php
                 $rubrics = $view->rubric_count;
                 while($rubrics > 0)
                 {
                     echo "<div class=\"input-field col s6 offset-s3\">
-                          <input id=\"r_name\" type=\"text\" name=\"{$rubrics}\" required>
+                          <input id=\"r_name\" type=\"text\" name=\"{$rubrics}\" placeholder=\"\" required>
                           </div>";
 
                     echo "<table class=\"fixed\">
@@ -48,7 +51,7 @@
 //                            //Test Delete
 
                             echo "</textarea>
-                                  <label for=\"test\">{$rubrics}{$rows}{$rowTabs}</label>
+                                  <label for=\"test\"></label>
                                   </div></td>";
                             $rowTabs--;
                         }
@@ -62,7 +65,7 @@
                 ?>
                 <div class="right btn-block col s12 l12">
                     <input class="btn black right z-depth-2" type="submit"
-                           name="submit" value="Create">
+                           name="submit" value="Create" id="btn-under-alert">
                 </div>
             </form>
         </div>
