@@ -830,9 +830,9 @@ class RubricHandler
         $criteriaID = $explosion[2];
         $result = $explosion[3];
         $studentID = $explosion[4];
-        $rubricDate = $this->retrieveDateID($explosion[5]);
+        $rubricDate = $this->checkDateID($explosion[5]);
 
-        $mergeID = $this->retrieveMergeID($rubricID, $categoryID, $criteriaID);
+        $mergeID = $this->checkMergeID($rubricID, $categoryID, $criteriaID);
 
         return $this->createAssessmentValue($mergeID, $studentID, $result,$dateID, $rubricDate);
     }
