@@ -62,6 +62,13 @@
                             echo '<div class="container s12 l12" id="ls-header"><h6 class="center helper-text">User not found</h6></div>';
                         }
                     }
+                    if (isset($view->delete))
+                    {
+                        if ($view->delete==True)
+                        {
+                            echo '<div class="container s12 l12" id="ls-header"><h6 class="center helper-text">User deleted</h6></div>';
+                        }
+                    }
                     ?>
                 </div>
             </div>

@@ -1,0 +1,89 @@
+<?php require('template/header.phtml') ?>
+<div class="container row" id="admin-container">
+    <div class="container s12 l12" id="ls-header">
+    </div>
+
+    <div class="row">
+        <div class="col s12">
+            <div id="test1" class="col s12">
+                <div class="container">
+                    <form name="addUser" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                        <div class="input-field col s12 l12">
+                            <input type="text" name="userName" id="userName" value="<?php if (isset($_POST['userName'])){echo $_POST['userName'];} ?>" required>
+                            <label for="userName">Username</label>
+                        </div><br/>
+
+                        <div class="right btn-block col s12 l12">
+                            <input class="btn black right z-depth-2" type="submit" name="searchUser" value="Find User">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="container">
+                    <?php
+                    //Check if search button was pressed
+                    if (isset($_POST['searchUser']))
+                    {
+                        //Check if anything was found in the search
+                        if ($view->user!=null)
+                        {
+                            //Check if the thing they found contains anything
+                            if ($view->user->getUsername() != null)
+                            {
+                                //For the teacher do the following
+                                if ($_SESSION['user']->getRoleID() != 1)
+                                {
+                                    //Makes sure that the user searched is in the teachers class
+                                    if (($view->user->getRoleID() != 1) && ($_SESSION['user']->getClassID() == $view->user->getClassID()) && ($view->user->getRoleID() != 2))
+                                    {
+                                        echo '
+                                        <form name="addUser" method="post" action="' . $_SERVER['PHP_SELF'] . '">
+                                            <input type="hidden" name="userName" id="userName" value="' . $view->user->getUserName() . '" required>
+                                            <div class="input-field col s12 l12">
+                                            <input type="text" name="firstName" id="firstName" value="' . $view->user->getTableGroup() . '" required>
+                                            <label for="firstName">Table Group</label>
+                                            </div><br/>
+                                            
+                                            <div class="right btn-block col s12 l12">
+                                            <input class="btn black right z-depth-2" type="submit" name="setTableGroup" value="Assign Table Group">
+                                            </div>
+                                        </form>
+                                        ';
+                                    }
+                                    else
+                                    {
+                                        echo '<h6 class="center helper-text">User not found</h6>';
+                                    }
+
+                                }
+                                //For the admin do the following
+                                else
+                                {
+
+                                }
+                            }
+                            else
+                            {
+                                echo '<h6 class="center helper-text">User not found</h6>';
+                            }
+                        }
+                        else
+                        {
+                            echo '<h6 class="center helper-text">User not found</h6>';
+                        }
+                    }
+                    ?>
+                </div>
+
+                <div>
+                    <p class="red-text"><?php if(isset($view->errorMessage)){ echo $view->errorMessage; } ?></p>
+                    <p><?php if(isset($view->setTableGroupSuccess)){ echo $view->setTableGroupSuccess; } ?></p>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php require('template/footer.phtml') ?>
