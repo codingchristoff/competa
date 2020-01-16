@@ -8,7 +8,7 @@
     <div class="container">
         <form name="addClassNameForm" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
             <div class="input-field col s12 l12">
-                <input type="text" name="className" id="className" value="<?php if (isset($view->errorMessage)){echo $_POST['userName'];}?>" required>
+                <input type="text" name="className" id="className" value="<?php if (isset($view->errorMessage)){echo $_POST['className'];}?>" required>
                 <label for="className">Class Name</label>
             </div><br/>
 
@@ -16,6 +16,12 @@
                 <input class="btn black right z-depth-2" type="submit" name="addClass" value="Add Class">
             </div>
         </form>
+
+        <div>
+            <p class="red-text"><?php if(isset($view->errorMessage)){ echo $view->errorMessage; } ?></p>
+            <p><?php if(isset($view->createUserSuccess)){ echo $view->createUserSuccess; } ?></p>
+        </div>
+
     </div>
 </div>
 <?php require('template/footer.phtml') ?>
