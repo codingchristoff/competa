@@ -33,10 +33,22 @@
                                 //For the teacher do the following
                                 if ($_SESSION['user']->getRoleID() != 1)
                                 {
-                                    //Makes sure that the user searched is in the teachers class !!!!NOT WORKING
+                                    //Makes sure that the user searched is in the teachers class
                                     if (($view->user->getRoleID() != 1) && ($_SESSION['user']->getClassID() == $view->user->getClassID()) && ($view->user->getRoleID() != 2))
                                     {
-                                        echo 'hi';
+                                        echo '
+                                        <form name="addUser" method="post" action="' . $_SERVER['PHP_SELF'] . '">
+                                            <input type="hidden" name="userName" id="userName" value="' . $view->user->getUserName() . '" required>
+                                            <div class="input-field col s12 l12">
+                                            <input type="text" name="firstName" id="firstName" value="' . $view->user->getTableGroup() . '" required>
+                                            <label for="firstName">Table Group</label>
+                                            </div><br/>
+                                            
+                                            <div class="right btn-block col s12 l12">
+                                            <input class="btn black right z-depth-2" type="submit" name="setTableGroup" value="Assign Table Group">
+                                            </div>
+                                        </form>
+                                        ';
                                     }
                                     else
                                     {
@@ -63,6 +75,10 @@
                     ?>
                 </div>
 
+                <div>
+                    <p class="red-text"><?php if(isset($view->errorMessage)){ echo $view->errorMessage; } ?></p>
+                    <p><?php if(isset($view->setTableGroupSuccess)){ echo $view->setTableGroupSuccess; } ?></p>
+                </div>
 
 
             </div>

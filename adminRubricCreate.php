@@ -14,7 +14,7 @@ if(isset($_SESSION['username']))
 
 if(isset($_POST['submit']))
 {
-    $_SESSION['rubric_count'] = $_POST['rubric_count'];
+//    $_SESSION['rubric_count'] = $_POST['rubric_count'];
     $_SESSION['category_count'] = $_POST['category_count'];
     $_SESSION['criteria_count'] = $_POST['criteria_count'];
 

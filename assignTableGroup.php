@@ -21,7 +21,16 @@ if(isset($_SESSION['user']))
         //For when a user is searched
         if (isset($_POST['searchUser']))
         {
-            $view->user = $dataSet->fetchUser($_POST['userName']);
+            $search = $dataSet->fetchUser($_POST['userName']);
+            //Check if the search is a student
+            if($search->getRoleID() == '3')
+            {
+                $view->user = $search;
+            }
+            else
+            {
+                $view->user = null;
+            }
         }
     }
     else
