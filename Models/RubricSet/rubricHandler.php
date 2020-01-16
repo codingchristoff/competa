@@ -663,6 +663,7 @@ class RubricHandler
     
     public function createMarkedRubric($studentID, $assessmentDate)//,$rubricDate)
     {
+        $assessmentDate = $this->retrieveDateID($assessmentDate);
         $mergeIDs = $this->getMergeIDsFromStudentID($studentID, $assessmentDate);
         $rubricDate = $mergeIDs[0]['rubricDate'];
         $rubricDate = $this->retrieveDate($rubricDate);

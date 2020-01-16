@@ -395,6 +395,37 @@ class UserDataSet
         return $dataSet;//Returns all students in an array
     }
 
+    // This function returns all studetns who are in a teachers class
+    public function getStudentsInClass()
+    {
+
+    }
+
+    public function getTeachersClassID($teacherID)
+    {
+        $sql = "SELECT classID FROM teachers WHERE teacherID = :teacherID";
+
+        if ($stmt = $this->dbHandle->prepare($sql)) {
+            $stmt->bindParam(":teacherID", $param_teacherID, PDO::PARAM_STR);
+
+            // Set parameters
+            $param_teacherID = trim($teacherID);
+
+            $stmt->execute(); // execute the PDO statement
+
+            //Getting the row (array)
+            $row = $stmt->fetch();
+            if ($row != false) {//returning the first value (the classID)
+                return $row;
+            } else {
+                return "Teacher not found";
+            }
+        }
+    else{
+    return false;}
+        }
+
+
     //Create user by adding to the database
     public function createUser($user, $classID)
     {

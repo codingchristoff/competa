@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a690ce52-896c-42aa-a240-0550241b5d76" name="Default Changelist" comment="Ali - Test">
+    <list default="true" id="a690ce52-896c-42aa-a240-0550241b5d76" name="Default Changelist" comment="Add user big functionalities">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/RubricSet/RubricLogic.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/RubricSet/rubricHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/RubricSet/rubricHandler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/UserData/UserDataSet.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/UserData/UserDataSet.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/displayRubric.php" beforeDir="false" afterPath="$PROJECT_DIR$/displayRubric.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.php" beforeDir="false" afterPath="$PROJECT_DIR$/test.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,29 +51,45 @@
         <item name="MySQL - jdbc:mysql://poseidon@salford.ac.uk:3306/sgb770_competa" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="sgb770_competa: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="assessments: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - jdbc:mysql://poseidon@salford.ac.uk:3306/sgb770_competa" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="sgb770_competa: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="assignedRubrics: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - jdbc:mysql://poseidon@salford.ac.uk:3306/sgb770_competa" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="sgb770_competa: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="dates: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - jdbc:mysql://poseidon@salford.ac.uk:3306/sgb770_competa" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="sgb770_competa: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="rubricGroup: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - jdbc:mysql://poseidon@salford.ac.uk:3306/sgb770_competa" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="sgb770_competa: schema" type="76f4a085:MysqlImplModel$Schema" />
         <item name="students: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - jdbc:mysql://poseidon@salford.ac.uk:3306/sgb770_competa" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="sgb770_competa: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="teachers: table" type="285a2a93:MysqlImplModel$Table" />
       </path>
     </expand>
     <select />
-  </component>
-  <component name="DockManager">
-    <window id="7">
-      <content type="file-editors">
-        <state>
-          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-            <file pinned="false" current-in-tab="true">
-              <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/7706a75a-5ffa-46c3-b228-1f6f6d916eb3/console.sql">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state>
-                    <caret column="22" selection-start-column="22" selection-end-column="22" />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
   </component>
   <component name="FavoritesManager">
     <favorites_list name="competa" />
@@ -78,28 +97,37 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/displayRubric.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="381">
-              <caret line="39" column="52" lean-forward="true" selection-start-line="39" selection-start-column="52" selection-end-line="39" selection-end-column="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Models/RubricSet/rubricHandler.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="824" column="65" lean-forward="true" selection-start-line="824" selection-start-column="65" selection-end-line="824" selection-end-column="65" />
+            <state relative-caret-position="863">
+              <caret line="230" column="24" selection-start-line="230" selection-start-column="19" selection-end-line="230" selection-end-column="24" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Views/displayRubric.phtml">
+        <entry file="file://$PROJECT_DIR$/test.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="32" column="38" lean-forward="true" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
+            <state relative-caret-position="1169">
+              <caret line="105" column="44" selection-start-line="105" selection-start-column="44" selection-end-line="105" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/displayRubric.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="952">
+              <caret line="56" column="72" selection-start-line="56" selection-start-column="72" selection-end-line="56" selection-end-column="72" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Models/UserData/UserDataSet.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="966">
+              <caret line="358" column="13" selection-start-line="358" selection-start-column="13" selection-end-line="358" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -121,24 +149,24 @@
         <option value="$PROJECT_DIR$/myData.php" />
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/Views/adminAddUserPage.phtml" />
-        <option value="$PROJECT_DIR$/Models/UserData/UserDataSet.php" />
         <option value="$PROJECT_DIR$/adminAddUserPage.php" />
         <option value="$PROJECT_DIR$/Views/template/footer.phtml" />
         <option value="$PROJECT_DIR$/js/materialize-nav.js" />
         <option value="$PROJECT_DIR$/css/my-style.css" />
         <option value="$PROJECT_DIR$/Views/viewUserData.phtml" />
         <option value="$PROJECT_DIR$/viewUserData.php" />
-        <option value="$PROJECT_DIR$/test.php" />
         <option value="$PROJECT_DIR$/searchRubric.phtml" />
         <option value="$PROJECT_DIR$/Views/index.phtml" />
         <option value="$PROJECT_DIR$/Views/searchRubric.phtml" />
-        <option value="$PROJECT_DIR$/Models/RubricSet/rubricHandler.php" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/7706a75a-5ffa-46c3-b228-1f6f6d916eb3/console.sql" />
         <option value="$PROJECT_DIR$/Models/RubricSet/Criteria.php" />
         <option value="$PROJECT_DIR$/searchRubric.php" />
         <option value="$PROJECT_DIR$/Views/template/header.phtml" />
         <option value="$PROJECT_DIR$/Views/displayRubric.phtml" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/7706a75a-5ffa-46c3-b228-1f6f6d916eb3/console.sql" />
         <option value="$PROJECT_DIR$/displayRubric.php" />
+        <option value="$PROJECT_DIR$/Models/RubricSet/rubricHandler.php" />
+        <option value="$PROJECT_DIR$/test.php" />
+        <option value="$PROJECT_DIR$/Models/UserData/UserDataSet.php" />
       </list>
     </option>
   </component>
@@ -147,10 +175,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1912" />
+    <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1696" />
-    <option name="height" value="1026" />
+    <option name="width" value="1096" />
+    <option name="height" value="1896" />
   </component>
   <component name="ProjectId" id="1WKuVKZkVy1BgQZ6Gu1osuPI9vd" />
   <component name="ProjectLevelVcsManager">
@@ -161,42 +189,39 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="competa11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="competa11" type="462c0819:PsiDirectoryNode" />
+              <item name="competa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="competa" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="competa11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="competa11" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="competa11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="competa11" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="competa11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="competa11" type="462c0819:PsiDirectoryNode" />
+              <item name="competa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="competa" type="462c0819:PsiDirectoryNode" />
               <item name="Models" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="competa11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="competa11" type="462c0819:PsiDirectoryNode" />
+              <item name="competa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="competa" type="462c0819:PsiDirectoryNode" />
               <item name="Models" type="462c0819:PsiDirectoryNode" />
               <item name="RubricSet" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="competa11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="competa11" type="462c0819:PsiDirectoryNode" />
+              <item name="competa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="competa" type="462c0819:PsiDirectoryNode" />
+              <item name="Models" type="462c0819:PsiDirectoryNode" />
+              <item name="UserData" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="competa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="competa" type="462c0819:PsiDirectoryNode" />
               <item name="Views" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="competa11" type="b2602c69:ProjectViewProjectNode" />
-              <item name="competa11" type="462c0819:PsiDirectoryNode" />
+              <item name="competa" type="b2602c69:ProjectViewProjectNode" />
+              <item name="competa" type="462c0819:PsiDirectoryNode" />
               <item name="Views" type="462c0819:PsiDirectoryNode" />
               <item name="template" type="462c0819:PsiDirectoryNode" />
             </path>
@@ -204,13 +229,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="database.console.LAST_STATE" value="false" />
+    <property name="database.console.LAST_STATE" value="true" />
     <property name="last_opened_file_path" value="C:/xampp/php/php.exe" />
   </component>
   <component name="RunDashboard">
@@ -264,6 +288,7 @@
       <workItem from="1578910639462" duration="30804000" />
       <workItem from="1578994425639" duration="11129000" />
       <workItem from="1579082417258" duration="20176000" />
+      <workItem from="1579169655591" duration="13037000" />
     </task>
     <task id="LOCAL-00002" summary="ali test">
       <created>1578593310180</created>
@@ -475,37 +500,44 @@
       <option name="project" value="LOCAL" />
       <updated>1579107481277</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Add user big functionalities">
+      <created>1579177275630</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1579177275630</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40559000" />
+    <option name="totallyTimeSpent" value="53614000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="1696" height="1026" extended-state="6" />
+    <frame x="-8" y="-8" width="1096" height="1896" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25305623" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16698842" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Database Console" weight="0.32922733" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32922733" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32898468" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="8" visible="true" weight="0.32922733" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.33238798" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49938875" weight="0.32922733" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50061125" side_tool="true" weight="0.32922733" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32922733" />
+      <window_info anchor="bottom" id="Database Console" order="13" visible="true" weight="0.25184345" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" visible="true" weight="0.14425428" />
+      <window_info anchor="right" id="Database" order="3" visible="true" weight="0.19401544" />
     </layout>
     <layout-to-restore>
       <window_info id="Favorites" order="0" side_tool="true" />
@@ -573,7 +605,6 @@
     <MESSAGE value="Changing setClass method location from StudentData -&gt; ClassData - Alex" />
     <MESSAGE value="Add user page more material - Alex" />
     <MESSAGE value="Add user page V1 - Alex" />
-    <MESSAGE value="Add user big functionalities" />
     <MESSAGE value="Small aesthetic changes made -Ste" />
     <MESSAGE value="Added a way to check that admins are inputting &quot;None&quot; for className in adminAddUserPage.php -Ste" />
     <MESSAGE value="username added" />
@@ -592,26 +623,10 @@
     <MESSAGE value="Ali - 15/01/20 - 4 - Student Demo Access" />
     <MESSAGE value="Ali - 15/01/20 - 5 - COMMIT" />
     <MESSAGE value="Ali - Test" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ali - Test" />
+    <MESSAGE value="Add user big functionalities" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add user big functionalities" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/logout.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/myData.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Models/UserData/UserDataSet.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2108">
-          <caret line="187" column="34" selection-start-line="187" selection-start-column="34" selection-end-line="187" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Views/template/footer.phtml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -664,13 +679,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" selection-start-line="1" selection-end-line="1" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Views/adminRubricCreate.phtml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-306">
@@ -692,20 +700,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Models/RubricSet/Rubric.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Models/RubricSet/Category.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="16" column="20" lean-forward="true" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Views/index.phtml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
@@ -717,13 +711,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="5" lean-forward="true" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Models/RubricSet/Criteria.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="20" lean-forward="true" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -767,13 +754,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Models/UserData/TeacherData.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-34">
-          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Models/UserData/StudentData.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-34">
@@ -800,17 +780,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Views/template/header.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="537">
-          <caret line="140" column="141" selection-start-line="140" selection-start-column="141" selection-end-line="140" selection-end-column="141" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Views/displayRubric.phtml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
           <caret line="32" column="38" lean-forward="true" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Models/RubricSet/RubricLogic.php" />
+    <entry file="file://$PROJECT_DIR$/Models/RubricSet/Category.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="833">
+          <caret line="49" column="5" selection-start-line="49" selection-start-column="5" selection-end-line="49" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Models/RubricSet/Rubric.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="43" column="5" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myData.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://7706a75a-5ffa-46c3-b228-1f6f6d916eb3/schema/sgb770_competa/table/assessments">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="0bfb14a9-8166-42dd-8e5a-bfa45732936e">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Models/RubricSet/Criteria.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Models/RubricSet/RubricMerge.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
         </state>
       </provider>
     </entry>
@@ -821,24 +839,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/displayRubric.php">
+    <entry file="file://$PROJECT_DIR$/logout.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Views/template/header.phtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="39" column="52" lean-forward="true" selection-start-line="39" selection-start-column="52" selection-end-line="39" selection-end-column="52" />
+        <state relative-caret-position="492">
+          <caret line="40" column="34" lean-forward="true" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Models/RubricSet/RubricLogic.php">
+    <entry file="file://$PROJECT_DIR$/editUser.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Models/UserData/TeacherData.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="47" lean-forward="true" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
+        <state relative-caret-position="1632">
+          <caret line="96" column="1" lean-forward="true" selection-start-line="96" selection-start-column="1" selection-end-line="96" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Models/RubricSet/rubricHandler.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="824" column="65" lean-forward="true" selection-start-line="824" selection-start-column="65" selection-end-line="824" selection-end-column="65" />
+        <state relative-caret-position="863">
+          <caret line="230" column="24" selection-start-line="230" selection-start-column="19" selection-end-line="230" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/displayRubric.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="952">
+          <caret line="56" column="72" selection-start-line="56" selection-start-column="72" selection-end-line="56" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1169">
+          <caret line="105" column="44" selection-start-line="105" selection-start-column="44" selection-end-line="105" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Models/UserData/UserDataSet.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="966">
+          <caret line="358" column="13" selection-start-line="358" selection-start-column="13" selection-end-line="358" selection-end-column="13" />
         </state>
       </provider>
     </entry>
