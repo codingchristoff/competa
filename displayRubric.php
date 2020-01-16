@@ -33,12 +33,21 @@ if(isset($_POST['submit']))
 {
     $arrayVals = array_slice($_POST, 0, -1);
 
+    $message = false;
+
     $dateID = $handler->checkDate($handler->getTimestamp());
 
     foreach ($arrayVals as $value)
     {
         $success = $handler->insertAssessmentValues($value, $dateID);
+        $message = true;
     }
+
+    if($message === true)
+    {
+        echo "This data has been sent to the database";
+    }
+
 }
 
 require_once('Views/displayRubric.phtml');
