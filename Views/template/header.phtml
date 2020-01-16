@@ -33,25 +33,25 @@
                     <li><a class=\'btn-block\' href=\'viewUserData.php\'>View User</a></li>
                     <li class="divider"></li>';
 
-            if ($_SESSION['user']->getRoleID() === '1')
-            {
-                echo '   
-                        <li><a class=\'btn-block\' href=\'adminAddUser.php\'>Add User</a></li>
-                        <li class="divider"></li>  
-                        ';
-            }
-            echo '
+                    if ($_SESSION['user']->getRoleID() === '1')
+                    {
+                        echo '   
+                                <li><a class=\'btn-block\' href=\'adminAddUser.php\'>Add User</a></li>
+                                <li class="divider"></li>  
+                                ';
+                    }
+                echo '
                     
                     <li><a class=\'btn-block\' href=\'editUser.php\'>Edit User</a></li>
                     <li class="divider"></li>';
 
-            if ($_SESSION['user']->getRoleID() === '1')
-            {
-                echo '   
-                        <li><a class=\'btn-block\' href=\'adminDeleteUser.php\'>Delete User</a></li> 
-                        ';
-            }
-            echo '
+                    if ($_SESSION['user']->getRoleID() === '1')
+                    {
+                        echo '   
+                                <li><a class=\'btn-block\' href=\'adminDeleteUser.php\'>Delete User</a></li> 
+                                ';
+                    }
+                echo '
                     
                 </ul>
                 
@@ -60,24 +60,59 @@
                     <li><a class=\'btn-block\' href=\'viewUserData.php\'>View User</a></li>
                     <li class="divider"></li>';
 
-            if ($_SESSION['user']->getRoleID() === '1')
-            {
-                echo '   
-                        <li><a class=\'btn-block\' href=\'adminAddUser.php\'>Add User</a></li>
-                        <li class="divider"></li>  
-                        ';
-            }
+                    if ($_SESSION['user']->getRoleID() === '1')
+                    {
+                        echo '   
+                                <li><a class=\'btn-block\' href=\'adminAddUser.php\'>Add User</a></li>
+                                <li class="divider"></li>  
+                                ';
+                }
             echo '<li><a class=\'btn-block\' href=\'editUser.php\'>Edit User</a></li>
                      <li class="divider"></li>';
-            if ($_SESSION['user']->getRoleID() === '1')
-            {
-                echo '   
-                        <li><a class=\'btn-block\' href=\'adminDeleteUser.php\'>Delete User</a></li>
-                        <li class="divider"></li>  
-                        ';
-            }
+                    if ($_SESSION['user']->getRoleID() === '1')
+                    {
+                        echo '   
+                                <li><a class=\'btn-block\' href=\'adminDeleteUser.php\'>Delete User</a></li>
+                                <li class="divider"></li>  
+                                ';
+                    }
              echo '        
-            </ul>';
+            </ul>
+            
+            <!-- Dropdown Structure - Manage Class 1 -->
+                <ul id="manageClass1" class="dropdown-content black">
+                    <li><a class=\'btn-block\' href=\'assignTableGroup.php\'>Assign Table Group</a></li>
+                    <li class="divider"></li>';
+
+                    if ($_SESSION['user']->getRoleID() === '1')
+                    {
+                        echo '   
+                                <li><a class=\'btn-block\' href=\'adminCreateClass.php\'>Create Class</a></li>
+                                <li class="divider"></li>
+                                <li><a class=\'btn-block\' href=\'adminDeleteClass.php\'>Delete Class</a></li>
+                                <li class="divider"></li>  
+                                ';
+                    }
+                echo '
+                </ul>
+                
+                <!-- Dropdown Structure - Manage Class 2 -->
+                <ul id="manageClass2" class="dropdown-content black">
+                    <li><a class=\'btn-block\' href=\'assignTableGroup.php\'>Assign Table Group</a></li>
+                    <li class="divider"></li>';
+
+                    if ($_SESSION['user']->getRoleID() === '1')
+                    {
+                        echo '   
+                                <li><a class=\'btn-block\' href=\'adminCreateClass.php\'>Create Class</a></li>
+                                <li class="divider"></li>
+                                <li><a class=\'btn-block\' href=\'adminDeleteClass.php\'>Delete Class</a></li>
+                                <li class="divider"></li>  
+                                ';
+                    }
+                echo '
+                </ul>';
+
 
         }
     }
@@ -124,6 +159,7 @@
                     if($_SESSION['user']->getRoleID() === '1' || $_SESSION['user']->getRoleID() === '2')
                     {
                         echo "<li><a class=\"dropdown-trigger\" href=\"#!\" data-target=\"dropdown1\">Manage User<i class=\"material-icons right\">arrow_drop_down</i></a></li>";
+                        echo "<li><a class=\"dropdown-trigger\" href=\"#!\" data-target=\"manageClass1\">Manage Class<i class=\"material-icons right white-text\">arrow_drop_down</i></a></li>";
 
                     }
                 } ?>
@@ -153,7 +189,7 @@
                     if($_SESSION['user']->getRoleID() === '1' || $_SESSION['user']->getRoleID() === '2')
                     {
                         echo "<li><a class=\"dropdown-trigger\" href=\"#!\" data-target=\"dropdown2\">Manage User<i class=\"material-icons right white-text\">arrow_drop_down</i></a></li>";
-
+                        echo "<li><a class=\"dropdown-trigger\" href=\"#!\" data-target=\"manageClass2\">Manage Class<i class=\"material-icons right white-text\">arrow_drop_down</i></a></li>";
                     }
                     echo "<li><a class=\"dropdown-trigger\" href=\"#!\" data-target=\"dropdown4\">Manage Rubrics<i class=\"material-icons right white-text\">arrow_drop_down</i></a></li>";
                     echo "<li><a class='btn-block' href='../../logout.php'> Log Out</a></li>";
