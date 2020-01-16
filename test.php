@@ -59,7 +59,7 @@ var_dump($handler->createDate($timestamp));
 
 //################ INSERTION TEST ################
 
-//var_dump($handler->checkMergeID("1","3","1"));
+var_dump($handler->checkMergeID("20","49","119"));
 
 //var_dump($handler->createCriteria("I do use the right manners."));
 //var_dump($handler->checkCriteria("Good"));
@@ -98,5 +98,5 @@ var_dump(explode(",",$str));
 //echo $explosion[5];
 //echo $rubricDate = $handler->retrieveDateID($explosion[5]);
 
-var_dump($handler->getDatesFromStudentID(1));
-var_dump($handler->createMarkedRubric(1,"2020-01-16 12:24:12"));
+//var_dump($handler->getDatesFromStudentID(1));
+//var_dump($handler->createMarkedRubric(1,"2020-01-16 12:24:12"));

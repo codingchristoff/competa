@@ -623,7 +623,7 @@ class RubricHandler
 
             $stmt->execute();
                 $result = $this->retrieveMergeID($rubricID, $categoryID, $criteriaID);
-                return $result['mergeID'];
+                return $result;
         } else {
             return false;
         }
