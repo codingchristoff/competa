@@ -61,15 +61,9 @@ if(isset($_SESSION['user']))
                     $view->editUserSuccess = 'User successfully edited';
                 }
             }
-
-
-
-
             //Fetches the same user
             $view->user = $dataSet->fetchUser($_POST['userName']);
         }
-
-
     }
     else{
         header('Location: myData.php');

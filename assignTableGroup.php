@@ -18,7 +18,11 @@ if(isset($_SESSION['user']))
     //Checks if an admin/teacher is logged in
     if ($_SESSION['user']->getRoleID() === '1' || $_SESSION['user']->getRoleID() === '2')
     {
-
+        //For when a user is searched
+        if (isset($_POST['searchUser']))
+        {
+            $view->user = $dataSet->fetchUser($_POST['userName']);
+        }
     }
     else
     {
