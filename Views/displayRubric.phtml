@@ -1,10 +1,10 @@
 <?php require('template/header.phtml') ?>
-<div class="container row s12 l12 rubric-admin">
-    <div class="container col s12 l12">
-        <form name="studentFill" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
-            <div class="container" id="ls-header">
-                <h6 class="center helper-text"><strong><?php echo $view->rubric_name ?></strong></h6>
-            </div>
+<div class="container white z-depth-2 row s12 l12 rubric-admin">
+    <form name="studentFill" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+        <div class="col s12 l12" id="ls-header">
+            <h6 class="center helper-text"><strong><?php echo $view->rubric_name ?></strong></h6>
+        </div>
+        <div class="container  col s12 l12">
             <div>
                 <table class="fixed">
                     <tbody>
@@ -46,7 +46,7 @@
                 <input class="btn black right z-depth-2" type="submit"
                        name="submit" value="Submit">
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
 <?php require('template/footer.phtml') ?>

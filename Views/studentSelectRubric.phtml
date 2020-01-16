@@ -3,26 +3,27 @@
 <div class="container row">
     <div class="container col s12 l12 black-text">
         <ul class="collection with-header">
-            <?php if (isset($view->error)) {
+            <?php
+            if (isset($view->error)) {
                 echo "<li class=\"collection-header center\"><h6><strong>{$view->error}</strong></h6></li>";
             }
             else{
-                echo "<li class=\"collection-header center\"><h6><strong>Search Results</strong></h6></li>";
                 $counter = 0;
-                foreach ($view->searchResult as $key => $value) {
-                    echo "<div class=\"col s12 m4\">
-                            <div class=\"card small purple lighten-5\">
+                while ($counter < count($view->dates)) {
+                    echo "<div class='col s12 m4'>
+                            <div class='card small purple lighten-5'>
                                 <div class=\"card-content black-text row\">
                                     <div class='card-meta'>
                                     <span class=\"left-align small col s12 l12 grey-text text-darken-2\">
-                                    Rubric: <strong>{$view->rubric->getRubricName()}</strong></span>
+                                    Rubric: <strong>{$view->rubrics[$counter]->getRubricName()}</strong></span>
                                     <span class=\"left-align small col s12 l12 grey-text text-darken-2\"> 
-                                    Date: <strong>{$view}</strong></span>
+                                    Date: <strong>{$view->dates[$counter]}</strong></span>
                                     </div>
                                     <div class=\"card-action col s12 l12\">
-                                        <form class =\"center card-button\" method=\"post\" action=\"{$_SERVER['PHP_SELF']}\">
-                                            <input type=\"hidden\" name=\"rubric_name\" value=\"{$view->searchValue}\">
-                                            <input type=\"hidden\" name=\"timestamp\" value=\"{$value}\">
+                                        <form class =\"center card-button\" method=\"post\" action='../studentViewRubric.php'>
+                                            <input type=\"hidden\" name=\"rubric\" value='".serialize($view->rubrics[$counter])."'>
+                                            <input type=\"hidden\" name=\"timestamp\" value=\"{$view->dates[$counter]}\">
+                                            <input type=\"hidden\" name=\"mergeIDs\" value='".serialize($view->mergeIDs[$counter])."'>
                                             <button class=\"btn black\" type=\"submit\" name=\"submit\">View
                                                 <i class=\"material-icons right\">visibility</i></button>
                                         </form>
@@ -30,6 +31,7 @@
                                 </div>
                             </div>
                         </div>";
+                    $counter+=1;
                 }
             }
             ?>
