@@ -16,7 +16,7 @@ if(isset($_SESSION['user']))
     $view->user = $_SESSION['user'];
 }
 
-if(isset($_SESSION['rubric_count']))
+if(isset($_SESSION['category_count']))
 {
 //    $view->rubric_count = $_SESSION['rubric_count'];
     $view->criteria_count_cols = $_SESSION['category_count']-1;
@@ -75,7 +75,11 @@ if(isset($_POST['submit']))
 
     $dateID = $handler->checkDate($handler->getTimestamp());
 
-    $handler->insertRubricData($arrayFinal, $dateID);
+    foreach ($arrayFinal as $row)
+    {
+        var_dump($row);
+        echo $handler->insertRubricData($row, $dateID);
+    }
 
 }
 
