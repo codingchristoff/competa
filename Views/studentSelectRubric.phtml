@@ -8,16 +8,16 @@
             }
             else{
                 echo "<li class=\"collection-header center\"><h6><strong>Search Results</strong></h6></li>";
-
+                $counter = 0;
                 foreach ($view->searchResult as $key => $value) {
                     echo "<div class=\"col s12 m4\">
                             <div class=\"card small purple lighten-5\">
                                 <div class=\"card-content black-text row\">
                                     <div class='card-meta'>
                                     <span class=\"left-align small col s12 l12 grey-text text-darken-2\">
-                                    Rubric: <strong>{$view->searchValue}</strong></span>
+                                    Rubric: <strong>{$view->rubric->getRubricName()}</strong></span>
                                     <span class=\"left-align small col s12 l12 grey-text text-darken-2\"> 
-                                    Date: <strong>{$value}</strong></span>
+                                    Date: <strong>{$view}</strong></span>
                                     </div>
                                     <div class=\"card-action col s12 l12\">
                                         <form class =\"center card-button\" method=\"post\" action=\"{$_SERVER['PHP_SELF']}\">
