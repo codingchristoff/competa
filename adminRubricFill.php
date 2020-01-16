@@ -77,10 +77,8 @@ if(isset($_POST['submit']))
 
     foreach ($arrayFinal as $row)
     {
-        var_dump($row);
-        echo $handler->insertRubricData($row, $dateID);
+       echo $handler->insertRubricData($row, $dateID);
     }
-
 }
 
 $view->pageTitle = 'Rubrics Fill';
