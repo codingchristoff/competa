@@ -16,20 +16,26 @@ if (isset($_SESSION['user'])){
         $handler = new RubricHandler();
 
         //Stores all of the current users fully assessed rubric's DATES into an array
-        $assessedRubricsArray = $handler->getDatesFromStudentID($_SESSION['user']->getUserID());
+        $view->dates = $handler->getDatesFromStudentID($_SESSION['user']->getUserID());
 
-        if ($assessedRubricsArray != false) {
+        //Creating a rubric for each date
+        foreach ($view->dates as $date) {
 
-            //First array holds the rubric objects
-            $rubricObjects = $assessedRubricsArray[0];
+            $assessedRubricsArray = $handler->createMarkedRubric($_SESSION['user']->getUserID());
 
-            //Only want the first value in the array (there is only 1 value in the array)
-            $view->rubrics = $rubricObjects[0];
+            if ($assessedRubricsArray != false) {
 
-            $view->mergeIDs[] = $assessedRubricsArray[1];
-        }
-        else{
-            $view->error = 'No marked rubrics available';
+                //First array holds the rubric objects
+                $rubricObjects = $assessedRubricsArray[0];
+
+                //Only want the first value in the array (there is only 1 value in the array)
+                $view->rubrics[] = $rubricObjects[0];
+
+                $view->mergeIDs[] = $assessedRubricsArray[1];
+            } else {
+                $view->error = 'No marked rubrics available';
+            }
+
         }
 
 
