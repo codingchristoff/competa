@@ -111,4 +111,4 @@ var_dump(explode(",",$str));
 
 //var_dump($userHandler->getStudentsInClass(11));
 
-var_dump($userHandler->insertStudentAssignment("2","322","1","22"));
+//var_dump($userHandler->insertStudentAssignment("2","322","1","22"));
