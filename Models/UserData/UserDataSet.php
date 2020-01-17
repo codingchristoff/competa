@@ -378,7 +378,7 @@ class UserDataSet
     // This function returns all studetns who are in a teachers class
     public function getStudentsInClass($classID)
     {
-        $sql = "SELECT studentID,tableGroup FROM students WHERE classID = :classID";
+        $sql = "SELECT studentID,tableGroup FROM students WHERE classID = :classID and tableGroup is not null ORDER BY tableGroup";
 
         if ($stmt = $this->dbHandle->prepare($sql)) {
             $stmt->bindParam(":classID", $param_classID, PDO::PARAM_STR);
@@ -405,7 +405,7 @@ class UserDataSet
 
     public function getTeachersClassID($teacherID)
     {
-        $sql = "SELECT classID FROM teachers WHERE teacherID = :teacherID";
+        $sql = "SELECT classID FROM teachers WHERE teacherID = :teacherID ";
 
         if ($stmt = $this->dbHandle->prepare($sql)) {
             $stmt->bindParam(":teacherID", $param_teacherID, PDO::PARAM_STR);
