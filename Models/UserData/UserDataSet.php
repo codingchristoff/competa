@@ -694,24 +694,72 @@ class UserDataSet
     private function checkUserVariables($userName, $firstName, $lastName, $email, $password)
     {
         //Check if the length is too big
-        if (strlen($userName) > 45)
-        {
+        if (strlen($userName) > 45) {
             return 'Username error';
         }
         //Check if the name uses letters and if it is the correct length
-        if (!(preg_match("/^[a-zA-Z]*$/", $firstName)) || !(preg_match("/^[a-zA-Z]*$/", $lastName)) || strlen($firstName) > 45 || strlen($lastName) > 45)
-        {
+        if (!(preg_match("/^[a-zA-Z]*$/", $firstName)) || !(preg_match("/^[a-zA-Z]*$/", $lastName)) || strlen($firstName) > 45 || strlen($lastName) > 45) {
             return 'Name error';
         }
 
-        if (filter_var($email, FILTER_VALIDATE_EMAIL) ===False || strlen($email) > 45)
-        {
+        if (filter_var($email, FILTER_VALIDATE_EMAIL) === False || strlen($email) > 45) {
             return 'Email error';
         }
 
-        if (strlen($password) > 255)
-        {
+        if (strlen($password) > 255) {
             return 'Password error';
         }
+    }
+    public function getStudentName($studentID)
+    {   //checks if value exists in database
+        $sql = "SELECT firstName, lastName FROM students where studentID = :studentID";
+        if ($stmt = $this->dbHandle->prepare($sql))
+        {
+        // Bind variables to the prepared statement as parameters
+        $stmt->bindParam(":studentID", $param_studentID, PDO::PARAM_STR);
+        // Set parameters
+        $param_studentID = trim($studentID);
+        // Attempt to execute the prepared statement
+        $stmt->execute();
+        $row = $stmt->fetch();
+        $name = $row['firstName'] . " " . $row['lastName'];
+        return $name;
+        }
+        else
+            {
+            return false;
+           }
+       //Close statement
+        unset($stmt);
+       //Close connection
+       unset($pdo);
+    }
+    /*
+     * Inserts into the assigned rubrics table the values it is passed.
+     */
+        public function insertStudentAssignment($teacherID, $studentID, $rubricDate, $targetStudent)
+    {
+       $sql = "INSERT INTO assignedRubrics values (:teacherID, :studentID, :rubricDate, :targetStudent)";
+        if ($stmt = $this->dbHandle->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":teacherID", $param_teacherID, PDO::PARAM_STR);
+            $stmt->bindParam(":studentID", $param_studentID, PDO::PARAM_STR);
+            $stmt->bindParam(":rubricDate", $param_rubricDate, PDO::PARAM_STR);
+            $stmt->bindParam(":targetStudent", $param_targetStudent, PDO::PARAM_STR);
+            // Set parameters
+            $param_teacherID = trim($teacherID);
+            $param_studentID = trim($studentID);
+            $param_rubricDate = trim($rubricDate);
+           $param_targetStudent = trim($targetStudent);
+           // Attempt to execute the prepared statement
+           $stmt->execute();
+           return "Rubric has been assigned to student:" . $this->getStudentName($studentID) . " for student: " .$this->getStudentName($targetStudent);
+        } else {
+           return "There was an error accessing the database. Please try again.";
+       }
+        // Close statement
+        unset($stmt);
+       // Close connection
+        unset($pdo);
     }
 }

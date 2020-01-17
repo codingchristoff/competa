@@ -57,8 +57,6 @@ if(isset($_POST['assign']))
     //gets the teacher's class ID
     $teacherClassID = $_SESSION['user']->getClassID($teacherID);
     $studentList = [];
-
-    $userHandler = new UserDataSet();
     //gets all students in that teacher's class and puts them in an array
     $studentList = $userHandler->getStudentsInClass($teacherClassID);
 
@@ -82,7 +80,9 @@ if(isset($_POST['assign']))
             // table group matches
             elseif ($currentTableGroup == $targetStudent['tableGroup'])
             {
-               $userHandler->insertStudentAssignment($teacherID,$currentID,$_SESSION['timestamp'],$targetStudent['studentID']);
+                $dateID = $handler->retrieveDateID($handler->retrieveDateID());
+
+                $userHandler->insertStudentAssignment($teacherID,$currentID,$dateID,$targetStudent['studentID']);
             }
             // table is different and searched is false
             elseif($currentTableGroup != $targetStudent['tableGroup'] && $isSearched == false)
