@@ -72,7 +72,7 @@
                     if ($_SESSION['user']->getRoleID() === '1')
                     {
                         echo '   
-                                <li><a class=\'btn-block\' href=\'adminDeleteUser.php\'>Delete User</a></li> 
+                                <li><a class=\'btn-block\' href=\'adminDeleteUser.php\'>Delete User</a></li><li class="divider"></li>
                                 ';
                     }
              echo '        
@@ -96,15 +96,17 @@
                 
                 <!-- Dropdown Structure - Manage Class 2 -->
                 <ul id="manageClass2" class="dropdown-content black">
+                    <li class="divider"></li>
                     <li><a class=\'btn-block\' href=\'assignTableGroup.php\'>Assign Table Group</a></li>
                     <li class="divider"></li>';
 
                     if ($_SESSION['user']->getRoleID() === '1')
                     {
-                        echo '   
+                        echo ' 
                                 <li><a class=\'btn-block\' href=\'adminAddClass.php\'>Add Class</a></li>
                                 <li class="divider"></li>
                                 <li><a class=\'btn-block\' href=\'adminDeleteClass.php\'>Delete Class</a></li>
+                                <li class="divider"></li>
                                 ';
                     }
                 echo '
@@ -135,10 +137,10 @@
 
         if($_SESSION['user']->getRoleID() === '1')
         {
-            echo '<li><a class=\'btn-block\' href=\'adminRubricCreate.php\'>Rubric Generator</a></li>';
+            echo '<li class="divider"></li><li><a class=\'btn-block\' href=\'adminRubricCreate.php\'>Rubric Generator</a></li>';
         }
         echo '<li class="divider"></li>
-                     <li><a class=\'btn-block\' href=\'searchRubric.php\'>Rubric Search</a></li>
+                     <li><a class=\'btn-block\' href=\'searchRubric.php\'>Rubric Search</a></li><li class="divider"></li>
                      </ul><li class="divider"></li>';
     }
 
