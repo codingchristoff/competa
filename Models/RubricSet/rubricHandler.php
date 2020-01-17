@@ -81,6 +81,35 @@ class RubricHandler
         unset($pdo);
     }
 
+        /**
+     * Returns rubricName from the date
+     */
+    public function getRubricNameOnDateID($dateID)
+    {
+        $sql = "SELECT rubricName FROM rubrics r INNER JOIN rubricGroup rg, rubricMerge rm  WHERE rg.dateID = 1 AND rm.mergeID = rg.mergeID AND r.rubricID = rm.rubricID";
+
+        if ($stmt = $this->dbHandle->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":dateID", $param_dateID, PDO::PARAM_STR);
+
+            // Set parameters
+            $param_dateID = trim($dateID);
+
+            // Attempt to execute the prepared statement
+            if ($stmt->execute()) {
+                $stmt->rowCount();
+                    $row = $stmt->fetch();
+                    return $row['rubricName'];                
+            } else {
+                return false;
+            }
+        }
+        //Close statement
+        unset($stmt);
+        //Close connection
+        unset($pdo);
+    }
+
     /**
      * Returns the category id based on the name of the category
      */
@@ -477,6 +506,36 @@ class RubricHandler
         unset($stmt);
         //Close connection
         unset($pdo);
+    }
+
+    public function getAssignedRubricAsClass($studentID)
+    {  
+        //checks if value exists in database
+        $sql = "SELECT * FROM assignedRubrics where studentID = :studentID";
+        if ($stmt = $this->dbHandle->prepare($sql))
+        {
+        // Bind variables to the prepared statement as parameters
+        $stmt->bindParam(":studentID", $param_studentID, PDO::PARAM_STR);
+        // Set parameters
+        $param_studentID = trim($studentID);
+        // Attempt to execute the prepared statement
+        $stmt->execute();
+        $assignedRubric = [];
+
+                    while ($row = $stmt->fetch()) {
+                        $assignedRubric[] = $row;
+                    }
+                             
+        return $assignedRubric;
+        }
+        else
+            {
+            return false;
+           }
+       //Close statement
+        unset($stmt);
+       //Close connection
+       unset($pdo);
     }
 
     //################ Set Methods ################
@@ -1043,4 +1102,5 @@ class RubricHandler
 
         return $this->createRubric($mergeID, $dateID);
     }
+
 }

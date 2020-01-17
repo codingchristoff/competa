@@ -448,7 +448,29 @@ class UserDataSet
     return false;}
         }
 
-
+        public function getTeachersName($teacherID)
+        {
+            $sql = "SELECT firstName, lastName FROM teachers WHERE teacherID = :teacherID";
+    
+            if ($stmt = $this->dbHandle->prepare($sql)) {
+                $stmt->bindParam(":teacherID", $param_teacherID, PDO::PARAM_STR);
+    
+                // Set parameters
+                $param_teacherID = trim($teacherID);
+    
+                $stmt->execute(); // execute the PDO statement
+    
+                //Getting the row (array)
+                $row = $stmt->fetch();
+                if ($row != false) {//returning the first value (the classID)
+                    return $row;
+                } else {
+                    return "Teacher not found";
+                }
+            }
+        else{
+        return false;}
+            }
 
     //Create user by adding to the database
     public function createUser($user, $classID)
@@ -711,7 +733,8 @@ class UserDataSet
         }
     }
     public function getStudentName($studentID)
-    {   //checks if value exists in database
+    {   
+        //checks if value exists in database
         $sql = "SELECT firstName, lastName FROM students where studentID = :studentID";
         if ($stmt = $this->dbHandle->prepare($sql))
         {
@@ -762,4 +785,21 @@ class UserDataSet
        // Close connection
         unset($pdo);
     }
+
+        /**
+     * 
+     */
+    public function getAssignedRubricForStudent($teacherID,$dateID,$studentID)
+    {
+        $rubricHandler = new RubricHandler();
+
+        $teacherName = ($this->getTeachersName($teacherID));
+        $rubricDate = ($rubricHandler->getdate($dateID));
+        $rubricName = ($rubricHandler->getRubricNameOnDateID($dateID));
+        $targetStudentName = ($this->getStudentName($studentID));
+
+        return $teacherName['firstName'] . $teacherName['lastName']. $rubricDate . $rubricName . $targetStudentName;
+
+    }
+
 }

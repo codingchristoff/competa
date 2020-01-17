@@ -82,5 +82,5 @@ if(isset($_POST['submit']))
     }
 }
 
-$view->pageTitle = 'Rubrics Fill';
+$view->pageTitle = 'Rubric Fill';
 require_once('Views/adminRubricFill.phtml');
