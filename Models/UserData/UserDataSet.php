@@ -8,7 +8,8 @@ require_once('Models/UserData/StudentData.php');
 
 class UserDataSet
 {
-    protected $dbHandle, $dbInstance;
+    protected $dbHandle;
+    protected $dbInstance;
 
     public function __construct()
     {
@@ -21,11 +22,10 @@ class UserDataSet
     {
 
         //Gets the first letter of the userName and puts it to lowercase
-        $userType = strtolower(substr($userName, 0,1));
+        $userType = strtolower(substr($userName, 0, 1));
 
         //Gets a student user
-        if ($userType === 's')
-        {
+        if ($userType === 's') {
             //SQL statement will select a specific user
             $sqlQuery = 'SELECT * FROM students WHERE userName="' . $userName . '"';
 
@@ -36,8 +36,7 @@ class UserDataSet
             return new StudentData($row);
         }
         //Gets a teacher user
-        else if($userType === 't')
-        {
+        elseif ($userType === 't') {
             //SQL statement will select a specific user
             $sqlQuery = 'SELECT * FROM teachers WHERE userName="' . $userName . '"';
 
@@ -48,8 +47,7 @@ class UserDataSet
             return new TeacherData($row);
         }
         //Gets an admin user
-        else if ($userType === 'a')
-        {
+        elseif ($userType === 'a') {
             //SQL statement will select a specific user
             $sqlQuery = 'SELECT * FROM admins WHERE userName="' . $userName . '"';
 
@@ -58,8 +56,7 @@ class UserDataSet
 
             $row = $statement->fetch();
             return new AdminData($row);
-        }
-        else{
+        } else {
             return null;
         }
     }
@@ -68,11 +65,10 @@ class UserDataSet
     public function searchUser($userName)
     {
         //Gets the first letter of the userName and puts it to lowercase
-        $userType = strtolower(substr($userName, 0,1));
+        $userType = strtolower(substr($userName, 0, 1));
 
         //Gets a student user
-        if ($userType === 's')
-        {
+        if ($userType === 's') {
             //SQL statement will select a specific user
             $sqlQuery = 'SELECT * FROM students WHERE userName LIKE"' . $userName . '%"';
 
@@ -85,11 +81,9 @@ class UserDataSet
                 $dataSet[] = new StudentData($row);
             }
             return $dataSet;
-
         }
         //Gets a teacher user
-        else if($userType === 't')
-        {
+        elseif ($userType === 't') {
             //SQL statement will select a specific user
             $sqlQuery = 'SELECT * FROM teachers WHERE userName LIKE"' . $userName . '%"';
 
@@ -104,8 +98,7 @@ class UserDataSet
             return $dataSet;
         }
         //Gets an admin user
-        else if ($userType === 'a')
-        {
+        elseif ($userType === 'a') {
             //SQL statement will select a specific user
             $sqlQuery = 'SELECT * FROM admins WHERE userName LIKE"' . $userName . '%"';
 
@@ -118,8 +111,7 @@ class UserDataSet
                 $dataSet[] = new AdminData($row);
             }
             return $dataSet;
-        }
-        else{
+        } else {
             return null;
         }
     }
@@ -139,8 +131,7 @@ class UserDataSet
         $row = $statement->fetch();
 
         //Check if anything was found in the database for admins
-        if ($row != null)
-        {
+        if ($row != null) {
             return new AdminData($row);
         }
 
@@ -152,8 +143,7 @@ class UserDataSet
         $row = $statement->fetch();
 
         //Check if anything was found in the database for teachers
-        if ($row != null)
-        {
+        if ($row != null) {
             return new TeacherData($row);
         }
 
@@ -165,8 +155,7 @@ class UserDataSet
         $row = $statement->fetch();
 
         //Check if anything was found in the database for teachers
-        if ($row != null)
-        {
+        if ($row != null) {
             return new StudentData($row);
         }
     }
@@ -184,17 +173,13 @@ class UserDataSet
         $user = $this->fetchUser($userClean);
 
         //Checks if the userName exists
-        if ($user != null)
-        {
+        if ($user != null) {
             //Checks password to see if it matches for the userName
-            if (password_verify($passClean, $user->getPassword()))
-            {
+            if (password_verify($passClean, $user->getPassword())) {
                 return $user;
-            }
-            else {
+            } else {
                 return null;
             }
-
         }
     }
 
@@ -215,7 +200,6 @@ class UserDataSet
             $dataSet[] = new StudentData($row);
         }
         return $dataSet;//Returns all students in an array
-
     }
 
     //Gets all teachers
@@ -323,14 +307,12 @@ class UserDataSet
         $classNameClean = $this->cleanInput($className);
 
         //Check if the name uses letters and spaces
-        if (!(preg_match("/^[a-zA-Z ]*$/", $classNameClean)) || strlen($classNameClean) > 45)
-        {
+        if (!(preg_match("/^[a-zA-Z ]*$/", $classNameClean)) || strlen($classNameClean) > 45) {
             return 'Class name error';
         }
 
         //Checks if the class already exists
-        if ($this->fetchClassID($classNameClean)!==null)
-        {
+        if ($this->fetchClassID($classNameClean)!==null) {
             return 'Class already exists';
         }
 
@@ -347,15 +329,13 @@ class UserDataSet
         //Cleans up input
         $classNameClean = $this->cleanInput($className);
 
-        if ($classNameClean=='Temporary')
-        {
+        if ($classNameClean=='Temporary') {
             return 'Cannot delete Temporary';
         }
 
         $classID = $this->fetchClassID($classNameClean);
         //Checks if the class exists
-        if ($classID==null)
-        {
+        if ($classID==null) {
             return 'Class does not exist';
         }
 
@@ -415,13 +395,12 @@ class UserDataSet
                     $studentIDs[] = $row;
                 }
                 return $studentIDs;
-
             } else {
                 return "No students in class";
             }
+        } else {
+            return false;
         }
-        else{
-            return false;}
     }
 
     public function getTeachersClassID($teacherID)
@@ -443,10 +422,10 @@ class UserDataSet
             } else {
                 return "Teacher not found";
             }
+        } else {
+            return false;
         }
-    else{
-    return false;}
-        }
+    }
 
 
 
@@ -461,41 +440,33 @@ class UserDataSet
         $passwordClean = $this->cleanInput($user->getPassword());
 
         //Encrypts the password using the Crypt_Blowfish algorithm
-        $passwordClean = password_hash($passwordClean,PASSWORD_BCRYPT);
+        $passwordClean = password_hash($passwordClean, PASSWORD_BCRYPT);
 
         //Gets the first letter of the userName and puts it to lowercase
-        $userType = strtolower(substr($userNameClean, 0,1));
+        $userType = strtolower(substr($userNameClean, 0, 1));
 
         //Check to see if the userName is using the correct naming scheme
-        if (!($userType=='s' || $userType=='t' || $userType=='a'))
-        {
+        if (!($userType=='s' || $userType=='t' || $userType=='a')) {
             return 'Username not using correct naming scheme, should start with S, T or A';
-        }
-        else if ($userType=='a' && $classID!='None')
-        {
+        } elseif ($userType=='a' && $classID!='None') {
             return 'Admins must have no class name';
-        }
-        else if ($userType!='a' && $classID=='None')
-        {
+        } elseif ($userType!='a' && $classID=='None') {
             return 'Only Admins can have no class';
         }
 
         //Checks if the user already exists
-        if ($this->fetchUser($userNameClean)->getUsername()!==null)
-        {
+        if ($this->fetchUser($userNameClean)->getUsername()!==null) {
             return 'Username already exists';
         }
 
         //Checks the rest of the variables to see if they are in the correct format
         $checkUserVariables = $this->checkUserVariables($userNameClean, $firstNameClean, $lastNameClean, $emailClean, $passwordClean);
-        if ($checkUserVariables!==null)
-        {
+        if ($checkUserVariables!==null) {
             return $checkUserVariables;
         }
 
         //Checks if user should be put into the student table
-        if ($userType === 's')
-        {
+        if ($userType === 's') {
             $classIDClean = intval($this->cleanInput($classID));
             //SQL statement that will be inserted into the database
             $sqlQuery = 'INSERT INTO students (firstName, lastName, userName, email, password, roleID, classID) VALUES ("' . $firstNameClean . '", "' . $lastNameClean . '", "' . $userNameClean . '", "' . $emailClean . '", "' . $passwordClean . '", "3", "' . $classIDClean .'");';
@@ -504,9 +475,7 @@ class UserDataSet
             $statement->execute(); // execute the PDO statement
         }
         //Checks if user should be put into the teacher table
-        else if($userType === 't')
-        {
-
+        elseif ($userType === 't') {
             $classIDClean = intval($this->cleanInput($classID));
             //SQL statement that will be inserted into the database
             $sqlQuery = 'INSERT INTO teachers (firstName, lastName, userName, email, password, roleID, classID) VALUES ("' . $firstNameClean . '", "' . $lastNameClean . '", "' . $userNameClean . '", "' . $emailClean . '", "' . $passwordClean . '", "2", "' . $classIDClean .'");';
@@ -515,8 +484,7 @@ class UserDataSet
             $statement->execute(); // execute the PDO statement
         }
         //Checks if user should be put into the admin table
-        else if($userType === 'a')
-        {
+        elseif ($userType === 'a') {
             //SQL statement that will be inserted into the database
             $sqlQuery = 'INSERT INTO admins (firstName, lastName, userName, email, password, roleID) VALUES ("' . $firstNameClean . '", "' . $lastNameClean . '", "' . $userNameClean . '", "' . $emailClean . '", "' . $passwordClean . '", "1");';
 
@@ -532,40 +500,37 @@ class UserDataSet
         $userClean = $this->cleanInput($userName);
 
         //Gets the first letter of the userName and puts it to lowercase
-        $userType = strtolower(substr($userName, 0,1));
+        $userType = strtolower(substr($userName, 0, 1));
 
         //Checks if user should be removed from student table
-        if ($userType === 's')
-        {
+        if ($userType === 's') {
             //SQL statement that will delete a student
             $sqlQuery = 'DELETE FROM students WHERE userName="' . $userClean .'";';
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
 
-            return True;
+            return true;
         }
         //Checks if user should be removed from teacher table
-        else if($userType === 't')
-        {
+        elseif ($userType === 't') {
             //SQL statement that will delete a student
             $sqlQuery = 'DELETE FROM teachers WHERE userName="' . $userClean .'";';
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
 
-            return True;
+            return true;
         }
         //Checks if user should be removed admin table
-        else if($userType === 'a')
-        {
+        elseif ($userType === 'a') {
             //SQL statement that will delete a student
             $sqlQuery = 'DELETE FROM admins WHERE userName="' . $userClean .'";';
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
 
-            return True;
+            return true;
         }
     }
 
@@ -580,32 +545,27 @@ class UserDataSet
         $passwordClean = $this->cleanInput($user->getPassword());
 
         //Encrypts the password using the Crypt_Blowfish algorithm
-        $passwordClean = password_hash($passwordClean,PASSWORD_BCRYPT);
+        $passwordClean = password_hash($passwordClean, PASSWORD_BCRYPT);
 
         //Gets the first letter of the userName and puts it to lowercase
-        $userType = strtolower(substr($userNameClean, 0,1));
+        $userType = strtolower(substr($userNameClean, 0, 1));
 
         //Tests on class name
-        if ($userType=='a' && $classID!='None')
-        {
+        if ($userType=='a' && $classID!='None') {
             return 'Admins must have no class name';
-        }
-        else if ($userType!='a' && $classID=='None')
-        {
+        } elseif ($userType!='a' && $classID=='None') {
             return 'Only Admins can have no class';
         }
 
 
         //Checks the rest of the variables to see if they are in the correct format
         $checkUserVariables = $this->checkUserVariables($userNameClean, $firstNameClean, $lastNameClean, $emailClean, $passwordClean);
-        if ($checkUserVariables!==null)
-        {
+        if ($checkUserVariables!==null) {
             return $checkUserVariables;
         }
 
         //Checks if user should be removed from students table
-        if ($userType === 's')
-        {
+        if ($userType === 's') {
             $classIDClean = intval($this->cleanInput($classID));
             //SQL statement that will edit a user
             $sqlQuery = 'UPDATE students SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'", password="' . $passwordClean.'", classID="' . $classIDClean.'" WHERE userName="' . $userNameClean.'"';
@@ -614,8 +574,7 @@ class UserDataSet
             $statement->execute(); // execute the PDO statement
         }
         //Checks if user should be removed from teachers table
-        else if ($userType === 't')
-        {
+        elseif ($userType === 't') {
             $classIDClean = intval($this->cleanInput($classID));
             //SQL statement that will edit a user
             $sqlQuery = 'UPDATE teachers SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'", password="' . $passwordClean.'", classID="' . $classIDClean.'" WHERE userName="' . $userNameClean.'"';
@@ -624,8 +583,7 @@ class UserDataSet
             $statement->execute(); // execute the PDO statement
         }
         //Checks if user should be removed from admins table
-        else if ($userType === 'a')
-        {
+        elseif ($userType === 'a') {
             //SQL statement that will edit a user
             $sqlQuery = 'UPDATE admins SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'", password="' . $passwordClean.'" WHERE userName="' . $userNameClean.'"';
 
@@ -641,8 +599,7 @@ class UserDataSet
         $userNameClean = $this->cleanInput($userName);
         $tableGroupClean = $this->cleanInput($tableGroup);
 
-        if (!(preg_match("/^[0-9]+$/", $tableGroupClean)))
-        {
+        if (!(preg_match("/^[0-9]+$/", $tableGroupClean))) {
             return 'Group must be a number';
         }
 
@@ -666,30 +623,52 @@ class UserDataSet
     private function checkUserVariables($userName, $firstName, $lastName, $email, $password)
     {
         //Check if the length is too big
-        if (strlen($userName) > 45)
-        {
+        if (strlen($userName) > 45) {
             return 'Username error';
         }
         //Check if the name uses letters and if it is the correct length
-        if (!(preg_match("/^[a-zA-Z]*$/", $firstName)) || !(preg_match("/^[a-zA-Z]*$/", $lastName)) || strlen($firstName) > 45 || strlen($lastName) > 45)
-        {
+        if (!(preg_match("/^[a-zA-Z]*$/", $firstName)) || !(preg_match("/^[a-zA-Z]*$/", $lastName)) || strlen($firstName) > 45 || strlen($lastName) > 45) {
             return 'Name error';
         }
 
-        if (filter_var($email, FILTER_VALIDATE_EMAIL) ===False || strlen($email) > 45)
-        {
+        if (filter_var($email, FILTER_VALIDATE_EMAIL) ===false || strlen($email) > 45) {
             return 'Email error';
         }
 
-        if (strlen($password) > 255)
-        {
+        if (strlen($password) > 255) {
             return 'Password error';
         }
     }
 
     public function assignRubric()
     {
+    }
 
+    public function getStudentName($studentID)
+    {
+        //checks if value exists in database
+        $sql = "SELECT firstName, lastName FROM students where studentID = :studentID";
+
+        if ($stmt = $this->dbHandle->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":studentID", $param_studentID, PDO::PARAM_STR);
+
+            // Set parameters
+            $param_studentID = trim($studentID);
+            
+            // Attempt to execute the prepared statement
+            $stmt->execute();
+            $row = $stmt->fetch();
+            $name = $row['firstName'] . " " . $row['lastName'];
+
+            return $name;
+        } else {
+            return false;
+        }
+        //Close statement
+        unset($stmt);
+        //Close connection
+        unset($pdo);
     }
     
     public function insertStudentAssignment($teacherID, $studentID, $rubricDate, $targetStudent)
@@ -711,7 +690,7 @@ class UserDataSet
 
             // Attempt to execute the prepared statement
             $stmt->execute();
-            return "Values inserted successfully";
+            return "Rubric has been assigned to student:" . $this->getStudentName($studentID) . " for student: " .$this->getStudentName($targetStudent);
         } else {
             return "There was an error accessing the database. Please try again.";
         }
