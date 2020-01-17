@@ -37,27 +37,24 @@ if(isset($_POST['submit']))
 
     $dateID = $handler->checkDate($handler->getTimestamp());
 
-    foreach ($arrayVals as $value)
-    {
-        $success = $handler->insertAssessmentValues($value, $dateID);
-        $message = true;
-    }
-
-    if($message === true)
-    {
-        echo "This data has been sent to the database";
-    }
+//    foreach ($arrayVals as $value)
+//    {
+//        $success = $handler->insertAssessmentValues($value, $dateID);
+//        $message = true;
+//    }
+//
+//    if($message === true)
+//    {
+//        echo "This data has been sent to the database";
+//    }
 
 }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                //hello
+
 //Click to assign a rubric to a class
 if(isset($_POST['assign']))
 {
     $teacherID = $_SESSION['user']->getRoleID();
-    $teacherClassID = $_SESSION['user']->getTeachersClassID($teacherID);
-    $studentList = [];
-    $studentList = $_SESSION['user']->getStudentsInClass($teacherClassID);
-
+    $teacherClassID = $_SESSION['user']->getClassID();
 }
 
 require_once('Views/displayRubric.phtml');
