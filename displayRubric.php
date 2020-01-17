@@ -83,7 +83,6 @@ if(isset($_POST['assign']))
             elseif ($currentTableGroup == $targetStudent['tableGroup'])
             {
                $userHandler->insertStudentAssignment($teacherID,$currentID,$_SESSION['timestamp'],$targetStudent['studentID']);
-               var_dump($userHandler);
             }
             // table is different and searched is false
             elseif($currentTableGroup != $targetStudent['tableGroup'] && $isSearched == false)
