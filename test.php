@@ -115,7 +115,7 @@ var_dump(explode(",",$str));
 //var_dump($userHandler->insertStudentAssignment("11","31","1","41"));
 //var_dump($userHandler->insertStudentAssignment("11","41","1","31"));
 
-//var_dump($handler->getAssignedRubric("86"));
+//var_dump($handler->getAssignedRubricAsClass("86"));
 //var_dump($userHandler->getTeachersName("32"));
 //var_dump($handler->getRubricNameOnDateID("2"));
-var_dump($userHandler->getAssignedRubricForStudent("37","1","22"));
+var_dump($userHandler->getAssignedRubricForStudent("32","1","86"));
