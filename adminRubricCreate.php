@@ -4,6 +4,7 @@ require_once('Models/UserData/UserData.php');
 session_start();
 
 $view = new stdClass();
+$view->pageTitle = 'Rubric Generator';
 $view->user = null;
 
 

@@ -156,7 +156,7 @@
                     if($_SESSION['user']->getRoleID() === '1' || $_SESSION['user']->getRoleID() === '2')
                     {
                         echo "<li><a class=\"dropdown-trigger "; if ($view->pageTitle == "View User" || $view->pageTitle == "Add User" || $view->pageTitle == "Edit User" || $view->pageTitle == "Delete User") {echo 'grey darken-3';}echo "\" href=\"#!\" data-target=\"dropdown1\">Manage User<i class=\"material-icons right\">arrow_drop_down</i></a></li>";
-                        echo "<li><a class=\"dropdown-trigger "; if ($view->pageTitle == "Assign Table Group" || $view->pageTitle == "Add Class" || $view->pageTitle == "Delete Class") {echo 'grey darken-3';}echo "\" href=\"#!\" data-target=\"manageClass1\">Manage Class<i class=\"material-icons right white-text\">arrow_drop_down</i></a></li>";
+                        echo "<li><a class=\"dropdown-trigger "; if ($view->pageTitle == "Rubric Generator" || $view->pageTitle == "Add Class" || $view->pageTitle == "Delete Class") {echo 'grey darken-3';}echo "\" href=\"#!\" data-target=\"manageClass1\">Manage Class<i class=\"material-icons right white-text\">arrow_drop_down</i></a></li>";
 
                     }
                 } ?>
@@ -167,7 +167,7 @@
                 {
                     if($_SESSION['user']->getRoleID() == '1' || $_SESSION['user']->getRoleID() == '2' || $_SESSION['user']->getRoleID() === '3')
                     {
-                        echo "<li><a class=\"dropdown-trigger\" href=\"#!\" data-target=\"dropdown3\">Manage Rubrics<i class=\"material-icons right\">arrow_drop_down</i></a></li>";
+                        echo "<li><a class=\"dropdown-trigger "; if ($view->pageTitle == "Assign Table Group" || $view->pageTitle == "Add Class" || $view->pageTitle == "Delete Class") {echo 'grey darken-3';}echo "\" href=\"#!\" data-target=\"dropdown3\">Manage Rubrics<i class=\"material-icons right\">arrow_drop_down</i></a></li>";
                     }
                     echo "<li><a href='../../logout.php'>Log Out</a></li>";
                 }
