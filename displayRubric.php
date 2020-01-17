@@ -53,7 +53,7 @@ if(isset($_POST['submit']))
 //Click to assign a rubric to a class
 if(isset($_POST['assign']))
 {   // gets teacher ID from session
-    $teacherID = $_SESSION['user']->getRoleID();
+    $teacherID = $_SESSION['user']->getUserID();
     //gets the teacher's class ID
     $teacherClassID = $_SESSION['user']->getClassID($teacherID);
     $studentList = [];
@@ -80,7 +80,7 @@ if(isset($_POST['assign']))
             // table group matches
             elseif ($currentTableGroup == $targetStudent['tableGroup'])
             {
-                $dateID = $handler->retrieveDateID($handler->retrieveDateID());
+                $dateID = $handler->getDateID($_SESSION['timestamp']);
 
                 $userHandler->insertStudentAssignment($teacherID,$currentID,$dateID,$targetStudent['studentID']);
             }
