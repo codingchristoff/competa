@@ -91,7 +91,6 @@ if(isset($_POST['assign']))
             }
             else{echo "An error has occurred assigning rubric to class.";}
         }
-
     }
 }
 
