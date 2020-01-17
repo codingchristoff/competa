@@ -43,10 +43,7 @@ if(isset($_POST['submit']))
     $count = 0; // offset counter
     $down = $lengthCount;
 
-    $arrayFinalCount = 0;
-
-
-    $arrayFinal = array();
+    $dateID = $handler->checkDate($handler->getTimestamp());
 
     while($count <= $lengthCount)
     {
@@ -64,20 +61,12 @@ if(isset($_POST['submit']))
 
         foreach ($arrayTemp as $key => $val)
         {
-            $arrayFinal[$arrayFinalCount] = "{$rubricName},{$category_name},{$val}";
-            $arrayFinalCount++;
-        }
+            $string = "{$rubricName},{$category_name},{$val}";
 
+            echo $handler->insertRubricData($string, $dateID);
+        }
         $count++;
         $down--;
-
-    }
-
-    $dateID = $handler->checkDate($handler->getTimestamp());
-
-    foreach ($arrayFinal as $row)
-    {
-       echo $handler->insertRubricData($row, $dateID);
     }
 }
 
