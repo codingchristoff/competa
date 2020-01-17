@@ -30,6 +30,7 @@
             echo '
                 <!-- Dropdown Structure -->
                 <ul id="dropdown1" class="dropdown-content black">
+                    <li class="divider"></li>
                     <li><a class=\'btn-block\' href=\'viewUserData.php\'>View User</a></li>
                     <li class="divider"></li>';
 
@@ -59,6 +60,7 @@
                 
                 <!-- Dropdown Structure 2 -->
                 <ul id="dropdown2" class="dropdown-content black">
+                    <li class="divider"></li>
                     <li><a class=\'btn-block\' href=\'viewUserData.php\'>View User</a></li>
                     <li class="divider"></li>';
 
@@ -83,6 +85,7 @@
             
             <!-- Dropdown Structure - Manage Class 1 -->
                 <ul id="manageClass1" class="dropdown-content black">
+                    <li class="divider"></li>
                     <li><a class=\'btn-block\' href=\'assignTableGroup.php\'>Assign Table Group</a></li>
                     <li class="divider"></li>';
 
@@ -126,7 +129,7 @@
 
         if($_SESSION['user']->getRoleID() === '1')
         {
-            echo '<li><a class=\'btn-block\' href=\'adminRubricCreate.php\'>Rubric Generator</a></li>';
+            echo '<li class="divider"></li><li><a class=\'btn-block\' href=\'adminRubricCreate.php\'>Rubric Generator</a></li>';
         }
         echo '<li class="divider"></li>
                      <li><a class=\'btn-block\' href=\'searchRubric.php\'>Rubric Search</a></li>
