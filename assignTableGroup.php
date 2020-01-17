@@ -53,7 +53,7 @@ if(isset($_SESSION['user']))
     else
     {
         //If the user is a student they cannot access the page therefore redirect them to myData page
-        header('Location: myData.php');
+        header('Location: home.php');
     }
 
 }

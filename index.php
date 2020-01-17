@@ -33,7 +33,7 @@ if(isset($_POST['submit']))
 
 if (isset($_SESSION['user']))
 {
-    header("Location: myData.php");
+    header("Location: home.php");
 }
 
 require_once('Views/index.phtml');
