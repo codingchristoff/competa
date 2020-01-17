@@ -398,7 +398,7 @@ class UserDataSet
     // This function returns all studetns who are in a teachers class
     public function getStudentsInClass($classID)
     {
-        $sql = "SELECT studentID,tableGroup FROM students WHERE classID = :classID and tableGroup is not null ORDER BY tableGroup";
+        $sql = "SELECT studentID,tableGroup FROM students WHERE classID = :classID";
 
         if ($stmt = $this->dbHandle->prepare($sql)) {
             $stmt->bindParam(":classID", $param_classID, PDO::PARAM_STR);
@@ -426,7 +426,7 @@ class UserDataSet
 
     public function getTeachersClassID($teacherID)
     {
-        $sql = "SELECT classID FROM teachers WHERE teacherID = :teacherID ";
+        $sql = "SELECT classID FROM teachers WHERE teacherID = :teacherID";
 
         if ($stmt = $this->dbHandle->prepare($sql)) {
             $stmt->bindParam(":teacherID", $param_teacherID, PDO::PARAM_STR);
@@ -579,8 +579,16 @@ class UserDataSet
         $emailClean = $this->cleanInput($user->getEmail());
         $passwordClean = $this->cleanInput($user->getPassword());
 
-        //Encrypts the password using the Crypt_Blowfish algorithm
-        $passwordClean = password_hash($passwordClean,PASSWORD_BCRYPT);
+
+        $editPassword = False;
+        if ((!$passwordClean==""))
+        {
+            //Encrypts the password using the Crypt_Blowfish algorithm
+            $passwordClean = password_hash($passwordClean,PASSWORD_BCRYPT);
+
+            $editPassword = True;
+        }
+
 
         //Gets the first letter of the userName and puts it to lowercase
         $userType = strtolower(substr($userNameClean, 0,1));
@@ -595,7 +603,6 @@ class UserDataSet
             return 'Only Admins can have no class';
         }
 
-
         //Checks the rest of the variables to see if they are in the correct format
         $checkUserVariables = $this->checkUserVariables($userNameClean, $firstNameClean, $lastNameClean, $emailClean, $passwordClean);
         if ($checkUserVariables!==null)
@@ -608,7 +615,14 @@ class UserDataSet
         {
             $classIDClean = intval($this->cleanInput($classID));
             //SQL statement that will edit a user
-            $sqlQuery = 'UPDATE students SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'", password="' . $passwordClean.'", classID="' . $classIDClean.'" WHERE userName="' . $userNameClean.'"';
+            if ($editPassword==True)
+            {
+                $sqlQuery = 'UPDATE students SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'", password="' . $passwordClean.'", classID="' . $classIDClean.'" WHERE userName="' . $userNameClean.'"';
+            }
+            else
+            {
+                $sqlQuery = 'UPDATE students SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'", classID="' . $classIDClean.'" WHERE userName="' . $userNameClean.'"';
+            }
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
@@ -618,7 +632,14 @@ class UserDataSet
         {
             $classIDClean = intval($this->cleanInput($classID));
             //SQL statement that will edit a user
-            $sqlQuery = 'UPDATE teachers SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'", password="' . $passwordClean.'", classID="' . $classIDClean.'" WHERE userName="' . $userNameClean.'"';
+            if ($editPassword==True)
+            {
+                $sqlQuery = 'UPDATE teachers SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'", password="' . $passwordClean.'", classID="' . $classIDClean.'" WHERE userName="' . $userNameClean.'"';
+            }
+            else
+            {
+                $sqlQuery = 'UPDATE teachers SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'", classID="' . $classIDClean.'" WHERE userName="' . $userNameClean.'"';
+            }
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
@@ -627,8 +648,15 @@ class UserDataSet
         else if ($userType === 'a')
         {
             //SQL statement that will edit a user
-            $sqlQuery = 'UPDATE admins SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'", password="' . $passwordClean.'" WHERE userName="' . $userNameClean.'"';
-
+            if ($editPassword==True)
+            {
+                $sqlQuery = 'UPDATE admins SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'", password="' . $passwordClean.'" WHERE userName="' . $userNameClean.'"';
+            }
+            else
+            {
+                $sqlQuery = 'UPDATE admins SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'" WHERE userName="' . $userNameClean.'"';
+            }
+            
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
         }
@@ -685,39 +713,5 @@ class UserDataSet
         {
             return 'Password error';
         }
-    }
-
-    public function assignRubric()
-    {
-
-    }
-    
-    public function insertStudentAssignment($teacherID, $studentID, $rubricDate, $targetStudent)
-    {
-        $sql = "INSERT INTO assignedRubrics values (:teacherID, :studentID, :rubricDate, :targetStudent)";
-
-        if ($stmt = $this->dbHandle->prepare($sql)) {
-            // Bind variables to the prepared statement as parameters
-            $stmt->bindParam(":teacherID", $param_teacherID, PDO::PARAM_STR);
-            $stmt->bindParam(":studentID", $param_studentID, PDO::PARAM_STR);
-            $stmt->bindParam(":rubricDate", $param_rubricDate, PDO::PARAM_STR);
-            $stmt->bindParam(":targetStudent", $param_targetStudent, PDO::PARAM_STR);
-
-            // Set parameters
-            $param_teacherID = trim($teacherID);
-            $param_studentID = trim($studentID);
-            $param_rubricDate = trim($rubricDate);
-            $param_targetStudent = trim($targetStudent);
-
-            // Attempt to execute the prepared statement
-            $stmt->execute();
-            return "Values inserted successfully";
-        } else {
-            return "There was an error accessing the database. Please try again.";
-        }
-        // Close statement
-        unset($stmt);
-        // Close connection
-        unset($pdo);
     }
 }
