@@ -146,25 +146,26 @@
 
     <nav class="black">
         <div id="top-nav" class="container nav-wrapper">
-            <a href="index.php" class="brand-logo center lighten-3">Rubrics</a>
+            <a href="index.php" class="brand-logo left-align lighten-3">Rubrics</a>
 
             <!-- Nav when view is more than 992px -->
-            <ul class="left hide-on-med-and-down">
+            
+            <ul class="right hide-on-med-and-down">
                 <?php if(isset($_SESSION['user']))
                 {
+                    echo "<li><a class='btn-block "; if ($view->pageTitle == "Home") {echo 'grey darken-3';}echo "' href='home.php'>Home</a></li>";
                     echo "<li><a class='btn-block "; if ($view->pageTitle == "My Data") {echo 'grey darken-3';}echo "' href='myData.php'>My Data</a></li>";
                     if($_SESSION['user']->getRoleID() === '1' || $_SESSION['user']->getRoleID() === '2')
                     {
                         echo "<li><a class=\"dropdown-trigger "; if ($view->pageTitle == "View User" || $view->pageTitle == "Add User" || $view->pageTitle == "Edit User" || $view->pageTitle == "Delete User") {echo 'grey darken-3';}echo "\" href=\"#!\" data-target=\"dropdown1\">Manage User<i class=\"material-icons right\">arrow_drop_down</i></a></li>";
+
+                    }
+
+                    if($_SESSION['user']->getRoleID() === '1' || $_SESSION['user']->getRoleID() === '2')
+                    {
                         echo "<li><a class=\"dropdown-trigger "; if ($view->pageTitle == "Assign Table Group" || $view->pageTitle == "Add Class" || $view->pageTitle == "Delete Class") {echo 'grey darken-3';}echo "\" href=\"#!\" data-target=\"manageClass1\">Manage Class<i class=\"material-icons right white-text\">arrow_drop_down</i></a></li>";
 
                     }
-                } ?>
-            </ul>
-
-            <ul class="right hide-on-med-and-down">
-                <?php if(isset($_SESSION['user']))
-                {
                     if($_SESSION['user']->getRoleID() == '1' || $_SESSION['user']->getRoleID() == '2' || $_SESSION['user']->getRoleID() === '3')
                     {
                         echo "<li><a class=\"dropdown-trigger "; if ($view->pageTitle == "Rubrics Fill" || $view->pageTitle == "Rubric Create" || $view->pageTitle == "Display Rubric" || $view->pageTitle == "Search Rubric") {echo 'grey darken-3';}echo "\" href=\"#!\" data-target=\"dropdown3\">Manage Rubrics<i class=\"material-icons right\">arrow_drop_down</i></a></li>";
