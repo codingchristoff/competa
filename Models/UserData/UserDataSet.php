@@ -579,8 +579,16 @@ class UserDataSet
         $emailClean = $this->cleanInput($user->getEmail());
         $passwordClean = $this->cleanInput($user->getPassword());
 
-        //Encrypts the password using the Crypt_Blowfish algorithm
-        $passwordClean = password_hash($passwordClean,PASSWORD_BCRYPT);
+
+        $editPassword = False;
+        if ((!$passwordClean==""))
+        {
+            //Encrypts the password using the Crypt_Blowfish algorithm
+            $passwordClean = password_hash($passwordClean,PASSWORD_BCRYPT);
+
+            $editPassword = True;
+        }
+
 
         //Gets the first letter of the userName and puts it to lowercase
         $userType = strtolower(substr($userNameClean, 0,1));
@@ -595,7 +603,6 @@ class UserDataSet
             return 'Only Admins can have no class';
         }
 
-
         //Checks the rest of the variables to see if they are in the correct format
         $checkUserVariables = $this->checkUserVariables($userNameClean, $firstNameClean, $lastNameClean, $emailClean, $passwordClean);
         if ($checkUserVariables!==null)
@@ -608,7 +615,14 @@ class UserDataSet
         {
             $classIDClean = intval($this->cleanInput($classID));
             //SQL statement that will edit a user
-            $sqlQuery = 'UPDATE students SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'", password="' . $passwordClean.'", classID="' . $classIDClean.'" WHERE userName="' . $userNameClean.'"';
+            if ($editPassword==True)
+            {
+                $sqlQuery = 'UPDATE students SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'", password="' . $passwordClean.'", classID="' . $classIDClean.'" WHERE userName="' . $userNameClean.'"';
+            }
+            else
+            {
+                $sqlQuery = 'UPDATE students SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'", classID="' . $classIDClean.'" WHERE userName="' . $userNameClean.'"';
+            }
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
@@ -618,7 +632,14 @@ class UserDataSet
         {
             $classIDClean = intval($this->cleanInput($classID));
             //SQL statement that will edit a user
-            $sqlQuery = 'UPDATE teachers SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'", password="' . $passwordClean.'", classID="' . $classIDClean.'" WHERE userName="' . $userNameClean.'"';
+            if ($editPassword==True)
+            {
+                $sqlQuery = 'UPDATE teachers SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'", password="' . $passwordClean.'", classID="' . $classIDClean.'" WHERE userName="' . $userNameClean.'"';
+            }
+            else
+            {
+                $sqlQuery = 'UPDATE teachers SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'", classID="' . $classIDClean.'" WHERE userName="' . $userNameClean.'"';
+            }
 
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
@@ -627,8 +648,15 @@ class UserDataSet
         else if ($userType === 'a')
         {
             //SQL statement that will edit a user
-            $sqlQuery = 'UPDATE admins SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'", password="' . $passwordClean.'" WHERE userName="' . $userNameClean.'"';
-
+            if ($editPassword==True)
+            {
+                $sqlQuery = 'UPDATE admins SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'", password="' . $passwordClean.'" WHERE userName="' . $userNameClean.'"';
+            }
+            else
+            {
+                $sqlQuery = 'UPDATE admins SET firstName="' . $firstNameClean .'", lastName="' . $lastNameClean.'", email="' . $emailClean.'" WHERE userName="' . $userNameClean.'"';
+            }
+            
             $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
             $statement->execute(); // execute the PDO statement
         }
