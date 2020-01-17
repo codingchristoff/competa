@@ -19,7 +19,7 @@ $handler = new rubricHandler();
 if(isset($_SESSION['rubric_name']))
 {
     $_SESSION['rubric'] = $handler->buildRubric($_SESSION['timestamp'], $_SESSION['rubric_name']);
-    $view->runTimestamp = $_SESSION['timestamp'];
+    $view->timestamp = $_SESSION['timestamp'];
 }
 if(isset($_SESSION['rubric']))
 {
@@ -37,24 +37,60 @@ if(isset($_POST['submit']))
 
     $dateID = $handler->checkDate($handler->getTimestamp());
 
-//    foreach ($arrayVals as $value)
-//    {
-//        $success = $handler->insertAssessmentValues($value, $dateID);
-//        $message = true;
-//    }
-//
-//    if($message === true)
-//    {
-//        echo "This data has been sent to the database";
-//    }
+    foreach ($arrayVals as $value)
+    {
+        $success = $handler->insertAssessmentValues($value, $dateID);
+        $message = true;
+    }
+
+    if($message === true)
+    {
+        echo "This data has been sent to the database";
+    }
 
 }
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                //hello
 //Click to assign a rubric to a class
 if(isset($_POST['assign']))
-{
+{   // gets teacher ID from session
     $teacherID = $_SESSION['user']->getRoleID();
-    $teacherClassID = $_SESSION['user']->getClassID();
+    //gets the teacher's class ID
+    $teacherClassID = $_SESSION['user']->getTeachersClassID($teacherID);
+    $studentList = [];
+    //gets all students in that teacher's class and puts them in an array
+    $studentList = $_SESSION['user']->getStudentsInClass($teacherClassID);
+
+    //for each student in the table, loop through to compare with each other student
+    foreach ($studentList as $currentStudent)
+    {
+        //records the necessary data of the student being compared
+        $currentID = $currentStudent['studentID'];
+        $currentTableGroup = $currentStudent['tableGroup'];
+        //Used to exit the loop early to save time
+        $isSearched = false;
+        // goes through the array again
+        foreach ($studentList as $targetStudent)
+        {
+            // table group is wrong and is searched are true
+            if ( $currentTableGroup != $targetStudent['tableGroup'] && $isSearched == true)
+            {
+                //Breaks out of the if and current for each loop
+                break;
+            }
+            // table group matches
+            elseif ($currentTableGroup == $targetStudent['tableGroup'])
+            {
+                $_SESSION['user']->insertStudentAssignment($teacherID,$currentID,$_SESSION['timestamp'],$targetStudent['studentID']);
+            }
+            // table is different and searched is false
+            elseif($currentTableGroup != $targetStudent['tableGroup'] && $isSearched == false)
+            {
+
+            }
+            else{echo "An error has occurred assigning rubric to class.";}
+        }
+
+    }
 }
 
 require_once('Views/displayRubric.phtml');
