@@ -50,7 +50,7 @@ if(isset($_SESSION['user']))
 
     }
     else {
-        header('Location: myData.php');
+        header('Location: home.php');
     }
 }
 else
