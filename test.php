@@ -109,4 +109,7 @@ var_dump(explode(",",$str));
 
 //var_dump($userHandler->getTeachersClassID("2"));
 
-var_dump($userHandler->getStudentsInClass(11));
+//var_dump($userHandler->getStudentsInClass(11));
+
+var_dump($userHandler->insertStudentAssignment("11","31","1","41"));
+var_dump($userHandler->insertStudentAssignment("11","41","1","31"));
