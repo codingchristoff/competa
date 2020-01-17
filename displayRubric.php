@@ -54,14 +54,13 @@ if(isset($_POST['submit']))
 if(isset($_POST['assign']))
 {   // gets teacher ID from session
     $teacherID = $_SESSION['user']->getRoleID();
-    var_dump($teacherID);
     //gets the teacher's class ID
-    $teacherClassID = $_SESSION['user']->getTeachersClassID($teacherID);
-    var_dump($teacherClassID);
+    $teacherClassID = $_SESSION['user']->getClassID($teacherID);
     $studentList = [];
+
+    $userHandler = new UserDataSet();
     //gets all students in that teacher's class and puts them in an array
-    $studentList = $_SESSION['user']->getStudentsInClass($teacherClassID);
-    var_dump($studentList);
+    $studentList = $userHandler->getStudentsInClass($teacherClassID);
 
     //for each student in the table, loop through to compare with each other student
     foreach ($studentList as $currentStudent)
@@ -83,7 +82,8 @@ if(isset($_POST['assign']))
             // table group matches
             elseif ($currentTableGroup == $targetStudent['tableGroup'])
             {
-               echo $_SESSION['user']->insertStudentAssignment($teacherID,$currentID,$_SESSION['timestamp'],$targetStudent['studentID']);
+               $userHandler->insertStudentAssignment($teacherID,$currentID,$_SESSION['timestamp'],$targetStudent['studentID']);
+               var_dump($userHandler);
             }
             // table is different and searched is false
             elseif($currentTableGroup != $targetStudent['tableGroup'] && $isSearched == false)
