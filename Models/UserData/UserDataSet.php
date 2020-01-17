@@ -686,4 +686,38 @@ class UserDataSet
             return 'Password error';
         }
     }
+
+    public function assignRubric()
+    {
+
+    }
+    
+    public function insertStudentAssignment($teacherID, $studentID, $rubricDate, $targetStudent)
+    {
+        $sql = "INSERT INTO assignedRubrics values (:teacherID, :studentID, :rubricDate, :targetStudent)";
+
+        if ($stmt = $this->dbHandle->prepare($sql)) {
+            // Bind variables to the prepared statement as parameters
+            $stmt->bindParam(":teacherID", $param_teacherID, PDO::PARAM_STR);
+            $stmt->bindParam(":studentID", $param_studentID, PDO::PARAM_STR);
+            $stmt->bindParam(":rubricDate", $param_rubricDate, PDO::PARAM_STR);
+            $stmt->bindParam(":targetStudent", $param_targetStudent, PDO::PARAM_STR);
+
+            // Set parameters
+            $param_teacherID = trim($teacherID);
+            $param_studentID = trim($studentID);
+            $param_rubricDate = trim($rubricDate);
+            $param_targetStudent = trim($targetStudent);
+
+            // Attempt to execute the prepared statement
+            $stmt->execute();
+            return "Values inserted successfully";
+        } else {
+            return "There was an error accessing the database. Please try again.";
+        }
+        // Close statement
+        unset($stmt);
+        // Close connection
+        unset($pdo);
+    }
 }
