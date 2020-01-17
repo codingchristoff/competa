@@ -10,9 +10,9 @@ $view->twoRubricsInfo = array();
 $view->threeRubricsInfo = array();
 
 
-if(isset($_SESSION['username']))
+if(isset($_SESSION['user']))
 {
-    $view->user = $_SESSION['username'];
+    $view->user = $_SESSION['user'];
 }
 
 if(isset($_SESSION['rubricsInfo']))

@@ -7,7 +7,7 @@ require_once('Models/UserData/ClassInfoData.php');
 session_start();
 
 $view = new stdClass();
-$view->pageTitle = 'View User';
+$view->pageTitle = 'View Teacher Class';
 
 //Initiating a connection to database and giving it to the view
 $dataSet = new UserDataSet();
