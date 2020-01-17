@@ -48,7 +48,9 @@
                     if ($_SESSION['user']->getRoleID() === '1')
                     {
                         echo '   
-                                <li><a class=\'btn-block\' href=\'adminDeleteUser.php\'>Delete User</a></li> 
+                                <li><a class=\'btn-block\' href=\'adminDeleteUser.php\'>Delete User</a></li>
+                                <li class="divider"></li>
+                                <li><a class=\'btn-block\' href=\'adminViewTeacherStudents.php\'>View Teachers Class</a></li> 
                                 ';
                     }
                 echo '
@@ -73,6 +75,7 @@
                     {
                         echo '   
                                 <li><a class=\'btn-block\' href=\'adminDeleteUser.php\'>Delete User</a></li><li class="divider"></li>
+                                <li><a class=\'btn-block\' href=\'adminViewTeacherStudents.php\'>View Teachers Class</a></li><li class="divider"></li>
                                 ';
                     }
              echo '        

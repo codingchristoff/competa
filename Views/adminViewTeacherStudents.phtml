@@ -10,16 +10,16 @@
                     </div><br/>
 
                     <div class="right btn-block col s12 l12">
-                        <input class="btn black right z-depth-2" type="submit" name="searchUser" value="Find Students">
+                        <input class="btn black right z-depth-2" type="submit" name="searchUser" value="View Students">
                     </div>
                 </form>
             </div>
 
             <?php
             if (isset($_POST['searchUser'])) {
-                echo '<h6 class="center helper-text"><strong>Students</strong></h6>';
                 echo '<div id="test1" class="col s12">
-                <div class="container">';
+                <div class="container"><h6 class="center helper-text"><strong>Students</strong></h6>';
+
                 if (isset($view->teachersStudents)) {
                     if (empty($view->teachersStudents)) {
                         echo '<h6 class="center helper-text">There are no students</h6>';
