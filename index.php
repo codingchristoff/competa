@@ -6,8 +6,6 @@ $view = new stdClass();
 $view->user = null;
 $view->success = null;
 
-// To ensure login.php is not manually accessible to logged in user
-
 require_once('Models/UserData/UserDataSet.php');
 require_once('Models/UserData/UserData.php');
 require_once('Models/UserData/AdminData.php');

@@ -13,7 +13,7 @@ $view->pageTitle = 'My Data';
 $dataSet = new UserDataSet();
 $view->dataSet = $dataSet;
 
-// To ensure login.php is not manually accessible to logged in user
+// To ensure myData.php is not manually accessible to logged in user
 if(!isset($_SESSION['user']))
 {
     header("Location: index.php");
