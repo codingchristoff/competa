@@ -26,12 +26,26 @@
 
 
                                 echo "<td>{$crit->getCriteriaText()}</td>";
-                                echo "<td>
-                                <label>
-                              <input class=\"with-gap\" type=\"radio\" value=\"{$view->rubric_id},{$catID},{$critID},{$result},{$_SESSION['user']->getUserID()},{$view->runTimestamp}\" name=\"{$critCount}\" required/> 
-                              <span></span>
-                              </label>
-                              </td>";
+
+                                if($_SESSION['user']->getRoleID() === '1' || $_SESSION['user']->getRoleID() === '2')
+                                {
+                                    echo "<td>
+                                    <label>
+                                      <input class=\"with-gap\" type=\"radio\" value=\"{$view->rubric_id},{$catID},{$critID},{$result},{$_SESSION['user']->getUserID()},{$view->runTimestamp}\" name=\"{$critCount}\" disabled=\"disabled\"/> 
+                                      <span></span>
+                                      </label>
+                                      </td>";
+                                }
+                                elseif ($_SESSION['user']->getRoleID() === '3')
+                                {
+                                    echo "<td>
+                                    <label>
+                                      <input class=\"with-gap\" type=\"radio\" value=\"{$view->rubric_id},{$catID},{$critID},{$result},{$_SESSION['user']->getUserID()},{$view->runTimestamp}\" name=\"{$critCount}\" required/> 
+                                      <span></span>
+                                      </label>
+                                      </td>";
+                                }
+
                                 $result++;
                             }
                             $result = 1;
@@ -42,10 +56,30 @@
                     </tbody>
                 </table>
             </div>
-            <div class="btn-block col s12 l12" id="btn-under-alert">
-                <input class="btn black right z-depth-2" type="submit"
-                       name="submit" value="Submit">
-            </div>
+
+            <?php
+            if($_SESSION['user']->getRoleID() === '2')
+            {
+                echo "<div class=\"col s6 l6 offset-s6 offset-l6 pull-l3 pull-s3\">
+                          <h6 class=\"center helper-text\"><strong>Assign to student:</strong></h6>
+                          </div>";
+
+                echo "<div class=\"input-field col s6 l6 offset-s6 offset-l6 pull-l3 pull-s3\">
+                          <input id=\"r_name\" type=\"text\" name=\"studentName\" placeholder=\"Student Name\" required>
+                          </div>";
+
+                echo "<div class=\"btn-block col s12 l12\" id=\"btn-under-alert\">
+                      <input class=\"btn black right z-depth-2\" type=\"submit\"
+                             name=\"assign\" value=\"Assign\">
+                      </div>";
+            }elseif($_SESSION['user']->getRoleID() === '3'){
+                echo "<div class=\"btn-block col s12 l12\" id=\"btn-under-alert\">
+                      <input class=\"btn black right z-depth-2\" type=\"submit\"
+                             name=\"submit\" value=\"Submit\">
+                      </div>";
+            }
+            ?>
+
         </div>
     </form>
 </div>
