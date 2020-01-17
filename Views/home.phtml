@@ -7,7 +7,43 @@
     <div class="container row">
         <div class="container col s12 l12 black-text">
             <ul class="collection with-header blue-grey z-depth-2">
+                <?php if(is_array($view->outstandingRubrics)) :?>
+
                 <li class="collection-header z-depth-2 center"><h6><strong>Outstanding Rubrics</strong></h6></li>
+
+                <?php foreach ($view->outstandingRubrics as $value) :?>
+
+                    <div class="col s12 m4">
+                            <div class="card small lighten-5">
+                                <div class="card-content black-text row">
+                                    <div class='card-meta'>
+                                    <span class="left-align small col s12 l12 grey-text text-darken-2">
+                                    Teacher: <strong><?=$value['firstName'] . " " . $value['lastName'] ?></strong></span>
+                                    <span class="left-align small col s12 l12 grey-text text-darken-2">
+                                    Date: <strong><?=$value['rubricDate'] ?></strong></span>
+                                    <span class="left-align small col s12 l12 grey-text text-darken-2">
+                                    Rubric Name: <strong><?=$value['rubricName']?></strong></span>
+                                    <span class="left-align small col s12 l12 grey-text text-darken-2">
+                                    Student Name: <strong><?=$value['targetStudentName']?></strong></span>
+                                    </div>
+                                    <div class="card-action col s12 l12">
+                                    <form class ="center card-button" method="post" action="<?php $_SERVER['PHP_SELF'] ?>">
+                                    <input type="hidden" name="rubric_name" value="<?php //$view->searchValue ?>">
+                                    <input type="hidden" name="timestamp" value="<?php //$value ?>">
+                                    <button class="btn black" type="submit" name="submit">Assess
+                                    <i class="material-icons right">visibility</i></button>
+                                    </form>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
+            <?php endforeach; ?>
+            <!-- If there are any errors -->
+               <?php elseif(is_string($view->err)): ?>
+
+                    <li class=\"collection-header center\"><h6><strong>{$view->err}</strong></h6></li>
+                <?php endif; ?>
 
             </ul>
         </div>

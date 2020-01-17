@@ -11,8 +11,7 @@ $view = new stdClass();
 $view->pageTitle = 'Home';
 
 //TESTING
-$view->searchValue = null;
-$view->searchResult = null;
+$view->outstandingRubrics = null;
 $view->err  = null;
 
 //Initiating a connection to database and giving it to the view
@@ -30,12 +29,26 @@ if(isset($_SESSION['user']))
     if($_SESSION['user']->getRoleID()==3)
     {
         //Gets outstanding rubrics that the user has
-        //$view->outstandingRubrics = $handler->
+        $outstandingRubricsArray = $handler->getAssignedRubricAsClass($_SESSION['user']->getUserID());
+        //var_dump($outstandingRubricsArray);
+
+        foreach ($outstandingRubricsArray as $value) {
+            $outstandingRubrics = $dataSet->getAssignedRubricForStudent($value['teacherID'], $value['rubricDate'], $value['targetStudent']);
+            //var_dump($view->outstandingRubrics);
+
+            if (is_array($outstandingRubrics)) {
+                $view->outstandingRubrics[] = $outstandingRubrics;
+                //var_dump($view->outstandingRubrics);
+            } else {
+                $view->err = $outstandingRubrics;
+            }
+        }
         //Check if the submit button has been pressed
         if(isset($_POST['submit']))
         {
             $_SESSION['rubric_name'] = $_POST['rubric_name'];
             $_SESSION['timestamp'] = $_POST['timestamp'];
+            $_SESSION['targetID'] = $_POST['targetID'];
 
             header("Location: displayRubric.php");
         }
