@@ -797,7 +797,8 @@ class UserDataSet
         $rubricDate = ($rubricHandler->getdate($dateID));
         $rubricName = ($rubricHandler->getRubricNameOnDateID($dateID));
         $targetStudentID = $studentID;
-        $data = [$teacherName['firstName'],$teacherName['lastName'],$rubricDate,$rubricName,$targetStudentID];
+        $studentName = $this->getStudentName($studentID);
+        $data = [$teacherName['firstName'],$teacherName['lastName'],$rubricDate,$rubricName,$targetStudentID, $studentName];
 
         return $data;
 
