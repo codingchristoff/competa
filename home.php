@@ -48,7 +48,7 @@ if(isset($_SESSION['user']))
         {
             $_SESSION['rubric_name'] = $_POST['rubric_name'];
             $_SESSION['timestamp'] = $_POST['timestamp'];
-            $_SESSION['targetID'] = $_POST['targetID'];
+            $_SESSION['targetID'] = $_POST['targetStudentName'];
 
             header("Location: displayRubric.php");
         }
