@@ -31,7 +31,7 @@
                                 {
                                     echo "<td>
                                     <label>
-                                      <input class=\"with-gap\" type=\"radio\" value=\"{$view->rubric_id},{$catID},{$critID},{$result},{$_SESSION['user']->getUserID()},{$view->runTimestamp}\" name=\"{$critCount}\" disabled=\"disabled\"/> 
+                                      <input class=\"with-gap\" type=\"radio\" value=\"{$view->rubric_id},{$catID},{$critID},{$result},{$_SESSION['user']->getUserID()},{$view->timestamp}\" name=\"{$critCount}\" disabled=\"disabled\"/> 
                                       <span></span>
                                       </label>
                                       </td>";
@@ -40,7 +40,7 @@
                                 {
                                     echo "<td>
                                     <label>
-                                      <input class=\"with-gap\" type=\"radio\" value=\"{$view->rubric_id},{$catID},{$critID},{$result},{$_SESSION['user']->getUserID()},{$view->runTimestamp}\" name=\"{$critCount}\" required/> 
+                                      <input class=\"with-gap\" type=\"radio\" value=\"{$view->rubric_id},{$catID},{$critID},{$result},{$_SESSION['targetID']},{$view->timestamp}\" name=\"{$critCount}\" required/> 
                                       <span></span>
                                       </label>
                                       </td>";
@@ -65,7 +65,7 @@
                           </div>";
 
                 echo "<div class=\"input-field col s6 l6 offset-s6 offset-l6 pull-l3 pull-s3\">
-                          <input id=\"r_name\" type=\"text\" name=\"studentName\" placeholder=\"Student Name\">
+                          <input id=\"r_name\" type=\"text\" name=\"studentName\" placeholder=\"Student Name\" >
                           </div>";
 
                 echo "<div class=\"btn-block col s12 l12\" id=\"btn-under-alert\">

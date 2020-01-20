@@ -117,6 +117,8 @@ var_dump(explode(",",$str));
 
 //var_dump($handler->getAssignedRubricAsClass("86"));
 //var_dump($userHandler->getTeachersName("32"));
-var_dump($handler->getRubricNameOnDateID("100"));
+//var_dump($handler->getRubricNameOnDateID("100"));
 //var_dump($userHandler->getAssignedRubricForStudent("32","1","86"));
+
+var_dump($handler->insertAssessmentValues("48,94,162,2,898,","211", "891"));
 
