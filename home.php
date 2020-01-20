@@ -44,12 +44,16 @@ if(isset($_SESSION['user']))
             }
         }
         //Check if the submit button has been pressed
-        if(isset($_POST['submit']))
+        if(isset($_POST['assess']))
         {
             $_SESSION['rubric_name'] = $_POST['rubric_name'];
             $_SESSION['timestamp'] = $_POST['timestamp'];
             $_SESSION['targetID'] = $_POST['targetStudentName'];
 
+            header("Location: displayRubric.php");
+        }
+        elseif(isset($_POST['submit']))
+        {
             $dataSet->removeAssignedRubric($_SESSION['user']->getUserID(), $_SESSION['targetID']);
 
             header("Location: home.php");
