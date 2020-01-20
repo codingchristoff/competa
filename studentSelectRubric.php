@@ -8,7 +8,7 @@ require_once('Models/RubricSet/rubricHandler.php');
 session_start();
 
 $view = new stdClass();
-$view->pageTitle = 'View Rubrics';
+$view->pageTitle = 'Results';
 
 //Checks if user is logged in
 if (isset($_SESSION['user'])){
@@ -18,6 +18,8 @@ if (isset($_SESSION['user'])){
 
         //Initiating database handler
         $handler = new RubricHandler();
+
+        $userHandler = new UserDataSet();
 
         //Stores all of the current users fully assessed rubric's DATES into an array
         $view->dates = $handler->getDatesFromStudentID($_SESSION['user']->getUserID());
@@ -39,6 +41,10 @@ if (isset($_SESSION['user'])){
                 $view->rubrics[] = $rubricObjects[0];
 
                 $view->mergeIDs[] = $assessedRubricsArray[1];
+
+                $username = $userHandler->getStudentName($handler->getMarkedByStudent($_SESSION['user']->getUserID(), $handler->getDateID($date)));
+
+                $view->markedBy[] = $username;
             } else {
                 $view->error = 'No marked rubrics available';
             }

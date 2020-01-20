@@ -44,11 +44,14 @@ if(isset($_SESSION['user']))
             }
         }
         //Check if the submit button has been pressed
-        if(isset($_POST['submit']))
+        if(isset($_POST['assess']))
         {
             $_SESSION['rubric_name'] = $_POST['rubric_name'];
-            $_SESSION['timestamp'] = $_POST['timestamp'];
-            $_SESSION['targetID'] = $_POST['targetStudentName'];
+            $_SESSION['timestamp'] = $_POST['rubricDate'];
+            $_SESSION['rubricDate'] = $handler->getDateID($_POST['rubricDate']);
+            $_SESSION['targetID'] = $_POST['targetStudentID'];
+
+            //var_dump($_SESSION['timestamp']);
 
             header("Location: displayRubric.php");
         }

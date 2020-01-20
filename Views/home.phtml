@@ -29,10 +29,10 @@
                                     <div class="card-action col s12 l12">
                                     <form class ="center card-button" method="post" action="<?php $_SERVER['PHP_SELF'] ?>">
                                     <input type="hidden" name="rubric_name" value="<?=$value['rubricName']?>">
-                                    <input type="hidden" name="timestamp" value="<?=$value['rubricDate']?>">
+                                    <input type="hidden" name="rubricDate" value="<?=$value['rubricDate']?>">
                                     <input type="hidden" name="targetStudentName" value="<?=$value['targetStudentName']?>">
-                                    <button class="btn black" type="submit" name="submit">Assess
-                                    <i class="material-icons right">visibility</i></button>
+                                        <input type="hidden" name="targetStudentID" value="<?=$value['targetStudentID']?>">
+                                    <button class="btn black" type="submit" name="assess">Assess</button>
                                     </form>
                                 </div>
                                 </div>

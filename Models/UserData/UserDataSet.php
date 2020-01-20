@@ -752,19 +752,22 @@ class UserDataSet
      * 
      * @param studentID
      * @param targetStudent
+     * @param rubricDate
      * 
      * @return string
      */
-    public function removeAssignedRubric($studentID, $targetStudent)
+    public function removeAssignedRubric($studentID, $targetStudent, $rubricDate)
     {
-        $sql = "DELETE FROM assignedRubrics WHERE studentID = :studentID AND targetStudent = :targetStudent";
+        $sql = "DELETE FROM assignedRubrics WHERE studentID = :studentID AND targetStudent = :targetStudent AND rubricDate = :rubricDate";
         if ($stmt = $this->dbHandle->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
             $stmt->bindParam(":studentID", $param_studentID, PDO::PARAM_STR);
             $stmt->bindParam(":targetStudent", $param_targetStudent, PDO::PARAM_STR);
+            $stmt->bindParam(":rubricDate", $param_rubricDate, PDO::PARAM_STR);
             // Set parameters
             $param_studentID = trim($studentID);
             $param_targetStudent = trim($targetStudent);
+            $param_rubricDate = trim($rubricDate);
             // Attempt to execute the prepared statement
             $stmt->execute();
             return "Rubric has been removed to student:" . $this->getStudentName($studentID) . " for student: " .$this->getStudentName($targetStudent);

@@ -30,6 +30,13 @@ $view->err  = null;
 
 $handler = new rubricHandler();
 
+//Checks if a USER has logged in
+if((!isset($_SESSION['user'])))
+{
+    //Redirects to login if not
+    header('Location: index.php');
+}
+
 if(isset($_POST['search']))
 {
     $view->searchValue = $_POST['search'];
