@@ -1025,7 +1025,7 @@ class RubricHandler
      *
      * @return boolean
      */
-    public function insertAssessmentValues($string, $dateID)
+    public function insertAssessmentValues($string, $dateID, $userID)
     {
         $explosion = explode(",", $string);
 
@@ -1038,15 +1038,15 @@ class RubricHandler
 
         $mergeID = $this->checkMergeID($rubricID, $categoryID, $criteriaID);
 
-        return $this->createAssessmentValue($mergeID, $studentID, $result, $dateID, $rubricDate);
+        return $this->createAssessmentValue($mergeID, $studentID, $result, $dateID, $rubricDate, $userID);
     }
 
     /**
      * Inserts the assessment values into the database
      */
-    public function createAssessmentValue($mergeID, $studentID, $result, $dateID, $rubricDate)
+    public function createAssessmentValue($mergeID, $studentID, $result, $dateID, $rubricDate, $markedBy)
     {
-        $sql = "INSERT INTO assessments (mergeID, studentID, result, dateID, rubricDate) values (:mergeID, :studentID, :result, :dateID, :rubricDate)";
+        $sql = "INSERT INTO assessments (mergeID, studentID, result, dateID, rubricDate, markedBy) values (:mergeID, :studentID, :result, :dateID, :rubricDate, :markedBy)";
  
         if ($stmt = $this->dbHandle->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
@@ -1055,6 +1055,8 @@ class RubricHandler
             $stmt->bindParam(":result", $param_result, PDO::PARAM_STR);
             $stmt->bindParam(":dateID", $param_dateID, PDO::PARAM_STR);
             $stmt->bindParam(":rubricDate", $param_rubricDate, PDO::PARAM_STR);
+            $stmt->bindParam(":markedBy", $param_markedBy, PDO::PARAM_STR);
+
 
             // Set parameters
             $param_mergeID = trim($mergeID);
@@ -1062,6 +1064,7 @@ class RubricHandler
             $param_result = trim($result);
             $param_dateID = trim($dateID);
             $param_rubricDate = trim($rubricDate);
+            $param_markedBy = trim($markedBy);
 
             // Attempt to execute the prepared statement
             $stmt->execute();

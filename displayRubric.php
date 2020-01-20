@@ -11,7 +11,7 @@ $view->rubric = null;
 $view->rubric_id = null;
 $view->rubric_name = null;
 $view->cats = array();
-$view->runTimestamp = null;
+$view->timestamp = null;
 
 
 $handler = new rubricHandler();
@@ -43,19 +43,19 @@ if(isset($_POST['submit']))
 
     $message = false;
 
+    $userID = $_SESSION['user']->getUserID();
     $dateID = $handler->checkDate($handler->getTimestamp());
 
     foreach ($arrayVals as $value)
     {
-        $success = $handler->insertAssessmentValues($value, $dateID);
-        var_dump($value);
-        $message = false;
+        $success = $handler->insertAssessmentValues($value, $dateID, $userID);
+        
+        $message = true;
     }
 
     if($message === true)
     {
-        //var_dump($_SESSION['user'], $_SESSION['targetID'],$_SESSION['rubricDate']);
-        $userHandler->removeAssignedRubric($_SESSION['user']->getUserID(), $_SESSION['targetID'],$_SESSION['rubricDate']);
+        $userHandler->removeAssignedRubric($userID, $_SESSION['targetID'],$_SESSION['rubricDate']);
         header("Location: home.php");
 
     }
