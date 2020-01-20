@@ -14,6 +14,10 @@ if(isset($_SESSION['user']))
 {
     $view->user = $_SESSION['user'];
 }
+else
+{
+    header('Location: index.php');
+}
 
 if(isset($_SESSION['rubricsInfo']))
 {

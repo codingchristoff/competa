@@ -17,6 +17,13 @@ $view->runTimestamp = null;
 $handler = new rubricHandler();
 $userHandler = new UserDataSet();
 
+//Checks if a USER has logged in
+if((!isset($_SESSION['user'])))
+{
+    //Redirects to login if not
+    header('Location: index.php');
+}
+
 if(isset($_SESSION['rubric_name']))
 {
     $_SESSION['rubric'] = $handler->buildRubric($_SESSION['timestamp'], $_SESSION['rubric_name']);

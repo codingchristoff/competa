@@ -50,7 +50,7 @@ if (isset($_SESSION['user'])){
     }
     //Redirects admin or teacher to their myData page
     else{
-        header('Location: myData.php');
+        header('Location: home.php');
     }
 }
 //If no user is logged in redirect to login
