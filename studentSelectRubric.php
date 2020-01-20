@@ -19,6 +19,8 @@ if (isset($_SESSION['user'])){
         //Initiating database handler
         $handler = new RubricHandler();
 
+        $userHandler = new UserDataSet();
+
         //Stores all of the current users fully assessed rubric's DATES into an array
         $view->dates = $handler->getDatesFromStudentID($_SESSION['user']->getUserID());
         //$view->dates = array_unique($view->dates);
@@ -39,6 +41,10 @@ if (isset($_SESSION['user'])){
                 $view->rubrics[] = $rubricObjects[0];
 
                 $view->mergeIDs[] = $assessedRubricsArray[1];
+
+                $username = $userHandler->getStudentName($handler->getMarkedByStudent($_SESSION['user']->getUserID(), $handler->getDateID($date)));
+
+                $view->markedBy[] = $username;
             } else {
                 $view->error = 'No marked rubrics available';
             }
