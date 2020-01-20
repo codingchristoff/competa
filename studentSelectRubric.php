@@ -8,7 +8,7 @@ require_once('Models/RubricSet/rubricHandler.php');
 session_start();
 
 $view = new stdClass();
-$view->pageTitle = 'View Rubrics';
+$view->pageTitle = 'Results';
 
 //Checks if user is logged in
 if (isset($_SESSION['user'])){
