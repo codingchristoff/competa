@@ -154,11 +154,11 @@
 
     <nav class="black">
         <div id="top-nav" class="container nav-wrapper">
-            <a href="index.php" class="brand-logo left-align lighten-3">Rubrics</a>
+            <a href="index.php" class="brand-logo left-align lighten-3 fixed s"><img src="">Rubrics</a>
 
             <!-- Nav when view is more than 992px -->
 
-            <ul class="right hide">
+            <ul class="right hide-on-med-and-down">
                 <?php if(isset($_SESSION['user']))
                 {
                     echo "<li><a class='btn-block "; if ($view->pageTitle == "Home") {echo 'grey darken-3';}echo "' href='home.php'>Home</a></li>";
@@ -201,7 +201,7 @@
             </ul>
 
             <!-- Use of materialise sidenav for v<992px navigation -->
-            <a href="#" data-target="slide-out" class="sidenav-trigger right show-on-large">
+            <a href="#" data-target="slide-out" class="sidenav-trigger right hide-on-large">
                 <i class="material-icons">menu</i></a>
         </div>
     </nav>
