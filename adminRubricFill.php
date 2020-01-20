@@ -8,6 +8,7 @@ $view = new stdClass();
 $view->user = null;
 $view->rubric_count = 1;
 $view->criteria_count = null;
+$view->success = False;
 $handler = new rubricHandler();
 
 if(isset($_SESSION['user']))
@@ -55,6 +56,7 @@ if(isset($_POST['submit']))
         }
         $count++;
     }
+    $view->success = True;
 }
 
 $view->pageTitle = 'Rubric Fill';
