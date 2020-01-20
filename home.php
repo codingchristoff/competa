@@ -50,7 +50,9 @@ if(isset($_SESSION['user']))
             $_SESSION['timestamp'] = $_POST['timestamp'];
             $_SESSION['targetID'] = $_POST['targetStudentName'];
 
-            header("Location: displayRubric.php");
+            $dataSet->removeAssignedRubric($_SESSION['user']->getUserID(), $_SESSION['targetID']);
+
+            header("Location: home.php");
         }
     }
 }
