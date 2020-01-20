@@ -3,10 +3,10 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    background-color: rgba(192,102,113,0.05);
 }
 main {
     flex: 1 0 auto;
-    background-color: rgba(80,80,80,0.05);
 }
 
 /* Class-based CSS*/
@@ -39,6 +39,10 @@ main {
 }
 
 /* ID-based CSS*/
+#container-header{
+    padding-top: 10px;
+}
+
 #sp_container{
     border: none;
 }
@@ -86,6 +90,7 @@ main {
 }
 #btn-under-alert{
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 #content-container{
     margin-top: 30px;

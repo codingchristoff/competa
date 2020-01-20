@@ -1,10 +1,14 @@
 <?php
-
 require_once('Models/UserData/UserData.php');
+require_once('Models/UserData/AdminData.php');
+require_once('Models/UserData/StudentData.php');
+require_once('Models/UserData/TeacherData.php');
 require_once('Models/RubricSet/rubricHandler.php');
 
+session_start();
+
 $view = new stdClass();
-$view->pageTitle = 'View Rubric';
+$view->pageTitle = 'Results';
 
 //Checks if user is logged in
 if (isset($_SESSION['user'])){
@@ -17,11 +21,14 @@ if (isset($_SESSION['user'])){
 
         //Stores all of the current users fully assessed rubric's DATES into an array
         $view->dates = $handler->getDatesFromStudentID($_SESSION['user']->getUserID());
+        //$view->dates = array_unique($view->dates);
+
+        $counter = 0;
 
         //Creating a rubric for each date
         foreach ($view->dates as $date) {
 
-            $assessedRubricsArray = $handler->createMarkedRubric($_SESSION['user']->getUserID());
+            $assessedRubricsArray = $handler->createMarkedRubric($_SESSION['user']->getUserID(), $date);
 
             if ($assessedRubricsArray != false) {
 
@@ -35,11 +42,7 @@ if (isset($_SESSION['user'])){
             } else {
                 $view->error = 'No marked rubrics available';
             }
-
         }
-
-
-
     }
     //Redirects admin or teacher to their myData page
     else{
@@ -50,5 +53,7 @@ if (isset($_SESSION['user'])){
 else{
     header('Location: index.php');
 }
+
+require_once ('Views/studentSelectRubric.phtml');
 
 

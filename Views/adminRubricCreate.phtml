@@ -1,53 +1,38 @@
 <?php require('template/header.phtml') ?>
+<div class="container">
+</div>
 <div class="container row">
-    <div class="container s12 l12" id="ls-header">
-        <h6 class="center helper-text"><strong>Test: Rubric Generator</strong></h6>
-    </div>
     <div class=" container row s12 l12">
         <form name="name" method="post" action="<?php $_SERVER['PHP_SELF'];?>">
-            <div class="container row s12 l12">
-                <div class="col s9 l9">
-                    <p>Select Number Of Rubrics You Require:</p>
+            <div class="container white z-depth-2">
+                    <h6 class="center helper-text" id="container-header"><strong>Rubric Generator</strong></h6>
+                <div class="container row s12 l12">
+                    <div class="col s9 l9">
+                        <p>Select Number Of Categories You Require For The Rubric:</p>
+                    </div>
+                    <div class="input-field col s3 l3">
+                        <select name="category_count" class="browser-default" id="rubrics">
+                            <option value="3">2</option>
+                            <option value="4">3</option>
+                            <option value="5">4</option>
+                        </select>
+                    </div><br>
                 </div>
-                <div class="input-field col s3 l3">
-                    <select name="rubric_count" class="browser-default" id="rubrics">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-                </div><br>
-            </div>
 
-            <div class="container row s12 l12">
-                <div class="col s9 l9">
-                    <p>Select Number Of Categories You Require For Each Rubric:</p>
+                <div class="container row s12 l12">
+                    <div class="col s9 l9">
+                        <p>Select Number Of Criteria For Each Category:</p>
+                    </div>
+                    <div class="input-field col s3 l3">
+                        <select name="criteria_count" class="browser-default" id="rubrics">
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div><br>
+                    <input class="btn black right z-depth-2" type="submit"
+                           name="submit" value="Submit" id="btn-under-alert">
                 </div>
-                <div class="input-field col s3 l3">
-                    <select name="category_count" class="browser-default" id="rubrics">
-                        <option value="3">2</option>
-                        <option value="4">3</option>
-                        <option value="5">4</option>
-                    </select>
-                </div><br>
-            </div>
-
-            <div class="container row s12 l12">
-                <div class="col s9 l9">
-                    <p>Select Number Of Criteria For Each Category:</p>
-                </div>
-                <div class="input-field col s3 l3">
-                    <select name="criteria_count" class="browser-default" id="rubrics">
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-                </div><br>
-            </div>
-
-            <div class="btn-block col s12 l12">
-                <input class="btn black right z-depth-2" type="submit"
-                       name="submit" value="Submit">
             </div>
         </form>
     </div>

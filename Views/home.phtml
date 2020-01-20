@@ -1,0 +1,56 @@
+<?php require('template/header.phtml') ?>
+<div class="container row" id="admin-container">
+    <div class="container s12 l12" id="ls-header">
+        <h6 class="center black-text"><strong>Home</strong></h6>
+    </div>
+
+    <div class="container row">
+        <div class="container col s12 l12 black-text">
+            <ul class="collection with-header blue-grey z-depth-2">
+                <?php if(is_array($view->outstandingRubrics)) :?>
+
+                <li class="collection-header z-depth-2 center"><h6><strong>Outstanding Rubrics</strong></h6></li>
+
+                <?php foreach ($view->outstandingRubrics as $value) :?>
+
+                    <div class="col s12 m4">
+                            <div class="card small lighten-5">
+                                <div class="card-content black-text row">
+                                    <div class='card-meta'>
+                                    <span class="left-align small col s12 l12 grey-text text-darken-2">
+                                    Teacher: <strong><?=$value['firstName'] . " " . $value['lastName'] ?></strong></span>
+                                    <span class="left-align small col s12 l12 grey-text text-darken-2">
+                                    Date: <strong><?=$value['rubricDate'] ?></strong></span>
+                                    <span class="left-align small col s12 l12 grey-text text-darken-2">
+                                    Rubric Name: <strong><?=$value['rubricName']?></strong></span>
+                                    <span class="left-align small col s12 l12 grey-text text-darken-2">
+                                    Student Name: <strong><?=$value['targetStudentName']?></strong></span>
+                                    </div>
+                                    <div class="card-action col s12 l12">
+                                    <form class ="center card-button" method="post" action="<?php $_SERVER['PHP_SELF'] ?>">
+                                    <input type="hidden" name="rubric_name" value="<?=$value['rubricName']?>">
+                                    <input type="hidden" name="rubricDate" value="<?=$value['rubricDate']?>">
+                                    <input type="hidden" name="targetStudentName" value="<?=$value['targetStudentName']?>">
+                                        <input type="hidden" name="targetStudentID" value="<?=$value['targetStudentID']?>">
+                                    <button class="btn black" type="submit" name="assess">Assess</button>
+                                    </form>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
+                <?php endforeach; ?>
+                <!-- If there are any errors -->
+               <?php elseif(is_string($view->err)): ?>
+
+                    <li class=\"collection-header center\"><h6><strong>{$view->err}</strong></h6></li>
+                <?php endif; ?>
+
+                <?php if(!(is_array($view->outstandingRubrics))) :?>
+                    <li class="collection-header z-depth-2 center"><h6><strong>Welcome Back</strong></h6></li>
+                <?php endif; ?>
+            </ul>
+        </div>
+    </div>
+</div>
+<?php require('template/footer.phtml') ?>

@@ -1,17 +1,26 @@
 <?php require('template/header.phtml') ?>
+<div class="container s12 l12" id="ls-header">
+    <h6 class="center black-text"><strong>My Data</strong></h6>
+</div>
     <div class="container s12 l12" id="ls-header">
-        <h6 class="center helper-text"><strong>Username: <?php echo $view->user->getUserName()?></strong></h6>
+        <h6 class="center helper-text">Username: <?php echo $view->user->getUserName()?></h6>
     </div>
 
     <div class="container s12 l12" id="ls-header">
-        <h6 class="center helper-text"><strong>Role: <?php if ($view->user->getRoleID() == 1) echo 'Admin'; else if ($view->user->getRoleID() == 2) echo 'Teacher'; else if ($view->user->getRoleID() == 3) echo 'Student'; else echo 'Unknown';?></strong></h6>
+        <h6 class="center helper-text">Role: <?php if ($view->user->getRoleID() == 1) echo 'Admin'; else if ($view->user->getRoleID() == 2) echo 'Teacher'; else if ($view->user->getRoleID() == 3) echo 'Student'; else echo 'Unknown';?></h6>
     </div>
 
     <div class="container s12 l12" id="ls-header">
-        <h6 class="center helper-text"><strong>Name: <?php echo $view->user->getFirstName() . ' ' . $view->user->getLastName()?></strong></h6>
+        <h6 class="center helper-text">Name: <?php echo $view->user->getFirstName() . ' ' . $view->user->getLastName()?></h6>
     </div>
 
     <div class="container s12 l12" id="ls-header">
-        <h6 class="center helper-text"><strong>Email: <?php echo $view->user->getEmail()?></strong></h6>
+        <h6 class="center helper-text">Email: <?php echo $view->user->getEmail()?></h6>
     </div>
+
+    <?php if($_SESSION['user']->getRoleID()=='3' || $_SESSION['user']->getRoleID()=='2')
+        echo '<div class="container s12 l12" id="ls-header">
+                <h6 class="center helper-text">Class: ' . $view->dataSet->fetchClassName($view->user->getClassID()) . '</h6>
+        </div>'
+    ?>
 <?php require('template/footer.phtml') ?>

@@ -1,5 +1,63 @@
 <?php require('template/header.phtml') ?>
 
+<div class="container row s12 l12 rubric-admin">
+    <div class="container col s12 l12">
+        <form name="studentFill" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+            <div class="container" id="ls-header">
+                <h6 class="center helper-text"><strong><?php echo $view->rubric->getRubricName(); ?></strong></h6>
+            </div>
+            <div>
+                <table class="fixed">
+                    <tbody>
+                    <?php
+                    $critCount = 0;
+                    $counter = 0;
+                    foreach ($view->rubric->getCategories() as $cat)
+                    {
+                        $catID = $cat->getCategoryID();
 
+                        echo "<tr>";
+                        echo "<td><strong>".$cat->getCategoryText()."</strong></td>";
+
+                        $crits = $cat->getCriteria(); // Criteria Array
+
+                        foreach ($crits as $crit)
+                        {
+                            $critID = $crit->getCriteriaID();
+
+                            echo "<td>{$crit->getCriteriaText()}</td>";
+                            if ($critID == $view->mergeIDs[$critCount]['criteriaID']) {
+                                echo "<td>
+                                    <label>
+                                  <input class=\"with-gap\" type='radio' checked='checked' /> 
+                                  <span></span>
+                                  </label>
+                                  </td>";
+                                $counter++;
+                            }
+                            else{
+                                echo "<td>
+                                    <label>
+                                  <input class=\"with-gap\" type='radio' disabled='disabled' /> 
+                                  <span></span>
+                                  </label>
+                                  </td>";
+                                $counter++;
+                            }
+                        }
+                        $counter = 0;
+                        echo "</tr>";
+                        $critCount++;
+                    }
+                    ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="btn-block col s12 l12" id="btn-under-alert">
+                <button class="btn black right z-depth-2" onclick="history.go(-1);">Back </button>
+            </div>
+        </form>
+    </div>
+</div>
 
 <?php require('template/footer.phtml') ?>

@@ -1,13 +1,14 @@
 <?php require('template/header.phtml') ?>
 <div class="container row" id="admin-container">
     <div class="container s12 l12" id="ls-header">
+            <h6 class="center black-text"><strong>Edit User</strong></h6>
     </div>
 
     <div class="row">
         <div class="col s12">
             <div id="test1" class="col s12">
                 <div class="container">
-                    <form name="addUser" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                    <form name="editUserForm" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                         <div class="input-field col s12 l12">
                             <input type="text" name="userName" id="userName" value="<?php if (isset($_POST['userName'])){echo $_POST['userName'];} ?>" required>
                             <label for="userName">Username</label>
@@ -48,10 +49,11 @@
     
                                         <div class="input-field col s12 l12">
                                         <div class="col s9 l9">
-                                        <p>New Class</p>
+                                        <p>Class</p>
                                         </div>
                                         <div class="input-field col s3 l3">
                                         <select name="classID" class="browser-default" id="classID">
+                                        <option value="None">None (Current)</option>
                                         <option value="None">None (Admin)</option>
                                         ';
                                             foreach ($view->allClasses as $class) {
@@ -102,10 +104,21 @@
     
                                         <div class="input-field col s12 l12">
                                         <div class="col s9 l9">
-                                        <p>New Class</p>
+                                        <p>Class</p>
                                         </div>
                                         <div class="input-field col s3 l3">
-                                        <select name="classID" class="browser-default" id="classID">
+                                        <select name="classID" class="browser-default" id="classID">';
+
+                                        if ($view->user->getRoleID()==2 || $view->user->getRoleID()==3)
+                                        {
+                                            echo '<option value="' . $view->user->getClassID() .'">' . $view->dataSet->fetchClassName($view->user->getClassID()).' (Current)</option>';
+                                        }
+                                        else
+                                        {
+                                            echo '<option value="None">None (Current)</option>';
+                                        }
+
+                                    echo '
                                         <option value="None">None (Admin)</option>
                                         ';
                                     foreach ($view->allClasses as $class) {
@@ -118,7 +131,7 @@
                                         </div><br/>
         
                                         <div class="input-field col s12 l12">
-                                        <input type="password" name="password" id="password" required>
+                                        <input type="password" name="password" id="password">
                                         <label for="password">New Password</label>
                                         </div><br/>
         

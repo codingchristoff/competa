@@ -9,7 +9,11 @@ session_start();
 $view = new stdClass();
 $view->pageTitle = 'My Data';
 
-// To ensure login.php is not manually accessible to logged in user
+//Initiating a connection to database and giving it to the view
+$dataSet = new UserDataSet();
+$view->dataSet = $dataSet;
+
+// To ensure myData.php is not manually accessible to logged in user
 if(!isset($_SESSION['user']))
 {
     header("Location: index.php");

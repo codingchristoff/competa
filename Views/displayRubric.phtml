@@ -1,10 +1,10 @@
 <?php require('template/header.phtml') ?>
-<div class="container row s12 l12 rubric-admin">
-    <div class="container col s12 l12">
-        <form name="studentFill" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
-            <div class="container" id="ls-header">
-                <h6 class="center helper-text"><strong><?php echo $view->rubric_name ?></strong></h6>
-            </div>
+<div class="container white z-depth-2 row s12 l12 rubric-admin">
+    <form name="studentFill" method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+        <div class="col s12 l12" id="ls-header">
+            <h6 class="center helper-text"><strong><?php echo $view->rubric_name ?></strong></h6>
+        </div>
+        <div class="container  col s12 l12">
             <div>
                 <table class="fixed">
                     <tbody>
@@ -26,12 +26,26 @@
 
 
                                 echo "<td>{$crit->getCriteriaText()}</td>";
-                                echo "<td>
-                                <label>
-                              <input class=\"with-gap\" type=\"radio\" value=\"{$view->rubric_id},{$catID},{$critID},{$result},{$_SESSION['user']->getUserID()},{$view->runTimestamp}\" name=\"{$critCount}\" required/> 
-                              <span></span>
-                              </label>
-                              </td>";
+
+                                if($_SESSION['user']->getRoleID() === '1' || $_SESSION['user']->getRoleID() === '2')
+                                {
+                                    echo "<td>
+                                    <label>
+                                      <input class=\"with-gap\" type=\"radio\" value=\"{$view->rubric_id},{$catID},{$critID},{$result},{$_SESSION['user']->getUserID()},{$view->timestamp}\" name=\"{$critCount}\" disabled=\"disabled\"/> 
+                                      <span></span>
+                                      </label>
+                                      </td>";
+                                }
+                                elseif ($_SESSION['user']->getRoleID() === '3')
+                                {
+                                    echo "<td>
+                                    <label>
+                                      <input class=\"with-gap\" type=\"radio\" value=\"{$view->rubric_id},{$catID},{$critID},{$result},{$_SESSION['targetID']},{$view->timestamp}\" name=\"{$critCount}\" required/> 
+                                      <span></span>
+                                      </label>
+                                      </td>";
+                                }
+
                                 $result++;
                             }
                             $result = 1;
@@ -42,11 +56,31 @@
                     </tbody>
                 </table>
             </div>
-            <div class="btn-block col s12 l12" id="btn-under-alert">
-                <input class="btn black right z-depth-2" type="submit"
-                       name="submit" value="Submit">
-            </div>
-        </form>
-    </div>
+
+            <?php
+            if($_SESSION['user']->getRoleID() === '2')
+            {
+                echo "<div class=\"col s6 l6 offset-s6 offset-l6 pull-l3 pull-s3\">
+                          <h6 class=\"center helper-text\"><strong>Assign to student:</strong></h6>
+                          </div>";
+
+                echo "<div class=\"input-field col s6 l6 offset-s6 offset-l6 pull-l3 pull-s3\">
+                          <input id=\"r_name\" type=\"text\" name=\"studentName\" placeholder=\"Student Name\" >
+                          </div>";
+
+                echo "<div class=\"btn-block col s12 l12\" id=\"btn-under-alert\">
+                      <input class=\"btn black right z-depth-2\" type=\"submit\"
+                             name=\"assign\" value=\"Assign\">
+                      </div>";
+            }elseif($_SESSION['user']->getRoleID() === '3'){
+                echo "<div class=\"btn-block col s12 l12\" id=\"btn-under-alert\">
+                      <input class=\"btn black right z-depth-2\" type=\"submit\"
+                             name=\"submit\" value=\"Submit\">
+                      </div>";
+            }
+            ?>
+
+        </div>
+    </form>
 </div>
 <?php require('template/footer.phtml') ?>

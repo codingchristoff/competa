@@ -1,13 +1,14 @@
 <?php require('template/header.phtml') ?>
-<div class="container row" id="admin-container">
+<div class="container row" id="adminDeleteUser-container">
     <div class="container s12 l12" id="ls-header">
+        <h6 class="center black-text"><strong>Delete User</strong></h6>
     </div>
 
     <div class="row">
         <div class="col s12">
             <div id="test1" class="col s12">
                 <div class="container">
-                    <form name="addUser" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                    <form name="deleteUserForm" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                         <div class="input-field col s12 l12">
                             <input type="text" name="userName" id="userName" value="<?php if (isset($_POST['userName'])){echo $_POST['userName'];} ?>" required>
                             <label for="userName">Username</label>
@@ -60,6 +61,13 @@
                         else
                         {
                             echo '<div class="container s12 l12" id="ls-header"><h6 class="center helper-text">User not found</h6></div>';
+                        }
+                    }
+                    if (isset($view->delete))
+                    {
+                        if ($view->delete==True)
+                        {
+                            echo '<div class="container s12 l12" id="ls-header"><h6 class="center helper-text">User deleted</h6></div>';
                         }
                     }
                     ?>

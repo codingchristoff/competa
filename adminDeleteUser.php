@@ -28,12 +28,12 @@ if(isset($_SESSION['user']))
         if (isset($_POST['deleteUser']))
         {
             //Deletes the user
-            $dataSet->deleteUser($_POST['userName']);
+            $view->delete = $dataSet->deleteUser($_POST['userName']);
         }
     }
     else
     {
-        header('Location: myData.php');
+        header('Location: home.php');
     }
 }
 else

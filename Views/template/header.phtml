@@ -1,4 +1,4 @@
-<?php //var_dump($_POS// var_dump($_SESSION);?>
+<?php //var_dump($_POST);// var_dump($_SESSION);?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,55 +30,94 @@
             echo '
                 <!-- Dropdown Structure -->
                 <ul id="dropdown1" class="dropdown-content black">
-                    <li><a class=\'btn-block\' href=\'viewUserData.php\'>View User</a></li>
+                    <li class="divider"></li>
+                    <li><a class=\'btn-block '; if ($view->pageTitle == "View User") {echo 'grey darken-3';}echo '\' href=\'viewUserData.php\'>View User</a></li>
                     <li class="divider"></li>';
 
-            if ($_SESSION['user']->getRoleID() === '1')
-            {
-                echo '   
-                        <li><a class=\'btn-block\' href=\'adminAddUser.php\'>Add User</a></li>
-                        <li class="divider"></li>  
-                        ';
-            }
-            echo '
+                    if ($_SESSION['user']->getRoleID() === '1')
+                    {
+                        echo '   
+                                <li><a class=\'btn-block '; if ($view->pageTitle == "Add User") {echo 'grey darken-3';}echo '\' href=\'adminAddUser.php\'>Add User</a></li>
+                                <li class="divider"></li>  
+                                ';
+                    }
+                echo '
                     
-                    <li><a class=\'btn-block\' href=\'editUser.php\'>Edit User</a></li>
+                    <li><a class=\'btn-block '; if ($view->pageTitle == "Edit User") {echo 'grey darken-3';}echo '\' href=\'editUser.php\'>Edit User</a></li>
                     <li class="divider"></li>';
 
-            if ($_SESSION['user']->getRoleID() === '1')
-            {
-                echo '   
-                        <li><a class=\'btn-block\' href=\'adminDeleteUser.php\'>Delete User</a></li>
-                        <li class="divider"></li>  
-                        ';
-            }
-            echo '
+                    if ($_SESSION['user']->getRoleID() === '1')
+                    {
+                        echo '   
+                                <li><a class=\'btn-block '; if ($view->pageTitle == "Delete User") {echo 'grey darken-3';}echo '\' href=\'adminDeleteUser.php\'>Delete User</a></li>
+                                <li class="divider"></li>
+                                <li><a class=\'btn-block '; if ($view->pageTitle == "View Teacher Class") {echo 'grey darken-3';}echo '\' href=\'adminViewTeacherStudents.php\'>View Teachers Class</a></li> 
+                                ';
+                    }
+                echo '
                     
                 </ul>
                 
                 <!-- Dropdown Structure 2 -->
                 <ul id="dropdown2" class="dropdown-content black">
-                    <li><a class=\'btn - block\' href=\'viewUserData.php\'>View User</a></li>
+                    <li class="divider"></li>
+                    <li><a class=\'btn-block '; if ($view->pageTitle == "View User") {echo 'grey darken-3';}echo '\' href=\'viewUserData.php\'>View User</a></li>
                     <li class="divider"></li>';
 
-            if ($_SESSION['user']->getRoleID() === '1')
-            {
-                echo '   
-                        <li><a class=\'btn - block\' href=\'adminAddUser.php\'>Add User</a></li>
-                        <li class="divider"></li>  
-                        ';
-            }
-            echo '<li><a class=\'btn - block\' href=\'editUser.php\'>Edit User</a></li>
+                    if ($_SESSION['user']->getRoleID() === '1')
+                    {
+                        echo '   
+                                <li><a class=\'btn-block '; if ($view->pageTitle == "Add User") {echo 'grey darken-3';}echo '\' href=\'adminAddUser.php\'>Add User</a></li>
+                                <li class="divider"></li>  
+                                ';
+                }
+            echo '<li><a class=\'btn-block '; if ($view->pageTitle == "Edit User") {echo 'grey darken-3';}echo '\' href=\'editUser.php\'>Edit User</a></li>
                      <li class="divider"></li>';
-            if ($_SESSION['user']->getRoleID() === '1')
-            {
-                echo '   
-                        <li><a class=\'btn-block\' href=\'adminDeleteUser.php\'>Delete User</a></li>
-                        <li class="divider"></li>  
-                        ';
-            }
+                    if ($_SESSION['user']->getRoleID() === '1')
+                    {
+                        echo '   
+                                <li><a class=\'btn-block '; if ($view->pageTitle == "Delete User") {echo 'grey darken-3';}echo '\' href=\'adminDeleteUser.php\'>Delete User</a></li><li class="divider"></li>
+                                <li><a class=\'btn-block '; if ($view->pageTitle == "View Teacher Class") {echo 'grey darken-3';}echo '\' href=\'adminViewTeacherStudents.php\'>View Teachers Class</a></li><li class="divider"></li>
+                                ';
+                    }
              echo '        
-            </ul>';
+            </ul>
+            
+            <!-- Dropdown Structure - Manage Class 1 -->
+                <ul id="manageClass1" class="dropdown-content black">
+                    <li class="divider"></li>
+                    <li><a class=\'btn-block '; if ($view->pageTitle == "Assign Table Group") {echo 'grey darken-3';}echo '\' href=\'assignTableGroup.php\'>Assign Table Group</a></li>
+                    <li class="divider"></li>';
+
+                    if ($_SESSION['user']->getRoleID() === '1')
+                    {
+                        echo '   
+                                <li><a class=\'btn-block '; if ($view->pageTitle == "Add Class") {echo 'grey darken-3';}echo '\' href=\'adminAddClass.php\'>Add Class</a></li>
+                                <li class="divider"></li>
+                                <li><a class=\'btn-block '; if ($view->pageTitle == "Delete Class") {echo 'grey darken-3';}echo '\' href=\'adminDeleteClass.php\'>Delete Class</a></li> 
+                                ';
+                    }
+                echo '
+                </ul>
+                
+                <!-- Dropdown Structure - Manage Class 2 -->
+                <ul id="manageClass2" class="dropdown-content black">
+                    <li class="divider"></li>
+                    <li><a class=\'btn-block '; if ($view->pageTitle == "Assign Table Group") {echo 'grey darken-3';}echo '\' href=\'assignTableGroup.php\'>Assign Table Group</a></li>
+                    <li class="divider"></li>';
+
+                    if ($_SESSION['user']->getRoleID() === '1')
+                    {
+                        echo ' 
+                                <li><a class=\'btn-block '; if ($view->pageTitle == "Add Class") {echo 'grey darken-3';}echo '\' href=\'adminAddClass.php\'>Add Class</a></li>
+                                <li class="divider"></li>
+                                <li><a class=\'btn-block '; if ($view->pageTitle == "Delete Class") {echo 'grey darken-3';}echo '\' href=\'adminDeleteClass.php\'>Delete Class</a></li>
+                                <li class="divider"></li>
+                                ';
+                    }
+                echo '
+                </ul>';
+
 
         }
     }
@@ -90,45 +129,60 @@
 
         if($_SESSION['user']->getRoleID() === '1')
         {
-            echo '<li><a class=\'btn-block\' href=\'adminRubricCreate.php\'>Rubric Generator</a></li>';
+            echo '<li class="divider"></li><li><a class=\'btn-block '; if ($view->pageTitle == "Rubric Create" || $view->pageTitle == "Rubric Fill") {echo 'grey darken-3';}echo '\' href=\'adminRubricCreate.php\'>Rubric Generator</a></li>';
         }
         echo '<li class="divider"></li>
-                     <li><a class=\'btn-block\' href=\'searchRubric.php\'>Rubric Search</a></li>
+                     <li><a class=\'btn-block '; if ($view->pageTitle == "Search Rubric" || $view->pageTitle == "Display Rubric") {echo 'grey darken-3';}echo '\' href=\'searchRubric.php\'>Rubric Search</a></li>
                      </ul><li class="divider"></li>';
     }
 
+    if(isset($_SESSION['user']))
+    {
+        echo '<!-- Dropdown Structure 4-->
+                     <ul id="dropdown4" class="dropdown-content black">';
+
+        if($_SESSION['user']->getRoleID() === '1')
+        {
+            echo '<li class="divider"></li><li><a class=\'btn-block '; if ($view->pageTitle == "Rubric Create" || $view->pageTitle == "Rubric Fill") {echo 'grey darken-3';}echo '\' href=\'adminRubricCreate.php\'>Rubric Generator</a></li>';
+        }
+        echo '<li class="divider"></li>
+                     <li><a class=\'btn-block '; if ($view->pageTitle == "Search Rubric" || $view->pageTitle == "Display Rubric") {echo 'grey darken-3';}echo '\' href=\'searchRubric.php\'>Rubric Search</a></li><li class="divider"></li>
+                     </ul><li class="divider"></li>';
+    }
 
     ?>
 
     <nav class="black">
         <div id="top-nav" class="container nav-wrapper">
-            <a href="index.php" class="brand-logo center lighten-3">Rubrics</a>
+            <a href="index.php" class="brand-logo left-align lighten-3 fixed s"><img src="">Rubrics</a>
 
             <!-- Nav when view is more than 992px -->
-            <ul class="left hide-on-med-and-down">
-                <?php if(isset($_SESSION['user']))
-                {
-                    echo "<li><a class='btn-block' href='myData.php'>My Data</a></li>";
-                    if($_SESSION['user']->getRoleID() === '1' || $_SESSION['user']->getRoleID() === '2')
-                    {
-                        echo "<li><a class=\"dropdown-trigger\" href=\"#!\" data-target=\"dropdown1\">Manage User<i class=\"material-icons right\">arrow_drop_down</i></a></li>";
-
-                    }
-                } ?>
-            </ul>
 
             <ul class="right hide-on-med-and-down">
                 <?php if(isset($_SESSION['user']))
                 {
-                    if($_SESSION['user']->getRoleID() == 1 || $_SESSION['user']->getRoleID() == 2 || $_SESSION['user']->getRoleID() === '3')
+                    echo "<li><a class='btn-block "; if ($view->pageTitle == "Home") {echo 'grey darken-3';}echo "' href='home.php'>Home</a></li>";
+                    echo "<li><a class='btn-block "; if ($view->pageTitle == "My Data") {echo 'grey darken-3';}echo "' href='myData.php'>My Data</a></li>";
+                    if($_SESSION['user']->getRoleID() === '1' || $_SESSION['user']->getRoleID() === '2')
                     {
-                        echo "<li><a class=\"dropdown-trigger\" href=\"#!\" data-target=\"dropdown3\">Manage Rubrics<i class=\"material-icons right\">arrow_drop_down</i></a></li>";
+                        echo "<li><a class=\"dropdown-trigger "; if ($view->pageTitle == "View User" || $view->pageTitle == "Add User" || $view->pageTitle == "Edit User" || $view->pageTitle == "Delete User") {echo 'grey darken-3';}echo "\" href=\"#!\" data-target=\"dropdown1\">Manage User<i class=\"material-icons right\">arrow_drop_down</i></a></li>";
+
+                    }
+
+                    if($_SESSION['user']->getRoleID() === '1' || $_SESSION['user']->getRoleID() === '2')
+                    {
+                        echo "<li><a class=\"dropdown-trigger "; if ($view->pageTitle == "Assign Table Group" || $view->pageTitle == "Add Class" || $view->pageTitle == "Delete Class") {echo 'grey darken-3';}echo "\" href=\"#!\" data-target=\"manageClass1\">Manage Class<i class=\"material-icons right white-text\">arrow_drop_down</i></a></li>";
+
+                    }
+                    if($_SESSION['user']->getRoleID() == '1' || $_SESSION['user']->getRoleID() == '2')
+                    {
+                        echo "<li><a class=\"dropdown-trigger "; if ($view->pageTitle == "Rubrics Fill" || $view->pageTitle == "Rubric Create" || $view->pageTitle == "Display Rubric" || $view->pageTitle == "Search Rubric") {echo 'grey darken-3';}echo "\" href=\"#!\" data-target=\"dropdown3\">Manage Rubrics<i class=\"material-icons right\">arrow_drop_down</i></a></li>";
+                    }
+                    if($_SESSION['user']->getRoleID() === '3')
+                    {
+                        echo "<li><a class='btn-block "; if ($view->pageTitle == "Results") {echo 'grey darken-3';}echo "' href='studentSelectRubric.php'>Results</a></li>";
                     }
                     echo "<li><a href='../../logout.php'>Log Out</a></li>";
-                }
-                else{
-                    // Used to trigger my modal login form
-                    echo "<li><a href='index.php'>Login</a></li>";
                 }
                 ?>
             </ul>
@@ -137,22 +191,30 @@
             <ul id="slide-out" class="sidenav black">
                 <?php if(isset($_SESSION['user']))
                 {
-                    echo "<li><a class='btn-block' href='myData.php'>My Data</a></li>";
-                    if($_SESSION['user']->getRoleID() === 1 || $_SESSION['user']->getRoleID() === 2 || $_SESSION['user']->getRoleID() === '3')
+                    echo "<li><a class='btn-block "; if ($view->pageTitle == "Home") {echo 'grey darken-3';}echo "' href='home.php'>Home</a></li><li class=\"divider\"></li>";
+
+                    echo "<li><a class='btn-block "; if ($view->pageTitle == "My Data") {echo 'grey darken-3';}echo "' href='myData.php'>My Data</a></li><li class=\"divider\"></li>  ";
+
+                    if($_SESSION['user']->getRoleID() === '1' || $_SESSION['user']->getRoleID() === '2')
                     {
-                        echo "<li><a class=\"dropdown-trigger\" href=\"#!\" data-target=\"dropdown2\">Manage User<i class=\"material-icons right white-text\">arrow_drop_down</i></a></li>";
-                        echo "<li><a class=\"dropdown-trigger\" href=\"#!\" data-target=\"dropdown3\">Manage Rubrics<i class=\"material-icons right\">arrow_drop_down</i></a></li>";
+                        echo "<li><a class=\"dropdown-trigger ";; if ($view->pageTitle == "View User" || $view->pageTitle == "Add User" || $view->pageTitle == "Edit User" || $view->pageTitle == "Delete User") {echo 'grey darken-3';}echo "\" href=\"#!\" data-target=\"dropdown2\">Manage User<i class=\"material-icons right white-text\">arrow_drop_down</i></a></li>";
+                        echo "<li><a class=\"dropdown-trigger "; if ($view->pageTitle == "Assign Table Group" || $view->pageTitle == "Add Class" || $view->pageTitle == "Delete Class") {echo 'grey darken-3';}echo "\" href=\"#!\" data-target=\"manageClass2\">Manage Class<i class=\"material-icons right white-text\">arrow_drop_down</i></a></li>";
+                    }
+                    if($_SESSION['user']->getRoleID() == '1' || $_SESSION['user']->getRoleID() == '2')
+                    {
+                        echo "<li><a class=\"dropdown-trigger "; if ($view->pageTitle == "Rubrics Fill" || $view->pageTitle == "Rubric Create" || $view->pageTitle == "Display Rubric" || $view->pageTitle == "Search Rubric") {echo 'grey darken-3';}echo "\" href=\"#!\" data-target=\"dropdown4\">Manage Rubrics<i class=\"material-icons right\">arrow_drop_down</i></a></li>";
+                    }
+                    if($_SESSION['user']->getRoleID() === '3')
+                    {
+                        echo "<li><a class='btn-block "; if ($view->pageTitle == "Results") {echo 'grey darken-3';}echo "' href='studentSelectRubric.php'>Results</a></li>";
                     }
                     echo "<li><a class='btn-block' href='../../logout.php'> Log Out</a></li>";
-                }
-                else{
-                    echo "<li><a href='login.php'>Login</a></li>";
                 }
                 ?>
             </ul>
 
             <!-- Use of materialise sidenav for v<992px navigation -->
-            <a href="#" data-target="slide-out" class="sidenav-trigger right">
+            <a href="#" data-target="slide-out" class="sidenav-trigger right hide-on-large">
                 <i class="material-icons">menu</i></a>
         </div>
     </nav>
