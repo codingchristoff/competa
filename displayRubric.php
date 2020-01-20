@@ -18,7 +18,7 @@ $handler = new rubricHandler();
 $userHandler = new UserDataSet();
 
 //Checks if a USER has logged in
-if((!isset($_SESSION['user'])))
+if(!(isset($_SESSION['user'])))
 {
     //Redirects to login if not
     header('Location: index.php');
@@ -48,12 +48,13 @@ if(isset($_POST['submit']))
     foreach ($arrayVals as $value)
     {
         $success = $handler->insertAssessmentValues($value, $dateID);
-        $message = true;
+        var_dump($value);
+        $message = false;
     }
 
     if($message === true)
     {
-        var_dump($_SESSION['user'], $_SESSION['targetID'],$_SESSION['rubricDate']);
+        //var_dump($_SESSION['user'], $_SESSION['targetID'],$_SESSION['rubricDate']);
         $userHandler->removeAssignedRubric($_SESSION['user']->getUserID(), $_SESSION['targetID'],$_SESSION['rubricDate']);
         header("Location: home.php");
 

@@ -47,10 +47,11 @@ if(isset($_SESSION['user']))
         if(isset($_POST['assess']))
         {
             $_SESSION['rubric_name'] = $_POST['rubric_name'];
+            $_SESSION['timestamp'] = $_POST['rubricDate'];
             $_SESSION['rubricDate'] = $handler->getDateID($_POST['rubricDate']);
             $_SESSION['targetID'] = $_POST['targetStudentID'];
 
-            //var_dump($_SESSION['targetID']);
+            //var_dump($_SESSION['timestamp']);
 
             header("Location: displayRubric.php");
         }
