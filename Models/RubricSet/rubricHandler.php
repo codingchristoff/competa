@@ -86,7 +86,7 @@ class RubricHandler
      */
     public function getRubricNameOnDateID($dateID)
     {
-        $sql = "SELECT rubricName FROM rubrics r INNER JOIN rubricGroup rg, rubricMerge rm  WHERE rg.dateID = 1 AND rm.mergeID = rg.mergeID AND r.rubricID = rm.rubricID";
+        $sql = "SELECT rubricName FROM rubrics r INNER JOIN rubricGroup rg, rubricMerge rm  WHERE rg.dateID = :dateID AND rm.mergeID = rg.mergeID AND r.rubricID = rm.rubricID";
 
         if ($stmt = $this->dbHandle->prepare($sql)) {
             // Bind variables to the prepared statement as parameters
