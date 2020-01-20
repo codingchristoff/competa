@@ -47,16 +47,12 @@ if(isset($_SESSION['user']))
         if(isset($_POST['assess']))
         {
             $_SESSION['rubric_name'] = $_POST['rubric_name'];
-            $_SESSION['timestamp'] = $_POST['timestamp'];
-            $_SESSION['targetID'] = $_POST['targetStudentName'];
+            $_SESSION['rubricDate'] = $handler->getDateID($_POST['rubricDate']);
+            $_SESSION['targetID'] = $_POST['targetStudentID'];
+
+            //var_dump($_SESSION['targetID']);
 
             header("Location: displayRubric.php");
-        }
-        elseif(isset($_POST['submit']))
-        {
-            $dataSet->removeAssignedRubric($_SESSION['user']->getUserID(), $_SESSION['targetID']);
-
-            header("Location: home.php");
         }
     }
 }

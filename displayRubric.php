@@ -15,6 +15,7 @@ $view->runTimestamp = null;
 
 
 $handler = new rubricHandler();
+$userHandler = new UserDataSet();
 
 if(isset($_SESSION['rubric_name']))
 {
@@ -45,10 +46,14 @@ if(isset($_POST['submit']))
 
     if($message === true)
     {
-        echo "This data has been sent to the database";
+        var_dump($_SESSION['user'], $_SESSION['targetID'],$_SESSION['rubricDate']);
+        $userHandler->removeAssignedRubric($_SESSION['user']->getUserID(), $_SESSION['targetID'],$_SESSION['rubricDate']);
+        header("Location: home.php");
+
     }
 
 }
+
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 //hello
 //Click to assign a rubric to a class
 if(isset($_POST['assign']))
@@ -57,6 +62,8 @@ if(isset($_POST['assign']))
     //gets the teacher's class ID
     $teacherClassID = $_SESSION['user']->getClassID($teacherID);
     $studentList = [];
+
+
     //gets all students in that teacher's class and puts them in an array
     $studentList = $userHandler->getStudentsInClass($teacherClassID);
 
