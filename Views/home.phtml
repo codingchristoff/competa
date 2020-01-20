@@ -39,13 +39,16 @@
                             </div>
                         </div>
 
-            <?php endforeach; ?>
-            <!-- If there are any errors -->
+                <?php endforeach; ?>
+                <!-- If there are any errors -->
                <?php elseif(is_string($view->err)): ?>
 
                     <li class=\"collection-header center\"><h6><strong>{$view->err}</strong></h6></li>
                 <?php endif; ?>
 
+                <?php if(!(is_array($view->outstandingRubrics))) :?>
+                    <li class="collection-header z-depth-2 center"><h6><strong>Welcome Back</strong></h6></li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>
