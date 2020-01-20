@@ -146,7 +146,7 @@
             echo '<li class="divider"></li><li><a class=\'btn-block '; if ($view->pageTitle == "Rubric Create" || $view->pageTitle == "Rubric Fill") {echo 'grey darken-3';}echo '\' href=\'adminRubricCreate.php\'>Rubric Generator</a></li>';
         }
         echo '<li class="divider"></li>
-                     <li><a class=\'btn-block '; if ($view->pageTitle == "Rubric Create" || $view->pageTitle == "Rubric Fill") {echo 'grey darken-3';}echo '\' href=\'searchRubric.php\'>Rubric Search</a></li><li class="divider"></li>
+                     <li><a class=\'btn-block '; if ($view->pageTitle == "Search Rubric" || $view->pageTitle == "Display Rubric") {echo 'grey darken-3';}echo '\' href=\'searchRubric.php\'>Rubric Search</a></li><li class="divider"></li>
                      </ul><li class="divider"></li>';
     }
 
@@ -187,6 +187,8 @@
             <ul id="slide-out" class="sidenav black">
                 <?php if(isset($_SESSION['user']))
                 {
+                    echo "<li><a class='btn-block "; if ($view->pageTitle == "Home") {echo 'grey darken-3';}echo "' href='home.php'>Home</a></li><li class=\"divider\"></li>";
+
                     echo "<li><a class='btn-block "; if ($view->pageTitle == "My Data") {echo 'grey darken-3';}echo "' href='myData.php'>My Data</a></li><li class=\"divider\"></li>  ";
 
                     if($_SESSION['user']->getRoleID() === '1' || $_SESSION['user']->getRoleID() === '2')
