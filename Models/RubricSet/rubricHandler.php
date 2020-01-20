@@ -3,6 +3,7 @@
 require_once('Models/RubricSet/Rubric.php');
 require_once('Models/RubricSet/Category.php');
 require_once('Models/RubricSet/Criteria.php');
+require_once('Models/UserData/UserDataSet.php');
 
 class RubricHandler
 {
@@ -1104,6 +1105,27 @@ class RubricHandler
         $mergeID = $this->checkMergeID($rubricID, $categoryID, $criteriaID);
 
         return $this->createRubric($mergeID, $dateID);
+    }
+
+    public function getMarkedByStudent($studentID, $dateFilledOut)
+    {
+        $sql = "SELECT markedBy FROM assessments WHERE studentID = :studentID AND dateID = :dateFilledOut";
+
+        $statement = $this->dbHandle->prepare($sql); // prepare a PDO statement
+
+        $statement->bindParam(":studentID", $param_studentID, PDO::PARAM_STR);
+        $statement->bindParam(":dateFilledOut", $param_dateFilledOut, PDO::PARAM_STR);
+
+        // Set parameters
+        $param_studentID = trim($studentID);
+        $param_dateFilledOut = trim($dateFilledOut);
+
+        $statement->execute(); // execute the PDO statement
+
+        $row = $statement->fetch();
+
+
+        return $row['markedBy'];
     }
 
 }
