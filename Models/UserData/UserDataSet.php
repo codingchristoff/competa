@@ -76,7 +76,7 @@ class UserDataSet
             $dataSetStudent[] = $row[0];
         }
 
-        if ($dataSetStudent!==null)
+        if (!empty($dataSetStudent))
         {
             return $dataSetStudent;
         }
@@ -93,7 +93,7 @@ class UserDataSet
             $dataSetTeacher[] = $row[0];
         }
 
-        if ($dataSetTeacher!==null)
+        if (!empty($dataSetTeacher))
         {
             return $dataSetTeacher;
         }
@@ -110,7 +110,7 @@ class UserDataSet
             $dataSetAdmin[] = $row[0];
         }
 
-        if ($dataSetAdmin!==null)
+        if (!empty($dataSetAdmin))
         {
             return $dataSetAdmin;
         }
@@ -537,11 +537,11 @@ class UserDataSet
             return 'Username already exists';
         }
 
-        if ($this->checkEmail($emailClean)!==null)
+        //Check if email already exists
+        if (!empty($this->checkEmail($emailClean)))
         {
             return 'Email already exists';
         }
-
 
 
         //Checks the rest of the variables to see if they are in the correct format
