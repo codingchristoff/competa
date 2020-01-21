@@ -442,10 +442,7 @@ class UserDataSet
             $param_classID = trim($classID);
 
             $stmt->execute(); // execute the PDO statement
-
-            $studentIDs = []; //STEVEN ADDED THIS DUE TO RETURN NOT WORKING
-
-
+            
 //            //Getting the row (array)
 //            $row = $stmt->fetch();
 //            if ($row != false) {//returning the first value (the classID)
