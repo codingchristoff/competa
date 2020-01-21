@@ -430,7 +430,7 @@ class UserDataSet
         return $dataSet;//Returns all students in an array
     }
 
-    // This function returns all studetns who are in a teachers class
+    // This function returns all students who are in a teachers class
     public function getStudentsInClass($classID)
     {
         $sql = "SELECT studentID,tableGroup FROM students WHERE classID = :classID";
@@ -443,18 +443,27 @@ class UserDataSet
 
             $stmt->execute(); // execute the PDO statement
 
-            $studentIDs = [];
+            $studentIDs = []; //STEVEN ADDED THIS DUE TO RETURN NOT WORKING
 
-            //Getting the row (array)
-            $row = $stmt->fetch();
-            if ($row != false) {//returning the first value (the classID)
-                while ($row = $stmt->fetch()) {
-                    $studentIDs[] = $row;
-                }
-                return $studentIDs;
-            } else {
-                return "No students in class";
+
+//            //Getting the row (array)
+//            $row = $stmt->fetch();
+//            if ($row != false) {//returning the first value (the classID)
+//                while ($row = $stmt->fetch()) {
+//                    $studentIDs[] = $row;
+//                }
+//                return $studentIDs;
+//            } else {
+//                return "No students in class";
+//            }
+
+            // STEVENs POTENTIAL FIX
+            $studentIDs = [];
+            while ($row = $stmt->fetch()) {
+                $studentIDs[] = $row; //First index studentID
             }
+            return $studentIDs;//Returns all studentIDs
+
         } else {
             return false;
         }
