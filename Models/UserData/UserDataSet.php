@@ -443,6 +443,8 @@ class UserDataSet
 
             $stmt->execute(); // execute the PDO statement
 
+            $studentIDs = [];
+
             //Getting the row (array)
             $row = $stmt->fetch();
             if ($row != false) {//returning the first value (the classID)
