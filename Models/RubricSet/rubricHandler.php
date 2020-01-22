@@ -9,6 +9,7 @@ class RubricHandler
 {
     protected $dbHandle;
     protected $dbInstance;
+    
     public function __construct()
     {
         $this->dbInstance = Database::getInstance();
