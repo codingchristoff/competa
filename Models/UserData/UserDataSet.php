@@ -61,6 +61,61 @@ class UserDataSet
         }
     }
 
+    //Checks the database for a specified user
+    public function checkEmail($userEmail)
+    {
+        //SQL statement will select a specific user
+        $sqlQuery = 'SELECT email FROM students WHERE email="' . $userEmail . '";';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+
+        //Returns all students in an array
+        $dataSetStudent = [];
+        while ($row = $statement->fetch()) {
+            $dataSetStudent[] = $row[0];
+        }
+
+        if (!empty($dataSetStudent))
+        {
+            return $dataSetStudent;
+        }
+
+        //SQL statement will select a specific user
+        $sqlQuery = 'SELECT email FROM teachers WHERE email="' . $userEmail . '";';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+
+        //Returns all students in an array
+        $dataSetTeacher = [];
+        while ($row = $statement->fetch()) {
+            $dataSetTeacher[] = $row[0];
+        }
+
+        if (!empty($dataSetTeacher))
+        {
+            return $dataSetTeacher;
+        }
+
+        //SQL statement will select a specific user
+        $sqlQuery = 'SELECT email FROM admins WHERE email="' . $userEmail . '";';
+
+        $statement = $this->dbHandle->prepare($sqlQuery); // prepare a PDO statement
+        $statement->execute(); // execute the PDO statement
+
+        //Returns all students in an array
+        $dataSetAdmin = [];
+        while ($row = $statement->fetch()) {
+            $dataSetAdmin[] = $row[0];
+        }
+
+        if (!empty($dataSetAdmin))
+        {
+            return $dataSetAdmin;
+        }
+    }
+
     //Search the database for a specific user
     public function searchUser($userName)
     {
@@ -312,7 +367,7 @@ class UserDataSet
         }
 
         //Checks if the class already exists
-        if ($this->fetchClassID($classNameClean)!==null) {
+        if ($this->fetchClassID($className)!==null) {
             return 'Class already exists';
         }
 
@@ -375,7 +430,7 @@ class UserDataSet
         return $dataSet;//Returns all students in an array
     }
 
-    // This function returns all studetns who are in a teachers class
+    // This function returns all students who are in a teachers class
     public function getStudentsInClass($classID)
     {
         $sql = "SELECT studentID,tableGroup FROM students WHERE classID = :classID";
@@ -387,17 +442,25 @@ class UserDataSet
             $param_classID = trim($classID);
 
             $stmt->execute(); // execute the PDO statement
+            
+//            //Getting the row (array)
+//            $row = $stmt->fetch();
+//            if ($row != false) {//returning the first value (the classID)
+//                while ($row = $stmt->fetch()) {
+//                    $studentIDs[] = $row;
+//                }
+//                return $studentIDs;
+//            } else {
+//                return "No students in class";
+//            }
 
-            //Getting the row (array)
-            $row = $stmt->fetch();
-            if ($row != false) {//returning the first value (the classID)
-                while ($row = $stmt->fetch()) {
-                    $studentIDs[] = $row;
-                }
-                return $studentIDs;
-            } else {
-                return "No students in class";
+            // STEVENs POTENTIAL FIX
+            $studentIDs = [];
+            while ($row = $stmt->fetch()) {
+                $studentIDs[] = $row; //First index studentID
             }
+            return $studentIDs;//Returns all studentIDs
+
         } else {
             return false;
         }
@@ -478,8 +541,16 @@ class UserDataSet
 
         //Checks if the user already exists
         if ($this->fetchUser($userNameClean)->getUsername()!==null) {
+
             return 'Username already exists';
         }
+
+        //Check if email already exists
+        if (!empty($this->checkEmail($emailClean)))
+        {
+            return 'Email already exists';
+        }
+
 
         //Checks the rest of the variables to see if they are in the correct format
         $checkUserVariables = $this->checkUserVariables($userNameClean, $firstNameClean, $lastNameClean, $emailClean, $passwordClean);

@@ -53,7 +53,16 @@
                                         </div>
                                         <div class="input-field col s3 l3">
                                         <select name="classID" class="browser-default" id="classID">
-                                        <option value="None">None (Current)</option>
+                                        ';
+                                        if ($view->user->getRoleID()==2 || $view->user->getRoleID()==3)
+                                        {
+                                            echo '<option value="' . $view->user->getClassID() .'">' . $view->dataSet->fetchClassName($view->user->getClassID()).' (Current)</option>';
+                                        }
+                                        else
+                                        {
+                                            echo '<option value="None">None (Current)</option>';
+                                        }
+                                        echo '
                                         <option value="None">None (Admin)</option>
                                         ';
                                             foreach ($view->allClasses as $class) {
@@ -66,7 +75,7 @@
                                         </div><br/>
         
                                         <div class="input-field col s12 l12">
-                                        <input type="password" name="password" id="password" required>
+                                        <input type="password" name="password" id="password">
                                         <label for="password">New Password</label>
                                         </div><br/>
         
